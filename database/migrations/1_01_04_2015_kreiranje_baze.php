@@ -9,7 +9,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
 class KreiranjeBaze extends Migration{
-    public function run(){
+    public function up(){
         Schema::create('pravapristupa', function(Blueprint $table)
         {
             $table->bigIncrements('id');
@@ -143,7 +143,7 @@ class KreiranjeBaze extends Migration{
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->nullable();
         });
-        Schema::create('temlejt', function(Blueprint $table)
+        Schema::create('templejt', function(Blueprint $table)
         {
             $table->bigIncrements('id');
             $table->string('slug', 45)->unique();
