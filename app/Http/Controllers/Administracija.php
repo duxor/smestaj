@@ -1,9 +1,22 @@
 <?php namespace App\Http\Controllers;
 
+use App\Security;
+use Illuminate\Support\Facades\Input;
+
 class Administracija extends Controller {
 
 	public function getIndex(){
-		return 'Administracija';
+		return Security::autentifikacija('stranice.administracija.index',null);
+	}
+	public function getLogin(){
+		if(Security::autentifikacijaTest()) return redirect('/administracija');
+		return view('stranice.administracija.login');
+	}
+	public function postLogin(){
+		return Security::login(Input::get('username'),Input::get('password'));
+	}
+	public function getLogout(){
+		return Security::logout();
 	}
 
 }

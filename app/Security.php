@@ -8,7 +8,8 @@
  * Početna podešavanja:
  * * $salt - proizvoljan niz znakova za povećanje bezbijednosti jačine password-a
  * * $daminLogURL - adresa do login stranice za pristup administrativnom panelu
- * * $korisnici - tabela u kojoj se nalaze korisnici sa poljima [id, username, password, token]
+ * * korisnici - tabela u kojoj se nalaze korisnici sa poljima [id, username, password, token]
+ * * log - tabela [id,korisnici_id,created_at]
  */
 
 
@@ -25,10 +26,10 @@ class Security {
     private $password;
     private $salt = 'ix501^@)5MwfP39ijJDr27g';
     public static $adminLogURL = '/administracija/login';
-    private $korisnici = 'korisnici';
     private $token;
     private $redirectURL;
     private $minLenPass = 4; //minimalna duzina sifre i korisnickog imena
+
 //SETERI[$redirectURL, $username, $password, $token, $_SESSION[token,id,username]]
     public function setRedirectURL($url){
         $this->redirectURL = $url;
@@ -84,9 +85,10 @@ class Security {
                 $sec->id = $korisnik->id;
                 $sec->username = $korisnik->username;
                 $sec->generateToken();
-                DB::table($sec->korisnici)->where('id', $sec->id)->update(['token' => $sec->token]);
+                Korisnici::where('id', $sec->id)->update(['token' => $sec->token]);
                 $sec->setSessions();
-            }else DB::table($sec->korisnici)->where('id', $sec->id)->update(['token' => null]);
+                Log::insert(['korisnici_id'=>$korisnik->id]);
+            }else Korisnici::where('id', $sec->id)->update(['token' => null]);
         }
         return Security::rediectToLogin();
     }

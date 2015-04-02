@@ -1,6 +1,7 @@
 body {
     padding-top: 60px;
 }
-.panel-body *{
-    text-align: justify;
+*{
+    font-size: 21px;
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
 }
