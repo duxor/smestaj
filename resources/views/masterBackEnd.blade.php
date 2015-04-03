@@ -44,8 +44,8 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i> Korisnici <i class="caret"></i></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#"><i class="glyphicon glyphicon-eye-open"></i> Pregled</a></li>
-                            <li><a href="#"><i class="glyphicon glyphicon-plus"></i> Dodaj novi</a></li>
+                            <li><a href="{!!url('/administracija/korisnik')!!}"><i class="glyphicon glyphicon-eye-open"></i> Pregled</a></li>
+                            <li><a href="{!!url('/administracija/korisnik/novi')!!}"><i class="glyphicon glyphicon-plus"></i> Dodaj novi</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">

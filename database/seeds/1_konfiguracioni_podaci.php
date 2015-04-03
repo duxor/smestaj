@@ -8,16 +8,22 @@ class KonfiguracioniPodaci extends Seeder{
     public function run(){
         $pravaPristupa = [
             [
-                'naziv' => 'Zabranjen pristup'
+                'naziv' => 'Zabranjen'//1
             ],
             [
-                'naziv' => 'Gost'
+                'naziv' => 'Korisnik'//2
             ],
             [
-                'naziv' => 'Analitičar'
+                'naziv' => 'Analitičar'//3
             ],
             [
-                'naziv' => 'Administrator'
+                'naziv' => 'Moderator'//4 -- vlasnikss
+            ],
+            [
+                'naziv' => 'Administrator'//5
+            ],
+            [
+                'naziv' => 'Kreator'//6
             ]
         ];
         PravaPristupa::insert($pravaPristupa);
@@ -29,7 +35,8 @@ class KonfiguracioniPodaci extends Seeder{
                 'email' => 'zabrana@zabrana.com',
                 'username' => 'zabrana',
                 'password' => Security::generateHashPass('zabrana'),
-                'pravapristupa_id' => 1
+                'pravapristupa_id' => 1,
+                'aktivan' => 0
             ],
             [
                 'prezime' => 'Administrator',
@@ -37,7 +44,8 @@ class KonfiguracioniPodaci extends Seeder{
                 'email' => 'admin@admin.com',
                 'username' => 'admin',
                 'password' => Security::generateHashPass('admin'),
-                'pravapristupa_id' => 4
+                'pravapristupa_id' => 6,
+                'aktivan' => 1
             ]
         ];
         Korisnici::insert($korisnici);

@@ -32,8 +32,6 @@ if (typeof console === "undefined") {
 		log: function() { }
 	};
 }
-var SubmitForma = new SubmitForm();
-
 /*#
  ### Autor: Dusan Perisci
  ### Home: dusanperisic.com
@@ -59,7 +57,7 @@ var SubmitForma = new SubmitForm();
  ###	<div class="form-group">
  ###		<div class="col-sm-2"></div>
  ###		<div class="col-sm-10">
- ###			<button type="button" class="btn btn-lg btn-success" onClick="SubmitForma.submit('forma')">
+ ###			<button type="button" class="btn btn-lg btn-success" onClick="SubmitForm.submit('forma')">
  ###				Submit
  ###			</button>
  ###		</biv>
@@ -67,8 +65,8 @@ var SubmitForma = new SubmitForm();
  ### </form>
  ###
  */
-function SubmitForm(){
-	this.submit = function(formaID){
+var SubmitForm = {
+	submit: function(formaID){
 		var test = 1;
 		var input = document.forms[formaID].getElementsByTagName('input');
 		var area = document.forms[formaID].getElementsByTagName('textarea');
@@ -76,22 +74,22 @@ function SubmitForm(){
 			areaL = area.length;
 		for(i=0; i< Math.max(inputL,areaL); i++){
 			if(i < inputL && input[i].getAttribute('id'))
-				test = succErr(input[i].getAttribute('type')=='email'?'email':'input',input[i].getAttribute('id'), test);
+				test = this.succErr(input[i].getAttribute('type')=='email'?'email':'input',input[i].getAttribute('id'), test);
 			if(i < areaL && area[i].getAttribute('id'))
-				test = succErr('area',area[i].getAttribute('id'), test);
+				test = this.succErr('area',area[i].getAttribute('id'), test);
 		}
 		if(test) $('#'+formaID).submit();
 		else alert('Popunite sve podatke.');
-	}
-	var testEmail = function(email){
+	},
+	testEmail: function(email){
 		var i1 = email.indexOf('@'),
 			i2 = email.indexOf('.');
 		if((i1 < 1 || i2 < 1) || (i1 > i2)) return false;
 		else return true;
-	}
-	var succErr = function(tip, ime, t){
+	},
+	succErr: function(tip, ime, t){
 		var polje = tip == 'input' || tip == 'email' ? 'input[name="'+ime+'"]' : tip == 'area' ? '#'+ime : null;
-		if($(polje).val().length > 2 && (tip=='email'?testEmail($(polje).val()):true)){
+		if($(polje).val().length > 2 && (tip=='email'?this.testEmail($(polje).val()):true)){
 			$('#d'+ime).removeClass('has-error');
 			$('#d'+ime).addClass('has-success');
 			$('#s'+ime).removeClass('glyphicon-remove');

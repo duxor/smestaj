@@ -26,6 +26,7 @@ class KreiranjeBaze extends Migration{
             $table->string('email', 45)->unique();
             $table->string('password', 150);
             $table->string('token', 250)->nullable();
+            $table->tinyInteger('aktivan')->default(0);
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->nullable();
             $table->unsignedBigInteger('pravapristupa_id');
