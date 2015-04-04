@@ -3,7 +3,8 @@ use Illuminate\Database\Seeder;
 use App\Security;
 use App\PravaPristupa;
 use App\Korisnici;
-
+use App\VrstaSadrzaja;
+use App\Tema;
 class KonfiguracioniPodaci extends Seeder{
     public function run(){
         $pravaPristupa = [
@@ -49,5 +50,29 @@ class KonfiguracioniPodaci extends Seeder{
             ]
         ];
         Korisnici::insert($korisnici);
+
+        VrstaSadrzaja::insert([
+            [
+                'naziv'=>'text-meni'//1
+            ],
+            [
+                'naziv'=>'text'//2
+            ],
+            [
+                'naziv'=>'email'//3
+            ],
+            [
+                'naziv'=>'koordinata'//4
+            ],
+        ]);
+
+        Tema::insert([
+            [
+                'slug'=>'osnovna',
+                'naziv'=>'Osnovna',
+                'opis'=>'Osnovna tema.'
+            ]
+        ]);
+
     }
 }

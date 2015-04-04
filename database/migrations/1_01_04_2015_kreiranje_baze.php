@@ -93,7 +93,7 @@ class KreiranjeBaze extends Migration{
             $table->tinyInteger('aktivan')->default(1);
             $table->unsignedBigInteger('korisnici_id');
             $table->foreign('korisnici_id')->references('id')->on('korisnici');
-            $table->unsignedBigInteger('tema_id');
+            $table->unsignedBigInteger('tema_id')->default(1);
             $table->foreign('tema_id')->references('id')->on('tema');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->nullable();
@@ -149,7 +149,8 @@ class KreiranjeBaze extends Migration{
         Schema::create('templejt', function(Blueprint $table)
         {
             $table->bigIncrements('id');
-            $table->string('slug', 45)->unique();
+            $table->integer('redoslijed')->default(10);
+            $table->string('slug', 45);
             $table->unsignedBigInteger('vrsta_sadrzaja_id');
             $table->foreign('vrsta_sadrzaja_id')->references('id')->on('vrsta_sadrzaja');
             $table->unsignedBigInteger('tema_id');

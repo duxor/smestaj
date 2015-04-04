@@ -7,6 +7,7 @@
             <table class="table table-striped">
                 <thead>
                 <tr>
+                    <th></th>
                     <th>Naziv</th>
                     <th>Slug</th>
                     <th>Opis</th>
@@ -16,6 +17,7 @@
                 <tbody>
                 @foreach($teme as $tema)
                     <tr>
+                        <td><a href="/administracija/aplikacija/tema-templejt/{{$tema['slug']}}" class="btn btn-default"><i class="glyphicon glyphicon-eye-open"></i></a></td>
                         <td>{{$tema['naziv']}}</td>
                         <td>{{$tema['slug']}}</td>
                         <td>{{$tema['opis']}}</td>
