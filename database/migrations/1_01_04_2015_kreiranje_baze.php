@@ -79,7 +79,9 @@ class KreiranjeBaze extends Migration{
         Schema::create('tema', function(Blueprint $table)
         {
             $table->bigIncrements('id');
-            $table->string('naziv', 45)->unique();
+            $table->string('slug',45)->unique();
+            $table->string('naziv', 45);
+            $table->text('opis')->nullable();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->nullable();
         });

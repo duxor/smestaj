@@ -13,17 +13,17 @@ class Korisnik extends Controller {
 
     public function getIndex(){
         $korisnici = Korisnici::join('pravaPristupa', 'korisnici.pravaPristupa_id','=','pravaPristupa.id')->orderBy('pravaPristupa_id','DESC')->get(['prezime','ime','username','naziv as pravaPristupa','aktivan'])->toArray();
-        return Security::autentifikacija('stranice.administracija.korisnici',compact('korisnici'));
+        return Security::autentifikacija('korisnik.index',compact('korisnici'));
     }
     public function getNovi(){
         $prava = PravaPristupa::where('id','<','5')->orderBy('id','DESC')->lists('naziv','id');
-        return Security::autentifikacija('stranice.administracija.korisnici', ['prava'=>$prava]);
+        return Security::autentifikacija('korisnik.edit', ['prava'=>$prava]);
     }
     public function postNovi(){
         if(Security::autentifikacijaTest()){
             if(Korisnici::where('id','<>',Input::get('id'))->where(function($query){
                 return $query->where('username', '=', Input::get('username'))->orWhere('email','=',Input::get('email'));
-            })->first()) return '<a href="/administracija/korisnici">Parametri Username ili Email već postoje u bazi!</a>';
+            })->first()) return '<a href="/administracija/korisnik">Parametri Username ili Email već postoje u bazi!</a>';
 
             $novi = Korisnici::firstOrNew(['id'=>Input::get('id')]);
             $novi->prezime = Input::get('prezime');
@@ -46,13 +46,11 @@ class Korisnik extends Controller {
         }
         return Security::rediectToLogin();
     }
-
-
     public function getProfil($username){
         if($username=='admin') return Redirect::back();
         $prava = PravaPristupa::where('id','<',5)->orderBy('id','DESC')->lists('naziv','id');
         $korisnik = Korisnici::where('username',$username)->first();
-        return Security::autentifikacija('stranice.administracija.korisnici', compact('korisnik', 'prava'));
+        return Security::autentifikacija('korisnik.edit', compact('korisnik', 'prava'));
     }
     public function getStatus($username){
         if(Security::autentifikacijaTest()){
