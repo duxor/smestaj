@@ -17,10 +17,10 @@ class Aplikacija extends Controller {
 //TEMA START::
 	public function getTema(){
 		$teme = Tema::get(['slug','naziv','opis'])->toArray();
-		return Security::autentifikacija('aplikacija.tema.index', compact('teme'));
+		return Security::autentifikacija('administracija.aplikacija.tema.index', compact('teme'));
 	}
 	public function getTemaNova(){
-		return Security::autentifikacija('aplikacija.tema.edit', null);
+		return Security::autentifikacija('administracija.aplikacija.tema.edit', null);
 	}
 	public function postTemaNova(){
 		if(Security::autentifikacijaTest()){
@@ -35,7 +35,7 @@ class Aplikacija extends Controller {
 	}
 	public function getTemaEdit($slug){
 		$tema=Tema::where('slug','=',$slug)->get(['id','slug','naziv','opis'])->first()->toArray();
-		return Security::autentifikacija('aplikacija.tema.edit',compact('tema'));
+		return Security::autentifikacija('administracija.aplikacija.tema.edit',compact('tema'));
 	}
 	public function getTemaUkloni($slug){
 		if(Security::autentifikacijaTest()){
@@ -59,7 +59,7 @@ class Aplikacija extends Controller {
 			->where('tema.slug','=',$slug)
 			->orderBy('redoslijed')
 			->get(['tema.naziv as tema','tema.slug as tema_slug','tema.id as tema_id','opis','templejt.id as templejt_id','templejt.slug','redoslijed','vrsta_sadrzaja_id','vrsta_sadrzaja.naziv as vrsta_sadrzaja'])->toArray();
-		return Security::autentifikacija('aplikacija.templejt.index',compact('templejt'));
+		return Security::autentifikacija('administracija.aplikacija.templejt.index',compact('templejt'));
 	}
 	public function postTemaTemplejt($id){
 		if(Security::autentifikacijaTest()){
@@ -72,13 +72,13 @@ class Aplikacija extends Controller {
 		$templejt=Templejt::where('id','=',Input::get('templejt_id'))->get(['id','slug','vrsta_sadrzaja_id'])->first()->toArray();
 		$vrstaSadrzaja=VrstaSadrzaja::orderBy('id')->get(['id','naziv'])->lists('naziv','id');
 		$temaSlug=Input::get('tema_slug');
-		return Security::autentifikacija('aplikacija.templejt.edit',compact('templejt','vrstaSadrzaja','temaSlug'));
+		return Security::autentifikacija('administracija.aplikacija.templejt.edit',compact('templejt','vrstaSadrzaja','temaSlug'));
 	}
 	public function postTemplejtNovi(){
 		$vrstaSadrzaja=VrstaSadrzaja::orderBy('id')->get(['id','naziv'])->lists('naziv','id');
 		$temaID=Input::get('tema_id');
 		$tema_slug=Input::get('tema_slug');
-		return Security::autentifikacija('aplikacija.templejt.edit',compact('vrstaSadrzaja','temaID','tema_slug'));
+		return Security::autentifikacija('administracija.aplikacija.templejt.edit',compact('vrstaSadrzaja','temaID','tema_slug'));
 	}
 	public function postTemplejtNoviSubmit(){
 		if(Security::autentifikacijaTest()){

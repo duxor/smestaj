@@ -13,11 +13,11 @@ class Korisnik extends Controller {
 
     public function getIndex(){
         $korisnici = Korisnici::join('pravaPristupa', 'korisnici.pravaPristupa_id','=','pravaPristupa.id')->orderBy('pravaPristupa_id','DESC')->get(['prezime','ime','username','naziv as pravaPristupa','aktivan'])->toArray();
-        return Security::autentifikacija('korisnik.index',compact('korisnici'));
+        return Security::autentifikacija('administracija.korisnik.index',compact('korisnici'));
     }
     public function getNovi(){
         $prava = PravaPristupa::where('id','<','5')->orderBy('id','DESC')->lists('naziv','id');
-        return Security::autentifikacija('korisnik.edit', ['prava'=>$prava]);
+        return Security::autentifikacija('administracija.korisnik.edit', ['prava'=>$prava]);
     }
     public function postNovi(){
         if(Security::autentifikacijaTest()){
@@ -50,7 +50,7 @@ class Korisnik extends Controller {
         if($username=='admin') return Redirect::back();
         $prava = PravaPristupa::where('id','<',5)->orderBy('id','DESC')->lists('naziv','id');
         $korisnik = Korisnici::where('username',$username)->first();
-        return Security::autentifikacija('korisnik.edit', compact('korisnik', 'prava'));
+        return Security::autentifikacija('administracija.korisnik.edit', compact('korisnik', 'prava'));
     }
     public function getStatus($username){
         if(Security::autentifikacijaTest()){

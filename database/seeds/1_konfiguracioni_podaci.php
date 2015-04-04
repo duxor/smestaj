@@ -5,9 +5,13 @@ use App\PravaPristupa;
 use App\Korisnici;
 use App\VrstaSadrzaja;
 use App\Tema;
+use App\Templejt;
+use App\Sadrzaji;
+use App\Nalog;
+
 class KonfiguracioniPodaci extends Seeder{
     public function run(){
-        $pravaPristupa = [
+        PravaPristupa::insert([
             [
                 'naziv' => 'Zabranjen'//1
             ],
@@ -26,10 +30,8 @@ class KonfiguracioniPodaci extends Seeder{
             [
                 'naziv' => 'Kreator'//6
             ]
-        ];
-        PravaPristupa::insert($pravaPristupa);
-
-        $korisnici = [
+        ]);
+        Korisnici::insert([
             [
                 'prezime' => 'Zabranjen',
                 'ime' => 'Zabranjen',
@@ -48,9 +50,7 @@ class KonfiguracioniPodaci extends Seeder{
                 'pravapristupa_id' => 6,
                 'aktivan' => 1
             ]
-        ];
-        Korisnici::insert($korisnici);
-
+        ]);
         VrstaSadrzaja::insert([
             [
                 'naziv'=>'text-meni'//1
@@ -65,14 +65,79 @@ class KonfiguracioniPodaci extends Seeder{
                 'naziv'=>'koordinata'//4
             ],
         ]);
-
         Tema::insert([
-            [
+            [//1
                 'slug'=>'osnovna',
                 'naziv'=>'Osnovna',
                 'opis'=>'Osnovna tema.'
             ]
         ]);
-
+        Templejt::insert([
+            [//1
+                'slug'=>'pocetna',
+                'vrsta_sadrzaja_id'=>1,
+                'tema_id'=>1,
+            ],
+            [//2
+                'slug'=>'smestaj',
+                'vrsta_sadrzaja_id'=>1,
+                'tema_id'=>1,
+            ],
+            [//3
+                'slug'=>'rezervacije',
+                'vrsta_sadrzaja_id'=>1,
+                'tema_id'=>1,
+            ],
+            [//4
+                'slug'=>'kontakt',
+                'vrsta_sadrzaja_id'=>1,
+                'tema_id'=>1,
+            ],
+            [//5
+                'slug'=>'login',
+                'vrsta_sadrzaja_id'=>1,
+                'tema_id'=>1,
+            ]
+        ]);
+        Nalog::insert([
+            [
+                'naziv'=>'Osnovni',
+                'slug'=>'osnovna',
+                'korisnici_id'=>2,
+                'tema_id'=>1
+            ]
+        ]);
+        Sadrzaji::insert([
+            [
+                'naziv'=>'Početna',
+                'sadrzaj'=>'<p>Tekst je u pripremi.</p>',
+                'templejt_id'=>1,
+                'nalog_id'=>1
+            ],
+            [
+                'naziv'=>'Smeštaj',
+                'sadrzaj'=>'<p>Tekst je u pripremi.</p>',
+                'templejt_id'=>1,
+                'nalog_id'=>1
+            ],
+            [
+                'naziv'=>'Rezervacije',
+                'sadrzaj'=>'<p>Tekst je u pripremi.</p>',
+                'templejt_id'=>1,
+                'nalog_id'=>1
+            ],
+            [
+                'naziv'=>'Kontakt',
+                'sadrzaj'=>'<p>Tekst je u pripremi.</p>',
+                'templejt_id'=>1,
+                'nalog_id'=>1
+            ],
+            [
+                'naziv'=>'Login',
+                'sadrzaj'=>'<p>Tekst je u pripremi.</p>',
+                'templejt_id'=>1,
+                'nalog_id'=>1
+            ],
+        ]);
     }
 }
