@@ -2,6 +2,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Security;
 
 
 class TestPodaci extends Seeder
@@ -13,12 +14,14 @@ class TestPodaci extends Seeder
 			(
 			[
 	            [
+
 	            	'prezime'=>'marko',
 	            	'ime'=>'markovic',
 	            	'username'=>'marko@test.com',
 	                'email' => 'marko@test.com',
-	                'password' => Hash::make('marko'),
+	                'password' => Security::generateHashPass('marko'),
 	                'pravapristupa_id'=>'1',
+	                'aktivan' => 0
 	            ],
 	           	
 	           	[
@@ -26,8 +29,9 @@ class TestPodaci extends Seeder
 	            	'ime'=>'Petar',
 	            	'username'=>'petar@test.com',
 	                'email' => 'petar@test.com',
-	                'password' => Hash::make('petar'),
+	                'password' =>Security::generateHashPass('petar'),
 	                'pravapristupa_id'=>'2',
+	                'aktivan' => 1
 	            ],
 
 	           	[
@@ -35,64 +39,72 @@ class TestPodaci extends Seeder
 	            	'ime'=>'Goran',
 	            	'username'=>'goran@test.com',
 	                'email' => 'goran@test.com',
-	                'password' => Hash::make('goran'),
+	                'password' => Security::generateHashPass('goran'),
 	                'pravapristupa_id'=>'3',
+	                'aktivan' => 1
 	            ],
 	           	[
 	            	'prezime'=>'Todorovic',
 	            	'ime'=>'Todor',
 	            	'username'=>'todor@test.com',
 	                'email' => 'todor@test.com',
-	                'password' => Hash::make('todor'),
+	                'password' => Security::generateHashPass('todor'),
 	                'pravapristupa_id'=>'4',
+	                'aktivan' => 1
 	            ],
 	           	[
 	            	'prezime'=>'Ivanovic',
 	            	'ime'=>'Ivan',
 	            	'username'=>'ivan@test.com',
 	                'email' => 'ivan@test.com',
-	                'password' => Hash::make('ivan'),
+	                'password' => Security::generateHashPass('ivan'),
 	                'pravapristupa_id'=>'5',
+	                'aktivan' => 1
 	            ],
 	           	[
 	            	'prezime'=>'Stojanovic',
 	            	'ime'=>'stojan',
 	            	'username'=>'stojan@test.com',
 	                'email' => 'stojan@test.com',
-	                'password' => Hash::make('stojan'),
+	                'password' => Security::generateHashPass('stojan'),
 	                'pravapristupa_id'=>'6',
+	                'aktivan' => 1
 	            ],
 	           	[
 	            	'prezime'=>'Dejanovic',
 	            	'ime'=>'Dejan',
 	            	'username'=>'dejan@test.com',
 	                'email' => 'dejan@test.com',
-	                'password' => Hash::make('dejan'),
+	                'password' => Security::generateHashPass('dejan'),
 	                'pravapristupa_id'=>'1',
+	                'aktivan' => 1
 	            ],
 	           	[
 	            	'prezime'=>'Milosevic',
 	            	'ime'=>'Milos',
 	            	'username'=>'milos@test.com',
 	                'email' => 'milos@test.com',
-	                'password' => Hash::make('milos'),
+	                'password' => Security::generateHashPass('milos'),
 	                'pravapristupa_id'=>'2',
+	                'aktivan' => 1
 	            ],
 	           	[
 	            	'prezime'=>'Andrijasevic',
 	            	'ime'=>'Andrija',
 	            	'username'=>'andrija@test.com',
 	                'email' => 'andrija@test.com',
-	                'password' => Hash::make('andrija'),
+	                'password' =>Security::generateHashPass('andrija'),
 	                'pravapristupa_id'=>'3',
+	                'aktivan' => 1
 	            ],
 	           	[
 	            	'prezime'=>'Nenadovic',
 	            	'ime'=>'Nenad',
 	            	'username'=>'nenad@test.com',
 	                'email' => 'nenad@test.com',
-	                'password' => Hash::make('nenad'),
+	                'password' => Security::generateHashPass('nenad'),
 	                'pravapristupa_id'=>'4',
+	                'aktivan' => 1
 	            ]
 	        ]            
 	    	);
