@@ -59,10 +59,13 @@ class KonfiguracioniPodaci extends Seeder{
                 'naziv'=>'text'//2
             ],
             [
-                'naziv'=>'email'//3
+                'naziv'=>'link-meni'//3
             ],
             [
-                'naziv'=>'koordinata'//4
+                'naziv'=>'email'//4
+            ],
+            [
+                'naziv'=>'koordinata'//5
             ],
         ]);
         Tema::insert([
@@ -75,7 +78,7 @@ class KonfiguracioniPodaci extends Seeder{
         Templejt::insert([
             [//1
                 'slug'=>'pocetna',
-                'vrsta_sadrzaja_id'=>1,
+                'vrsta_sadrzaja_id'=>3,
                 'tema_id'=>1,
             ],
             [//2
@@ -117,25 +120,25 @@ class KonfiguracioniPodaci extends Seeder{
             [
                 'naziv'=>'Smeštaj',
                 'sadrzaj'=>'<p>Tekst je u pripremi.</p>',
-                'templejt_id'=>1,
+                'templejt_id'=>2,
                 'nalog_id'=>1
             ],
             [
                 'naziv'=>'Rezervacije',
                 'sadrzaj'=>'<p>Tekst je u pripremi.</p>',
-                'templejt_id'=>1,
+                'templejt_id'=>3,
                 'nalog_id'=>1
             ],
             [
                 'naziv'=>'Kontakt',
                 'sadrzaj'=>'<p>Tekst je u pripremi.</p>',
-                'templejt_id'=>1,
+                'templejt_id'=>4,
                 'nalog_id'=>1
             ],
             [
                 'naziv'=>'Login',
                 'sadrzaj'=>'<p>Tekst je u pripremi.</p>',
-                'templejt_id'=>1,
+                'templejt_id'=>5,
                 'nalog_id'=>1
             ],
         ]);

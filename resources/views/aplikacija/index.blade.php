@@ -1,188 +1,125 @@
 @extends('master')
 
-<?php
-$gMapa = "<div id='googleMap' style='height:300px;'></div>";
-?>
-
-
 @section('body')
-    <!--pocetna START::-->
+    {{--pocetna START::--}}
     <div
             class="parallax-image-wrapper parallax-image-wrapper-100"
-            data-anchor-target="#{{$meni[0]['slug']}} + .gap"
+            data-anchor-target="#{{$podaci[0]['slug']}} + .gap"
             data-bottom-top="transform:translate3d(0px, 150%, 0px)"
             data-top-bottom="transform:translate3d(0px, 0%, 0px)">
 
         <div
                 class="parallax-image parallax-image-100"
-                style="background-image:url({!! $pozadina[4] !!})"
-                data-anchor-target="#{{$meni[0]['slug']}} + .gap"
+                style="background-image:url('{{$podaci['pozadine'][1]}}')"
+                data-anchor-target="#{{$podaci[0]['slug']}} + .gap"
                 data-bottom-top="transform: translate3d(0px, -80%, 0px);"
                 data-top-bottom="transform: translate3d(0px, 80%, 0px);"
                 ></div>
     </div>
-    <!--pocetna END::-->
+    {{--pocetna END::--}}
 
-    <!-- START::-->
+    {{--Smestaj START::--}}
     <div
             class="parallax-image-wrapper parallax-image-wrapper-100"
-            data-anchor-target="#{{$meni[1]['slug']}} + .gap"
+            data-anchor-target="#{{$podaci[1]['slug']}} + .gap"
             data-bottom-top="transform:translate3d(0px, 200%, 0px)"
             data-top-bottom="transform:translate3d(0px, 0%, 0px)">
 
         <div
                 class="parallax-image parallax-image-100"
-                style="background-image:url({!! $pozadina[5] !!})"
-                data-anchor-target="#{{$meni[1]['slug']}} + .gap"
+                style="background-image:url('{{$podaci['pozadine'][2]}}')"
+                data-anchor-target="#{{$podaci[1]['slug']}} + .gap"
                 data-bottom-top="transform: translate3d(0px, -80%, 0px);"
                 data-top-bottom="transform: translate3d(0px, 80%, 0px);"
                 ></div>
     </div>
-    <!-- START::-->
+    {{--Smestaj END::--}}
 
-    <!-- START::-->
+    {{--Rezervacije START::--}}
     <div
             class="parallax-image-wrapper parallax-image-wrapper-50"
-            data-anchor-target="#{{$meni[2]['slug']}} + .gap"
-            data-bottom-top="transform:translate3d(0px, 350%, 0px)"
+            data-anchor-target="#{{$podaci[2]['slug']}} + .gap"
+            data-bottom-top="transform:translate3d(0px, 320%, 0px)"
             data-top-bottom="transform:translate3d(0px, 0%, 0px)">
 
         <div
                 class="parallax-image parallax-image-50"
-                style="background-image:url({!! $pozadina[6] !!})"
-                data-anchor-target="#{{$meni[2]['slug']}} + .gap"
+                style="background-image:url('{{$podaci['pozadine'][2]}}')"
+                data-anchor-target="#{{$podaci[2]['slug']}} + .gap"
                 data-bottom-top="transform: translate3d(0px, -60%, 0px);"
                 data-top-bottom="transform: translate3d(0px, 60%, 0px);"
                 ></div>
     </div>
-    <!-- END::-->
+    {{--Rezervacije END::--}}
 
-    <!-- START::-->
+    {{--Kontakt START::--}}
     <div
             class="parallax-image-wrapper parallax-image-wrapper-100"
-            data-anchor-target="#{{$meni[3]['slug']}} + .gap"
+            data-anchor-target="#{{$podaci[3]['slug']}} + .gap"
             data-bottom-top="transform:translate3d(0px, 300%, 0px)"
             data-top-bottom="transform:translate3d(0px, 0%, 0px)">
 
         <div
                 class="parallax-image parallax-image-50"
-                style="background-image:url({!! $pozadina[7] !!})"
-                data-anchor-target="#{{$meni[3]['slug']}} + .gap"
+                style="background-image:url('{{$podaci['pozadine'][3]}}')"
+                data-anchor-target="#{{$podaci[3]['slug']}} + .gap"
                 data-bottom-top="transform: translate3d(0px, -60%, 0px);"
                 data-top-bottom="transform: translate3d(0px, 60%, 0px);"
                 ></div>
     </div>
-    <!-- END::-->
-
-    <!-- START::-->
-    <div
-            class="parallax-image-wrapper parallax-image-wrapper-100"
-            data-anchor-target="#{{$meni[4]['slug']}} + .gap"
-            data-bottom-top="transform:translate3d(0px, 300%, 0px)"
-            data-top-bottom="transform:translate3d(0px, 0%, 0px)">
-
-        <div
-                class="parallax-image parallax-image-50"
-                style="background-image:url({!! $pozadina[8] !!})"
-                data-anchor-target="#{{$meni[4]['slug']}} + .gap"
-                data-bottom-top="transform: translate3d(0px, -60%, 0px);"
-                data-top-bottom="transform: translate3d(0px, 60%, 0px);"
-                ></div>
-    </div>
-    <!-- END::-->
-
-    <!--Kontakt START::-->
-    <div
-            class="parallax-image-wrapper parallax-image-wrapper-50"
-            data-anchor-target="#{{$meni[5]['slug']}} + .gap"
-            data-bottom-top="transform:translate3d(0px, 300%, 0px)"
-            data-top-bottom="transform:translate3d(0px, 0%, 0px)">
-
-        <div
-                class="parallax-image parallax-image-50"
-                style="background-image:url({!! $pozadina[9] !!})"
-                data-anchor-target="#{{$meni[5]['slug']}} + .gap"
-                data-bottom-top="transform: translate3d(0px, -60%, 0px);"
-                data-top-bottom="transform: translate3d(0px, 60%, 0px);"
-                ></div>
-    </div>
-    <!--Kontakt END::-->
+    {{--Kontakt END::--}}
 
     <div id="skrollr-body">
-
-
         {{--pocetna START::--}}
-        <div id="{{$meni[0]['slug']}}">
-            <?php require_once'php/slideshow.php'?>
+        <div class="content content-full" id="{{$podaci[0]['slug']}}">
+            <div class="container">
+                <h1>{!!$podaci[0]['naziv']!!}</h1>
+                {!!$podaci[0]['sadrzaj']!!}
+            </div>
         </div>
         <div class="gap gap-100"></div>
         {{--pocetna END::--}}
 
-        {{--O nama START::--}}
-        <div class="content" id="{{$meni[1]['slug']}}">
-            <div class="container">
-                <h1>{!! $podaci[1]['naslov'] !!}</h1>
-                {!! $podaci[1]['sadrzaj'] !!}
-            </div>
+        {{--Smestaj START::--}}
+        <div class="content" id="{{$podaci[1]['slug']}}">
+                <h1>{!!$podaci[1]['naziv']!!}</h1>
+                {!!$podaci[1]['sadrzaj']!!}
         </div>
         <div class="gap gap-100"></div>
-        {{--O nama END::--}}
+        {{--Smestaj END::--}}
 
-        {{-- START::--}}
-        <div class="content content-full" id="{{$meni[2]['slug']}}">
+        {{--Rezervacije START::--}}
+        <div class="content content-full" id="{{$podaci[2]['slug']}}">
             <div class="container">
-
+                <h1>{!!$podaci[2]['naziv']!!}</h1>
+                {!!$podaci[2]['sadrzaj']!!}
             </div>
         </div>
         <div class="gap gap-50"></div>
-        {{-- END::--}}
+        {{--Rezervacije END::--}}
 
-        {{-- START::--}}
-        <div class="content" id="{{$meni[3]['slug']}}">
+        {{--Kontakt START::--}}
+        <div class="content" id="{{$podaci[3]['slug']}}">
             <div class="container">
-
+                <h1>{!!$podaci[3]['naziv']!!}</h1>
+                {!!$podaci[3]['sadrzaj']!!}
             </div>
         </div>
         <div class="gap gap-100"></div>
-        {{-- END::--}}
-
-        {{-- START::--}}
-        <div class="content" id="{{$meni[4]['slug']}}">
-            <div class="container">
-
-            </div>
-        </div>
-        <div class="gap gap-100"></div>
-        {{-- END::--}}
-
-        {{--kontakt START::--}}
-        <div class="content content-full" id="{{$meni[5]['slug']}}">
-            <div class="container">
-                <h1>{!! $podaci[5]['naslov'] !!}</h1>
-                <div id='googleMap' style='height:300px;'></div>
-                {!! $podaci[5]['sadrzaj'] !!}
-                <p>Kontaktirajte nas putem <a href="#" data-toggle="modal" data-target="#posaljiMail" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-envelope"></span> email-a</a></p>
-            </div>
-        </div>
-        <div class="gap gap-100"></div>
-        {{--kontakt END::--}}
+        {{--Kontakt END::--}}
 
         {{--footer START::--}}
         <div class="content" id="done" style="height: 200px;">
             <div class="container">
                 <div class="col-sm-10">
                     <p>Autor: Dušan Perišić</p>
-                    <p>web developer & dizajner</p>
-                    <a href="http://dusanperisic.com" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-hand-right"></span> <i>dusanperisic.com</i></a>
-                </div>
-                <div class="col-sm-2">
-                    <a href="/administracija" class="btn btn-lg btn-default"><span class="glyphicon glyphicon-cog"></span> Administracija</a>
+                    <a href="http://dusanperisic.com" class="btn btn-lg btn-primary"><i>dusanperisic.com</i></a>
                 </div>
             </div>
         </div>
         {{--footer END::--}}
-    </div>
 
+    </div>
 
     {{--MODAL:: posalji mail START::--}}
     <div class="modal fade" id="posaljiMail">
@@ -227,7 +164,7 @@ $gMapa = "<div id='googleMap' style='height:300px;'></div>";
                     </div>
                 </div>
                 <div class="modal-footer">
-                    {!! Form::button('<span class="glyphicon glyphicon-envelope"></span> Pošalji', ['class'=>'btn btn-lg btn-success', 'onClick'=>'SubmitForma.submit(\'kontaktForma\')']) !!}
+                    {!! Form::button('<span class="glyphicon glyphicon-envelope"></span> Pošalji', ['class'=>'btn btn-lg btn-primary', 'onClick'=>'SubmitForma.submit("kontaktForma")']) !!}
                     {!! Form::button('<span class="glyphicon glyphicon-trash"></span> Obriši sve', ['class'=>'btn btn-lg btn-danger', 'type'=>'reset']) !!}
                     {!! Form::close() !!}
                 </div>
@@ -235,4 +172,4 @@ $gMapa = "<div id='googleMap' style='height:300px;'></div>";
         </div>
     </div>
     {{--MODAL:: posalji mail END::--}}
-@endsection
+@stop

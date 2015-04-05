@@ -1,0 +1,39 @@
+/******************************
+*    Autor: Dusan Perisic
+*    Datum: 12.03.2015.
+*
+*    Dodatni stilovi
+*
+*******************************/
+h3{
+    text-decoration: underline;
+}
+.okvir, .okvirSlide {
+    background-color: rgba(255, 255, 255, 0.8);
+}
+.okvir{
+    margin: 4%;
+    padding: 3%;
+    float: left;
+    width: 40%;
+
+    -webkit-border-radius: 70px;
+    -webkit-border-top-right-radius: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+    -moz-border-radius: 70px;
+    -moz-border-radius-topright: 5px;
+    -moz-border-radius-bottomleft: 5px;
+    border-radius: 70px;
+    border-top-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+#googleMap{
+    margin-bottom: 3%;
+}
+body {
+     padding-top: 60px;;
+ }
+nav li a, p{
+    font-size: 21px;
+}
