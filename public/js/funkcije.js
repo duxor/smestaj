@@ -1,13 +1,3 @@
-//DatePicker START::
-$('.jumbotron .input-daterange').datepicker({
-	orientation: "top auto",
-	weekStart: 1,
-	startDate: "current",
-	todayBtn: "linked",
-	toggleActive: true,
-	format: "yyyy-mm-dd"
-});
-//DatePicker END::
 
 $(document).ready(function() {
 	// navigation click actions	

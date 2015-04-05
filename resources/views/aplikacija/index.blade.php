@@ -142,6 +142,9 @@
                     <p>Autor: Dušan Perišić</p>
                     <a href="http://dusanperisic.com" class="btn btn-lg btn-primary"><i>dusanperisic.com</i></a>
                 </div>
+                <div class="col-sm-2">
+                    <a href="{!!url('/administracija')!!}" class="btn btn-lg btn-default"><i class="glyphicon glyphicon-cog"></i> Administracija</a>
+                </div>
             </div>
         </div>
         {{--footer END::--}}
