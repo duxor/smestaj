@@ -13,6 +13,7 @@ class DatabaseSeeder extends Seeder {
 	public function run()
 	{
 		Model::unguard();
+		$this->call('TestPodaci');
 
 		$this->call('KonfiguracioniPodaci');
 		$this->call('TestPodaciAlikacije');
