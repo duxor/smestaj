@@ -24,8 +24,8 @@
     {!! HTML::style('css/datepicker.css') !!}
 
     {!! HTML::script('js/jquery-3.0.js') !!}
-    {!! HTML::script('http://maps.googleapis.com/maps/api/js') !!}
     @if(isset($podaci['x']))
+        {!! HTML::script('http://maps.googleapis.com/maps/api/js') !!}
         <script>var mx="{{$podaci['x']}}", my="{{$podaci['y']}}";</script>
         {!! HTML::script('js/gmap1.js') !!}
     @endif
@@ -35,7 +35,7 @@
 
 <body>
 {{--navigacija START::--}}
-<nav class="navbar navbar-default navbar-fixed-top">
+<nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -53,10 +53,11 @@
                 @foreach($podaci as $k => $meni)
                     @if(isset($meni['vrsta_sadrzaja_id']))
                         @if($meni['vrsta_sadrzaja_id']==1)
-                            <li><a href="/#{{$meni['slug']}}" class="scroll-link navbar-btn" data-id="{{$meni['slug']}}"><i class="{{$podaci['icon'][$k]}}"></i> {!! $meni['naziv'] !!}</a></li>
+                            <li><a href="/#{{$meni['slug']}}" class="scroll-link" data-id="{{$meni['slug']}}"><i class="{{$podaci['icon'][$k]}}"></i> {!! $meni['naziv'] !!}</a></li>
                         @endif
                     @endif
                 @endforeach
+                <li><a href="#"><i class="glyphicon glyphicon-log-in"></i> Login</a></li>
             </ul>
         </div>
     </div>

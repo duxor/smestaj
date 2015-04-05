@@ -1,4 +1,4 @@
-@extends('master')
+@extends('master-paralax-1')
 
 @section('body')
     {{--pocetna START::--}}
@@ -10,7 +10,7 @@
 
         <div
                 class="parallax-image parallax-image-100"
-                style="background-image:url('{{$podaci['pozadine'][1]}}')"
+                style="background-image:url('{{$podaci['pozadine'][0]}}')"
                 data-anchor-target="#{{$podaci[0]['slug']}} + .gap"
                 data-bottom-top="transform: translate3d(0px, -80%, 0px);"
                 data-top-bottom="transform: translate3d(0px, 80%, 0px);"
@@ -27,7 +27,7 @@
 
         <div
                 class="parallax-image parallax-image-100"
-                style="background-image:url('{{$podaci['pozadine'][2]}}')"
+                style="background-image:url('{{$podaci['pozadine'][1]}}')"
                 data-anchor-target="#{{$podaci[1]['slug']}} + .gap"
                 data-bottom-top="transform: translate3d(0px, -80%, 0px);"
                 data-top-bottom="transform: translate3d(0px, 80%, 0px);"
@@ -73,8 +73,35 @@
         {{--pocetna START::--}}
         <div class="content content-full" id="{{$podaci[0]['slug']}}">
             <div class="container">
-                <h1>{!!$podaci[0]['naziv']!!}</h1>
-                {!!$podaci[0]['sadrzaj']!!}
+                <div class="col-sm-5">
+                    <div class="jumbotron" style="text-align: left">
+                        {!!Form::open(['url'=>'','class'=>'form-horizontal'])!!}
+                            <div class="form-group">
+                                <p><i class="glyphicon glyphicon-search"></i> Pronađite savršen smeštaj</p>
+                                <p>Grad</p>
+                                {!!Form::select('grad',$podaci['grad'],1,['class'=>'form-control'])!!}
+                            </div>
+                            <div class="form-group">
+                                <p>Izaberite period</p>
+                                <div class="input-daterange input-group col-sm-12" id="datepicker">
+                                    {!! Form::text('datumOd', null, ['class'=>'input-sm form-control','placeholder'=>'od...']) !!}
+                                    <span class="input-group-addon">do</span>
+                                    {!! Form::text('datumDo', null, ['class'=>'input-sm form-control','placeholder'=>'do...']) !!}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {!!Form::button('<i class="glyphicon glyphicon-search"></i>',['class'=>'btn btn-success','type'=>'submit'])!!}
+                            </div>
+                            <div class="form-group">
+                                <p>Broj osoba</p>
+                                {!!Form::select('brojOsoba',[1=>1,2=>2,3=>3,4=>4,5=>5,6=>6,7=>7,8=>8,9=>9,10=>10,11=>11,12=>12],1,['class'=>'form-control'])!!}
+                            </div>
+                        {!!Form::close()!!}
+                    </div>
+                </div>
+                <div class="col-sm-7">
+                    SLIDER
+                </div>
             </div>
         </div>
         <div class="gap gap-100"></div>

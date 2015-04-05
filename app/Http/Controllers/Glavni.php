@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\Grad;
 use App\Templejt;
 
 class Glavni extends Controller {
@@ -9,18 +10,19 @@ class Glavni extends Controller {
 			->where('nalog_id','=',1)->where('tema_id','=',1)->orderBy('redoslijed')->get(['slug','naziv','sadrzaj','vrsta_sadrzaja_id'])->toArray();
 		$podaci['foother']=false;
 		$podaci['pozadine']=[
-			'teme/osnovna-paralax/slike/1.jpg',
-			'teme/osnovna-paralax/slike/2.jpg',
-			'teme/osnovna-paralax/slike/3.jpg',
-			'teme/osnovna-paralax/slike/4.jpg',
-			'teme/osnovna-paralax/slike/5.jpg',
-			'teme/osnovna-paralax/slike/6.jpg',
-			'teme/osnovna-paralax/slike/7.jpg',
-			'teme/osnovna-paralax/slike/78.jpg',
+			'teme/osnovna-paralax/slike/15.jpg',//8
+			'teme/osnovna-paralax/slike/19.jpg',
+			'teme/osnovna-paralax/slike/28.jpg',
+			'teme/osnovna-paralax/slike/34.jpg',
 		];
 		$podaci['icon']=[
+			'',
+			'glyphicon glyphicon-search',
+			'glyphicon glyphicon-calendar',
+			'glyphicon glyphicon-earphone',
 			''
 		];
+		$podaci['grad']=Grad::orderBy('id')->get(['id','naziv'])->lists('naziv','id');
 		return view('aplikacija.index',compact('podaci'));
 	}
 

@@ -98,7 +98,7 @@ class KonfiguracioniPodaci extends Seeder{
             ],
             [//5
                 'slug'=>'login',
-                'vrsta_sadrzaja_id'=>1,
+                'vrsta_sadrzaja_id'=>3,
                 'tema_id'=>1,
             ]
         ]);
