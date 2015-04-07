@@ -26,9 +26,11 @@ class Glavni extends Controller {
 		return view('aplikacija.index',compact('podaci'));
 	}
 	public function getLogin(){
-		//Security::registracija(Input::get('email'),Input::get('password'));
-		return view('korisnici.prijava.index');
-
+		Security::registracija(Input::get('email'),Input::get('password'));
+	}
+	public function postLogin(){
+		
+		
 	}
 
 }

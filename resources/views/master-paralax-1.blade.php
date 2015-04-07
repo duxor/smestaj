@@ -57,7 +57,7 @@
                         @endif
                     @endif
                 @endforeach
-                <li><a href="#"><i class="glyphicon glyphicon-log-in"></i> Login</a></li>
+                <li><a href="/login"><i class="glyphicon glyphicon-log-in"></i> Login</a></li>
             </ul>
         </div>
     </div>
