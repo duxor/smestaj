@@ -3,6 +3,7 @@
 use App\Grad;
 use App\Templejt;
 use App\Korisnici;
+use App\Security;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 
@@ -29,7 +30,7 @@ class Glavni extends Controller {
 		return view('aplikacija.index',compact('podaci'));
 	}
 	public function getLogin(){
-		Security::registracija(Input::get('email'),Input::get('password'));
+		//Security::registracija(Input::get('email'),Input::get('password'));
 	}
 	public function postLogin(){
 

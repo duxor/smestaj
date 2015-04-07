@@ -26,19 +26,19 @@
                     <tbody>
                       <tr>
                         <td>Prezime:</td>
-                        <td>{!! Form::text('prezime','prezime', ['class'=>'form-control', 'placeholder'=>'Prezime','id'=>'prezime'])!!}</td>
+                        <td>{!! Form::text('prezime',$korisnik['prezime'], ['class'=>'form-control', 'placeholder'=>'Prezime','id'=>'prezime'])!!}</td>
                       </tr>
                       <tr>
                         <td>Ime:</td>
-                        <td>{!! Form::text('ime','ime', ['class'=>'form-control', 'placeholder'=>'Ime','id'=>'ime'])!!}</td>
+                        <td>{!! Form::text('ime',$korisnik['ime'], ['class'=>'form-control', 'placeholder'=>'Ime','id'=>'ime'])!!}</td>
                       </tr>
                       <tr>
                         <td>Username:</td>
-                        <td>{!! Form::text('username','username', ['class'=>'form-control', 'placeholder'=>'Username','id'=>'username'])!!}</td>
+                        <td>{!! Form::text('username',$korisnik['username'], ['class'=>'form-control', 'placeholder'=>'Username','id'=>'username'])!!}</td>
                       </tr>
                       <tr>
                         <td>Email:</td>
-                        <td>{!! Form::text('email','email', ['class'=>'form-control', 'placeholder'=>'Email','id'=>'email','type'=>'email'])!!}</td>
+                        <td>{!! Form::text('email',$korisnik['email'], ['class'=>'form-control', 'placeholder'=>'Email','id'=>'email','type'=>'email'])!!}</td>
                       </tr>                    
                     </tbody>
                   </table>
