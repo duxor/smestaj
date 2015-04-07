@@ -23,6 +23,6 @@
             </tr>
         @endforeach
     </table>
-    <a href="{!!url('/administracija/korisnik/novi')!!}" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-plus"></span> Dodaj novog korisnika</a>
+    <a href="{!!url('/administracija/korisnik/novi')!!}" class="btn btn-lg btn-default"><span class="glyphicon glyphicon-plus"></span> Dodaj novog korisnika</a>
 
 @endsection

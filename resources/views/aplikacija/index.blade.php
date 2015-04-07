@@ -71,36 +71,54 @@
 
     <div id="skrollr-body">
         {{--pocetna START::--}}
-        <div class="content content-full" id="{{$podaci[0]['slug']}}">
-            <div class="container">
+        <div class="content content-full" id="{{$podaci[0]['slug']}}"><div id="map" style="height:650px;margin-top:-80px;width:104%;margin-left: -3%;"></div>
+            <div class="container" style="margin-top: -500px">
                 <div class="col-sm-5">
-                    <div class="jumbotron" style="text-align: left">
+                    <div style="
+                        padding: 10px 30px;
+                        background-color: #262626;
+                        color:#fff;
+                        -webkit-border-radius: 10px;
+                        -moz-border-radius: 10px;
+                        border-radius: 10px;
+                    ">
                         {!!Form::open(['url'=>'','class'=>'form-horizontal'])!!}
-                            <div class="form-group">
-                                <p><i class="glyphicon glyphicon-search"></i> Pronađite savršen smeštaj</p>
-                                <p>Grad</p>
-                                {!!Form::select('grad',$podaci['grad'],1,['class'=>'form-control'])!!}
+                        <div class="form-group">
+                            <p><i class="glyphicon glyphicon-search"></i> Pronađite savršen smeštaj</p>
+                            {!!Form::label('lgrad','Grad',['class'=>'control-label'])!!}
+                            {!!Form::select('grad',$podaci['grad'],1,['class'=>'form-control'])!!}
+                        </div>
+                        <div class="form-group" id="datarange">
+                            {!!Form::label('lperiod','Izaberite period',['class'=>'control-label'])!!}
+                            <div class="input-daterange input-group col-sm-12" id="datepicker">
+                                {!! Form::text('datumOd', null, ['class'=>'input-sm form-control','placeholder'=>'od...']) !!}
+                                <span class="input-group-addon">do</span>
+                                {!! Form::text('datumDo', null, ['class'=>'input-sm form-control','placeholder'=>'do...']) !!}
                             </div>
-                            <div class="form-group">
-                                <p>Izaberite period</p>
-                                <div class="input-daterange input-group col-sm-12" id="datepicker">
-                                    {!! Form::text('datumOd', null, ['class'=>'input-sm form-control','placeholder'=>'od...']) !!}
-                                    <span class="input-group-addon">do</span>
-                                    {!! Form::text('datumDo', null, ['class'=>'input-sm form-control','placeholder'=>'do...']) !!}
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                {!!Form::button('<i class="glyphicon glyphicon-search"></i>',['class'=>'btn btn-success','type'=>'submit'])!!}
-                            </div>
-                            <div class="form-group">
-                                <p>Broj osoba</p>
-                                {!!Form::select('brojOsoba',[1=>1,2=>2,3=>3,4=>4,5=>5,6=>6,7=>7,8=>8,9=>9,10=>10,11=>11,12=>12],1,['class'=>'form-control'])!!}
-                            </div>
+                        </div>
+                        <script>
+                            $('#datarange .input-daterange').datepicker({
+                                orientation: "top auto",
+                                weekStart: 1,
+                                startDate: "current",
+                                todayBtn: "linked",
+                                toggleActive: true,
+                                format: "yyyy-mm-dd"
+                            });
+                        </script>
+                        <div class="form-group">
+                            {!!Form::label('lgrad','Broj osoba',['class'=>'control-label'])!!}
+                            {!!Form::select('brojOsoba',[1=>1,2=>2,3=>3,4=>4,5=>5,6=>6,7=>7,8=>8,9=>9,10=>10,11=>11,12=>12],1,['class'=>'form-control'])!!}
+                        </div>
+                        <div class="form-group" style="text-align: right">
+                            {!!Form::button('<i class="glyphicon glyphicon-search"></i> Pretraga',['class'=>'btn btn-lg btn-primary','type'=>'submit'])!!}
+                        </div>
                         {!!Form::close()!!}
+
                     </div>
                 </div>
                 <div class="col-sm-7">
-                    SLIDER
+                    <div style="width: 100%; height: 500px"></div>
                 </div>
             </div>
         </div>
