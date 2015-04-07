@@ -51,6 +51,9 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-qrcode"></i> Aplikacije <i class="caret"></i></a>
                         <ul class="dropdown-menu">
+                            <li><a href="{!!url('/administracija/nalog')!!}"><i class="glyphicon glyphicon-eye-open"></i> Pregled naloga</a></li>
+                            <li><a href="{!!url('/administracija/nalog/nalog-novi')!!}"><i class="glyphicon glyphicon-plus"></i> Novi nalog</a></li>
+
                             <li><a href="{!!url('/administracija/aplikacija/tema')!!}"><i class="glyphicon glyphicon-eye-open"></i> Pregled tema</a></li>
                             <li><a href="{!!url('/administracija/aplikacija/tema-nova')!!}"><i class="glyphicon glyphicon-plus"></i> Nova tema</a></li>
                         </ul>

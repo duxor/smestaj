@@ -25,5 +25,10 @@ class Glavni extends Controller {
 		$podaci['grad']=Grad::orderBy('id')->get(['id','naziv'])->lists('naziv','id');
 		return view('aplikacija.index',compact('podaci'));
 	}
+	public function getLogin(){
+		//Security::registracija(Input::get('email'),Input::get('password'));
+		return view('korisnici.prijava.index');
+
+	}
 
 }
