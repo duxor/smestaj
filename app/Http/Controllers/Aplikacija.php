@@ -100,4 +100,13 @@ class Aplikacija extends Controller {
 		return Security::rediectToLogin();
 	}
 //TEMPLEJT END::
+
+//#OSNOVNA START::
+	public function getOsnovna(){
+		
+	}
+	public function postOsnovna(){
+
+	}
+//OSNOVNA END::
 }

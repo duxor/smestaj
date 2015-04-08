@@ -29,6 +29,7 @@ class Security {
     private $token;
     private $redirectURL;
     private $minLenPass = 4; //minimalna duzina sifre i korisnickog imena
+    private $prava_pristupa;//prava_pristupa_id
 
 //SETERI[$redirectURL, $username, $password, $token, $_SESSION[token,id,username]]
     public function setRedirectURL($url){
@@ -47,6 +48,7 @@ class Security {
         Session::put('token', $this->token);
         Session::put('id', $this->id);
         Session::put('username', $this->username);
+        Session::put('prava_pristupa', $this->prava_pristupa);
     }
 //GENERATORI[hashPass, token]
     public static function generateHashPass($pass){
@@ -78,12 +80,13 @@ class Security {
             $sec->setUsername($username);
             $sec->setPass($password);
 
-            $korisnik = Korisnici::all(['id','username', 'password'])->where('username',$sec->username)->first();
+            $korisnik = Korisnici::all(['id','username','password','prava_pristupa_id'])->where('username',$sec->username)->first();
             $test = $korisnik ? password_verify($sec->password.$sec->salt, $korisnik->password) : false;
 
             if ($test){
                 $sec->id = $korisnik->id;
                 $sec->username = $korisnik->username;
+                $sec->prava_pristupa = $korisnik->prava_pristupa_id;
                 $sec->generateToken();
                 Korisnici::where('id', $sec->id)->update(['token' => $sec->token]);
                 $sec->setSessions();
