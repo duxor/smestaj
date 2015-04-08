@@ -16,6 +16,8 @@ class Administracija extends Controller {
 	public function postLogin(){
 		return Security::login(Input::get('username'),Input::get('password'));
 	}
+	
+	
 	public function getLogout(){
 		return Security::logout();
 	}

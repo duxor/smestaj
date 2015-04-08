@@ -6,6 +6,7 @@ use App\Korisnici;
 use App\Security;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 
 class Glavni extends Controller {
 
@@ -56,7 +57,9 @@ class Glavni extends Controller {
 	}
 	public function getEditNalog(){
 
-		$korisnik=Korisnici::find('4');
+		$korisnik=Korisnici::find('4');//ovo resiti
+
+		
 		return view('korisnici.profil.edit',compact('korisnik'));
 		
 		
@@ -72,6 +75,16 @@ class Glavni extends Controller {
 		$korisnik=Korisnici::find('4');
 		return view('korisnici.profil.index',compact('korisnik'));
 		
+	}
+
+	//login korisnika
+	public function getPrijava(){
+		if(Security::autentifikacijaTest()) return redirect('/profil');
+		return view ('/korisnici/autentifikacija/login');
+	}
+	public function postPrijava(){
+		return Security::login(Input::get('username'),Input::get('password'));
+			
 	}
 
 }
