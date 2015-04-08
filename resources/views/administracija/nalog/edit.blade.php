@@ -59,7 +59,7 @@
     <div id="dnaziv" class="form-group has-feedback">
         {!! Form::label('lnaziv', 'Naziv',['class'=>'control-label col-sm-2']) !!}
         <div class="col-sm-10">
-            {!!Form::text('naziv', 'naziv', ['class'=>'form-control', 'placeholder'=>'Naziv','id'=>'naziv'])!!}
+            {!!Form::text('naziv', null, ['class'=>'form-control', 'placeholder'=>'Naziv','id'=>'naziv'])!!}
             <span id="snaziv" class="glyphicon form-control-feedback"></span>
         </div>
     </div>
@@ -67,7 +67,7 @@
     <div id="dslug" class="form-group has-feedback">
         {!! Form::label('lslug', 'Slug',['class'=>'control-label col-sm-2']) !!}
         <div class="col-sm-10">
-            {!! Form::text('slug','slug', ['class'=>'form-control', 'placeholder'=>'Slug','id'=>'slug'])!!}
+            {!! Form::text('slug',null, ['class'=>'form-control', 'placeholder'=>'Slug','id'=>'slug'])!!}
             <span id="sslug" class="glyphicon form-control-feedback"></span>
         </div>
     </div>
