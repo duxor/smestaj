@@ -1,7 +1,7 @@
 <?php
 
-Route::controller('/administracija/korisnik','Korisnik');
-Route::controller('/administracija/aplikacija','Aplikacija');
-Route::controller('/administracija/nalog','Nalozi');
-Route::controller('/administracija','Administracija');
+Route::controller('/administracija/korisnik','Administracija\Korisnik');
+Route::controller('/administracija/aplikacija','Administracija\Aplikacija');
+Route::controller('/administracija/nalog','Administracija\Nalozi');
+Route::controller('/administracija','Administracija\Administracija');
 Route::controller('/','Glavni');

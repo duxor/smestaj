@@ -80,13 +80,13 @@ class Security {
             $sec->setUsername($username);
             $sec->setPass($password);
 
-            $korisnik = Korisnici::all(['id','username','password','prava_pristupa_id'])->where('username',$sec->username)->first();
+            $korisnik = Korisnici::all(['id','username','password','pravapristupa_id'])->where('username',$sec->username)->first();
             $test = $korisnik ? password_verify($sec->password.$sec->salt, $korisnik->password) : false;
 
             if ($test){
                 $sec->id = $korisnik->id;
                 $sec->username = $korisnik->username;
-                $sec->prava_pristupa = $korisnik->prava_pristupa_id;
+                $sec->prava_pristupa = $korisnik->pravapristupa_id;
                 $sec->generateToken();
                 Korisnici::where('id', $sec->id)->update(['token' => $sec->token]);
                 $sec->setSessions();

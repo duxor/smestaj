@@ -41,7 +41,7 @@ class TestPodaciAlikacije extends Seeder{
         ];
         Tema::insert($teme);
 
-        $teme=Tema::get(['id'])->toArray();
+        $teme=Tema::where('id','=',1)->get(['id'])->toArray();
         foreach($teme as $tema){
             $nalog=new Nalog();
                 $nalog->naziv='Nalog broj '.$tema['id'];

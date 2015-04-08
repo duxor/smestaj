@@ -1,4 +1,6 @@
-<?php namespace App\Http\Controllers;
+<?php namespace App\Http\Controllers\Administracija;
+use App\Http\Controllers\Controller;
+
 use App\Http\Requests;
 use App\Nalog;
 use App\OsnovneMetode;
@@ -103,7 +105,7 @@ class Aplikacija extends Controller {
 
 //#OSNOVNA START::
 	public function getOsnovna(){
-		
+
 	}
 	public function postOsnovna(){
 

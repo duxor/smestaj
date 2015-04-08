@@ -1,4 +1,5 @@
-<?php namespace App\Http\Controllers;
+<?php namespace App\Http\Controllers\Administracija;
+use App\Http\Controllers\Controller;
 
 use App\Korisnici;
 use App\PravaPristupa;
