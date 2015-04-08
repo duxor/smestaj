@@ -24,11 +24,14 @@ class Security {
     private $id;
     private $username;
     private $password;
-    private $salt = 'ix501^@)5MwfP39ijJDr27g';
-    public static $adminLogURL = '/administracija/login';
+    private $salt='ix501^@)5MwfP39ijJDr27g';
+    private static $adminID=5;//5+
+    private static $userID=2;
+    public static $adminLogURL='/administracija/login';
+    public static $userLogURL='/profil/login';
     private $token;
     private $redirectURL;
-    private $minLenPass = 4; //minimalna duzina sifre i korisnickog imena
+    private $minLenPass=4;//minimalna duzina sifre i korisnickog imena
     private $prava_pristupa;//prava_pristupa_id
 
 //SETERI[$redirectURL, $username, $password, $token, $_SESSION[token,id,username]]
@@ -112,6 +115,11 @@ class Security {
         return redirect($this->redirectURL);
     }
     public static function rediectToLogin(){
+        if(Session::has('prava_pristupa')){
+            switch(Session::has('prava_pristupa')){
+                case Security::$userID: return redirect(Security::$adminLogURL);
+            }
+        }
         return redirect(Security::$adminLogURL);
     }
 }
