@@ -7,6 +7,7 @@ use App\Korisnici;
 use App\Security;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 
 use Illuminate\Http\Request;
 
@@ -19,19 +20,21 @@ class Profil extends Controller {
 
 
     public function getLogin(){
-    	 if(Security::autentifikacijaTest()) return redirect('/korisnik.prijava.index');
+    	 if(Security::autentifikacijaTest()) return view('/profil/profil');
         return view('korisnik.prijava.index');
 	}
 
-    public function postPrijava(){
+    public function postLogin(){
 		return Security::login(Input::get('username'),Input::get('password'));
 
 	}
 
 	public function getProfil(){
 
-		$korisnik=Korisnici::find('4');
-		return view('korisnici.profil.index',compact('korisnik'));
+		
+		$value = Session::get('id');
+		$korisnik=Korisnici::where('id','=','value')->get();
+		return view('korisnik.profil.index',compact('korisnik'));
 		
 		
 	}
