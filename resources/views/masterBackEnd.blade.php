@@ -49,24 +49,18 @@
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-qrcode"></i> Aplikacije <i class="caret"></i></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-qrcode"></i> Nalozi <i class="caret"></i></a>
                         <ul class="dropdown-menu">
+                            <li><a href="#"><i class="glyphicon glyphicon-cog"></i> Osnovni</a></li>
                             <li><a href="{!!url('/administracija/nalog')!!}"><i class="glyphicon glyphicon-eye-open"></i> Pregled naloga</a></li>
                             <li><a href="{!!url('/administracija/nalog/nalog-novi')!!}"><i class="glyphicon glyphicon-plus"></i> Novi nalog</a></li>
-
-                            <li><a href="{!!url('/administracija/aplikacija/tema')!!}"><i class="glyphicon glyphicon-eye-open"></i> Pregled tema</a></li>
-                            <li><a href="{!!url('/administracija/aplikacija/tema-nova')!!}"><i class="glyphicon glyphicon-plus"></i> Nova tema</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-cog"></i> Osnovna <i class="caret"></i></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-qrcode"></i> Aplikacije <i class="caret"></i></a>
                         <ul class="dropdown-menu">
-                            <li><a href="/administracija/aplikacija/tema-templejt/osnovna"><i class="glyphicon glyphicon-eye-open"></i> Pregled</a></li>
-                            <li><a href="#" onclick="sub()"><i class="glyphicon glyphicon-plus"></i> Dodaj novi</a></li><script>function sub(){$('#frm').submit()}</script>
-                            {!!Form::open(['url'=>'/administracija/aplikacija/templejt-novi','class'=>'col-sm-6','id'=>'frm'])!!}
-                            {!!Form::hidden('tema_slug','osnovna')!!}
-                            {!!Form::hidden('tema_id',1)!!}
-                            {!!Form::close()!!}
+                            <li><a href="{!!url('/administracija/aplikacija/tema')!!}"><i class="glyphicon glyphicon-eye-open"></i> Pregled tema</a></li>
+                            <li><a href="{!!url('/administracija/aplikacija/tema-nova')!!}"><i class="glyphicon glyphicon-plus"></i> Nova tema</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">

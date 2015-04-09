@@ -18,7 +18,7 @@ class Aplikacija extends Controller {
 
 //TEMA START::
 	public function getTema(){
-		$teme = Tema::get(['slug','naziv','opis'])->toArray();
+		$teme = Tema::get(['id','slug','naziv','opis','aktivan'])->toArray();
 		return Security::autentifikacija('administracija.aplikacija.tema.index', compact('teme'));
 	}
 	public function getTemaNova(){
@@ -49,6 +49,15 @@ class Aplikacija extends Controller {
 			Templejt::where('tema_id','=',$id)->delete();
 			Tema::where('slug','=',$slug)->delete();
 			return redirect('/administracija/aplikacija/tema');
+		}
+		return Security::rediectToLogin();
+	}
+	public function getTemaStatus($id){
+		if(Security::autentifikacijaTest()){
+			$tema = Tema::find($id,['id','aktivan'])->first();
+			$tema->aktivan = $tema->aktivan ? 0 : 1;
+			$tema->save();
+			return Redirect::back();
 		}
 		return Security::rediectToLogin();
 	}

@@ -13,6 +13,7 @@
                     <th>Slug</th>
                     <th>Opis</th>
                     <th></th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -26,6 +27,7 @@
                             <a href="/administracija/aplikacija/tema-edit/{{$tema['slug']}}" class="btn btn-info"><i class="glyphicon glyphicon-pencil"></i></a>
                             <a href="/administracija/aplikacija/tema-ukloni/{{$tema['slug']}}" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></a>
                         </td>
+                        <td><a href="{!!url('/administracija/aplikacija/tema-status/'.$tema['id'])!!}">@if($tema['aktivan']==1) <span class="glyphicon glyphicon-ok"></span> @else <span class="glyphicon glyphicon-remove"></span>@endif</a></td>
                     </tr>
                 @endforeach
                 </tbody>

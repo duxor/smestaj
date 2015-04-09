@@ -82,6 +82,7 @@ class KreiranjeBaze extends Migration{
             $table->string('slug',45)->unique();
             $table->string('naziv', 45);
             $table->text('opis')->nullable();
+            $table->tinyInteger('aktivan')->default(0);
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->nullable();
         });
