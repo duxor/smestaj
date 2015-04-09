@@ -63,6 +63,19 @@ class Security {
         $this->setToken(hash('haval256,5', $this->salt.uniqid().openssl_random_pseudo_bytes(50), false));
         return $this->token;
     }
+    public static function registracija($username,$email,$password,$prezime=null,$ime=null){
+        if(isset($username)&&isset($password)&&isset($password)){
+            $korisnik=new Korisnici();
+                $korisnik->username=$username;
+                $korisnik->email=$email;
+                $korisnik->password=Security::generateHashPass($password);
+                $korisnik->prezime=$prezime;
+                $korisnik->ime=$ime;
+            $korisnik->save();
+            Security::rediectToLogin();
+        }
+        return'GRESKA UNOSA!';
+    }
 //FUNKCIONALNOSTI
 
 //#TESTERI[autentifikacija, input, login]
