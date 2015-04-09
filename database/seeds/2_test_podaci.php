@@ -3,16 +3,14 @@
 
 use Illuminate\Database\Seeder;
 use App\Security;
-
+use App\Korisnici;
 
 class TestPodaci extends Seeder
 {
 
 		public function run()
 		{
-			DB::table('korisnici')->insert
-			(
-			[
+			Korisnici::insert([
 	            [
 
 	            	'prezime'=>'marko',
@@ -106,8 +104,7 @@ class TestPodaci extends Seeder
 	                'pravapristupa_id'=>'4',
 	                'aktivan' => 1
 	            ]
-	        ]            
-	    	);
+	        ]);
 
 		}
 

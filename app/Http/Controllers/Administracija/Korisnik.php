@@ -6,12 +6,8 @@ use App\PravaPristupa;
 use App\Security;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Input;
-
+/* duXor 09.04.2015. */
 class Korisnik extends Controller {
-    private $korisnik = 2;
-    private $kreator = 6;
-    private $admin = 5;
-
     public function getIndex(){
         $korisnici = Korisnici::join('pravaPristupa', 'korisnici.pravaPristupa_id','=','pravaPristupa.id')->orderBy('pravaPristupa_id','DESC')->get(['prezime','ime','username','naziv as pravaPristupa','aktivan'])->toArray();
         return Security::autentifikacija('administracija.korisnik.index',compact('korisnici'),5);

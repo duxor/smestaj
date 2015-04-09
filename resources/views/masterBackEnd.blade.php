@@ -22,7 +22,6 @@
     {!! HTML::script('js/jquery-3.0.js') !!}
     {!! HTML::script('js/funkcije.js') !!}
     {!! HTML::script('tinymce/tinymce.min.js') !!}
-    <style>h1,h2,p{text-align: center}</style>
 
 </head>
 <body>
@@ -49,9 +48,9 @@
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-qrcode"></i> Nalozi <i class="caret"></i></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-glass"></i> Nalozi <i class="caret"></i></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#"><i class="glyphicon glyphicon-cog"></i> Osnovni</a></li>
+                            <li><a href="{!!url('/administracija/nalog/nalog-edit/osnovna')!!}"><i class="glyphicon glyphicon-cog"></i> Osnovni</a></li>
                             <li><a href="{!!url('/administracija/nalog')!!}"><i class="glyphicon glyphicon-eye-open"></i> Pregled naloga</a></li>
                             <li><a href="{!!url('/administracija/nalog/nalog-novi')!!}"><i class="glyphicon glyphicon-plus"></i> Novi nalog</a></li>
                         </ul>

@@ -1,12 +1,13 @@
 @extends('masterBackEnd')
 
 @section('content')
+    <h1>Korisnici</h1>
     <table class="table table-striped">
         <thead><tr><th>Prezime i Ime</th><th>Prava pristupa</th><th>Status</th><th></th><th></thead>
         @foreach($korisnici as $korisnik)
             <tr>
                 <td>
-                    @if($korisnik['pravaPristupa']!='Kreator')<a href="{!! url('/administracija/korisnik/profil/'.$korisnik['slug'])!!}">@endif
+                    @if($korisnik['pravaPristupa']!='Kreator')<a href="{!! url('/administracija/korisnik/profil/'.$korisnik['username'])!!}">@endif
                         {{$korisnik['prezime']}} {{$korisnik['ime']}}
                     @if($korisnik['pravaPristupa']!='Kreator')</a>@endif
                 </td>

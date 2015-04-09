@@ -1,8 +1,13 @@
 @extends('masterBackEnd')
 
 @section('content')
-
-    @if(!isset($korisnik)){{$korisnik=null}}@endif
+    <div class="col-sm-2"></div>
+    @if(!isset($korisnik))
+        {{$korisnik=null}}
+        <h1 class="col-sm-10">Novi korisnik</h1>
+    @else
+        <h1 class="col-sm-10">Uredi korisnika</h1>
+    @endif
 
     {!!Form::open(['url'=>'/administracija/korisnik/novi','class'=>'form-horizontal','id'=>'forma'])!!}
     {!!Form::hidden('id',$korisnik['id'])!!}
