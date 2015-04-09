@@ -23,11 +23,8 @@ class Profil extends Controller {
 
 
     public function getLogin(){
-<<<<<<< HEAD
-    	 if(Security::autentifikacijaTest()) return view('/profil/profil');
-=======
-    	if(Security::autentifikacijaTest()) return redirect('/profil');
->>>>>>> origin/master
+
+    	if(Security::autentifikacijaTest()) return redirect('/profil/profil');
         return view('korisnik.prijava.index');
 	}
 
