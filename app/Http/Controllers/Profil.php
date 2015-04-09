@@ -9,12 +9,15 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 
+
 use Illuminate\Http\Request;
 
 class Profil extends Controller {
 
 
 	public function getIndex(){
+
+
 		
     }
 
@@ -35,21 +38,20 @@ class Profil extends Controller {
 
 	public function getProfil(){
 
-		
-		$value = Session::get('id');
-		$korisnik=Korisnici::where('id','=','value')->get();
-		return view('korisnik.profil.index',compact('korisnik'));
+		$ids=Session::get('id');
+		$korisnik=Korisnici::where('id','=','ids')->get(['prezime','ime','username','email'])->first()->toArray();
+		return view('korisnik.profil.index', compact('korisnik'));
 		
 		
 	}
 	public function getEditNalog(){
 
 		$korisnik=Korisnici::find('4');//ovo resiti
-		return view('korisnici.profil.edit',compact('korisnik'));
+		return view('korisnik.profil.edit',compact('korisnik'));
 		
 		
 	}
-	public function postFormEdit(){
+	public function postEditNalog(){
 
 		$korisnik= Korisnici::firstOrNew(['id'=>Input::get('id')],['id','prezime','ime' ,'username','email']);  
 		$korisnik->prezime=Input::get('prezime');
@@ -58,7 +60,7 @@ class Profil extends Controller {
 		$korisnik->email=Input::get('email');;
 		$korisnik->save();
 		$korisnik=Korisnici::find('4');
-		return view('korisnici.profil.index',compact('korisnik'));
+		return view('korisnik.profil.index',compact('korisnik'));
 		
 	}
 
