@@ -54,7 +54,7 @@ class Aplikacija extends Controller {
 	}
 	public function getTemaStatus($id){
 		if(Security::autentifikacijaTest()){
-			$tema = Tema::find($id,['id','aktivan'])->first();
+			$tema = Tema::find($id,['id','aktivan']);
 			$tema->aktivan = $tema->aktivan ? 0 : 1;
 			$tema->save();
 			return Redirect::back();

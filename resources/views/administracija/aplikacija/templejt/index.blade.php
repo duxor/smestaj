@@ -4,7 +4,7 @@
 
     @if(isset($templejt))
         @if($templejt)
-            <h2>{{$templejt[0]['tema']}}</h2>
+            <h2>Naziv teme: {{$templejt[0]['tema']}}</h2>
             <p>{{$templejt[0]['opis']}}</p>
             <table class="table table-striped">
                 <thead>

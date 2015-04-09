@@ -1,7 +1,9 @@
 @extends('masterBackEnd')
 
 @section('content')
-    @if(!isset($tema)){{$tema=null}}@endif
+    <h1>
+    @if(!isset($tema))Nova tema{{$tema=null}}@else Naziv teme: {{$tema['naziv']}}@endif
+    </h1>
     {!! Form::open(['url'=>'/administracija/aplikacija/tema-nova','id'=>'forma','class'=>'form-horizontal']) !!}
     {!! Form::hidden('id', $tema['id']) !!}
 

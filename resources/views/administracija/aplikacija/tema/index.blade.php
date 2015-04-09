@@ -5,6 +5,7 @@
 
     @if(isset($teme))
         @if($teme)
+            <h1>Teme</h1>
             <table class="table table-striped">
                 <thead>
                 <tr>
@@ -13,7 +14,7 @@
                     <th>Slug</th>
                     <th>Opis</th>
                     <th></th>
-                    <th></th>
+                    <th>Aktivan</th>
                 </tr>
                 </thead>
                 <tbody>
