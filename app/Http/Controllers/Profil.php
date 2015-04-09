@@ -19,7 +19,7 @@ class Profil extends Controller {
 
 
     public function getLogin(){
-    	 if(Security::autentifikacijaTest()) return redirect('/korisnik.prijava.index');
+    	if(Security::autentifikacijaTest()) return redirect('/profil');
         return view('korisnik.prijava.index');
 	}
 

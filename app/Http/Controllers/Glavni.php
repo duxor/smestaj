@@ -39,6 +39,7 @@ class Glavni extends Controller {
         {"id":"14614","type":"Feature","geometry":{"type":"Point","coordinates":[18.776330,43.505224]},"properties":{"crime_type":"THEFT","date_time":"2011-12-25 22:30:00","description":"GRAND THEFT FROM LOCKED AUTO","case_number":"116164029","address":null,"zip_code":null,"beat":null,"accuracy":"9"}},
       ]
 });';
+
 		return $niz;
 	}
 

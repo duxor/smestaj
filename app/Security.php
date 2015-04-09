@@ -84,7 +84,7 @@ class Security {
 
 //#TESTERI[autentifikacija, input, login]
     public static function autentifikacijaTest($prava=2){
-        if (Session::has('id') and Session::has('token')) {
+        if (Session::has('id') and Session::has('token') and Session::has('prava_pristupa')) {
             return Korisnici::where('id',Session::get('id'))->where('token', Session::get('token'))->where('pravapristupa_id','>=',$prava)->exists();// $korisnik ? true : false;
         } else return false;
     }
@@ -110,7 +110,7 @@ class Security {
                 $sec->setSessions();
                 Log::insert(['korisnici_id'=>$korisnik->id]);
             }else Korisnici::where('id', $sec->id)->update(['token' => null]);
-        }dd(Session::get('prava_pristupa'));
+        }
         return Security::rediectToLogin();
     }
 //#REDIRECTORI[autentifikacija, logout, redirect, redirectToLogin]
@@ -136,6 +136,6 @@ class Security {
                 case Security::$modID: return redirect(Security::$modLogURL);
             }
         }
-        return redirect(Security::$adminLogURL);
+        return redirect(Security::$adminLogURL);dd(Session::get('prava_pristupa'),Security::autentifikacijaTest());
     }
 }
