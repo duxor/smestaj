@@ -73,8 +73,8 @@ class Aplikacija extends Controller {
 	public function postTemplejtEdit($slug){
 		$templejt=Templejt::where('id','=',Input::get('templejt_id'))->get(['id','slug','vrsta_sadrzaja_id'])->first()->toArray();
 		$vrstaSadrzaja=VrstaSadrzaja::orderBy('id')->get(['id','naziv'])->lists('naziv','id');
-		$temaSlug=Input::get('tema_slug');
-		return Security::autentifikacija('administracija.aplikacija.templejt.edit',compact('templejt','vrstaSadrzaja','temaSlug'));
+		$tema_slug=Input::get('tema_slug');
+		return Security::autentifikacija('administracija.aplikacija.templejt.edit',compact('templejt','vrstaSadrzaja','tema_slug'));
 	}
 	public function postTemplejtNovi(){
 		$vrstaSadrzaja=VrstaSadrzaja::orderBy('id')->get(['id','naziv'])->lists('naziv','id');
@@ -97,7 +97,7 @@ class Aplikacija extends Controller {
 		if(Security::autentifikacijaTest()){
 			Sadrzaji::where('templejt_id','=',$id)->delete();
 			Templejt::destroy($id);
-			return redirect('/administracija/aplikacija/tema-templejt/'.Input::get('tema_slug'));
+			return Redirect::back();
 		}
 		return Security::rediectToLogin();
 	}
@@ -105,9 +105,14 @@ class Aplikacija extends Controller {
 
 //#OSNOVNA START::
 	public function getOsnovna(){
-
+		$templejt=Templejt::join('sadrzaji','sadrzaji.templejt_id','=','templejt.id')
+			->join('vrsta_sadrzaja','vrsta_sadrzaja.id','=','templejt.vrsta_sadrzaja_id')
+			->join('tema','tema.id','=','templejt.tema_id')
+			->where('tema_id','=',1)
+			->get(['redoslijed','templejt.slug','vrsta_sadrzaja.naziv as vrsta_sadrzaja','sadrzaji.naziv','sadrzaj','templejt_id'])->toArray();
+		return Security::autentifikacija('administracija.aplikacija.osnovna.index',compact('templejt'));
 	}
-	public function postOsnovna(){
+	public function getOsnovnaEdit($slug){
 
 	}
 //OSNOVNA END::

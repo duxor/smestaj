@@ -61,7 +61,7 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-cog"></i> Osnovna <i class="caret"></i></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#"><i class="glyphicon glyphicon-eye-open"></i> Pregled</a></li>
+                            <li><a href="/administracija/aplikacija/osnovna"><i class="glyphicon glyphicon-eye-open"></i> Pregled</a></li>
                             <li><a href="#"><i class="glyphicon glyphicon-plus"></i> Dodaj novi</a></li>
                         </ul>
                     </li>

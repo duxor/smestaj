@@ -104,7 +104,7 @@ class Security {
     }
     public static function logout(){
         if(Session::has('id')){
-            $korisnik = Korisnici::all(['id', 'token'])->find(Session::get('id'));
+            $korisnik = Korisnici::all(['id','token'])->find(Session::get('id'));
             $korisnik->token = null;
             $korisnik->save();
         }
