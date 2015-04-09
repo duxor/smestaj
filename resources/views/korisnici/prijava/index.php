@@ -1,10 +1,10 @@
-@extends('master-paralax-1')
+@extends('masterBackEnd')
 
-@section('body')
+@section('content')
     <div class="col-sm-7">
         <h1>Prijava</h1>
         <hr/>
-        {!! Form::open(['url'=>'glavni/login','class'=>'form-horizontal','id'=>'forma']) !!}
+        {!! Form::open(['url'=>'/profil/','class'=>'form-horizontal','id'=>'forma']) !!}
         <div id="dusername" class="form-group has-feedback">
             {!! Form::label('lusername','Username',['class'=>'control-label col-sm-2']) !!}
             <div class="col-sm-10">
@@ -30,5 +30,4 @@
         </div>
         {!! Form::close() !!}
     </div>
-
 @stop
