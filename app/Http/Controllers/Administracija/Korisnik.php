@@ -14,14 +14,14 @@ class Korisnik extends Controller {
 
     public function getIndex(){
         $korisnici = Korisnici::join('pravaPristupa', 'korisnici.pravaPristupa_id','=','pravaPristupa.id')->orderBy('pravaPristupa_id','DESC')->get(['prezime','ime','username','naziv as pravaPristupa','aktivan'])->toArray();
-        return Security::autentifikacija('administracija.korisnik.index',compact('korisnici'));
+        return Security::autentifikacija('administracija.korisnik.index',compact('korisnici'),5);
     }
     public function getNovi(){
         $prava = PravaPristupa::where('id','<','5')->orderBy('id','DESC')->lists('naziv','id');
-        return Security::autentifikacija('administracija.korisnik.edit', ['prava'=>$prava]);
+        return Security::autentifikacija('administracija.korisnik.edit', ['prava'=>$prava],5);
     }
     public function postNovi(){
-        if(Security::autentifikacijaTest()){
+        if(Security::autentifikacijaTest(5)){
             if(Korisnici::where('id','<>',Input::get('id'))->where(function($query){
                 return $query->where('username', '=', Input::get('username'))->orWhere('email','=',Input::get('email'));
             })->first()) return '<a href="/administracija/korisnik">Parametri Username ili Email već postoje u bazi!</a>';
@@ -39,7 +39,7 @@ class Korisnik extends Controller {
         }else return Security::rediectToLogin();
     }
     public function getUkloni($username){
-        if(Security::autentifikacijaTest()){
+        if(Security::autentifikacijaTest(5)){
             //potrebno je ukloniti sve zapise sa kojima je vezan dati korisnik
             //...
             Korisnici::where('username','=',$username)->delete();
@@ -51,10 +51,10 @@ class Korisnik extends Controller {
         if($username=='admin') return Redirect::back();
         $prava = PravaPristupa::where('id','<',5)->orderBy('id','DESC')->lists('naziv','id');
         $korisnik = Korisnici::where('username',$username)->first();
-        return Security::autentifikacija('administracija.korisnik.edit', compact('korisnik', 'prava'));
+        return Security::autentifikacija('administracija.korisnik.edit', compact('korisnik', 'prava'),5);
     }
     public function getStatus($username){
-        if(Security::autentifikacijaTest()){
+        if(Security::autentifikacijaTest(5)){
             $korisnik = Korisnici::where('username','=',$username)->get(['id','aktivan'])->first();
             $korisnik->aktivan = $korisnik->aktivan ? 0 : 1;
             $korisnik->save();

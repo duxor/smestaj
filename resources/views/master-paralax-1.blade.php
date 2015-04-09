@@ -17,7 +17,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
-    <title>[NASLOV]</title>
+    <title>najSmestaj</title>
     {!! HTML::style('teme/osnovna-paralax/css/templejt.css') !!}
     {!! HTML::style('css/bootstrap.min.css') !!}
     {!! HTML::style('teme/osnovna-paralax/css/parallax.css') !!}
@@ -83,7 +83,8 @@
                 */
                 // create an image icon
                 var img = marker.appendChild(document.createElement("a"));
-                img.setAttribute("class","glyphicon glyphicon-pushpin");//("src", "../geojson/icons/" + type.replace(/ /g, "_") + ".png");
+                img.setAttribute("class","glyphicon glyphicon-screenshot");//glyphicon glyphicon-pushpin");//("src", "../geojson/icons/" + type.replace(/ /g, "_") + ".png");
+                img.setAttribute("style","color:red");
                 markers.addMarker(marker, feature);
                 locations.push(marker.location);
 
@@ -182,7 +183,7 @@
                 <span class="icon-bar"></span>
             </button>
             <a href="/" class="navbar-brand">
-                <span class="glyphicon glyphicon-home"></span> [NASLOV]
+                <span class="glyphicon glyphicon-home"></span> najSmestaj
             </a>
         </div>
         <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
