@@ -16,7 +16,7 @@
               <h3 class="panel-title">Profil korisnika:</h3> 
             </div>
             <div class="panel-body">
-             {!! Form::open(['url'=>'/form-edit','id'=>'forma','class'=>'form-horizontal']) !!}
+             {!! Form::open(['url'=>'/profil/edit-nalog','id'=>'forma','class'=>'form-horizontal']) !!}
              {!! Form::hidden('id', $korisnik['id']) !!}
               <div class="row">
                 <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=100" class="img-circle"> </div>
