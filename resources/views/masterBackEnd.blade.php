@@ -61,8 +61,12 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-cog"></i> Osnovna <i class="caret"></i></a>
                         <ul class="dropdown-menu">
-                            <li><a href="/administracija/aplikacija/osnovna"><i class="glyphicon glyphicon-eye-open"></i> Pregled</a></li>
-                            <li><a href="#"><i class="glyphicon glyphicon-plus"></i> Dodaj novi</a></li>
+                            <li><a href="/administracija/aplikacija/tema-templejt/osnovna"><i class="glyphicon glyphicon-eye-open"></i> Pregled</a></li>
+                            <li><a href="#" onclick="sub()"><i class="glyphicon glyphicon-plus"></i> Dodaj novi</a></li><script>function sub(){$('#frm').submit()}</script>
+                            {!!Form::open(['url'=>'/administracija/aplikacija/templejt-novi','class'=>'col-sm-6','id'=>'frm'])!!}
+                            {!!Form::hidden('tema_slug','osnovna')!!}
+                            {!!Form::hidden('tema_id',1)!!}
+                            {!!Form::close()!!}
                         </ul>
                     </li>
                     <li class="dropdown">

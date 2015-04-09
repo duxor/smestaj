@@ -71,16 +71,14 @@ class Aplikacija extends Controller {
 		return Security::rediectToLogin();
 	}
 	public function postTemplejtEdit($slug){
-		$templejt=Templejt::where('id','=',Input::get('templejt_id'))->get(['id','slug','vrsta_sadrzaja_id'])->first()->toArray();
+		$templejt=Templejt::where('id','=',Input::get('templejt_id'))->get(['id','slug','vrsta_sadrzaja_id','tema_id'])->first()->toArray();
 		$vrstaSadrzaja=VrstaSadrzaja::orderBy('id')->get(['id','naziv'])->lists('naziv','id');
-		$tema_slug=Input::get('tema_slug');
 		return Security::autentifikacija('administracija.aplikacija.templejt.edit',compact('templejt','vrstaSadrzaja','tema_slug'));
 	}
 	public function postTemplejtNovi(){
 		$vrstaSadrzaja=VrstaSadrzaja::orderBy('id')->get(['id','naziv'])->lists('naziv','id');
-		$temaID=Input::get('tema_id');
-		$tema_slug=Input::get('tema_slug');
-		return Security::autentifikacija('administracija.aplikacija.templejt.edit',compact('vrstaSadrzaja','temaID','tema_slug'));
+		$templejt=['tema_id'=>Input::get('tema_id'), 'tema_slug'=>Input::get('tema_slug')];
+		return Security::autentifikacija('administracija.aplikacija.templejt.edit',compact('vrstaSadrzaja','templejt'));
 	}
 	public function postTemplejtNoviSubmit(){
 		if(Security::autentifikacijaTest()){
@@ -89,7 +87,7 @@ class Aplikacija extends Controller {
 				$templejt->vrsta_sadrzaja_id=Input::get('vrsta_sadrzaja_id');
 				$templejt->tema_id=Input::get('tema_id');
 			$templejt->save();
-			return redirect('/administracija/aplikacija/tema-templejt/'.Input::get('tema_slug'));
+			return redirect('/administracija/aplikacija/tema-templejt/'.(Tema::find(Input::get('tema_id'))->get(['slug'])->first()->slug));
 		}
 		return Security::rediectToLogin();
 	}
@@ -109,7 +107,8 @@ class Aplikacija extends Controller {
 			->join('vrsta_sadrzaja','vrsta_sadrzaja.id','=','templejt.vrsta_sadrzaja_id')
 			->join('tema','tema.id','=','templejt.tema_id')
 			->where('tema_id','=',1)
-			->get(['redoslijed','templejt.slug','vrsta_sadrzaja.naziv as vrsta_sadrzaja','sadrzaji.naziv','sadrzaj','templejt_id'])->toArray();
+			->get(['redoslijed','templejt.slug','vrsta_sadrzaja.naziv as vrsta_sadrzaja','sadrzaji.naziv','sadrzaj','templejt_id',
+				'tema.id as tema_id','tema.slug as tema_slug','tema.naziv as tema','tema.opis'])->toArray();
 		return Security::autentifikacija('administracija.aplikacija.osnovna.index',compact('templejt'));
 	}
 	public function getOsnovnaEdit($slug){

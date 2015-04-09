@@ -1,26 +1,28 @@
 @extends('masterBackEnd')
 
 @section('content')
-    @if(!isset($templejt))
-        {{$templejt=null}}
-        {{$temaSlug=null}}
+    @if(!isset($templejt['id']))
+        {{$templejt['id']=null}}
+        {{$templejt['slug']=null}}
+        {{$templejt['vrsta_sadrzaja_id']=null}}
     @endif
-    {!! Form::open(['url'=>'/administracija/aplikacija/templejt-novi-submit','id'=>'forma','class'=>'form-horizontal']) !!}
-    {!! Form::hidden('id', $templejt['id']) !!}
-    {!!Form::hidden('tema_slug',$tema_slug)!!}
-    {!!Form::hidden('tema_id',$temaID)!!}
+
+
+    {!!Form::open(['url'=>'/administracija/aplikacija/templejt-novi-submit','id'=>'forma','class'=>'form-horizontal']) !!}
+    {!!Form::hidden('id',$templejt['id']) !!}
+    {!!Form::hidden('tema_id',$templejt['tema_id'])!!}
 
     <div id="dslug" class="form-group has-feedback">
-        {!! Form::label('lslug', 'Slug',['class'=>'control-label col-sm-2']) !!}
+        {!!Form::label('lslug','Slug',['class'=>'control-label col-sm-2']) !!}
         <div class="col-sm-10">
-            {!! Form::text('slug', $templejt['slug'], ['class'=>'form-control', 'placeholder'=>'Slug','id'=>'slug'])!!}
+            {!!Form::text('slug',$templejt['slug'],['class'=>'form-control','placeholder'=>'Slug','id'=>'slug'])!!}
             <span id="sslug" class="glyphicon form-control-feedback"></span>
         </div>
     </div>
     <div class="form-group">
-        {!! Form::label('lvrsta_sadrzaja_id', 'Vrsta sadržaja',['class'=>'control-label col-sm-2']) !!}
+        {!! Form::label('lvrsta_sadrzaja_id','Vrsta sadržaja',['class'=>'control-label col-sm-2']) !!}
         <div class="col-sm-10">
-            {!! Form::select('vrsta_sadrzaja_id', $vrstaSadrzaja, $templejt['vrsta_sadrzaja_id'], ['class'=>'form-control'])!!}
+            {!! Form::select('vrsta_sadrzaja_id',$vrstaSadrzaja,$templejt['vrsta_sadrzaja_id'],['class'=>'form-control'])!!}
         </div>
     </div>
 
