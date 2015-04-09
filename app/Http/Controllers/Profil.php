@@ -60,7 +60,7 @@ class Profil extends Controller {
 		
 	}
 		public function postRegistracija(){
-			Security::registracija('username2','email2','password2','prezime2', 'ime2');
+			Security::registracija(Input::get('username2'),Input::get('email2'),Input::get('password2'),Input::get('prezime2'), Input::get('ime2'));
 
 		
 		

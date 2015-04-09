@@ -47,7 +47,7 @@
                             <div id="dusername2" class="form-group has-feedback">
                                 {!! Form::label('lusername2','Username',['class'=>'control-label col-sm-2']) !!}
                                 <div class="col-sm-10">
-                                    {!! Form::text('username2',Input::old('username'),['placeholder'=>'Korisničko ime','class'=>'form-control','id'=>'username2']) !!}
+                                    {!! Form::text('username2',Input::old('username2'),['placeholder'=>'Korisničko ime','class'=>'form-control','id'=>'username2']) !!}
                                     <span id="susername2" class="glyphicon form-control-feedback"></span>
                                 </div>
                             </div>
@@ -73,8 +73,8 @@
                                     <span id="prezime2" class="glyphicon form-control-feedback"></span>
                                 </div>
                             </div>
-                             <div id="dime" class="form-group has-feedback">
-                                {!! Form::label('lime2','Ime2',['class'=>'control-label col-sm-2']) !!}
+                             <div id="dime2" class="form-group has-feedback">
+                                {!! Form::label('lime2','Ime',['class'=>'control-label col-sm-2']) !!}
                                 <div class="col-sm-10">
                                     {!! Form::text('ime2',Input::old('ime2'),['placeholder'=>'ime','class'=>'form-control','id'=>'ime2']) !!}
                                     <span id="ime2" class="glyphicon form-control-feedback"></span>
@@ -86,7 +86,7 @@
                                 <div class="col-sm-2"></div>
                                 <div class="col-sm-10">
                                     {!! Form::button('<span class="glyphicon glyphicon-play-circle"></span> Registracija', ['class' => 'btn btn-lg btn-primary','onClick'=>'SubmitForm.submit(\'forma2\')']) !!}
-                                    {!! Form::button('<span class="glyphicon glyphicon-refresh"></span> Resetuj polja', ['class' => 'btn btn-lg btn-warning']) !!}
+                                   
                                 </div>
                             </div>
                             {!! Form::close() !!}
