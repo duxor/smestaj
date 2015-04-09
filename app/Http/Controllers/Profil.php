@@ -42,7 +42,6 @@ class Profil extends Controller {
 		
 	}
 	public function getEditNalog(){
-
 		$korisnik=Korisnici::find('4');//ovo resiti
 		return view('korisnik.profil.edit',compact('korisnik'));
 		
@@ -60,6 +59,13 @@ class Profil extends Controller {
 		return view('korisnik.profil.index',compact('korisnik'));
 		
 	}
+		public function postRegistracija(){
+			Security::registracija('username2','email2','password2','prezime2', 'ime2');
+
+		
+		
+	}
+
 
 
 
