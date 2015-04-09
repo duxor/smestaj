@@ -36,7 +36,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="{!! url('/') !!}" class="navbar-brand">[BREND]</a>
+            <a href="{!! url('/') !!}" class="navbar-brand">najSmestaj</a>
         </div>
         <div id="dMenija" class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">

@@ -25,10 +25,13 @@ class Security {
     private $username;
     private $password;
     private $salt='ix501^@)5MwfP39ijJDr27g';
-    private static $adminID=5;//5+
     private static $userID=2;
+    private static $modID=4;
+    private static $adminID=5;
+    private static $kreatorID=6;
     public static $adminLogURL='/administracija/login';
     public static $userLogURL='/profil/login';
+    public static $modLogURL='/moderator/login';
     private $token;
     private $redirectURL;
     private $minLenPass=4;//minimalna duzina sifre i korisnickog imena
@@ -80,11 +83,9 @@ class Security {
 //FUNKCIONALNOSTI
 
 //#TESTERI[autentifikacija, input, login]
-    public static function autentifikacijaTest()
-    {
+    public static function autentifikacijaTest($prava=2){
         if (Session::has('id') and Session::has('token')) {
-            $korisnik = Korisnici::all(['id', 'token'])->where('id', Session::get('id'))->where('token', Session::get('token'))->first();
-            return $korisnik ? true : false;
+            return Korisnici::where('id',Session::get('id'))->where('token', Session::get('token'))->where('pravapristupa_id','>=',$prava)->exists();// $korisnik ? true : false;
         } else return false;
     }
     private function inputTest($in){
@@ -109,12 +110,12 @@ class Security {
                 $sec->setSessions();
                 Log::insert(['korisnici_id'=>$korisnik->id]);
             }else Korisnici::where('id', $sec->id)->update(['token' => null]);
-        }
+        }dd(Session::get('prava_pristupa'));
         return Security::rediectToLogin();
     }
 //#REDIRECTORI[autentifikacija, logout, redirect, redirectToLogin]
-    public static function autentifikacija($target, $dodaci){
-        return Security::autentifikacijaTest() ? $dodaci ? view($target, $dodaci) : view($target) : Security::rediectToLogin();
+    public static function autentifikacija($target,$dodaci,$prava=2){
+        return Security::autentifikacijaTest($prava) ? $dodaci ? view($target, $dodaci) : view($target) : Security::rediectToLogin();
     }
     public static function logout(){
         if(Session::has('id')){
@@ -130,8 +131,9 @@ class Security {
     }
     public static function rediectToLogin(){
         if(Session::has('prava_pristupa')){
-            switch(Session::has('prava_pristupa')){
-                case Security::$userID: return redirect(Security::$adminLogURL);
+            switch(Session::get('prava_pristupa')){
+                case Security::$userID: return redirect(Security::$userLogURL);
+                case Security::$modID: return redirect(Security::$modLogURL);
             }
         }
         return redirect(Security::$adminLogURL);
