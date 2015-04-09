@@ -19,12 +19,13 @@ class Profil extends Controller {
 
 
     public function getLogin(){
-    	 if(Security::autentifikacijaTest()) return redirect('/korisnici.prijava.index');
-        return view('korisnici.prijava.index');
+    	 if(Security::autentifikacijaTest()) return redirect('/korisnik.prijava.index');
+        return view('korisnik.prijava.index');
 	}
 
     public function postPrijava(){
-		return Security::registracija(Input::get('username'),Input::get('password'));
+		return Security::login(Input::get('username'),Input::get('password'));
+
 	}
 
 	public function getProfil(){
