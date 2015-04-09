@@ -74,7 +74,7 @@ class Security {
                 $korisnik->password=Security::generateHashPass($password);
                 $korisnik->prezime=$prezime;
                 $korisnik->ime=$ime;
-                $korisnik->prava_pristupa_id=2;
+                $korisnik->pravapristupa_id=2;
             $korisnik->save();
             Security::rediectToLogin();
         }
