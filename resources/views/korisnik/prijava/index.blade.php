@@ -4,7 +4,7 @@
     <div class="col-sm-7">
         <h1>Prijava</h1>
         <hr/>
-        {!! Form::open(['url'=>'/profil/prijava','class'=>'form-horizontal','id'=>'forma']) !!}
+        {!! Form::open(['url'=>'/profil/login','class'=>'form-horizontal','id'=>'forma']) !!}
         <div id="dusername" class="form-group has-feedback">
             {!! Form::label('lusername','Username',['class'=>'control-label col-sm-2']) !!}
             <div class="col-sm-10">

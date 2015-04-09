@@ -17,7 +17,7 @@ class TestPodaci extends Seeder
 
 	            	'prezime'=>'marko',
 	            	'ime'=>'markovic',
-	            	'username'=>'marko@test.com',
+	            	'username'=>'marko',
 	                'email' => 'marko@test.com',
 	                'password' => Security::generateHashPass('marko'),
 	                'pravapristupa_id'=>'1',
@@ -27,7 +27,7 @@ class TestPodaci extends Seeder
 	           	[
 	            	'prezime'=>'Petrovic',
 	            	'ime'=>'Petar',
-	            	'username'=>'petar@test.com',
+	            	'username'=>'petar',
 	                'email' => 'petar@test.com',
 	                'password' =>Security::generateHashPass('petar'),
 	                'pravapristupa_id'=>'2',
@@ -37,7 +37,7 @@ class TestPodaci extends Seeder
 	           	[
 	            	'prezime'=>'Goranovic',
 	            	'ime'=>'Goran',
-	            	'username'=>'goran@test.com',
+	            	'username'=>'goran',
 	                'email' => 'goran@test.com',
 	                'password' => Security::generateHashPass('goran'),
 	                'pravapristupa_id'=>'3',
@@ -46,7 +46,7 @@ class TestPodaci extends Seeder
 	           	[
 	            	'prezime'=>'Todorovic',
 	            	'ime'=>'Todor',
-	            	'username'=>'todor@test.com',
+	            	'username'=>'todor',
 	                'email' => 'todor@test.com',
 	                'password' => Security::generateHashPass('todor'),
 	                'pravapristupa_id'=>'4',
@@ -55,7 +55,7 @@ class TestPodaci extends Seeder
 	           	[
 	            	'prezime'=>'Ivanovic',
 	            	'ime'=>'Ivan',
-	            	'username'=>'ivan@test.com',
+	            	'username'=>'ivan',
 	                'email' => 'ivan@test.com',
 	                'password' => Security::generateHashPass('ivan'),
 	                'pravapristupa_id'=>'5',
@@ -64,7 +64,7 @@ class TestPodaci extends Seeder
 	           	[
 	            	'prezime'=>'Stojanovic',
 	            	'ime'=>'stojan',
-	            	'username'=>'stojan@test.com',
+	            	'username'=>'stojan',
 	                'email' => 'stojan@test.com',
 	                'password' => Security::generateHashPass('stojan'),
 	                'pravapristupa_id'=>'6',
@@ -73,7 +73,7 @@ class TestPodaci extends Seeder
 	           	[
 	            	'prezime'=>'Dejanovic',
 	            	'ime'=>'Dejan',
-	            	'username'=>'dejan@test.com',
+	            	'username'=>'dejan',
 	                'email' => 'dejan@test.com',
 	                'password' => Security::generateHashPass('dejan'),
 	                'pravapristupa_id'=>'1',
@@ -82,7 +82,7 @@ class TestPodaci extends Seeder
 	           	[
 	            	'prezime'=>'Milosevic',
 	            	'ime'=>'Milos',
-	            	'username'=>'milos@test.com',
+	            	'username'=>'milos',
 	                'email' => 'milos@test.com',
 	                'password' => Security::generateHashPass('milos'),
 	                'pravapristupa_id'=>'2',
@@ -91,7 +91,7 @@ class TestPodaci extends Seeder
 	           	[
 	            	'prezime'=>'Andrijasevic',
 	            	'ime'=>'Andrija',
-	            	'username'=>'andrija@test.com',
+	            	'username'=>'andrija',
 	                'email' => 'andrija@test.com',
 	                'password' =>Security::generateHashPass('andrija'),
 	                'pravapristupa_id'=>'3',
@@ -100,7 +100,7 @@ class TestPodaci extends Seeder
 	           	[
 	            	'prezime'=>'Nenadovic',
 	            	'ime'=>'Nenad',
-	            	'username'=>'nenad@test.com',
+	            	'username'=>'nenad',
 	                'email' => 'nenad@test.com',
 	                'password' => Security::generateHashPass('nenad'),
 	                'pravapristupa_id'=>'4',

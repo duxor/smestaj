@@ -24,24 +24,24 @@
                     <tbody>
                       <tr>
                         <td>Prezime:</td>
-                        <td>{!! $korisnik['prezime']!!}</td>
+                        <td>{!! $korisnik['prezime'] !!}</td>
                       </tr>
                       <tr>
                         <td>Ime:</td>
-                        <td>{!! $korisnik['ime']!!}</td>
+                        <td>{!! $korisnik['ime'] !!}</td>
                       </tr>
                       <tr>
                         <td>Username:</td>
-                        <td>{!! $korisnik['username']!!}</td>
+                        <td>{!! $korisnik['username'] !!}</td>
                       </tr>
                       <tr>
                         <td>Email:</td>
-                        <td><a href="{!! $korisnik['email']!!}">{!! $korisnik['email']!!}</a></td>
+                        <td><a href="{!! $korisnik['email']!!}">{!! $korisnik['email'] !!}</a></td>
                       </tr>                    
                     </tbody>
                   </table>
                   
-                 <a href="{!!url('/edit-nalog/')!!}" class="btn btn-lg btn-primary" >Edit Profile</a>
+                 <a href="{!!url('/profil/edit-nalog/')!!}" class="btn btn-lg btn-primary" >Edit Profile</a>
                 </div>
               </div>
             </div>            
