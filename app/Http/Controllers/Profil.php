@@ -19,16 +19,19 @@ class Profil extends Controller {
 
 
     public function getLogin(){
-    	 if(Security::autentifikacijaTest()) return redirect('/profil');
-        return view('korisnici.prijava.index');
+    	 if(Security::autentifikacijaTest()) return redirect('/korisnik.prijava.index');
+        return view('korisnik.prijava.index');
+	}
 
-		
+    public function postPrijava(){
+		return Security::login(Input::get('username'),Input::get('password'));
+
 	}
 
 	public function getProfil(){
 
-		//$korisnik=Korisnici::find('4');
-		//return view('korisnici.profil.index',compact('korisnik'));
+		$korisnik=Korisnici::find('4');
+		return view('korisnici.profil.index',compact('korisnik'));
 		
 		
 	}
@@ -52,10 +55,6 @@ class Profil extends Controller {
 		
 	}
 
-    public function postPrijava(){
-		return Security::login(Input::get('username'),Input::get('password'));
-			
-	}
 
 
 }

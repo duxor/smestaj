@@ -6,7 +6,7 @@
         @foreach($korisnici as $korisnik)
             <tr>
                 <td>
-                    @if($korisnik['pravaPristupa']!='Kreator')<a href="{!! url('/administracija/korisnik/profil/'.$korisnik['username'])!!}">@endif
+                    @if($korisnik['pravaPristupa']!='Kreator')<a href="{!! url('/administracija/korisnik/profil/'.$korisnik['slug'])!!}">@endif
                         {{$korisnik['prezime']}} {{$korisnik['ime']}}
                     @if($korisnik['pravaPristupa']!='Kreator')</a>@endif
                 </td>
