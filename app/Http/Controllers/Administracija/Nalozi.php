@@ -21,24 +21,24 @@ class Nalozi extends Controller {
 		join('tema','nalog.tema_id','=','tema.id')->select('nalog.naziv as naziv','nalog.slug','nalog.aktivan','tema.naziv as tema','korisnici.ime')->
 		get()->toArray();
 		
-		return Security::autentifikacija('administracija.nalog.index', compact('nalozi'));
+		return Security::autentifikacija('administracija.nalog.index', compact('nalozi'),5);
 	}
 	public function getNalogEdit($slug){
 		$nalog=Nalog::where('slug','=',$slug)->get(['id','naziv', 'slug', 'aktivan', 'created_at', 'updated_at','korisnici_id','tema_id'])->first()->toArray();
 		$lista = array('' => '') +  Korisnici::where('pravapristupa_id','>','3')->lists('ime', 'id');
 		$tema=Tema::lists('naziv','id');
-		return Security::autentifikacija('administracija.nalog.edit', compact('nalog','lista','tema'));
+		return Security::autentifikacija('administracija.nalog.edit', compact('nalog','lista','tema'),5);
 	}
 
 	public function getNalogNovi(){
 		$kor = array('' => '') + Korisnici::where('pravapristupa_id','>','3')->lists('ime', 'id');
 		$tema= Tema::lists('naziv','id');
-		return Security::autentifikacija('administracija.nalog.edit', compact('kor','tema'));
+		return Security::autentifikacija('administracija.nalog.edit', compact('kor','tema'),5);
 
 	}
 
 	public function postNalogNovi(){
-		if(Security::autentifikacijaTest()){
+		if(Security::autentifikacijaTest(5)){
 			$nalog= Nalog::firstOrNew(['id'=>Input::get('id')],['id','naziv','slug' ,'pridruzi','tema']);  
 			$nalog->naziv=Input::get('naziv');
 			$nalog->slug=Input::get('slug');
@@ -51,7 +51,7 @@ class Nalozi extends Controller {
 	}
 
 	public function getNalogActive($naziv){
-        if(Security::autentifikacijaTest()){
+        if(Security::autentifikacijaTest(5)){
             $nalog = Nalog::where('naziv','=',$naziv)->get(['id','aktivan'])->first();
             $nalog->aktivan = $nalog->aktivan ? 0 : 1;
             $nalog->save();
@@ -60,7 +60,7 @@ class Nalozi extends Controller {
         return Security::rediectToLogin();
     }
     public function getNalogBrisi($slug){
-		if(Security::autentifikacijaTest()){
+		if(Security::autentifikacijaTest(5)){
 			Nalog::where('slug','=',$slug)->delete();
 			return redirect('/administracija/nalog');
 		}

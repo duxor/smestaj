@@ -132,10 +132,10 @@ class Security {
     public static function rediectToLogin(){
         if(Session::has('prava_pristupa')){
             switch(Session::get('prava_pristupa')){
-                case Security::$userID: return redirect(Security::$userLogURL);
-                case Security::$modID: return redirect(Security::$modLogURL);
+                case Security::$userID:return redirect(Security::$userLogURL);
+                case Security::$modID:return redirect(Security::$modLogURL);
             }
         }
-        return redirect(Security::$adminLogURL);dd(Session::get('prava_pristupa'),Security::autentifikacijaTest());
+        return redirect(Security::$adminLogURL);
     }
 }
