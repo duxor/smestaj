@@ -1,12 +1,8 @@
 <?php namespace App\Http\Controllers;
 
 use App\Grad;
+use App\Objekat;
 use App\Templejt;
-use App\Korisnici;
-use App\Security;
-use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Session;
 
 class Glavni extends Controller {
 
@@ -31,15 +27,15 @@ class Glavni extends Controller {
 		return view('aplikacija.index',compact('podaci'));
 	}
 	public function getMarkeri(){
-		$niz = 'onLoadMarkers({
-  "type": "FeatureCollection",
-  "features": [
-        {"id":"14614","type":"Feature","geometry":{"type":"Point","coordinates":[20.6844017,43.7246229]},"properties":{"crime_type":"THEFT","date_time":"2011-12-25 22:30:00","description":"GRAND THEFT FROM LOCKED AUTO","case_number":"116164029","address":null,"zip_code":null,"beat":null,"accuracy":"9"}},
-        {"id":"14614","type":"Feature","geometry":{"type":"Point","coordinates":[20.505436,44.788241]},"properties":{"crime_type":"THEFT","date_time":"2011-12-25 22:30:00","description":"GRAND THEFT FROM LOCKED AUTO","case_number":"116164029","address":null,"zip_code":null,"beat":null,"accuracy":"9"}},
-        {"id":"14614","type":"Feature","geometry":{"type":"Point","coordinates":[18.776330,43.505224]},"properties":{"crime_type":"THEFT","date_time":"2011-12-25 22:30:00","description":"GRAND THEFT FROM LOCKED AUTO","case_number":"116164029","address":null,"zip_code":null,"beat":null,"accuracy":"9"}},
-      ]
-});';
-
+		$nalozi=Objekat::whereNotNull('x')->get(['id','x','y'])->toArray();
+		$niz = 'onLoadMarkers({"type": "FeatureCollection","features": [';
+		$i=0;
+		foreach($nalozi as $nalog){
+			if($i==0)$i=1;
+			else $niz.=',';
+			$niz.='{"id":"'.$nalog['id'].'","type":"Feature","geometry":{"type":"Point","coordinates":['.$nalog['y'].','.$nalog['x'].']},"properties":{}}';
+		}
+        $niz.=']});';
 		return $niz;
 	}
 
