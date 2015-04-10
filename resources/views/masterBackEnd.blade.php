@@ -39,7 +39,7 @@
         </div>
         <div id="dMenija" class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
-                @if(\App\Security::autentifikacijaTest())
+                @if(\App\Security::autentifikacijaTest(5))
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i> Korisnici <i class="caret"></i></a>
                         <ul class="dropdown-menu">
