@@ -50,7 +50,7 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-glass"></i> Nalozi <i class="caret"></i></a>
                         <ul class="dropdown-menu">
-                            <li><a href="{!!url('/administracija/nalog/nalog-edit/osnovna')!!}"><i class="glyphicon glyphicon-cog"></i> Osnovni</a></li>
+                            <li><a href="{!!url('/administracija/nalog/sadrzaji/osnovna')!!}"><i class="glyphicon glyphicon-cog"></i> Osnovni</a></li>
                             <li><a href="{!!url('/administracija/nalog')!!}"><i class="glyphicon glyphicon-eye-open"></i> Pregled naloga</a></li>
                             <li><a href="{!!url('/administracija/nalog/nalog-novi')!!}"><i class="glyphicon glyphicon-plus"></i> Novi nalog</a></li>
                         </ul>

@@ -3,9 +3,10 @@
 @section('content')
     <h1>Korisnici</h1>
     <table class="table table-striped">
-        <thead><tr><th>Prezime i Ime</th><th>Prava pristupa</th><th>Status</th><th></th><th></thead>
+        <thead><tr>Username<th></th><th>Prezime i Ime</th><th>Prava pristupa</th><th>Status</th><th></th><th></thead>
         @foreach($korisnici as $korisnik)
             <tr>
+                <td>{{$korisnik['username']}}</td>
                 <td>
                     @if($korisnik['pravaPristupa']!='Kreator')<a href="{!! url('/administracija/korisnik/profil/'.$korisnik['username'])!!}">@endif
                         {{$korisnik['prezime']}} {{$korisnik['ime']}}
