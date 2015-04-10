@@ -2,11 +2,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Security;
-use App\VrstaObjekta;
-use App\Grad;
 use App\Objekat;
-
+use App\Smestaj;
 
 
 class TestObjekat extends Seeder
@@ -14,12 +11,6 @@ class TestObjekat extends Seeder
 
 		public function run()
 		{
-			DB::table('vrsta_objekta')->insert(
-				[
-					['naziv'=>'Hotel'],
-					['naziv'=>'Privatni smeštaj'],
-				]
-				);
 			DB::table('grad')->insert(
 					[
 						['naziv'=>'Beograd'],
@@ -113,10 +104,15 @@ class TestObjekat extends Seeder
 		                'nalog_id' => '3'
 						],
 
-					]
-
-
-				);
+					]);
+		$objekti=Objekat::get(['id','naziv'])->toArray();
+		foreach($objekti as $objekat){
+			Smestaj::insert([
+				['naziv'=>$objekat['naziv'].'1','kapacitet_id'=>3,'vrsta_smestaja_id'=>1,'objekat_id'=>$objekat['id']],
+				['naziv'=>$objekat['naziv'].'2','kapacitet_id'=>5,'vrsta_smestaja_id'=>2,'objekat_id'=>$objekat['id']],
+				['naziv'=>$objekat['naziv'].'3','kapacitet_id'=>9,'vrsta_smestaja_id'=>1,'objekat_id'=>$objekat['id']],
+			]);
+		}
 	}
 
 }

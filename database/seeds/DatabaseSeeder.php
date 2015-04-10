@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder {
 		
 		$this->call('KonfiguracioniPodaci');
 		$this->call('TestPodaciAlikacije');
-		$this->call('TestPodaci');
+		$this->call('TestPodaciKorisnici');
 		$this->call('TestObjekat');
 	}
 

@@ -68,7 +68,7 @@ class KreiranjeBaze extends Migration{
         {
             $table->bigIncrements('id');
             $table->string('naziv', 45)->nullable();
-            $table->unsignedInteger('broj_kreveta')->nullable();
+            $table->unsignedInteger('broj_osoba')->nullable();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->nullable();
         });
