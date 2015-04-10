@@ -36,13 +36,15 @@ class Profil extends Controller {
 	public function getProfil(){
 
 		$ids=Session::get('id');
-		$korisnik=Korisnici::where('id','=','ids')->get(['prezime','ime','username','email'])->first()->toArray();
+		$korisnik=Korisnici::where('id', '=', $ids)->get(['ime','prezime','email','username'])->first()->toArray();
 		return view('korisnik.profil.index', compact('korisnik'));
 		
 		
 	}
 	public function getEditNalog(){
-		$korisnik=Korisnici::find('4');//ovo resiti
+
+		$ids=Session::get('id');
+		$korisnik=Korisnici::where('id', '=', $ids)->get(['id','ime','prezime','email','username'])->first()->toArray();
 		return view('korisnik.profil.edit',compact('korisnik'));
 		
 		
@@ -55,7 +57,8 @@ class Profil extends Controller {
 		$korisnik->username=Input::get('username');
 		$korisnik->email=Input::get('email');;
 		$korisnik->save();
-		$korisnik=Korisnici::find('4');
+		$ids=Session::get('id');
+		$korisnik=Korisnici::where('id', '=', $ids)->get(['id','ime','prezime','email','username'])->first()->toArray();
 		return view('korisnik.profil.index',compact('korisnik'));
 		
 	}
