@@ -70,7 +70,7 @@
                             <li><a href="#"><i class="glyphicon glyphicon-plus"></i> LOG</a></li>
                         </ul>
                     </li>
-                    <li><a href="{!!url('/administracija/logout')!!}"><span class="glyphicon glyphicon-off"></span> Odjava</a></li>
+                    <li><a href="{!!url('/administracija/logout')!!}"><i class="glyphicon glyphicon-off"></i> Odjava</a></li>
                 @endif
             </ul>
         </div>
