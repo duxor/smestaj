@@ -4,9 +4,9 @@
     <div class="col-sm-3"></div>
     @if(!isset($nalog))
         {{$nalog=null}}
-        <h1 class="col-sm-9">Novi nalog</h1>
+        <h1 class="col-sm-9">Nova aplikacija</h1>
     @else
-        <h1 class="col-sm-9">Uredi nalog</h1>
+        <h1 class="col-sm-9">Uredi aplikaciju</h1>
     @endif
 
 

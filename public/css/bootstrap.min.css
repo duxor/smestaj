@@ -119,6 +119,7 @@ body{padding-top: 70px}
     border-color: #e08132 #e08132 hsl(27, 74%, 54%);
 }
 .footer {
+    margin-top: 100px;
     bottom: 0;
     width: 100%;
     padding: 30px 0;

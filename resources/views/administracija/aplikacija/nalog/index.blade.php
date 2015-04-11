@@ -4,11 +4,12 @@
 
     @if(isset($nalozi))
         @if($nalozi)
+            <h1>Aplikacije</h1>
             <table class="table table-striped">
                 <thead>
                 <tr>
                     <th></th>
-                    <th>Naziv</th>
+                    <th>Naziv (brend)</th>
                     <th>Slug</th>
                      <th>Aktivan</th>
                     <th>Korisnik</th>

@@ -1,6 +1,6 @@
 @extends('masterBackEnd')
 @section('content')
-    <h1>Pregled naloga</h1>
+    <h1>Pregled aplikacija</h1>
     @if(isset($podaci))
         @if($podaci)
             @foreach($podaci as $podatak)

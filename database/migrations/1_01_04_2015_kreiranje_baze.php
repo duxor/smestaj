@@ -123,6 +123,7 @@ class KreiranjeBaze extends Migration{
         {
             $table->bigIncrements('id');
             $table->string('naziv', 45);
+            $table->tinyInteger('aktivan')->default(1);
             $table->unsignedBigInteger('kapacitet_id');
             $table->foreign('kapacitet_id')->references('id')->on('kapacitet');
             $table->unsignedBigInteger('vrsta_smestaja_id');
