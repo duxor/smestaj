@@ -62,22 +62,22 @@
                             <div id="demail2" class="form-group has-feedback">
                                 {!! Form::label('lemail2','Email',['class'=>'control-label col-sm-2']) !!}
                                 <div class="col-sm-10">
-                                    {!! Form::email('email2',Input::old('email2'),['placeholder'=>'email','class'=>'form-control','id'=>'email2']) !!}
+                                    {!! Form::text('email2',Input::old('email2'),['placeholder'=>'Email','class'=>'form-control','id'=>'email2']) !!}
                                     <span id="email2" class="glyphicon form-control-feedback"></span>
                                 </div>
                             </div>
-                            <div id="dprezime" class="form-group has-feedback">
+                            <div class="form-group has-feedback">
                                 {!! Form::label('lprezime2','Prezime',['class'=>'control-label col-sm-2']) !!}
                                 <div class="col-sm-10">
-                                    {!! Form::text('prezime2',Input::old('prezime2'),['placeholder'=>'prezime','class'=>'form-control','id'=>'prezime2']) !!}
-                                    <span id="prezime2" class="glyphicon form-control-feedback"></span>
+                                    {!! Form::text('prezime2',Input::old('prezime2'),['placeholder'=>'Prezime','class'=>'form-control']) !!}
+                                    <span  class="glyphicon form-control-feedback"></span>
                                 </div>
                             </div>
-                             <div id="dime2" class="form-group has-feedback">
+                             <div class="form-group has-feedback">
                                 {!! Form::label('lime2','Ime',['class'=>'control-label col-sm-2']) !!}
                                 <div class="col-sm-10">
-                                    {!! Form::text('ime2',Input::old('ime2'),['placeholder'=>'ime','class'=>'form-control','id'=>'ime2']) !!}
-                                    <span id="ime2" class="glyphicon form-control-feedback"></span>
+                                    {!! Form::text('ime2',Input::old('ime2'),['placeholder'=>'Ime','class'=>'form-control']) !!}
+                                    <span class="glyphicon form-control-feedback"></span>
                                 </div>
                             </div>
 

@@ -16,36 +16,34 @@ class Profil extends Controller {
 
 
 	public function getIndex(){
-
-
-		
+		if(Security::autentifikacijaTest())
+		{
+			$ids=Session::get('id');
+			$korisnik=Korisnici::where('id', '=', $ids)->get(['id','ime','prezime','email','username'])->first()->toArray();
+			return view('korisnik.profil.index', compact('korisnik'));
+		}return view('korisnik.prijava.index');
     }
 
 
     public function getLogin(){
-
-    	if(Security::autentifikacijaTest()) return redirect('/profil/profil');
+    	if(Security::autentifikacijaTest()) return redirect('/profil/');
         return view('korisnik.prijava.index');
 	}
 
     public function postLogin(){
 		return Security::login(Input::get('username'),Input::get('password'));
-
 	}
 
 	public function getProfil(){
-
-		$ids=Session::get('id');
-		$korisnik=Korisnici::where('id', '=', $ids)->get(['ime','prezime','email','username'])->first()->toArray();
-		return view('korisnik.profil.index', compact('korisnik'));
-		
-		
 	}
 	public function getEditNalog(){
 
-		$ids=Session::get('id');
-		$korisnik=Korisnici::where('id', '=', $ids)->get(['id','ime','prezime','email','username'])->first()->toArray();
-		return view('korisnik.profil.edit',compact('korisnik'));
+		if(Security::autentifikacijaTest())
+		{
+			$ids=Session::get('id');
+			$korisnik=Korisnici::where('id', '=', $ids)->get(['id','ime','prezime','email','username'])->first()->toArray();
+			return view('korisnik.profil.edit',compact('korisnik'));
+		}return view('korisnik.prijava.index');
 		
 		
 	}
