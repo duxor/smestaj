@@ -37,7 +37,7 @@
     @yield('head')
 </head>
 
-<body onload="initMap()">
+<body>
 {{--navigacija START::--}}
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">

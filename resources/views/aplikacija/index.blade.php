@@ -135,6 +135,10 @@
             opacity: 1;
         }
     </style>
+
+    <script>
+        $(document).ready(function(){ initMap(); })
+    </script>
 @endsection
 
 @section('body')
@@ -220,6 +224,7 @@
                         border-radius: 10px;
                     ">
                         {!!Form::open(['url'=>'/pretraga','class'=>'form-horizontal'])!!}
+                        {!!Form::hidden('tacan_broj',1)!!}
                         <div class="form-group">
                             <p><i class="glyphicon glyphicon-search"></i> Pronađite savršen smeštaj</p>
                             {!!Form::label('lgrad','Grad',['class'=>'control-label'])!!}
