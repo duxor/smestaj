@@ -14,6 +14,17 @@
                         <div class="tab-pane fade in active" id="tab1default">
                                                         <h1>Prijava</h1>
                             <hr/>
+                                                        @if ( $errors->any())
+                            <div class="alert alert-danger" role="alert">
+                              <p>Ispravite sledeće greške:</p>
+
+                              <ul>
+                                @foreach( $errors->all() as $message )
+                                  <li>{{ $message }}</li>
+                                @endforeach
+                              </ul>
+                              </div>
+                            @endif
                             {!! Form::open(['url'=>'/profil/login','class'=>'form-horizontal','id'=>'forma1']) !!}
                             <div id="dusername" class="form-group has-feedback">
                                 {!! Form::label('lusername','Username',['class'=>'control-label col-sm-2']) !!}
@@ -43,6 +54,17 @@
                         <div class="tab-pane fade" id="tab2default">
                         <h1>Registracija korisnika</h1>
                             <hr/>
+                            @if ( $errors->any())
+                            <div class="alert alert-danger" role="alert">
+                              <p>Ispravite sledeće greške:</p>
+
+                              <ul>
+                                @foreach( $errors->all() as $message )
+                                  <li>{{ $message }}</li>
+                                @endforeach
+                              </ul>
+                              </div>
+                            @endif
                             {!! Form::open(['url'=>'/profil/registracija','class'=>'form-horizontal','id'=>'forma2']) !!}
                             <div id="dusername2" class="form-group has-feedback">
                                 {!! Form::label('lusername2','Username',['class'=>'control-label col-sm-2']) !!}
