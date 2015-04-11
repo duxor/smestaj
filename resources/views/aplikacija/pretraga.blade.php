@@ -15,14 +15,14 @@
             spotlight = new SpotlightLayer();
             map.addLayer(spotlight);
             markers = new MM.MarkerLayer();
-            map.setCenterZoom(new com.modestmaps.Location(45.311149,15.7401466), 6);
+            //map.setCenterZoom(new com.modestmaps.Location(45.311149,15.7401466), 6);
 
             map.addLayer(markers);
             loadMarkers();
         }
         function loadMarkers() {
             var script = document.createElement("script");
-            script.src = "/markeri";
+            script.src = "/pretraga/markeri-izbor?broj_osoba={{$podaci['broj_osoba']}}&grad_id={{$podaci['grad_id']}}&tacan_broj={{$podaci['tacan_broj']}}";
             document.getElementsByTagName("head")[0].appendChild(script);
         }
         function onLoadMarkers(collection) {
@@ -31,16 +31,14 @@
                     locations = [];
             for (var i = 0; i < len; i++) {
                 var feature = features[i],
-                        type = feature.properties.crime_type,
+                        type = feature.properties.naslov,//crime_type,
                         marker = document.createElement("a");
-
                 marker.feature = feature;
                 marker.type = type;
-
                 // give it a title
                 marker.setAttribute("title", [
                     type//, "on", feature.properties.date_time
-                ].join(" "));
+                ]);//.join(" "));
                 marker.setAttribute("class", "report");
                 // set the href to link to crimespotting's crime page
                 marker.setAttribute("href", "/aplikacija/objekat/" + feature.slug);
@@ -143,18 +141,22 @@
 @endsection
 @section('content')
     <h1>Pretraga</h1>
-    {!!Form::open(['url'=>'/pretraga','class'=>'form-inline'])!!}
+    {!!Form::open(['url'=>'/pretraga','class'=>'form-inline col-sm-11'])!!}
     <div class="form-group">
         <label>Broj mesta (Tačan  broj {!!Form::checkbox('tacan_broj',1,$podaci['tacan_broj'])!!})</label>
-        {!!Form::select('broj_osoba',[1=>1,2=>2,3=>3,4=>4,5=>5,6=>6,7=>7,8=>8,9=>9,10=>10,11=>11,12=>12],2,['class'=>'form-control'])!!}
+        {!!Form::select('broj_osoba',[1=>1,2=>2,3=>3,4=>4,5=>5,6=>6,7=>7,8=>8,9=>9,10=>10,11=>11,12=>12],$podaci['broj_osoba'],['class'=>'form-control'])!!}
         {!!Form::select('grad_id',$podaci['gradovi'],$podaci['grad_id'],['class'=>'form-control'])!!}
         {!!Form::button('<i class="glyphicon glyphicon-search"></i> Pronađi',['class'=>'btn btn-primary','type'=>'submit'])!!}
     </div>
     {!!Form::close()!!}
+    <div class="col-sm-1">
+        <a href="#" class="btn btn-success scroll-link" data-id="rezultati"><i class="glyphicon glyphicon-download"></i> Rezultati</a>
+    </div><br clear="all">
     <hr>
 
-    <div id="map" style="width: 100%;height: 400px"></div>
     @if($podaci['rezultat'])
+        <div id="map" style="width: 100%;height: 400px"></div>
+        <p id="rezultati"></p>
         @foreach($podaci['rezultat'] as $smestaj)
             <hr>
             <div class="col-sm-4">

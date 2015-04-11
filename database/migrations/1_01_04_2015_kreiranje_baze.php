@@ -108,6 +108,7 @@ class KreiranjeBaze extends Migration{
             $table->string('naziv', 45);
             $table->string('x', 45)->nullable();
             $table->string('y', 45)->nullable();
+            $table->string('z', 45)->nullable()->default(1);
             $table->string('adresa', 45)->nullable();
             $table->tinyInteger('aktivan')->default(1);
             $table->unsignedBigInteger('vrsta_objekta_id');
