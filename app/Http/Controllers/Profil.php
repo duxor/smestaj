@@ -24,8 +24,6 @@ class Profil extends Controller {
 			return view('korisnik.profil.index', compact('korisnik'));
 		}return view('korisnik.prijava.index');
     }
-
-
     public function getLogin(){
     	if(Security::autentifikacijaTest()) return redirect('/profil/');
         return view('korisnik.prijava.index');
@@ -56,6 +54,18 @@ class Profil extends Controller {
 		}return view('korisnik.prijava.index');
 	}
 	public function postEditNalog(){
+		//pocetak validacije
+		$data=Input::all();
+		$rules = array(
+	        'username'	=> 'Required|Between:5,12',
+	        'email'     => 'Required|Between:3,64|Email',
+			);
+		$v=Validator::make($data,$rules);
+		if($v->fails())
+		{
+			return Redirect::to('/profil/edit-nalog')->withErrors($v->errors());
+		}
+		//kraj validacije
 		$korisnik= Korisnici::firstOrNew(['id'=>Input::get('id')],['id','prezime','ime' ,'username','email']);  
 		$korisnik->prezime=Input::get('prezime');
 		$korisnik->ime=Input::get('ime');
@@ -67,24 +77,22 @@ class Profil extends Controller {
 		return view('korisnik.profil.index',compact('korisnik'));
 	}
 	public function postRegistracija(){
-
 			$un=Input::get('username2');
 			$email=Input::get('email2');
-
-			$data=['username'=>$un,'email'=>$email];
+			$password=Input::get('password2');
+			$password_confirm=Input::get('password_confirmation');
+			$data=['username'=>$un,'email'=>$email,'password'=>$password,'password_confirmation'=>$password_confirm];
 			$rules = array(
 	        'username'	=> 'Required|Between:5,12|Unique:korisnici',
 	        'email'     => 'Required|Between:3,64|Email|Unique:korisnici',
+	        'password'  =>'Required|AlphaNum|Between:4,8|Confirmed',
+            'password_confirmation'=>'Required|AlphaNum|Between:4,8'
 			);
-
 			$v=Validator::make($data,$rules);
-
 			if($v->fails())
 			{
 				return Redirect::to('/profil/login')->withErrors($v->errors());
 			}
         	Security::registracija(Input::get('username2'),Input::get('email2'),Input::get('password2'),Input::get('prezime2'), Input::get('ime2'));
-                		
-
 	}
 }

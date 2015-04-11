@@ -33,6 +33,19 @@ if (typeof console === "undefined") {
 		log: function() { }
 	};
 }
+
+//funkcija za zadrzavanje aktivnog taba na strani registracija
+$(document).ready(function() {
+ $('a[data-toggle="tab"]').on('click', function (e) {
+    localStorage.setItem('lastTab', $(e.target).attr('href'));
+  });
+  var lastTab = localStorage.getItem('lastTab');
+  if (lastTab) {
+      $('a[href="'+lastTab+'"]').click();
+  }
+});
+
+
 /*#
  ### Autor: Dusan Perisci
  ### Home: dusanperisic.com

@@ -4,7 +4,7 @@
     <div class="col-sm-7">
         <div class="panel with-nav-tabs panel-default">
                 <div class="panel-heading">
-                        <ul class="nav nav-tabs">
+                        <ul class="nav nav-tabs" id="myTab">
                             <li class="active"><a href="#tab1default" data-toggle="tab">Prijava korisnika</a></li>
                             <li><a href="#tab2default" data-toggle="tab">Registracija korisnika</a></li>
                         </ul>
@@ -79,6 +79,13 @@
                                 <div class="col-sm-10">
                                     {!! Form::password('password2', ['placeholder'=>'Pristupna šifra','class'=>'form-control','id'=>'password2']) !!}
                                     <span id="spassword2" class="glyphicon form-control-feedback"></span>
+                                </div>
+                            </div>
+                            <div id="dpasswordconfirm" class="form-group has-feedback">
+                                {!! Form::label('lpassword2','Password',['class'=>'control-label col-sm-2']) !!}
+                                <div class="col-sm-10">
+                                    {!! Form::password('password_confirmation', ['placeholder'=>'Ponovite šifru','class'=>'form-control','id'=>'password_confirmation']) !!}
+                                    <span id="spasswordconfirm" class="glyphicon form-control-feedback"></span>
                                 </div>
                             </div>
                             <div id="demail2" class="form-group has-feedback">

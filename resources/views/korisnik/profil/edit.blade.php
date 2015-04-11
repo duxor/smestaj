@@ -24,13 +24,24 @@
                 <div class=" col-md-9 col-lg-9 "> 
                   <table class="table table-user-information">
                     <tbody>
+                      @if ( $errors->any())
+                      <div class="alert alert-danger" role="alert">
+                        <p>Ispravite sledeće greške:</p>
+
+                        <ul>
+                          @foreach( $errors->all() as $message )
+                            <li>{{ $message }}</li>
+                          @endforeach
+                        </ul>
+                        </div>
+                      @endif
                       <tr>
                         <td>Prezime:</td>
-                        <td>{!! Form::text('prezime',$korisnik['prezime'], ['class'=>'form-control', 'placeholder'=>'Prezime','id'=>'prezime'])!!}</td>
+                        <td>{!! Form::text('prezime',$korisnik['prezime'], ['class'=>'form-control', 'placeholder'=>'Prezime'])!!}</td>
                       </tr>
                       <tr>
                         <td>Ime:</td>
-                        <td>{!! Form::text('ime',$korisnik['ime'], ['class'=>'form-control', 'placeholder'=>'Ime','id'=>'ime'])!!}</td>
+                        <td>{!! Form::text('ime',$korisnik['ime'], ['class'=>'form-control', 'placeholder'=>'Ime'])!!}</td>
                       </tr>
                       <tr>
                         <td>Username:</td>
