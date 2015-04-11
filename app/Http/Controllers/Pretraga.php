@@ -19,7 +19,8 @@ class Pretraga extends Controller {
 			->get(['smestaj.naziv','adresa','broj_osoba'])->toArray();
 		$podaci['gradovi']=Grad::lists('naziv','id');
 		$podaci['grad_id']=Input::get('grad_id');
-		$podaci['tacan_broj']=Input::get('tacan_broj');//dd($podaci['tacan_broj'],Input::get('tacan_broj'),Input::all());
+		$podaci['tacan_broj']=Input::get('tacan_broj');
+		$podaci['grad_koo']=Grad::find(Input::get('grad_id'),['x','y','z']);
 		return view('aplikacija.pretraga',compact('podaci'));
 		dd(Input::all(),$podaci,$podsaci['gradovi']);
 	}

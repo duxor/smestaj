@@ -1,5 +1,4 @@
 @extends('master-paralax-1')
-
 @section('head')
     <script type="text/javascript">
         var map;var markers, spotlight, locationsByType = {};

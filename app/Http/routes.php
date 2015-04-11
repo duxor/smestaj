@@ -7,5 +7,6 @@ Route::controller('/administracija','Administracija\Administracija');
 
 Route::controller('/profil','Profil');
 Route::controller('/pretraga','Pretraga');
+Route::controller('/aplikacija','Aplikacija');
 
 Route::controller('/','Glavni');

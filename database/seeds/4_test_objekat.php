@@ -4,6 +4,7 @@
 use Illuminate\Database\Seeder;
 use App\Objekat;
 use App\Smestaj;
+use App\Grad;
 
 
 class TestObjekat extends Seeder
@@ -11,14 +12,11 @@ class TestObjekat extends Seeder
 
 		public function run()
 		{
-			DB::table('grad')->insert(
-					[
-						['naziv'=>'Beograd'],
-						['naziv'=>'Foča'],
-						['naziv'=>'Brčko'],
-						
-					]
-				);
+			Grad::insert([
+				['naziv'=>'Beograd','x'=>'20.459212','y'=>'44.806611','z'=>'10'],
+				['naziv'=>'Foča','x'=>'18.776427','y'=>'43.506879','z'=>'13'],
+				['naziv'=>'Brčko','x'=>'18.805860','y'=>'44.876264','z'=>'13']
+			]);
 
 			DB::table('objekat')->insert(
 					[

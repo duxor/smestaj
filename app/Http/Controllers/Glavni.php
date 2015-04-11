@@ -27,13 +27,13 @@ class Glavni extends Controller {
 		return view('aplikacija.index',compact('podaci'));
 	}
 	public function getMarkeri(){
-		$nalozi=Objekat::whereNotNull('x')->get(['id','x','y'])->toArray();
+		$nalozi=Objekat::join('nalog','nalog.id','=','objekat.nalog_id')->whereNotNull('x')->get(['objekat.id','objekat.naziv','slug','x','y'])->toArray();
 		$niz = 'onLoadMarkers({"type": "FeatureCollection","features": [';
 		$i=0;
 		foreach($nalozi as $nalog){
 			if($i==0)$i=1;
 			else $niz.=',';
-			$niz.='{"id":"'.$nalog['id'].'","type":"Feature","geometry":{"type":"Point","coordinates":['.$nalog['y'].','.$nalog['x'].']},"properties":{}}';
+			$niz.='{"id":"'.$nalog['id'].'","slug":"'.$nalog['slug'].'","type":"Feature","geometry":{"type":"Point","coordinates":['.$nalog['y'].','.$nalog['x'].']},"properties":{"crime_type":"'.$nalog['naziv'].'","description":"GRAND THEFT FROM LOCKED AUTO","case_number":"116164029","address":null,"zip_code":null,"beat":null,"accuracy":"9"}}';
 		}
         $niz.=']});';
 		return $niz;
