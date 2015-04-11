@@ -18,27 +18,13 @@
                 <a href="#">
                     <img style="height: 150px;" src="/teme/osnovna-paralax/slike/15.jpg" alt="...">
                 </a>
-            </div><style >.tabela-bezbojna, .tabela-bezbojna td{
-                    border-color: #fff;
-                }</style>
+            </div>
             <div class="col-sm-8">
-                <h4>{{$smestaj['naziv']}}</h4>
-                <table class="table" style="border-color: #fff">
-                    <tr>
-                        <td>Broj mesta:</td>
-                        <td>{{$smestaj['broj_osoba']}}</td>
-                    </tr>
-                    <tr>
-                        <td>Broj mesta:</td>
-                        <td>{{$smestaj['broj_osoba']}}</td>
-                    </tr>
-                    <tr>
-                        <td>Broj mesta:</td>
-                        <td>{{$smestaj['broj_osoba']}}</td>
-                    </tr>
+                <h3>{{$smestaj['naziv']}}</h3>
+                <table class="moja-tabela">
+                    <tr><td>Broj mesta:</td><td>{{$smestaj['broj_osoba']}}</td></tr>
+                    <tr><td>Adresa:</td><td>{{$smestaj['adresa']}}</td></tr>
                 </table>
-                <p>Broj mesta: {{$smestaj['broj_osoba']}}</p>
-                <p>Adresa: {{$smestaj['adresa']}}</p>
                 <a href="#" class="btn btn-lg btn-default"><i class="glyphicon glyphicon-zoom-in"></i> Pregled</a>
                 <a href="#" class="btn btn-lg btn-info"><i class="glyphicon glyphicon-check"></i> Rezervacija</a>
             </div><br clear="all">

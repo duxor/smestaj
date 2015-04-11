@@ -37,3 +37,7 @@ body {
 nav li a, p{
     font-size: 21px;
 }
+.moja-tabela td{
+    padding: 5px 10px 0 0;
+    font-size: 21px
+}
