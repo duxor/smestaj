@@ -16,12 +16,17 @@ class Profil extends Controller {
 
 
 	public function getIndex(){
-		
+		if(Security::autentifikacijaTest())
+		{
+			$ids=Session::get('id');
+			$korisnik=Korisnici::where('id', '=', $ids)->get(['id','ime','prezime','email','username'])->first()->toArray();
+			return view('korisnik.profil.index', compact('korisnik'));
+		}return view('korisnik.prijava.index');
     }
 
 
     public function getLogin(){
-    	if(Security::autentifikacijaTest()) return redirect('/profil/profil');
+    	if(Security::autentifikacijaTest()) return redirect('/profil/');
         return view('korisnik.prijava.index');
 	}
 
@@ -30,12 +35,6 @@ class Profil extends Controller {
 	}
 
 	public function getProfil(){
-		if(Security::autentifikacijaTest())
-		{
-			$ids=Session::get('id');
-			$korisnik=Korisnici::where('id', '=', $ids)->get(['id','ime','prezime','email','username'])->first()->toArray();
-			return view('korisnik.profil.index', compact('korisnik'));
-		}return view('korisnik.prijava.index');
 	}
 	public function getEditNalog(){
 

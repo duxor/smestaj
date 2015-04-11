@@ -195,7 +195,18 @@
                         @endif
                     @endif
                 @endforeach
-                <li><a href="/profil/login"><i class="glyphicon glyphicon-log-in"></i> Login</a></li>
+                @if(\App\Security::autentifikacijaTest())
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i> Profil <i class="caret"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/profil"><i class="glyphicon glyphicon-eye-open"></i> Pregled</a></li>
+                            <li><a href="/profil/edit-nalog"><i class="glyphicon glyphicon-pencil"></i> Uredi</a></li>
+                            <li><a href="/administracija/logout"><i class="glyphicon glyphicon-off"></i> Odjava</a></li>
+                        </ul>
+                    </li>
+                @else
+                    <li><a href="/profil/login"><i class="glyphicon glyphicon-log-in"></i> Login</a></li>
+                @endif
             </ul>
         </div>
     </div>

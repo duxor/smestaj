@@ -8,28 +8,18 @@ use App\Tema;
 use App\Templejt;
 use App\Sadrzaji;
 use App\Nalog;
-
+use App\Kapacitet;
+use App\VrstaObjekta;
+use App\VrstaSmestaja;
 class KonfiguracioniPodaci extends Seeder{
     public function run(){
         PravaPristupa::insert([
-            [
-                'naziv' => 'Zabranjen'//1
-            ],
-            [
-                'naziv' => 'Korisnik'//2
-            ],
-            [
-                'naziv' => 'Analitičar'//3
-            ],
-            [
-                'naziv' => 'Moderator'//4 -- vlasnikss
-            ],
-            [
-                'naziv' => 'Administrator'//5
-            ],
-            [
-                'naziv' => 'Kreator'//6
-            ]
+            ['naziv' => 'Zabranjen'],//1
+            ['naziv' => 'Korisnik'],//2
+            ['naziv' => 'Analitičar'],//3
+            ['naziv' => 'Moderator'],//4 -- vlasnikss
+            ['naziv' => 'Administrator'],//5
+            ['naziv' => 'Kreator']//6
         ]);
         Korisnici::insert([
             [
@@ -52,21 +42,11 @@ class KonfiguracioniPodaci extends Seeder{
             ]
         ]);
         VrstaSadrzaja::insert([
-            [
-                'naziv'=>'text-meni'//1
-            ],
-            [
-                'naziv'=>'text'//2
-            ],
-            [
-                'naziv'=>'link-meni'//3
-            ],
-            [
-                'naziv'=>'email'//4
-            ],
-            [
-                'naziv'=>'koordinata'//5
-            ],
+            ['naziv'=>'text-meni'],//1
+            ['naziv'=>'text'],//2
+            ['naziv'=>'link-meni'],//3
+            ['naziv'=>'email'],//4
+            ['naziv'=>'koordinata']//5
         ]);
         Tema::insert([
             [//1
@@ -141,6 +121,32 @@ class KonfiguracioniPodaci extends Seeder{
                 'templejt_id'=>5,
                 'nalog_id'=>1
             ],
+        ]);
+        VrstaObjekta::insert([
+            ['naziv'=>'Hotel'],
+            ['naziv'=>'Hostel'],
+            ['naziv'=>'Motel'],
+            ['naziv'=>'Privatni smeštaj']
+        ]);
+        VrstaSmestaja::insert([
+            ['naziv'=>'Soba'],
+            ['naziv'=>'Apartman']
+        ]);
+        Kapacitet::insert([
+            ['naziv'=>'','broj_osoba'=>1],
+            ['naziv'=>'','broj_osoba'=>2],
+            ['naziv'=>'Bračni krevet','broj_osoba'=>2],
+            ['naziv'=>'','broj_osoba'=>3],
+            ['naziv'=>'','broj_osoba'=>4],
+            ['naziv'=>'','broj_osoba'=>5],
+            ['naziv'=>'','broj_osoba'=>6],
+            ['naziv'=>'','broj_osoba'=>7],
+            ['naziv'=>'','broj_osoba'=>8],
+            ['naziv'=>'','broj_osoba'=>9],
+            ['naziv'=>'','broj_osoba'=>10],
+            ['naziv'=>'','broj_osoba'=>11],
+            ['naziv'=>'','broj_osoba'=>12],
+            ['naziv'=>'','broj_osoba'=>13]
         ]);
     }
 }

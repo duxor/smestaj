@@ -60,8 +60,15 @@ class Nalozi extends Controller {
 		return Security::rediectToLogin();
 	}
 	public function getSadrzaji($slug){
-		$podaci['sadrzaji']=Sadrzaji::join('nalog','sadrzaji.nalog_id','=','nalog.id')->where('nalog.slug',$slug)->get(['nalog.slug','nalog.naziv as nalog_naziv','sadrzaji.naziv as sadrzaj_naziv','sadrzaj','templejt_id','nalog_id']);
+		$podaci=Sadrzaji::join('nalog','sadrzaji.nalog_id','=','nalog.id')->where('nalog.slug',$slug)->get(['sadrzaji.id','nalog.slug','nalog.naziv as nalog_naziv','sadrzaji.naziv as sadrzaj_naziv','sadrzaj','templejt_id','nalog_id'])->toArray();
 		return Security::autentifikacija('administracija.nalog.pregled',compact('podaci'),5);
+	}
+	public function postSadrzaji($id){
+		if(Security::autentifikacijaTest(5)){
+			Sadrzaji::find($id)->update(['naziv'=>Input::get('naziv'),'sadrzaj'=>Input::get('sadrzaj')]);
+			return Redirect::back();
+		}
+		return Security::rediectToLogin();
 	}
 
 

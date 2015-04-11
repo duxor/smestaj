@@ -39,27 +39,27 @@
         </div>
         <div id="dMenija" class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
-                @if(\App\Security::autentifikacijaTest())
+                @if(\App\Security::autentifikacijaTest(5))
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i> Korisnici <i class="caret"></i></a>
                         <ul class="dropdown-menu">
                             <li><a href="{!!url('/administracija/korisnik')!!}"><i class="glyphicon glyphicon-eye-open"></i> Pregled</a></li>
-                            <li><a href="{!!url('/administracija/korisnik/novi')!!}"><i class="glyphicon glyphicon-plus"></i> Dodaj novi</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-glass"></i> Nalozi <i class="caret"></i></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="{!!url('/administracija/nalog/nalog-edit/osnovna')!!}"><i class="glyphicon glyphicon-cog"></i> Osnovni</a></li>
-                            <li><a href="{!!url('/administracija/nalog')!!}"><i class="glyphicon glyphicon-eye-open"></i> Pregled naloga</a></li>
-                            <li><a href="{!!url('/administracija/nalog/nalog-novi')!!}"><i class="glyphicon glyphicon-plus"></i> Novi nalog</a></li>
+                            <li><a href="{!!url('/administracija/korisnik/novi')!!}"><i class="glyphicon glyphicon-plus"></i> Novi</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-qrcode"></i> Aplikacije <i class="caret"></i></a>
                         <ul class="dropdown-menu">
-                            <li><a href="{!!url('/administracija/aplikacija/tema')!!}"><i class="glyphicon glyphicon-eye-open"></i> Pregled tema</a></li>
-                            <li><a href="{!!url('/administracija/aplikacija/tema-nova')!!}"><i class="glyphicon glyphicon-plus"></i> Nova tema</a></li>
+                            <li><a href="{!!url('/administracija/nalog/sadrzaji/osnovna')!!}"><i class="glyphicon glyphicon-cog"></i> Osnovna</a></li>
+                            <li><a href="{!!url('/administracija/nalog')!!}"><i class="glyphicon glyphicon-eye-open"></i> Pregled</a></li>
+                            <li><a href="{!!url('/administracija/nalog/nalog-novi')!!}"><i class="glyphicon glyphicon-plus"></i> Nova</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-text-height"></i>eme <i class="caret"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{!!url('/administracija/aplikacija/tema')!!}"><i class="glyphicon glyphicon-eye-open"></i> Pregled</a></li>
+                            <li><a href="{!!url('/administracija/aplikacija/tema-nova')!!}"><i class="glyphicon glyphicon-plus"></i> Nova</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -67,10 +67,10 @@
                         <ul class="dropdown-menu">
                             <li><a href="#"><i class="glyphicon glyphicon-eye-open"></i> Piwik</a></li>
                             <li><a href="#"><i class="glyphicon glyphicon-plus"></i> Google</a></li>
-                            <li><a href="#"><i class="glyphicon glyphicon-plus"></i> LOG</a></li>
+                            <li><a href="#"><i class="glyphicon glyphicon-plus"></i> Log</a></li>
                         </ul>
                     </li>
-                    <li><a href="{!!url('/administracija/logout')!!}"><span class="glyphicon glyphicon-off"></span> Odjava</a></li>
+                    <li><a href="{!!url('/administracija/logout')!!}"><i class="glyphicon glyphicon-off"></i> Odjava</a></li>
                 @endif
             </ul>
         </div>
