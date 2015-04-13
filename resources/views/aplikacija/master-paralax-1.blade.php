@@ -65,10 +65,11 @@
                 @if(\App\Security::autentifikacijaTest())
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i> Profil <i class="caret"></i></a>
-                        <ul class="dropdown-menu">
+                        <ul class="dropdown-menu">))
+                            <li><a @if(\App\Security::autentifikacijaTest(5)) href="/administracija" @else href="/moderacija" @endif><i class="glyphicon glyphicon-cog"></i> Podešavanja</a></li>
                             <li><a href="/profil"><i class="glyphicon glyphicon-eye-open"></i> Pregled</a></li>
                             <li><a href="/profil/edit-nalog"><i class="glyphicon glyphicon-pencil"></i> Uredi</a></li>
-                            <li><a href="{!!url('/log/logout')!!}"><i class="glyphicon glyphicon-off"></i> Odjava</a></li>
+                            <li><a href="{!!url('/log/logout')!!}" style="color:red"><i class="glyphicon glyphicon-off"></i> Odjava</a></li>
                         </ul>
                     </li>
                 @else
