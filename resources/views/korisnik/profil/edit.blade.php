@@ -48,6 +48,10 @@
                         <td>{!! Form::text('username',$korisnik['username'], ['class'=>'form-control', 'placeholder'=>'Username','id'=>'username'])!!}</td>
                       </tr>
                       <tr>
+                        <td>Password:</td>
+                        <td>{!! Form::password('password', ['class'=>'form-control'])!!}</td>
+                      </tr>
+                      <tr>
                         <td>Email:</td>
                         <td>{!! Form::text('email',$korisnik['email'], ['class'=>'form-control', 'placeholder'=>'Email','id'=>'email','type'=>'email'])!!}</td>
                       </tr>                    

@@ -59,6 +59,7 @@ class Profil extends Controller {
 		$rules = array(
 	        'username'	=> 'Required|Between:5,12',
 	        'email'     => 'Required|Between:3,64|Email',
+	        'password'  =>'AlphaNum|Between:4,8|',
 			);
 		$v=Validator::make($data,$rules);
 		if($v->fails())
@@ -66,13 +67,18 @@ class Profil extends Controller {
 			return Redirect::to('/profil/edit-nalog')->withErrors($v->errors());
 		}
 		//kraj validacije
-		$korisnik= Korisnici::firstOrNew(['id'=>Input::get('id')],['id','prezime','ime' ,'username','email']);  
+		$pass=Input::get('password');
+		$has_pass=Security::generateHashPass($pass);
+
+		$korisnik= Korisnici::firstOrNew(['id'=>Input::get('id')],['id','prezime','ime' ,'username','password','email']);  
 		$korisnik->prezime=Input::get('prezime');
 		$korisnik->ime=Input::get('ime');
 		$korisnik->username=Input::get('username');
+		$korisnik->password=$has_pass;
 		$korisnik->email=Input::get('email');;
 		$korisnik->save();
 		$ids=Session::get('id');
+		
 		$korisnik=Korisnici::where('id', '=', $ids)->get(['id','ime','prezime','email','username'])->first()->toArray();
 		return view('korisnik.profil.index',compact('korisnik'));
 	}
