@@ -1,4 +1,4 @@
-@extends('masterBackEnd')
+@extends('administracija.masterBackEnd')
 {{--forma za izmenu naloga--}}
 @section('content')
     <div class="col-sm-3"></div>

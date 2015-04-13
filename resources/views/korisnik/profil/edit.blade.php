@@ -1,4 +1,4 @@
-@extends('masterBackEnd')
+@extends('administracija.masterBackEnd')
 
 @section('body')
 

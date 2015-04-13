@@ -1,4 +1,4 @@
-@extends('master-paralax-1')
+@extends('aplikacija.master-paralax-1')
 @section('head')
     <script type="text/javascript">
         var map, markers, spotlight, locationsByType = {};
@@ -149,12 +149,12 @@
         {!!Form::button('<i class="glyphicon glyphicon-search"></i> Pronađi',['class'=>'btn btn-primary','type'=>'submit'])!!}
     </div>
     {!!Form::close()!!}
-    <div class="col-sm-1">
-        <a href="#" class="btn btn-success scroll-link" data-id="rezultati"><i class="glyphicon glyphicon-download"></i> Rezultati</a>
-    </div><br clear="all">
-    <hr>
 
     @if($podaci['rezultat'])
+        <div class="col-sm-1">
+            <a href="#" class="btn btn-success scroll-link" data-id="rezultati"><i class="glyphicon glyphicon-download"></i> Rezultati</a>
+        </div><br clear="all">
+        <hr>
         <div id="map" style="width: 100%;height: 400px"></div>
         <p id="rezultati"></p>
         @foreach($podaci['rezultat'] as $smestaj)
@@ -175,6 +175,6 @@
             </div><br clear="all">
         @endforeach
     @else
-        <p>Nema rezultata za date parametre. Proverite parametre i pokušajte ponovo.</p>
+        <br clear="all"><p>Nema rezultata za date parametre. Proverite parametre i pokušajte ponovo.</p>
     @endif
 @endsection

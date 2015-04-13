@@ -20,14 +20,14 @@ class Glavni extends Controller {
 		$podaci['grad']=Grad::orderBy('id')->get(['id','naziv'])->lists('naziv','id');
 		return view('aplikacija.index',compact('podaci'));
 	}
-	public function getMarkeri(){
-		$nalozi=Objekat::join('nalog','nalog.id','=','objekat.nalog_id')->whereNotNull('x')->get(['objekat.id','objekat.naziv','slug','x','y','adresa'])->toArray();
+	public function getMarkeriGradovi(){
+		$nalozi=Grad::whereNotNull('x')->get(['id','naziv','x','y'])->toArray();
 		$niz = 'onLoadMarkers({"type": "FeatureCollection","features": [';
 		$i=0;
 		foreach($nalozi as $nalog){
 			if($i==0)$i=1;
 			else $niz.=',';
-			$niz.='{"id":"'.$nalog['id'].'","slug":"'.$nalog['slug'].'","type":"Feature","geometry":{"type":"Point","coordinates":['.$nalog['y'].','.$nalog['x'].']},"properties":{"naslov":"'.$nalog['naziv'].'","description":null,"case_number":null,"address":null,"zip_code":null,"beat":null,"accuracy":"9"}}';
+			$niz.='{"id":"'.$nalog['id'].'","type":"Feature","geometry":{"type":"Point","coordinates":['.$nalog['x'].','.$nalog['y'].']},"properties":{"naslov":"'.$nalog['naziv'].'","description":null,"case_number":null,"address":null,"zip_code":null,"beat":null,"accuracy":"9"}}';
 		}
         $niz.=']});';
 		return $niz;

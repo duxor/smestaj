@@ -1,4 +1,4 @@
-@extends('master-paralax-1')
+@extends('aplikacija.master-paralax-1')
 @section('head')
     <script type="text/javascript">
         var map;var markers, spotlight, locationsByType = {};
@@ -20,7 +20,7 @@
         }
         function loadMarkers() {
             var script = document.createElement("script");
-            script.src = "/markeri";
+            script.src = "/markeri-gradovi";
             document.getElementsByTagName("head")[0].appendChild(script);
         }
         function onLoadMarkers(collection) {
@@ -36,9 +36,10 @@
                 marker.type = type;
 
                 // give it a title
-                marker.setAttribute("title", [
+                /*marker.setAttribute("title", [
                     type, "on", feature.properties.date_time
                 ].join(" "));
+                */
                 marker.setAttribute("class", "report");
                 // set the href to link to crimespotting's crime page
                 marker.setAttribute("href", "#");// + [
@@ -49,8 +50,8 @@
                  */
                 // create an image icon
                 var img = marker.appendChild(document.createElement("a"));
-                img.setAttribute("class","glyphicon glyphicon-screenshot");//glyphicon glyphicon-pushpin");//("src", "../geojson/icons/" + type.replace(/ /g, "_") + ".png");
-                img.setAttribute("style","color:red");
+                img.setAttribute("class","glyphicon glyphicon-flag");//glyphicon glyphicon-pushpin");//("src", "../geojson/icons/" + type.replace(/ /g, "_") + ".png");
+                img.setAttribute("style","color:#5104ff;font-size:26px");
                 markers.addMarker(marker, feature);
                 locations.push(marker.location);
 

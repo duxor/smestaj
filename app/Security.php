@@ -124,7 +124,7 @@ class Security {
             $korisnik->save();
         }
         Session::flush();
-        return Redirect::back();
+        return redirect('/');
     }
     public function redirect(){
         return redirect($this->redirectURL);
