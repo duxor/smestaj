@@ -29,9 +29,10 @@ class Security {
     private static $modID=4;
     private static $adminID=5;
     private static $kreatorID=6;
-    public static $adminLogURL='/administracija/login';
-    public static $userLogURL='/profil/login';
-    public static $modLogURL='/moderator/login';
+    public static $adminURL='/administracija';
+    public static $userURL='/profil';
+    public static $modURL='/moderator';
+    public static $logURL='/log/login';
     private $token;
     private $redirectURL;
     private $minLenPass=4;//minimalna duzina sifre i korisnickog imena
@@ -114,7 +115,7 @@ class Security {
         return Security::rediectToLogin();
     }
 //#REDIRECTORI[autentifikacija, logout, redirect, redirectToLogin]
-    public static function autentifikacija($target,$dodaci,$prava=2){
+    public static function autentifikacija($target,$dodaci=null,$prava=2){
         return Security::autentifikacijaTest($prava) ? $dodaci ? view($target, $dodaci) : view($target) : Security::rediectToLogin();
     }
     public static function logout(){
@@ -132,10 +133,10 @@ class Security {
     public static function rediectToLogin(){
         if(Session::has('prava_pristupa')){
             switch(Session::get('prava_pristupa')){
-                case Security::$userID:return redirect(Security::$userLogURL);
-                case Security::$modID:return redirect(Security::$modLogURL);
+                case Security::$userID:return redirect(Security::$userURL);
+                case Security::$modID:return redirect(Security::$modURL);
             }
         }
-        return redirect(Security::$adminLogURL);
+        return redirect(Security::$adminURL);
     }
 }

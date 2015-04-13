@@ -35,7 +35,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="{!! url('/') !!}" class="navbar-brand"><i class="glyphicon glyphicon-home"></i> najSmestaj</a>
+            <a href="{!! url('/') !!}" class="navbar-brand"><i class="glyphicon glyphicon-home"></i> najSmeštaj</a>
         </div>
         <div id="dMenija" class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">

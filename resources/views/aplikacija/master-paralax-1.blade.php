@@ -49,12 +49,12 @@
                 <span class="icon-bar"></span>
             </button>
             <a href="/" class="navbar-brand">
-                najSmestaj
+                najSmeštaj
             </a>
         </div>
         <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a href="/" @if(isset($podaci['pocetna'])) class="scroll-link" data-id="pocetna" @endif><i class="glyphicon glyphicon-home"></i></a></li>
+                <li><a href="/" @if(isset($podaci['pocetna'])) class="scroll-link" data-id="pocetna" @endif><i class="glyphicon glyphicon-search"></i></a></li>
                 @foreach($podaci as $k => $meni)
                     @if(isset($meni['vrsta_sadrzaja_id']))
                         @if($meni['vrsta_sadrzaja_id']==1)
@@ -73,7 +73,7 @@
                         </ul>
                     </li>
                 @else
-                    <li><a href="/profil/login"><i class="glyphicon glyphicon-log-in"></i> Login</a></li>
+                    <li><a href="/log/login"><i class="glyphicon glyphicon-log-in"></i> Login</a></li>
                 @endif
             </ul>
         </div>
