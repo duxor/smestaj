@@ -35,7 +35,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="{!! url('/') !!}" class="navbar-brand"><i class="glyphicon glyphicon-home"></i> najSmeštaj</a>
+            <a href="{!! url('/') !!}" class="navbar-brand">najSmeštaj</a>
         </div>
         <div id="dMenija" class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -47,6 +47,17 @@
                             <li><a href="{!!url('')!!}"><i class="glyphicon glyphicon-pencil"></i> Sadržaji</a></li>
                             <li><a href="{!!url('')!!}"><i class="glyphicon glyphicon-comment"></i> Komentari</a></li>
                             <li><a href="{!!url('')!!}"><i class="glyphicon glyphicon-envelope"></i> Newsletter</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-home"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{!!url('')!!}"><i class=""></i> Pregled</a></li>
+                            <li><a href="{!!url('')!!}"><i class=""></i> Novi</a></li>
+                            <li><a href="{!!url('')!!}"><i class=""></i> Pregled smeštaja</a></li>
+                            <li><a href="{!!url('')!!}"><i class=""></i> Novi smeštaj</a></li>
+                            <li><a href="{!!url('')!!}"><i class=""></i> Slobodni</a></li>
+                            <li><a href="{!!url('')!!}"><i class=""></i> Zauzeti</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -68,6 +79,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-stats"></i> Analitika</a>
                         <ul class="dropdown-menu">
                             <li><a href="{!!url('')!!}"><i class="glyphicon glyphicon-usd"></i> Finansije</a></li>
+                            <li><a href="{!!url('')!!}"><i class="glyphicon glyphicon-user"></i> Korisnici</a></li>
                         </ul>
                     </li>
 
