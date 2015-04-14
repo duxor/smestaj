@@ -43,7 +43,7 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-cog"></i></a>
                         <ul class="dropdown-menu">
-                            <li><a href="{!!url('')!!}"><i class="glyphicon glyphicon-wrench"></i> Podešavanja</a></li>
+                            <li><a href="{!!url('/moderator/podesavanja')!!}"><i class="glyphicon glyphicon-wrench"></i> Podešavanja</a></li>
                             <li><a href="{!!url('')!!}"><i class="glyphicon glyphicon-pencil"></i> Sadržaji</a></li>
                             <li><a href="{!!url('')!!}"><i class="glyphicon glyphicon-comment"></i> Komentari</a></li>
                             <li><a href="{!!url('')!!}"><i class="glyphicon glyphicon-envelope"></i> Newsletter</a></li>

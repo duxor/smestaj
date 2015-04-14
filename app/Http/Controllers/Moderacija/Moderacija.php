@@ -8,4 +8,10 @@ class Moderacija extends Controller {
 	public function getIndex(){
 		return Security::autentifikacija('moderacija.aplikacija.index');
 	}
+	public function getPodesavanja()
+	{
+		return Security::autentifikacija('moderacija.aplikacija.podesavanja');	
+	}
+
+
 }
