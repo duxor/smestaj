@@ -24,8 +24,8 @@ class Moderacija extends Controller {
 	public function getPodesavanja()
 	{	
 		$idkor=Session::get('id');
-		$nalozi=Nalog::where('korisnici_id',$idkor)->lists('naziv', 'id');
-		$tema_id= Tema::lists('naziv','id');
+		$nalozi=Nalog::where('korisnici_id',$idkor)->where('aktivan',1)->lists('naziv', 'id');
+		$tema_id= Tema::where('id','>','1')->lists('naziv','id');
 		return Security::autentifikacija('moderacija.aplikacija.podesavanja',compact('tema_id','nalozi'),4);
 	}
 	public function postPodesavanja()
@@ -42,14 +42,21 @@ class Moderacija extends Controller {
 			$tema_id=Input::get('tema');
 			$templejt=Templejt::where('tema_id',$tema_id)->get(['id','slug'])->toArray();
 
-			foreach ($templejt as $templ) 
+			if(Sadrzaji::where('nalog_id',Input::get('nalog'))->exists())
 			{
-				$sadrzaj=new Sadrzaji;
-				$sadrzaj->naziv=$templ['slug'];
-				$sadrzaj->sadrzaj='Tekst je u pripremi';
-				$sadrzaj->templejt_id=$templ['id'];
-				$sadrzaj->nalog_id=Input::get('nalog');
-				$sadrzaj->save();
+				//ako postoji azururaj ako ne dodaj novi
+			}
+			else
+			{
+				foreach ($templejt as $templ) 
+				{
+					$sadrzaj=new Sadrzaji;
+					$sadrzaj->naziv=$templ['slug'];
+					$sadrzaj->sadrzaj='Tekst je u pripremi';
+					$sadrzaj->templejt_id=$templ['id'];
+					$sadrzaj->nalog_id=Input::get('nalog');
+					$sadrzaj->save();
+				}
 			}
 			return redirect('/moderator/podesavanja');
 		}
