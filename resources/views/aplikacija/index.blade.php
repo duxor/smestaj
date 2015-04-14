@@ -223,39 +223,54 @@
                         -moz-border-radius: 10px;
                         border-radius: 10px;
                     ">
-                        {!!Form::open(['url'=>'/pretraga','class'=>'form-horizontal'])!!}
-                        {!!Form::hidden('tacan_broj',1)!!}
-                        <div class="form-group">
-                            <p><i class="glyphicon glyphicon-search"></i> Pronađite savršen smeštaj</p>
-                            {!!Form::label('lgrad','Grad',['class'=>'control-label'])!!}
-                            {!!Form::select('grad_id',$podaci['grad'],1,['class'=>'form-control'])!!}
-                        </div>
-                        <div class="form-group" id="datarange">
-                            {!!Form::label('lperiod','Izaberite period',['class'=>'control-label'])!!}
-                            <div class="input-daterange input-group col-sm-12" id="datepicker">
-                                {!! Form::text('datumOd', null, ['class'=>'input-sm form-control','placeholder'=>'od...']) !!}
-                                <span class="input-group-addon">do</span>
-                                {!! Form::text('datumDo', null, ['class'=>'input-sm form-control','placeholder'=>'do...']) !!}
+                        <p><i class="glyphicon glyphicon-search"></i> Pronađite savršen smeštaj</p>
+                        <div role="tabpanel">
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#tab-rezervacije" aria-controls="tab-rezervacije" role="tab" data-toggle="tab"><i class="glyphicon glyphicon-list-alt"></i> Rezervacije</a></li>
+                                <li role="presentation"><a href="#tab-objekti" aria-controls="tab-objekti" role="tab" data-toggle="tab"><i class="glyphicon glyphicon-home"></i> Objekti</a></li>
+                            </ul>
+                            <div class="tab-content" style="padding:0 10px">
+                                <div role="tabpanel" class="tab-pane fade in active" id="tab-rezervacije">
+
+                                    {!!Form::open(['url'=>'/pretraga','class'=>'form-horizontal'])!!}
+                                    {!!Form::hidden('tacan_broj',1)!!}
+                                    <div class="form-group">
+                                        {!!Form::label('lgrad','Grad',['class'=>'control-label'])!!}
+                                        {!!Form::select('grad_id',$podaci['grad'],1,['class'=>'form-control'])!!}
+                                    </div>
+                                    <div class="form-group" id="datarange">
+                                        {!!Form::label('lperiod','Izaberite period',['class'=>'control-label'])!!}
+                                        <div class="input-daterange input-group col-sm-12" id="datepicker">
+                                            {!! Form::text('datumOd', null, ['class'=>'input-sm form-control','placeholder'=>'od...']) !!}
+                                            <span class="input-group-addon">do</span>
+                                            {!! Form::text('datumDo', null, ['class'=>'input-sm form-control','placeholder'=>'do...']) !!}
+                                        </div>
+                                    </div>
+                                    <script>
+                                        $('#datarange .input-daterange').datepicker({
+                                            orientation: "top auto",
+                                            weekStart: 1,
+                                            startDate: "current",
+                                            todayBtn: "linked",
+                                            toggleActive: true,
+                                            format: "yyyy-mm-dd"
+                                        });
+                                    </script>
+                                    <div class="form-group">
+                                        {!!Form::label('lgrad','Broj osoba',['class'=>'control-label'])!!}
+                                        {!!Form::select('broj_osoba',[1=>1,2=>2,3=>3,4=>4,5=>5,6=>6,7=>7,8=>8,9=>9,10=>10,11=>11,12=>12],2,['class'=>'form-control'])!!}
+                                    </div>
+                                    <div class="form-group" style="text-align: right">
+                                        {!!Form::button('<i class="glyphicon glyphicon-search"></i> Pretraga',['class'=>'btn btn-lg btn-primary','type'=>'submit'])!!}
+                                    </div>
+                                    {!!Form::close()!!}
+                                </div>
+                                <div role="tabpanel" class="tab-pane fade" id="tab-objekti">
+                                    Pretraga po nazivu smeštajnog kapaciteta (po brendu).
+                                </div>
                             </div>
+
                         </div>
-                        <script>
-                            $('#datarange .input-daterange').datepicker({
-                                orientation: "top auto",
-                                weekStart: 1,
-                                startDate: "current",
-                                todayBtn: "linked",
-                                toggleActive: true,
-                                format: "yyyy-mm-dd"
-                            });
-                        </script>
-                        <div class="form-group">
-                            {!!Form::label('lgrad','Broj osoba',['class'=>'control-label'])!!}
-                            {!!Form::select('broj_osoba',[1=>1,2=>2,3=>3,4=>4,5=>5,6=>6,7=>7,8=>8,9=>9,10=>10,11=>11,12=>12],2,['class'=>'form-control'])!!}
-                        </div>
-                        <div class="form-group" style="text-align: right">
-                            {!!Form::button('<i class="glyphicon glyphicon-search"></i> Pretraga',['class'=>'btn btn-lg btn-primary','type'=>'submit'])!!}
-                        </div>
-                        {!!Form::close()!!}
 
                     </div>
                 </div>
@@ -268,7 +283,7 @@
         {{--pocetna END::--}}
 
         {{--Smestaj START::--}}
-        <div class="content" id="{{$podaci[1]['slug']}}">
+        <div class="content-full container" id="{{$podaci[1]['slug']}}">
                 <h1>{!!$podaci[1]['naziv']!!}</h1>
                 {!!$podaci[1]['sadrzaj']!!}
         </div>

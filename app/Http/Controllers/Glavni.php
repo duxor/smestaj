@@ -16,7 +16,7 @@ class Glavni extends Controller {
 			'teme/osnovna-paralax/slike/28.jpg',
 			'teme/osnovna-paralax/slike/34.jpg',
 		];
-		$podaci['icon']=['','glyphicon glyphicon-search','glyphicon glyphicon-calendar','glyphicon glyphicon-earphone',''];
+		$podaci['icon']=['','glyphicon glyphicon-home','glyphicon glyphicon-calendar','glyphicon glyphicon-earphone',''];
 		$podaci['grad']=Grad::orderBy('id')->get(['id','naziv'])->lists('naziv','id');
 		return view('aplikacija.index',compact('podaci'));
 	}
