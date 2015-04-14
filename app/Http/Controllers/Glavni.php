@@ -18,7 +18,7 @@ class Glavni extends Controller {
 		];
 		$podaci['icon']=['','glyphicon glyphicon-home','glyphicon glyphicon-calendar','glyphicon glyphicon-earphone',''];
 		$podaci['grad']=Grad::orderBy('id')->get(['id','naziv'])->lists('naziv','id');
-		return view('aplikacija.index',compact('podaci'));
+		return view('aplikacija.osnova.index',compact('podaci'));
 	}
 	public function getMarkeriGradovi(){
 		$nalozi=Grad::whereNotNull('x')->get(['id','naziv','x','y'])->toArray();

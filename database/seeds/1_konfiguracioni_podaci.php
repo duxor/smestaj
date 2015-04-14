@@ -15,7 +15,7 @@ class KonfiguracioniPodaci extends Seeder{
     public function run(){
         PravaPristupa::insert([
             ['naziv' => 'Zabranjen'],//1
-            ['naziv' => 'Korisnik'],//2
+            ['naziv' => 'Gost'],//2
             ['naziv' => 'Analitičar'],//3
             ['naziv' => 'Moderator'],//4 -- vlasnikss
             ['naziv' => 'Administrator'],//5
@@ -104,8 +104,8 @@ class KonfiguracioniPodaci extends Seeder{
                 'nalog_id'=>1
             ],
             [
-                'naziv'=>'Rezervacije',
-                'sadrzaj'=>'<p>Tekst je u pripremi.</p>',
+                'naziv'=>'Popusti',
+                'sadrzaj'=>'<p>Tekst je u pripremi (Rezervišite online i ostvarite bonus i popuste za naredni period).</p>',
                 'templejt_id'=>3,
                 'nalog_id'=>1
             ],

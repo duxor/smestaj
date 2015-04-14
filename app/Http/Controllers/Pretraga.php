@@ -12,7 +12,7 @@ class Pretraga extends Controller {
 		$tacan_broj=Input::get('tacan_broj')?'':'>';
 
 		$podaci=Templejt::join('sadrzaji','sadrzaji.templejt_id','=','templejt.id')->where('nalog_id','=',1)->where('tema_id','=',1)->orderBy('redoslijed')->get(['slug','naziv','vrsta_sadrzaja_id'])->toArray();
-		$podaci['icon']=['','glyphicon glyphicon-search','glyphicon glyphicon-calendar','glyphicon glyphicon-earphone',''];
+		$podaci['icon']=['','glyphicon glyphicon-home','glyphicon glyphicon-calendar','glyphicon glyphicon-earphone',''];
 
 		$podaci['broj_osoba']=Input::get('broj_osoba')?Input::get('broj_osoba'):1;
 		$podaci['rezultat']=Objekat::
@@ -25,7 +25,7 @@ class Pretraga extends Controller {
 		$podaci['grad_id']=Input::get('grad_id');
 		$podaci['tacan_broj']=Input::get('tacan_broj');
 		$podaci['grad_koo']=Grad::find(Input::get('grad_id'),['x','y','z']);
-		return view('aplikacija.pretraga',compact('podaci'));
+		return view('aplikacija.osnova.pretraga',compact('podaci'));
 	}
 	public function postOsnovna(){
 

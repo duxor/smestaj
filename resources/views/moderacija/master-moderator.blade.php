@@ -61,7 +61,7 @@
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-list-alt"></i> Rezervacije</a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-list-alt"></i> Rezervacije <i class="caret"></i></a>
                         <ul class="dropdown-menu">
                             <li><a href="{!!url('')!!}"><i class=""></i> Aktuelne</a></li>
                             <li><a href="{!!url('')!!}"><i class=""></i> Arhiva</a></li>
@@ -69,16 +69,16 @@
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-briefcase"></i> Saradnja</a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-briefcase"></i> Saradnja <i class="caret"></i></a>
                         <ul class="dropdown-menu">
                             <li><a href="{!!url('')!!}"><i class=""></i> Aktuelno</a></li>
                             <li><a href="{!!url('')!!}"><i class=""></i> Pretraga</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-stats"></i> Analitika</a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-stats"></i> Analitika <i class="caret"></i></a>
                         <ul class="dropdown-menu">
-                            <li><a href="{!!url('')!!}"><i class="glyphicon glyphicon-usd"></i> Finansije</a></li>
+                            <li><a href="{!!url('')!!}"><i class="glyphicon glyphicon-euro"></i> Finansije</a></li>
                             <li><a href="{!!url('')!!}"><i class="glyphicon glyphicon-user"></i> Korisnici</a></li>
                         </ul>
                     </li>
