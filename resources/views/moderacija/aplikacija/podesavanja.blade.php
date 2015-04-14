@@ -1,46 +1,69 @@
 @extends('moderacija.master-moderator')
 
-<div class="container">
-	<div class="row">
-		 <form class="form-horizontal">
-            <fieldset>
-                <!-- Address form -->
-         
-                <h2>Podešavanja</h2>
-         
-                <!-- Izbor teme-->
-                <div class="control-group">
-                    <label class="control-label">Izbor teme</label>
-                    <div class="controls">
-                        <select id="country" name="country" class="input-xlarge">
-                            <option value="" selected="selected">(Izaberite temu)</option>
-                            <option value="AF">Afghanistan</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label">Naziv Brenda:</label>
-                    <div class="controls">
-                        <input id="full-name" name="full-name" type="text" placeholder="Unesite naziv brenda"
-                        class="input-xlarge">
-                        <p class="help-block"></p>
-                    </div>
-                </div>
-              <div class="control-group">
-                    <label class="control-label">Saradnja:</label>
-                    <div class="controls">
-                        <select id="country" name="country" class="input-xlarge">
-                            <option value="" selected="selected">(Da li ste za saradnju)</option>
-                            <option value="1">Da</option>
-                            <option value="0">Ne</option>
-                        </select>
-                    </div>
-                </div>
-   
-                
+@section('content')
+<div class="row">
+    <div class="col-md-12">
 
-            </fieldset>
-        </form>
+	    {!! Form::open(['url'=>'/moderator/podesavanja','id'=>'forma','class'=>'form-horizontal']) !!}
+
+	    <div  class="form-group has-feedback">
+	        {!! Form::label('nalog', 'Izaberite nalog:',['class'=>'control-label col-sm-3']) !!}
+	        <div class="col-sm-9">
+	            {!!Form::select('nalog' ,$nalozi,  ['class'=>'form-control'])!!}
+	        </div>
+	    </div>
+
+
+	    <div id="izbor_teme" class="form-group has-feedback">
+	        {!! Form::label('tema', 'Izaberite temu:',['class'=>'control-label col-sm-3']) !!}
+	        <div class="col-sm-9">
+	            {!!Form::select('tema' ,$tema_id, ['class'=>'form-control'])!!}
+	        </div>
+	    </div>
+	   	<div id="saradnja" class="form-group has-feedback">
+	        {!! Form::label('saradnja', 'Spreman za saradnju:',['class'=>'control-label col-sm-3']) !!}
+	        <div class="col-sm-9">
+	            {!!Form::select('saradnja', ['0'=>'Ne','1'=>'Da'], ['class'=>'form-control'])!!}
+	        </div>
+	    </div>
+	    
+	    <div class="form-group">
+		    <div class="col-sm-3"></div>
+		    <div class="col-sm-9">
+		        {!! Form::button('<span class="glyphicon glyphicon-floppy-disk"></span> Sačuvaj', ['class'=>'btn btn-lg btn-primary','type'=>'submit']) !!}
+		        
+		    </div>
+		</div>
+	    {!! Form::close() !!}
+
 	</div>
 </div>
+<div class="row">
 
+	    <h3>Uvoz tekstova</h3>
+
+	    {!! Form::open(['url'=>'/moderator/podesavanja','id'=>'forma','class'=>'form-horizontal']) !!}
+			    <div id="izbor_teme" class="form-group has-feedback">
+			        {!! Form::label('tema', 'Izaberite temu:',['class'=>'control-label col-sm-3']) !!}
+			        <div class="col-sm-9">
+			            {!!Form::select('tema' ,$tema_id, ['class'=>'form-control'])!!}
+			        </div>
+			    </div>
+			    <div id="izbor_teme" class="form-group has-feedback">
+			        {!! Form::label('tema', 'Izaberite temu:',['class'=>'control-label col-sm-3']) !!}
+			        <div class="col-sm-9">
+			            {!!Form::select('tema' ,$tema_id, ['class'=>'form-control'])!!}
+			        </div>
+			    </div>
+			    <div class="col-sm-3">
+			    <div class="form-group">
+				    
+				    <div class="col-sm-9">
+				        {!! Form::button('<span class="glyphicon glyphicon-floppy-disk"></span> Sačuvaj', ['class'=>'btn btn-lg btn-primary','type'=>'submit']) !!}
+				        
+				    </div>
+				    </div>
+				</div>
+	    {!! Form::close() !!}
+</div>
+@endsection

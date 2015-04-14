@@ -27,7 +27,8 @@ class Nalozi extends Controller {
 		return Security::autentifikacija('administracija.aplikacija.nalog.edit', compact('nalog','korisnici','tema_id'),5);
 	}
 	public function postNalogEdit(){
-		if(Security::autentifikacijaTest(5)){
+		if(Security::autentifikacijaTest(4)){
+
 			$nalog= Nalog::firstOrNew(['id'=>Input::get('id')],['id','naziv','slug','korisnici_id','tema_id']);
 			$nalog->naziv=Input::get('naziv');
 			$nalog->slug=Input::get('slug');
