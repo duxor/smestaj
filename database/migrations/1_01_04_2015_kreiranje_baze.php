@@ -103,6 +103,18 @@ class KreiranjeBaze extends Migration{
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->nullable();
         });
+        Schema::create('newsletter', function(Blueprint $table)
+        {
+            $table->bigIncrements('id');
+            $table->string('token', 250);
+            $table->tinyInteger('aktivan')->default(1);
+            $table->unsignedBigInteger('korisnici_id');
+            $table->foreign('korisnici_id')->references('id')->on('korisnici');
+            $table->unsignedBigInteger('nalog_id')->default(1);
+            $table->foreign('nalog_id')->references('id')->on('nalog');
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->nullable();
+        });
         Schema::create('objekat', function(Blueprint $table)
         {
             $table->bigIncrements('id');
@@ -146,6 +158,17 @@ class KreiranjeBaze extends Migration{
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->nullable();
         });
+        Schema::create('komentari', function(Blueprint $table)
+        {
+            $table->bigIncrements('id');
+            $table->text('komentar');
+            $table->unsignedBigInteger('korisnici_id');
+            $table->foreign('korisnici_id')->references('id')->on('korisnici');
+            $table->unsignedBigInteger('sadrzaj_id');
+            $table->foreign('sadrzaj_id')->references('id')->on('sadrzaj');
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->nullable();
+        });
         Schema::create('vrsta_sadrzaja', function(Blueprint $table)
         {
             $table->bigIncrements('id');
@@ -177,7 +200,9 @@ class KreiranjeBaze extends Migration{
         Schema::drop('objekat');
         Schema::drop('vrsta_objekta');
         Schema::drop('grad');
+        Schema::drop('komentari');
         Schema::drop('sadrzaji');
+        Schema::drop('newsletter');
         Schema::drop('nalog');
         Schema::drop('templejt');
         Schema::drop('tema');
