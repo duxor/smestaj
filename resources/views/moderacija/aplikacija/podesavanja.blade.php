@@ -42,7 +42,7 @@
 
 	    <h3>Uvoz tekstova</h3>
 
-	    {!! Form::open(['url'=>'/moderator/podesavanja','id'=>'forma','class'=>'form-horizontal']) !!}
+	    {!! Form::open(['url'=>'#','id'=>'forma','class'=>'form-horizontal']) !!}
 			    <div id="izbor_teme" class="form-group has-feedback">
 			        {!! Form::label('tema', 'Izaberite temu:',['class'=>'control-label col-sm-3']) !!}
 			        <div class="col-sm-9">
