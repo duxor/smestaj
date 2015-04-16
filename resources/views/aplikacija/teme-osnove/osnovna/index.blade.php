@@ -266,6 +266,20 @@
                                 </div>
                                 <div role="tabpanel" class="tab-pane fade" id="tab-objekti">
                                     Pretraga po nazivu smeštajnog kapaciteta (po brendu).
+                                    {!!Form::open(['url'=>'/pretraga/smestaji','class'=>'form-horizontal'])!!}
+                                    <div class="form-group">
+                                        {!!Form::label('lnaziv','Naziv',['class'=>'col-sm-3'])!!}
+                                        <div class="col-sm-9">
+                                            {!!Form::text('naziv',null,['class'=>'form-control'])!!}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-3"></div>
+                                        <div class="col-sm-9">
+                                            {!!Form::button('Pretraži',['type'=>'submit','class'=>'form-control'])!!}
+                                        </div>
+                                    </div>
+                                    {!!Form::close()!!}
                                 </div>
                             </div>
 
