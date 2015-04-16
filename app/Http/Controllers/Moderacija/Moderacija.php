@@ -41,12 +41,9 @@ class Moderacija extends Controller {
 
 			$tema_id=Input::get('tema');
 			$templejt=Templejt::where('tema_id',$tema_id)->get(['id','slug'])->toArray();
-
-			if(Sadrzaji::where('nalog_id',Input::get('nalog'))->exists())
-			{
-				//ako postoji azururaj ako ne dodaj novi
-			}
-			else
+			
+			//ako postoji zapis preskoci ako ne dodaj novi
+			if(!Sadrzaji::where('nalog_id',Input::get('nalog'))->exists())
 			{
 				foreach ($templejt as $templ) 
 				{
@@ -58,11 +55,65 @@ class Moderacija extends Controller {
 					$sadrzaj->save();
 				}
 			}
+		
+		
 			return redirect('/moderator/podesavanja');
 		}
 		return Security::rediectToLogin();	
 	
 	}
+	public function postPrenos()
+	{
+		 $izvor=Input::get('izvorisnatema');
+		$odrediste=Input::get('odredisnatema');
+		if(Security::autentifikacijaTest(4))
+		{
+			$a=Templejt::where('templejt.tema_id','=',Input::get('izvorisnatema'))
+			->get(['templejt.id','templejt.slug'])->toArray();
+
+				$sadrzaj= array();
+				$slug=array();
+			foreach ($a as $templ) 
+			{
+					$id=$templ['id'];
+					
+					$slug[]=$templ['slug'];
+					$sadrzaj[]=Sadrzaji::where('templejt_id','=',$id)->get(['sadrzaj'])->first()->toArray();
+					
+			}
+		$niz_slug_sadrzaj_izvoriste=array_combine($slug, $sadrzaj);
+		
+		}
+		if(Security::autentifikacijaTest(4))
+		{
+			$a=Templejt::where('templejt.tema_id','=',Input::get('odredisnatema'))
+			->get(['templejt.id','templejt.slug'])->toArray();
+
+				$sadrzaj_odrediste= array();
+				$slug_odrediste=array();
+			foreach ($a as $templ) 
+			{
+					$id=$templ['id'];
+					
+					$slug_odrediste[]=$templ['slug'];
+					$sadrzaj_odrediste[]=Sadrzaji::where('templejt_id','=',$id)->get(['sadrzaj'])->first()->toArray();
+					
+			}
+
+			$niz_slug_sadrzaj_odrediste=array_combine($slug_odrediste, $sadrzaj_odrediste);	
+		}
+		
+		$d=array_merge($niz_slug_sadrzaj_odrediste,$niz_slug_sadrzaj_izvoriste);
+		$id=Templejt::where('tema_id','=', Input::get('odredisnatema'))->get(['id'])->toArray();
+		
+		$g=array_combine($id, $d);
+		dd(g);
+
+
+
+
+	}
+
 
 
 }
