@@ -164,8 +164,8 @@ class KreiranjeBaze extends Migration{
             $table->text('komentar');
             $table->unsignedBigInteger('korisnici_id');
             $table->foreign('korisnici_id')->references('id')->on('korisnici');
-            $table->unsignedBigInteger('sadrzaj_id');
-            $table->foreign('sadrzaj_id')->references('id')->on('sadrzaj');
+            $table->unsignedBigInteger('sadrzaji_id');
+            $table->foreign('sadrzaji_id')->references('id')->on('sadrzaji');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->nullable();
         });
