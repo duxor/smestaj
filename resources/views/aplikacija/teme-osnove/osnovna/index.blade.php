@@ -1,4 +1,4 @@
-@extends('aplikacija.osnova.master-paralax-1')
+@extends('aplikacija.teme-osnove.osnovna.master')
 @section('head')
     <script type="text/javascript">
         var map;var markers, spotlight, locationsByType = {};
@@ -13,14 +13,13 @@
                         //new com.modestmaps.MouseHandler()
                     ]);
             markers = new MM.MarkerLayer();
-            //map.setCenterZoom(new com.modestmaps.Location(45.311149,15.7401466), 6);
-
             map.addLayer(markers);
             loadMarkers();
+            map.setCenterZoom(new com.modestmaps.Location(44.311149,17.7401466), 7);
         }
         function loadMarkers() {
             var script = document.createElement("script");
-            script.src = "/markeri-gradovi";
+            script.src = "/pretraga/markeri-gradovi";
             document.getElementsByTagName("head")[0].appendChild(script);
         }
         function onLoadMarkers(collection) {
@@ -151,7 +150,7 @@
 
         <div
                 class="parallax-image parallax-image-100"
-                style="background-image:url('{{$podaci['pozadine'][0]}}')"
+                style="background-image:url('{{$podaci['pozadine'][0]['sadrzaj']}}')"
                 data-anchor-target="#{{$podaci[0]['slug']}} + .gap"
                 data-bottom-top="transform: translate3d(0px, -80%, 0px);"
                 data-top-bottom="transform: translate3d(0px, 80%, 0px);"
@@ -168,7 +167,7 @@
 
         <div
                 class="parallax-image parallax-image-100"
-                style="background-image:url('{{$podaci['pozadine'][1]}}')"
+                style="background-image:url('{{$podaci['pozadine'][1]['sadrzaj']}}')"
                 data-anchor-target="#{{$podaci[1]['slug']}} + .gap"
                 data-bottom-top="transform: translate3d(0px, -80%, 0px);"
                 data-top-bottom="transform: translate3d(0px, 80%, 0px);"
@@ -185,7 +184,7 @@
 
         <div
                 class="parallax-image parallax-image-50"
-                style="background-image:url('{{$podaci['pozadine'][2]}}')"
+                style="background-image:url('{{$podaci['pozadine'][2]['sadrzaj']}}')"
                 data-anchor-target="#{{$podaci[2]['slug']}} + .gap"
                 data-bottom-top="transform: translate3d(0px, -60%, 0px);"
                 data-top-bottom="transform: translate3d(0px, 60%, 0px);"
@@ -202,7 +201,7 @@
 
         <div
                 class="parallax-image parallax-image-50"
-                style="background-image:url('{{$podaci['pozadine'][3]}}')"
+                style="background-image:url('{{$podaci['pozadine'][3]['sadrzaj']}}')"
                 data-anchor-target="#{{$podaci[3]['slug']}} + .gap"
                 data-bottom-top="transform: translate3d(0px, -60%, 0px);"
                 data-top-bottom="transform: translate3d(0px, 60%, 0px);"
@@ -377,4 +376,4 @@
         </div>
     </div>
     {{--MODAL:: posalji mail END::--}}
-@stop
+@endsection

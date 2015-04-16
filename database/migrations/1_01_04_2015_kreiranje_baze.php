@@ -97,7 +97,7 @@ class KreiranjeBaze extends Migration{
             $table->tinyInteger('aktivan')->default(1);
             $table->unsignedBigInteger('korisnici_id');
             $table->foreign('korisnici_id')->references('id')->on('korisnici');
-            $table->unsignedBigInteger('tema_id')->default(1);
+            $table->unsignedBigInteger('tema_id')->default(2);
             $table->foreign('tema_id')->references('id')->on('tema');
             $table->tinyInteger('saradnja')->default(1);
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));

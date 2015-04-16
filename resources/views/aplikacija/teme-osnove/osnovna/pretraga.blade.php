@@ -1,4 +1,4 @@
-@extends('aplikacija.teme.osnovna.master')
+@extends('aplikacija.teme-osnove.osnovna.master')
 @section('head')
     <script type="text/javascript">
         var map, markers, spotlight, locationsByType = {};

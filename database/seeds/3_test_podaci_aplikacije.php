@@ -55,7 +55,6 @@ class TestPodaciAlikacije extends Seeder{
             $this->templejtSadrzaj($tema['id'],'Smeštajni kapacitet','smestajni-kapaciteti','Opis...',$nalog->id);
             $this->templejtSadrzaj($tema['id'],'Nešto prvo','nesto-prvo','Opis...',$nalog->id);
             $this->templejtSadrzaj($tema['id'],'Nešto drugo','nesto-drugo','Opis...',$nalog->id);
-            $this->templejtSadrzaj($tema['id'],'Nešto treće','nesto-trece','Opis...',$nalog->id);
             $this->templejtSadrzaj($tema['id'],'Kontakt','kontakt','Opis...',$nalog->id);
         }
     }
