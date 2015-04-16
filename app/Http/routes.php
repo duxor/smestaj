@@ -12,4 +12,6 @@ Route::controller('/profil','Profil');
 Route::controller('/pretraga','Pretraga');
 Route::controller('/aplikacija','Aplikacija');
 
-Route::controller('/','Glavni');
+Route::get('/{slug?}','Aplikacija@getIndex');
+
+//Route::controller('/','Glavni');

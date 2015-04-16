@@ -152,6 +152,7 @@ class KreiranjeBaze extends Migration{
             $table->bigIncrements('id');
             $table->string('naziv', 45);
             $table->text('sadrzaj');
+            $table->string('icon', 45)->nullable();
             $table->unsignedBigInteger('templejt_id');
             $table->unsignedBigInteger('nalog_id');
             $table->foreign('nalog_id')->references('id')->on('nalog');

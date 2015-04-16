@@ -53,6 +53,11 @@ class KonfiguracioniPodaci extends Seeder{
                 'slug'=>'osnovna',
                 'naziv'=>'Osnovna',
                 'opis'=>'Osnovna tema.'
+            ],
+            [//2
+                'slug'=>'paralax-1',
+                'naziv'=>'Paralax 1',
+                'opis'=>'Osnovna tema moderatorske platforme.'
             ]
         ]);
         Templejt::insert([
@@ -94,30 +99,35 @@ class KonfiguracioniPodaci extends Seeder{
             [
                 'naziv'=>'Početna',
                 'sadrzaj'=>'<p>Tekst je u pripremi.</p>',
+                'icon'=>'glyphicon glyphicon-search',
                 'templejt_id'=>1,
                 'nalog_id'=>1
             ],
             [
                 'naziv'=>'Smeštaj',
                 'sadrzaj'=>'<p>Tekst je u pripremi.</p>',
+                'icon'=>'glyphicon glyphicon-home',
                 'templejt_id'=>2,
                 'nalog_id'=>1
             ],
             [
                 'naziv'=>'Popusti',
                 'sadrzaj'=>'<p>Tekst je u pripremi (Rezervišite online i ostvarite bonus i popuste za naredni period).</p>',
+                'icon'=>'glyphicon glyphicon-calendar',
                 'templejt_id'=>3,
                 'nalog_id'=>1
             ],
             [
                 'naziv'=>'Kontakt',
                 'sadrzaj'=>'<p>Tekst je u pripremi.</p>',
+                'icon'=>'glyphicon glyphicon-earphone',
                 'templejt_id'=>4,
                 'nalog_id'=>1
             ],
             [
                 'naziv'=>'Login',
                 'sadrzaj'=>'<p>Tekst je u pripremi.</p>',
+                'icon'=>'',
                 'templejt_id'=>5,
                 'nalog_id'=>1
             ],
