@@ -105,13 +105,7 @@ class Moderacija extends Controller {
 		
 		$d=array_merge($niz_slug_sadrzaj_odrediste,$niz_slug_sadrzaj_izvoriste);
 		$id=Templejt::where('tema_id','=', Input::get('odredisnatema'))->get(['id'])->toArray();
-		
-		$g=array_combine($id, $d);
-		dd(g);
-
-
-
-
+	
 	}
 
 
