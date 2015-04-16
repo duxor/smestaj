@@ -135,8 +135,11 @@ class Security {
             switch(Session::get('prava_pristupa')){
                 case Security::$userID:return redirect(Security::$userURL);
                 case Security::$modID:return redirect(Security::$modURL);
+                case Security::$adminID:
+                case Security::$kreatorID:
+                    return redirect(Security::$adminURL);
             }
         }
-        return redirect(Security::$adminURL);
+        return redirect(Security::$logURL);
     }
 }

@@ -25,7 +25,7 @@
                                 </ul>
                             </div>
                         @endif
-                        {!! Form::open(['url'=>'/profil/login','class'=>'form-horizontal','id'=>'forma1']) !!}
+                        {!! Form::open(['url'=>'/log/login','class'=>'form-horizontal','id'=>'forma1']) !!}
                         <div id="dusername" class="form-group has-feedback">
                             {!! Form::label('lusername','Username',['class'=>'control-label col-sm-2']) !!}
                             <div class="col-sm-10">

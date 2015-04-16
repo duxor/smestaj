@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\Security;
+use Illuminate\Support\Facades\Input;
 
 class Log extends Controller {
 	public function getLogin(){
