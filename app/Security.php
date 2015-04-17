@@ -131,13 +131,14 @@ class Security {
         return redirect($this->redirectURL);
     }
     public static function rediectToLogin(){
-        if(Session::has('prava_pristupa')){
+        if(Session::has('prava_pristupa'))
+        if(Security::autentifikacijaTest(Session::has('prava_pristupa'))){
             switch(Session::get('prava_pristupa')){
-                case Security::$userID:return redirect(Security::$userURL);
-                case Security::$modID:return redirect(Security::$modURL);
+                case Security::$userID:return redirect(Security::$userURL);break;
+                case Security::$modID:return redirect(Security::$modURL);break;
                 case Security::$adminID:
                 case Security::$kreatorID:
-                    return redirect(Security::$adminURL);
+                    return redirect(Security::$adminURL);break;
             }
         }
         return redirect(Security::$logURL);

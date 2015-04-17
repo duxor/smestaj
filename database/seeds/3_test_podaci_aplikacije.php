@@ -11,32 +11,38 @@ class TestPodaciAlikacije extends Seeder{
             [
                 'slug'=>'test-tema-1',
                 'naziv'=>'Test tema 1',
-                'opis'=>'Test tema opis...'
+                'opis'=>'Test tema opis...',
+                'aktivan'=>1
             ],
             [
                 'slug'=>'test-tema-2',
                 'naziv'=>'Test tema 2',
-                'opis'=>'Test tema opis...'
+                'opis'=>'Test tema opis...',
+                'aktivan'=>1
             ],
             [
                 'slug'=>'test-tema-3',
                 'naziv'=>'Test tema 3',
-                'opis'=>'Test tema opis...'
+                'opis'=>'Test tema opis...',
+                'aktivan'=>1
             ],
             [
                 'slug'=>'test-tema-4',
                 'naziv'=>'Test tema 4',
-                'opis'=>'Test tema opis...'
+                'opis'=>'Test tema opis...',
+                'aktivan'=>1
             ],
             [
                 'slug'=>'test-tema-5',
                 'naziv'=>'Test tema 5',
-                'opis'=>'Test tema opis...'
+                'opis'=>'Test tema opis...',
+                'aktivan'=>1
             ],
             [
                 'slug'=>'test-tema-6',
                 'naziv'=>'Test tema 6',
-                'opis'=>'Test tema opis...'
+                'opis'=>'Test tema opis...',
+                'aktivan'=>1
             ],
         ];
         Tema::insert($teme);
@@ -46,7 +52,7 @@ class TestPodaciAlikacije extends Seeder{
             $nalog=new Nalog();
                 $nalog->naziv='Nalog broj '.$tema['id'];
                 $nalog->slug='nalog-broj-'.$tema['id'];
-                $nalog->korisnici_id=2;
+                $nalog->korisnici_id=rand(4,7);
                 $nalog->tema_id=$tema['id'];
             $nalog->save();
 
