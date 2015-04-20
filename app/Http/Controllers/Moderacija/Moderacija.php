@@ -63,6 +63,20 @@ class Moderacija extends Controller {
 		}
 		return Redirect::back();
 	}
+	public function getSadrzaji(){
+		$temaid=Nalog::where('id',Session::get('id'))->get(['tema_id'])->toArray();
+		$podaci=Sadrzaji::join('nalog', 'sadrzaji.nalog_id','=','nalog.id')->where('nalog.tema_id', $temaid)->get(['sadrzaji.id','sadrzaji.naziv as sadrzaj_naziv','sadrzaj','templejt_id','nalog_id'])->toArray();
+		return Security::autentifikacija('moderacija.aplikacija.sadrzaji',compact('podaci'),4);
+		}
+	
+	public function postSadrzaji($id){
+		if(Security::autentifikacijaTest(4))
+		{
+				Sadrzaji::find($id)->update(['naziv'=>Input::get('naziv'),'sadrzaj'=>Input::get('sadrzaj')]);
+				return Redirect::back();
+		}
+	return Security::rediectToLogin();
+	}
 
 
 
