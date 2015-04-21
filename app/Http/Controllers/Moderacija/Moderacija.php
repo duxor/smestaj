@@ -41,7 +41,7 @@ class Moderacija extends Controller {
 				$templejti=Templejt::where('tema_id',$app->tema_id)->get(['id','slug'])->toArray();
 				foreach($templejti as $templejt)
 					Sadrzaji::insert([
-						'naziv'=>$templejt['slug'].'-naziv',
+						'naziv'=>'N'.$templejt['id'],
 						'sadrzaj'=>'Tekst je u pripremi',
 						'templejt_id'=>$templejt['id'],
 						'nalog_id'=>$app->id]);

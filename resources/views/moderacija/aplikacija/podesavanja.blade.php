@@ -5,7 +5,7 @@
 	@foreach($podaci['aplikacije'] as $app)
       	<div class="panel panel-info">
             <div class="panel-heading">
-              <h3 class="panel-title">Podešavanje aplikacije <b>{{$app['naziv']}}</b> <a href="/{{$app['slug']}}">LINK</a> </h3>
+              <h3 class="panel-title">Podešavanje aplikacije <b>{{$app['naziv']}}</b>  <a href="/{{$app['slug']}}"> <i class="glyphicon glyphicon-eye-open"></i></a> </h3>
             </div>
             <div id="id{{$app['id']}}" class="panel-body">
 				{!! Form::open(['url'=>'/moderator/podesavanja','id'=>'forma','class'=>'form-horizontal']) !!}
@@ -23,7 +23,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-					{!! Form::label('saradnja','Saradnja:',['class'=>'control-label col-sm-3']) !!}
+					{!! Form::label('saradnja','Saradnja',['class'=>'control-label col-sm-3']) !!}
 					<div class="col-sm-9">
 						{!!Form::select('saradnja',['0'=>'Ne','1'=>'Da'],$app['saradnja'],['class'=>'form-control'])!!}
 					</div>
