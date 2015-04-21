@@ -41,17 +41,21 @@
             <ul class="nav navbar-nav navbar-right">
                 @if(\App\Security::autentifikacijaTest(4))
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-cog"></i></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="osnovno" data-toggle="tooltip" data-placement="bottom" title="Osnovno"><i class="glyphicon glyphicon-cog"></i></a>
                         <ul class="dropdown-menu">
+                            <li class="dropdown-header">Osnovno</li>
+                            <li class="divider"></li>
                             <li><a href="{!!url('/moderator/podesavanja')!!}"><i class="glyphicon glyphicon-wrench"></i> Podešavanja</a></li>
-                            <li><a href="{!!url('/moderator/sadrzaji/')!!}"><i class="glyphicon glyphicon-pencil"></i> Sadržaji</a></li>
-                            <li><a href="{!!url('')!!}"><i class="glyphicon glyphicon-comment"></i> Komentari</a></li>
-                            <li><a href="{!!url('')!!}"><i class="glyphicon glyphicon-envelope"></i> Newsletter</a></li>
+                            <li><a href="{!!url('/moderator/sadrzaji')!!}"><i class="glyphicon glyphicon-pencil"></i> Sadržaji</a></li>
+                            <li><a href="{!!url('/moderator/komentari')!!}"><i class="glyphicon glyphicon-comment"></i> Komentari</a></li>
+                            <li><a href="{!!url('/moderator/u-pripremi')!!}"><i class="glyphicon glyphicon-envelope"></i> Newsletter</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-home"></i></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="objekti" data-toggle="tooltip" data-placement="bottom" title="Objekti"><i class="glyphicon glyphicon-home"></i></a>
                         <ul class="dropdown-menu">
+                            <li class="dropdown-header">Objekti</li>
+                            <li class="divider"></li>
                             <li><a href="{!!url('')!!}"><i class=""></i> Pregled</a></li>
                             <li><a href="{!!url('')!!}"><i class=""></i> Novi</a></li>
                             <li><a href="{!!url('')!!}"><i class=""></i> Pregled smeštaja</a></li>
@@ -61,25 +65,31 @@
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-list-alt"></i> Rezervacije <i class="caret"></i></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="rezervacije" data-toggle="tooltip" data-placement="bottom" title="Rezervacije"><i class="glyphicon glyphicon-list-alt"></i></a>
                         <ul class="dropdown-menu">
+                            <li class="dropdown-header">Rezervacije</li>
+                            <li class="divider"></li>
                             <li><a href="{!!url('')!!}"><i class=""></i> Aktuelne</a></li>
                             <li><a href="{!!url('')!!}"><i class=""></i> Arhiva</a></li>
                             <li><a href="{!!url('')!!}"><i class=""></i> Gosti</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-briefcase"></i> Saradnja <i class="caret"></i></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="saradnja" data-toggle="tooltip" data-placement="bottom" title="Saradnja"><i class="glyphicon glyphicon-briefcase"></i></a>
                         <ul class="dropdown-menu">
-                            <li><a href="{!!url('')!!}"><i class=""></i> Aktuelno</a></li>
-                            <li><a href="{!!url('')!!}"><i class=""></i> Pretraga</a></li>
+                            <li class="dropdown-header">Saradnja</li>
+                            <li class="divider"></li>
+                            <li><a href="{!!url('/moderator/u-pripremi')!!}"><i class="glyphicon glyphicon-eye-open"></i> Aktuelno</a></li>
+                            <li><a href="{!!url('/moderator/u-pripremi')!!}"><i class="glyphicon glyphicon-zoom-in"></i> Pretraga</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-stats"></i> Analitika <i class="caret"></i></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="analitika" data-toggle="tooltip" data-placement="bottom" title="Analitika"><i class="glyphicon glyphicon-stats"></i></a>
                         <ul class="dropdown-menu">
-                            <li><a href="{!!url('')!!}"><i class="glyphicon glyphicon-euro"></i> Finansije</a></li>
-                            <li><a href="{!!url('')!!}"><i class="glyphicon glyphicon-user"></i> Korisnici</a></li>
+                            <li class="dropdown-header">Analitika</li>
+                            <li class="divider"></li>
+                            <li><a href="{!!url('/moderator/u-pripremi')!!}"><i class="glyphicon glyphicon-euro"></i> Finansije</a></li>
+                            <li><a href="{!!url('/moderator/u-pripremi')!!}"><i class="glyphicon glyphicon-user"></i> Korisnici</a></li>
                         </ul>
                     </li>
 
@@ -96,6 +106,13 @@
         </div>
     </div>
 </nav>
+<script>
+    $(function(){$('#osnovno').tooltip()})
+    $(function(){$('#objekti').tooltip()})
+    $(function(){$('#rezervacije').tooltip()})
+    $(function(){$('#saradnja').tooltip()})
+    $(function(){$('#analitika').tooltip()})
+</script>
 
 <div class="container">
     @yield('content')

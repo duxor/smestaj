@@ -2,6 +2,7 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Komentari;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Input;
@@ -78,6 +79,16 @@ class Moderacija extends Controller {
 	return Security::rediectToLogin();
 	}
 
+	public function getKomentari(){
+		if(Security::autentifikacijaTest(4)){
+			$komentari=Komentari::join('sadrzaji','sadrzaji.id','=','komentari.sadrzaji_id')->join('nalog','nalog.id','=','sadrzaji.nalog_id')
+				->where('nalog.korisnici_id',Session::get('id'))->get(['komentar','nalog.id'])->toArray();
+			dd($komentari);
+		}
+		return Redirect::back();
+	}
 
-
+	public function getUPripremi(){
+		return view('moderacija.u-pripremi.index');
+	}
 }
