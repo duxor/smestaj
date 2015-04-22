@@ -56,8 +56,8 @@
                         <ul class="dropdown-menu">
                             <li class="dropdown-header">Objekti</li>
                             <li class="divider"></li>
-                            <li><a href="{!!url('')!!}"><i class=""></i> Pregled</a></li>
-                            <li><a href="{!!url('')!!}"><i class=""></i> Novi</a></li>
+                            <li><a href="{!!url('')!!}"><i class=""></i> Pregled objekata</a></li>
+                            <li><a href="{!!url('')!!}"><i class=""></i> Novi objekat</a></li>
                             <li><a href="{!!url('')!!}"><i class=""></i> Pregled smeštaja</a></li>
                             <li><a href="{!!url('')!!}"><i class=""></i> Novi smeštaj</a></li>
                             <li><a href="{!!url('')!!}"><i class=""></i> Slobodni</a></li>
@@ -69,9 +69,9 @@
                         <ul class="dropdown-menu">
                             <li class="dropdown-header">Rezervacije</li>
                             <li class="divider"></li>
-                            <li><a href="{!!url('')!!}"><i class=""></i> Aktuelne</a></li>
-                            <li><a href="{!!url('')!!}"><i class=""></i> Arhiva</a></li>
-                            <li><a href="{!!url('')!!}"><i class=""></i> Gosti</a></li>
+                            <li><a href="{!!url('')!!}"><i class="glyphicon glyphicon-check"></i> Aktuelne</a></li>
+                            <li><a href="{!!url('')!!}"><i class="glyphicon glyphicon-floppy-saved"></i> Arhiva</a></li>
+                            <li><a href="{!!url('')!!}"><i class="glyphicon glyphicon-user"></i> Gosti</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
