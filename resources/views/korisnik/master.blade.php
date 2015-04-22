@@ -77,7 +77,7 @@
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="poruke" data-toggle="tooltip" data-placement="bottom" title="Poruke"><i class="glyphicon glyphicon-list-alt"></i></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="poruke" data-toggle="tooltip" data-placement="bottom" title="Poruke"><i class="glyphicon glyphicon-envelope"></i></a>
                         <ul class="dropdown-menu">
                             <li class="dropdown-header">Poruke</li>
                             <li class="divider"></li>
