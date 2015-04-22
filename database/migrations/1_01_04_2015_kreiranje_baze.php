@@ -119,6 +119,7 @@ class KreiranjeBaze extends Migration{
         {
             $table->bigIncrements('id');
             $table->string('naziv', 45);
+            $table->text('opis')->nullable();
             $table->string('x', 45)->nullable();
             $table->string('y', 45)->nullable();
             $table->string('z', 45)->nullable()->default(1);
@@ -189,6 +190,19 @@ class KreiranjeBaze extends Migration{
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->nullable();
         });
+        Schema::create('rezervacije', function(Blueprint $table)
+        {
+            $table->bigIncrements('id');
+            $table->dateTime('od');
+            $table->dateTime('do');
+            $table->tinyInteger('broj_osoba');
+            $table->unsignedBigInteger('korisnici_id');
+            $table->foreign('korisnici_id')->references('id')->on('korisnici');
+            $table->unsignedBigInteger('smestaj_id');
+            $table->foreign('smestaj_id')->references('id')->on('smestaj');
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->nullable();
+        });
 
     }
     public function down()
@@ -198,6 +212,7 @@ class KreiranjeBaze extends Migration{
         Schema::drop('smestaj');
         Schema::drop('vrsta_smestaja');
         Schema::drop('kapacitet');
+        Schema::drop('rezervacije');
         Schema::drop('objekat');
         Schema::drop('vrsta_objekta');
         Schema::drop('grad');

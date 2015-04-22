@@ -56,12 +56,12 @@
                         <ul class="dropdown-menu">
                             <li class="dropdown-header">Objekti</li>
                             <li class="divider"></li>
-                            <li><a href="{!!url('')!!}"><i class=""></i> Pregled objekata</a></li>
-                            <li><a href="{!!url('')!!}"><i class=""></i> Novi objekat</a></li>
-                            <li><a href="{!!url('')!!}"><i class=""></i> Pregled smeštaja</a></li>
-                            <li><a href="{!!url('')!!}"><i class=""></i> Novi smeštaj</a></li>
-                            <li><a href="{!!url('')!!}"><i class=""></i> Slobodni</a></li>
-                            <li><a href="{!!url('')!!}"><i class=""></i> Zauzeti</a></li>
+                            <li><a href="{!!url('/moderator/u-pripremi')!!}"><i class=""></i> Pregled objekata</a></li>
+                            <li><a href="{!!url('/moderator/u-pripremi')!!}"><i class=""></i> Novi objekat</a></li>
+                            <li><a href="{!!url('/moderator/u-pripremi')!!}"><i class=""></i> Pregled smeštaja</a></li>
+                            <li><a href="{!!url('/moderator/u-pripremi')!!}"><i class=""></i> Novi smeštaj</a></li>
+                            <li><a href="{!!url('/moderator/u-pripremi')!!}"><i class=""></i> Slobodni</a></li>
+                            <li><a href="{!!url('/moderator/u-pripremi')!!}"><i class=""></i> Zauzeti</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -69,9 +69,9 @@
                         <ul class="dropdown-menu">
                             <li class="dropdown-header">Rezervacije</li>
                             <li class="divider"></li>
-                            <li><a href="{!!url('')!!}"><i class="glyphicon glyphicon-check"></i> Aktuelne</a></li>
-                            <li><a href="{!!url('')!!}"><i class="glyphicon glyphicon-floppy-saved"></i> Arhiva</a></li>
-                            <li><a href="{!!url('')!!}"><i class="glyphicon glyphicon-user"></i> Gosti</a></li>
+                            <li><a href="{!!url('/moderator/u-pripremi')!!}"><i class="glyphicon glyphicon-check"></i> Aktuelne</a></li>
+                            <li><a href="{!!url('/moderator/u-pripremi')!!}"><i class="glyphicon glyphicon-floppy-saved"></i> Arhiva</a></li>
+                            <li><a href="{!!url('/moderator/u-pripremi')!!}"><i class="glyphicon glyphicon-user"></i> Gosti</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -83,6 +83,7 @@
                             <li><a href="{!!url('/moderator/u-pripremi')!!}"><i class="glyphicon glyphicon-zoom-in"></i> Pretraga</a></li>
                         </ul>
                     </li>
+                    <li><a href="{!!url('moderator/u-pripremi')!!}" id="galerija" data-toggle="tooltip" data-placement="bottom" title="Galerija"><i class="glyphicon glyphicon-picture"></i></a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="analitika" data-toggle="tooltip" data-placement="bottom" title="Analitika"><i class="glyphicon glyphicon-stats"></i></a>
                         <ul class="dropdown-menu">
@@ -92,9 +93,8 @@
                             <li><a href="{!!url('/moderator/u-pripremi')!!}"><i class="glyphicon glyphicon-user"></i> Korisnici</a></li>
                         </ul>
                     </li>
-
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i> Profil <i class="caret"></i></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="profil" data-toggle="tooltip" data-placement="bottom" title="Profil"><i class="glyphicon glyphicon-user"></i></a>
                         <ul class="dropdown-menu">
                             <li><a href="/profil"><i class="glyphicon glyphicon-eye-open"></i> Pregled</a></li>
                             <li><a href="/profil/edit-nalog"><i class="glyphicon glyphicon-pencil"></i> Uredi</a></li>
@@ -111,7 +111,9 @@
     $(function(){$('#objekti').tooltip()})
     $(function(){$('#rezervacije').tooltip()})
     $(function(){$('#saradnja').tooltip()})
+    $(function(){$('#galerija').tooltip()})
     $(function(){$('#analitika').tooltip()})
+    $(function(){$('#profil').tooltip()})
 </script>
 
 <div class="container">
