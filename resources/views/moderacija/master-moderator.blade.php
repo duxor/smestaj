@@ -19,6 +19,7 @@
     <title>Moderacija</title>
     {!! HTML::style('css/bootstrap.min.css') !!}
     {!! HTML::style('css/templejtBackEnd.css') !!}
+    {!! HTML::style('css/fontelo.css') !!}
     {!! HTML::script('js/jquery-3.0.js') !!}
     {!! HTML::script('js/funkcije.js') !!}
     {!! HTML::script('tinymce/tinymce.min.js') !!}
@@ -56,12 +57,12 @@
                         <ul class="dropdown-menu">
                             <li class="dropdown-header">Objekti</li>
                             <li class="divider"></li>
-                            <li><a href="{!!url('/moderator/u-pripremi')!!}"><i class=""></i> Pregled objekata</a></li>
-                            <li><a href="{!!url('/moderator/u-pripremi')!!}"><i class=""></i> Novi objekat</a></li>
-                            <li><a href="{!!url('/moderator/u-pripremi')!!}"><i class=""></i> Pregled smeštaja</a></li>
-                            <li><a href="{!!url('/moderator/u-pripremi')!!}"><i class=""></i> Novi smeštaj</a></li>
-                            <li><a href="{!!url('/moderator/u-pripremi')!!}"><i class=""></i> Slobodni</a></li>
-                            <li><a href="{!!url('/moderator/u-pripremi')!!}"><i class=""></i> Zauzeti</a></li>
+                            <li><a href="{!!url('/moderator/u-pripremi')!!}"><i class="icon-commerical-building "></i> Pregled objekata</a></li>
+                            <li><a href="{!!url('/moderator/u-pripremi')!!}"><i class="icon-building"></i> Novi objekat</a></li>
+                            <li><a href="{!!url('/moderator/u-pripremi')!!}"><i class="icon-th-large-outline"></i> Pregled smeštaja</a></li>
+                            <li><a href="{!!url('/moderator/u-pripremi')!!}"><i class="icon-hospital"></i> Novi smeštaj</a></li>
+                            <li><a href="{!!url('/moderator/u-pripremi')!!}"><i class="icon-lodging"></i> Slobodni</a></li>
+                            <li><a href="{!!url('/moderator/u-pripremi')!!}"><i class="icon-cancel-circled"></i> Zauzeti</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">

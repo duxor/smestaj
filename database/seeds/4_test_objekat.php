@@ -13,94 +13,192 @@ class TestObjekat extends Seeder
 		public function run()
 		{
 			Grad::insert([
+				
 				['naziv'=>'Beograd','x'=>'20.459212','y'=>'44.806611','z'=>'10'],
-				['naziv'=>'Foča','x'=>'18.776427','y'=>'43.506879','z'=>'13'],
-				['naziv'=>'Brčko','x'=>'18.805860','y'=>'44.876264','z'=>'13']
+				['naziv'=>'Niš','x'=>'43.341834','y'=>'21.991711','z'=>'13'],
+				['naziv'=>'Užice','x'=>'43.855317','y'=>'19.838841','z'=>'13'],
+				['naziv'=>'Bijeljina','x'=>'44.757912','y'=>'19.214315','z'=>'13']
+				
 			]);
 
 			DB::table('objekat')->insert(
 					[
 						[//1
-						'naziv'=>'Penthaus-Jović',
-		            	'x'=>'44.908025',
-		            	'y'=>'20.385132',
+						'naziv'=>'Asteris hotel',
+		            	'x'=>'44.80545',
+		            	'y'=>'20.464311',
+		            	'z'=>'1',
+		            	'adresa'=>'50 Kralja Milana,',
 		                'aktivan' => '1',
 		                'vrsta_objekta_id' =>'1',
 		                'grad_id'=>'1',
-		                'nalog_id' => '3'
+		                'nalog_id' => '2'
 						],
-						[//3
-						'naziv'=>'Vila labudovo jezero',
-		            	'x'=>'44.696676',
-		            	'y'=>'20.541',
-		                'aktivan' => '1',
-		                'vrsta_objekta_id' =>'1',
-		                'grad_id'=>'1',
-		                'nalog_id' => '3'
-						],
-						[//3
-						'naziv'=>'Stadion',
-		            	'x'=>'44.74805',
-		            	'y'=>'20.478172',
+						[//2
+						'naziv'=>'Green hostel',
+		            	'x'=>'44.791299',
+		            	'y'=>'20.491369',
+		            	'z'=>'1',
+		            	'adresa'=>'Gospodara Vučića',
 		                'aktivan' => '1',
 		                'vrsta_objekta_id' =>'2',
 		                'grad_id'=>'1',
 		                'nalog_id' => '3'
+						],
+						[//3
+						'naziv'=>'Motel Dexy',
+		            	'x'=>'44.755919',
+		            	'y'=>'20.42088',
+		            	'z'=>'1',
+		            	'adresa'=>'Ace Joksimovića',
+		                'aktivan' => '1',
+		                'vrsta_objekta_id' =>'3',
+		                'grad_id'=>'1',
+		                'nalog_id' => '4'
 						],
 						[//4
-						'naziv'=>'marko',
-		            	'x'=>'43.505478',
-		            	'y'=>'18.777265',
+						'naziv'=>'Naj-smeštaj',
+		            	'x'=>'44.743423',
+		            	'y'=>'20.502763',
+		            	'z'=>'1',
+		            	'adresa'=>'Gunjak',
+		                'aktivan' => '1',
+		                'vrsta_objekta_id' =>'4',
+		                'grad_id'=>'1',
+		                'nalog_id' => '4'
+						],//Kraj Beograd
+						[//Pocetak Niš
+						'naziv'=>'Nais-home',
+		            	'x'=>'43.310774',
+		            	'y'=>'21.925986',
+		            	'z'=>'1',
+		            	'adresa'=>'Jahorinska',
 		                'aktivan' => '1',
 		                'vrsta_objekta_id' =>'1',
 		                'grad_id'=>'2',
-		                'nalog_id' => '4'
+		                'nalog_id' => '5'
 						],
-						[//5
-						'naziv'=>'Penthaus-Foča',
-		            	'x'=>'43.499607',
-		            	'y'=>'18.759499',
+						[//2
+						'naziv'=>'Hostel-Jug',
+		            	'x'=>'43.316273',
+		            	'y'=>'21.884851',
+		            	'z'=>'1',
+		            	'adresa'=>'27 Novopazarska',
 		                'aktivan' => '1',
 		                'vrsta_objekta_id' =>'2',
 		                'grad_id'=>'2',
-		                'nalog_id' => '4'
+		                'nalog_id' => '5'
 						],
-						[//6
-						'naziv'=>'Penthaus_Foča2',
-		            	'x'=>'43.502172',
-		            	'y'=>'18.779926',
+						[//3
+						'naziv'=>'Motel - South Paradise',
+		            	'x'=>'43.331381',
+		            	'y'=>'21.945856',
+		            	'z'=>'1',
+		            	'adresa'=>'Hrizantema',
+		                'aktivan' => '1',
+		                'vrsta_objekta_id' =>'3',
+		                'grad_id'=>'2',
+		                'nalog_id' => '6'
+						],
+						[//4
+						'naziv'=>'Javni-dom',
+		            	'x'=>'43.302302',
+		            	'y'=>'21.922832',
+		            	'z'=>'1',
+		            	'adresa'=>'128 Ljubomira Nikolića',
+		                'aktivan' => '1',
+		                'vrsta_objekta_id' =>'4',
+		                'grad_id'=>'2',
+		                'nalog_id' => '6'
+						],//Kraj Niš
+						[//Pošetak užice
+						'naziv'=>'Pleasure',
+		            	'x'=>'43.853151',
+		            	'y'=>'19.845622',
+		            	'z'=>'1',
+		            	'adresa'=>'Nikole Pašića',
 		                'aktivan' => '1',
 		                'vrsta_objekta_id' =>'1',
-		                'grad_id'=>'2',
-		                'nalog_id' => '4'
+		                'grad_id'=>'3',
+		                'nalog_id' => '7'
 						],
-						[//7
-						'naziv'=>'Penthaus-Brčko',
-		            	'x'=>'44.872656 ',
-		            	'y'=>'18.810628',
+						[//2
+						'naziv'=>'Hostel Sunny-valley',
+		            	'x'=>'43.858031',
+		            	'y'=>'19.856114',
+		            	'z'=>'1',
+		            	'adresa'=>'Karađorđeva',
 		                'aktivan' => '1',
 		                'vrsta_objekta_id' =>'2',
 		                'grad_id'=>'3',
-		                'nalog_id' => '4'
+		                'nalog_id' => '7'
 						],
-						[//8
-						'naziv'=>'Penthaus-Brčko2',
-		            	'x'=>'44.875664',
-		            	'y'=>'18.803701',
+						[//3
+						'naziv'=>'Užički raj',
+		            	'x'=>'43.858588 ',
+		            	'y'=>'19.829164',
+		            	'z'=>'1',
+		            	'adresa'=>'Ustanicka,',
+		                'aktivan' => '1',
+		                'vrsta_objekta_id' =>'3',
+		                'grad_id'=>'3',
+		                'nalog_id' => '8'
+						],
+						[//4
+						'naziv'=>'Naj-smeštaj',
+		            	'x'=>'43.860567',
+		            	'y'=>'19.840139',
+		            	'z'=>'1',
+		            	'adresa'=>'Vidovdanska	',
+		                'aktivan' => '1',
+		                'vrsta_objekta_id' =>'4',
+		                'grad_id'=>'3',
+		                'nalog_id' => '8'
+						],
+						[//Početak Bijeljina
+						'naziv'=>'Semberija',
+		            	'x'=>' 44.761081',
+		            	'y'=>'19.18582',
+		            	'z'=>'1',
+		            	'adresa'=>'Stefana Dečanskog',
 		                'aktivan' => '1',
 		                'vrsta_objekta_id' =>'1',
-		                'grad_id'=>'3',
-		                'nalog_id' => '3'
+		                'grad_id'=>'4',
+		                'nalog_id' => '8'
 						],
-						[//9
-						'naziv'=>'Penthaus-Brčko3',
-		            	'x'=>'44.875682',
-		            	'y'=>'18.808122',
+						[//2
+						'naziv'=>'Posavska noć',
+		            	'x'=>'44.76876',
+		            	'y'=>'19.225302',
+		            	'z'=>'1',
+		            	'adresa'=>'Račanska',
 		                'aktivan' => '1',
-		                'vrsta_objekta_id' =>'1',
-		                'grad_id'=>'3',
-		                'nalog_id' => '3'
+		                'vrsta_objekta_id' =>'2',
+		                'grad_id'=>'4',
+		                'nalog_id' => '8'
 						],
+						[//3
+						'naziv'=>'Dream',
+		            	'x'=>'44.741332',
+		            	'y'=>'19.222555',
+		            	'z'=>'1',
+		            	'adresa'=>'Srpske vojske',
+		                'aktivan' => '1',
+		                'vrsta_objekta_id' =>'3',
+		                'grad_id'=>'4',
+		                'nalog_id' => '8'
+						],
+						[//4
+						'naziv'=>'Naj-smeštaj',
+		            	'x'=>'44.751939',
+		            	'y'=>'19.196119',
+		            	'z'=>'1',
+		            	'adresa'=>'Lukijana Mušičkog',
+		                'aktivan' => '1',
+		                'vrsta_objekta_id' =>'4',
+		                'grad_id'=>'4',
+		                'nalog_id' => '8'
+						]
 
 					]);
 		$objekti=Objekat::get(['id','naziv'])->toArray();
