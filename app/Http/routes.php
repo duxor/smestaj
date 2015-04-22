@@ -7,7 +7,11 @@ Route::controller('/administracija','Administracija\Administracija');
 
 Route::controller('/moderator','Moderacija\Moderacija');
 
+Route::controller('/korisnik','Korisnik\Korisnik');
+
 Route::controller('/log','Log');
+Route::get('/login','Log@getLogin');
+
 Route::controller('/profil','Profil');
 Route::controller('/pretraga','Pretraga');
 Route::controller('/aplikacija','Aplikacija');

@@ -200,6 +200,7 @@ class KreiranjeBaze extends Migration{
             $table->foreign('korisnici_id')->references('id')->on('korisnici');
             $table->unsignedBigInteger('smestaj_id');
             $table->foreign('smestaj_id')->references('id')->on('smestaj');
+            $table->text('napomena')->nullable();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->nullable();
         });

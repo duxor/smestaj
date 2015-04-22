@@ -30,7 +30,7 @@ class Security {
     private static $adminID=5;
     private static $kreatorID=6;
     public static $adminURL='/administracija';
-    public static $userURL='/profil';
+    public static $userURL='/korisnik';
     public static $modURL='/moderator';
     public static $logURL='/log/login';
     private $token;
