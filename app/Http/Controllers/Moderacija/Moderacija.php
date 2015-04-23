@@ -16,14 +16,15 @@ use App\Sadrzaji;
 
 class Moderacija extends Controller {
 	public function getIndex(){
-		$nalozi=Nalog::join ('korisnici', 'nalog.korisnici_id','=','korisnici.id' )
+		$aplikacije=Nalog::join ('korisnici', 'nalog.korisnici_id','=','korisnici.id' )
 			->join('tema','nalog.tema_id','=','tema.id')
-			->select('nalog.id','nalog.naziv as naziv','nalog.slug','nalog.aktivan','tema.naziv as tema','korisnici.ime')
-			->get()->toArray();
-		return Security::autentifikacija('moderacija.aplikacija.index', compact('nalozi'),4);
+			->where('korisnici.id',Session::get('id'))
+			->get(['nalog.id','nalog.naziv as naziv','nalog.slug','nalog.aktivan','tema.naziv as tema','korisnici.ime'])
+			->toArray();
+		return Security::autentifikacija('moderacija.aplikacija.index', compact('aplikacije'),4);
 	}
-	public function getPodesavanja(){
-		$podaci['aplikacije']=Nalog::where('aktivan',1)->where('korisnici_id',Session::get('id'))->get(['id','slug','naziv','saradnja','tema_id'])->toArray();
+	public function getPodesavanja($slug=null){
+		$podaci['aplikacije']=$slug?Nalog::where('aktivan',1)->where('korisnici_id',Session::get('id'))->where('slug',$slug)->get(['id','slug','naziv','saradnja','tema_id'])->toArray():Nalog::where('aktivan',1)->where('korisnici_id',Session::get('id'))->get(['id','slug','naziv','saradnja','tema_id'])->toArray();
 		$podaci['teme']=Tema::where('id','<>',1)->where('aktivan',1)->lists('naziv','id');
 		foreach($podaci['aplikacije'] as $k=>$app){
 			$podaci['aplikacije'][$k]['teme']=Tema::join('templejt','templejt.tema_id','=','tema.id')

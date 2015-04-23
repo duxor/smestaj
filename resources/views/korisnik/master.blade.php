@@ -45,8 +45,8 @@
                         <ul class="dropdown-menu">
                             <li class="dropdown-header">Smeštaj</li>
                             <li class="divider"></li>
-                            <li><a href="{!!url('/moderator/u-pripremi')!!}"><i class="glyphicon glyphicon-wrench"></i> Pretraga</a></li>
-                            <li><a href="{!!url('/moderator/u-pripremi')!!}"><i class="glyphicon glyphicon-pencil"></i> Preporuke</a></li>
+                            <li><a href="{!!url('/moderator/u-pripremi')!!}"><i class="glyphicon glyphicon-search"></i> Pretraga</a></li>
+                            <li><a href="{!!url('/moderator/u-pripremi')!!}"><i class="glyphicon glyphicon-thumbs-up"></i> Preporuke</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -54,8 +54,8 @@
                         <ul class="dropdown-menu">
                             <li class="dropdown-header">Popusti</li>
                             <li class="divider"></li>
-                            <li><a href="{!!url('/moderator/u-pripremi')!!}"><i class="glyphicon glyphicon-wrench"></i> Pretraga</a></li>
-                            <li><a href="{!!url('/moderator/u-pripremi')!!}"><i class="glyphicon glyphicon-pencil"></i> Preporuke</a></li>
+                            <li><a href="{!!url('/moderator/u-pripremi')!!}"><i class="glyphicon glyphicon-bookmark"></i> Bonus</a></li>
+                            <li><a href="{!!url('/moderator/u-pripremi')!!}"><i class="glyphicon glyphicon-search"></i> Pretraga</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -63,8 +63,8 @@
                         <ul class="dropdown-menu">
                             <li class="dropdown-header">Posete</li>
                             <li class="divider"></li>
-                            <li><a href="{!!url('/moderator/u-pripremi')!!}"><i class="glyphicon glyphicon-wrench"></i> Pregled</a></li>
-                            <li><a href="{!!url('/moderator/u-pripremi')!!}"><i class="glyphicon glyphicon-pencil"></i> Lista želja</a></li>
+                            <li><a href="{!!url('/moderator/u-pripremi')!!}"><i class="glyphicon glyphicon-eye-open"></i> Pregled</a></li>
+                            <li><a href="{!!url('/moderator/u-pripremi')!!}"><i class="glyphicon glyphicon-heart-empty"></i> Lista želja</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
