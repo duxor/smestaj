@@ -53,7 +53,7 @@ class TestPodaciAlikacije extends Seeder{
                 $nalog->naziv='Nalog broj '.$tema['id'];
                 $nalog->slug='nalog-broj-'.$tema['id'];
                 $nalog->korisnici_id=rand(4,7);
-                $nalog->tema_id=$tema['id'];
+                $nalog->tema_id=2;
             $nalog->save();
 
             $this->templejtSadrzaj($tema['id'],'Početna','pocetna','Opis...',$nalog->id);

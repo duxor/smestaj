@@ -23,8 +23,8 @@ class TestObjekat extends Seeder{
 					[
 						[//1
 						'naziv'=>'Asteris hotel',
-		            	'x'=>'44.80545',
-		            	'y'=>'20.464311',
+		            	'y'=>'44.80545',
+		            	'x'=>'20.464311',
 		            	'z'=>'1',
 		            	'adresa'=>'50 Kralja Milana,',
 		                'aktivan' => '1',
@@ -34,8 +34,8 @@ class TestObjekat extends Seeder{
 						],
 						[//2
 						'naziv'=>'Green hostel',
-		            	'x'=>'44.791299',
-		            	'y'=>'20.491369',
+		            	'y'=>'44.791299',
+		            	'x'=>'20.491369',
 		            	'z'=>'1',
 		            	'adresa'=>'Gospodara Vučića',
 		                'aktivan' => '1',
@@ -45,8 +45,8 @@ class TestObjekat extends Seeder{
 						],
 						[//3
 						'naziv'=>'Motel Dexy',
-		            	'x'=>'44.755919',
-		            	'y'=>'20.42088',
+		            	'y'=>'44.755919',
+		            	'x'=>'20.42088',
 		            	'z'=>'1',
 		            	'adresa'=>'Ace Joksimovića',
 		                'aktivan' => '1',
@@ -56,8 +56,8 @@ class TestObjekat extends Seeder{
 						],
 						[//4
 						'naziv'=>'Naj-smeštaj',
-		            	'x'=>'44.743423',
-		            	'y'=>'20.502763',
+		            	'y'=>'44.743423',
+		            	'x'=>'20.502763',
 		            	'z'=>'1',
 		            	'adresa'=>'Gunjak',
 		                'aktivan' => '1',
@@ -67,8 +67,8 @@ class TestObjekat extends Seeder{
 						],//Kraj Beograd
 						[//Pocetak Niš
 						'naziv'=>'Nais-home',
-		            	'x'=>'43.310774',
-		            	'y'=>'21.925986',
+		            	'y'=>'43.310774',
+		            	'x'=>'21.925986',
 		            	'z'=>'1',
 		            	'adresa'=>'Jahorinska',
 		                'aktivan' => '1',
@@ -78,8 +78,8 @@ class TestObjekat extends Seeder{
 						],
 						[//2
 						'naziv'=>'Hostel-Jug',
-		            	'x'=>'43.316273',
-		            	'y'=>'21.884851',
+		            	'y'=>'43.316273',
+		            	'x'=>'21.884851',
 		            	'z'=>'1',
 		            	'adresa'=>'27 Novopazarska',
 		                'aktivan' => '1',
@@ -89,8 +89,8 @@ class TestObjekat extends Seeder{
 						],
 						[//3
 						'naziv'=>'Motel - South Paradise',
-		            	'x'=>'43.331381',
-		            	'y'=>'21.945856',
+		            	'y'=>'43.331381',
+		            	'x'=>'21.945856',
 		            	'z'=>'1',
 		            	'adresa'=>'Hrizantema',
 		                'aktivan' => '1',
@@ -100,8 +100,8 @@ class TestObjekat extends Seeder{
 						],
 						[//4
 						'naziv'=>'Javni-dom',
-		            	'x'=>'43.302302',
-		            	'y'=>'21.922832',
+		            	'y'=>'43.302302',
+		            	'x'=>'21.922832',
 		            	'z'=>'1',
 		            	'adresa'=>'128 Ljubomira Nikolića',
 		                'aktivan' => '1',
@@ -111,8 +111,8 @@ class TestObjekat extends Seeder{
 						],//Kraj Niš
 						[//Pošetak užice
 						'naziv'=>'Pleasure',
-		            	'x'=>'43.853151',
-		            	'y'=>'19.845622',
+		            	'y'=>'43.853151',
+		            	'x'=>'19.845622',
 		            	'z'=>'1',
 		            	'adresa'=>'Nikole Pašića',
 		                'aktivan' => '1',
@@ -122,8 +122,8 @@ class TestObjekat extends Seeder{
 						],
 						[//2
 						'naziv'=>'Hostel Sunny-valley',
-		            	'x'=>'43.858031',
-		            	'y'=>'19.856114',
+		            	'y'=>'43.858031',
+		            	'x'=>'19.856114',
 		            	'z'=>'1',
 		            	'adresa'=>'Karađorđeva',
 		                'aktivan' => '1',
@@ -133,8 +133,8 @@ class TestObjekat extends Seeder{
 						],
 						[//3
 						'naziv'=>'Užički raj',
-		            	'x'=>'43.858588 ',
-		            	'y'=>'19.829164',
+		            	'y'=>'43.858588 ',
+		            	'x'=>'19.829164',
 		            	'z'=>'1',
 		            	'adresa'=>'Ustanicka,',
 		                'aktivan' => '1',
@@ -144,8 +144,8 @@ class TestObjekat extends Seeder{
 						],
 						[//4
 						'naziv'=>'Naj-smeštaj',
-		            	'x'=>'43.860567',
-		            	'y'=>'19.840139',
+		            	'y'=>'43.860567',
+		            	'x'=>'19.840139',
 		            	'z'=>'1',
 		            	'adresa'=>'Vidovdanska	',
 		                'aktivan' => '1',
@@ -155,8 +155,8 @@ class TestObjekat extends Seeder{
 						],
 						[//Početak Bijeljina
 						'naziv'=>'Semberija',
-		            	'x'=>' 44.761081',
-		            	'y'=>'19.18582',
+		            	'y'=>' 44.761081',
+		            	'x'=>'19.18582',
 		            	'z'=>'1',
 		            	'adresa'=>'Stefana Dečanskog',
 		                'aktivan' => '1',
@@ -166,8 +166,8 @@ class TestObjekat extends Seeder{
 						],
 						[//2
 						'naziv'=>'Posavska noć',
-		            	'x'=>'44.76876',
-		            	'y'=>'19.225302',
+		            	'y'=>'44.76876',
+		            	'x'=>'19.225302',
 		            	'z'=>'1',
 		            	'adresa'=>'Račanska',
 		                'aktivan' => '1',
@@ -177,8 +177,8 @@ class TestObjekat extends Seeder{
 						],
 						[//3
 						'naziv'=>'Dream',
-		            	'x'=>'44.741332',
-		            	'y'=>'19.222555',
+		            	'y'=>'44.741332',
+		            	'x'=>'19.222555',
 		            	'z'=>'1',
 		            	'adresa'=>'Srpske vojske',
 		                'aktivan' => '1',
@@ -188,8 +188,8 @@ class TestObjekat extends Seeder{
 						],
 						[//4
 						'naziv'=>'Naj-smeštaj',
-		            	'x'=>'44.751939',
-		            	'y'=>'19.196119',
+		            	'y'=>'44.751939',
+		            	'x'=>'19.196119',
 		            	'z'=>'1',
 		            	'adresa'=>'Lukijana Mušičkog',
 		                'aktivan' => '1',
