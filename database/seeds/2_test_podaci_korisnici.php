@@ -11,16 +11,36 @@ class TestPodaciKorisnici extends Seeder
 		public function run()
 		{
 			Korisnici::insert([
-	            [
+				[
 
-	            	'prezime'=>'marko',
-	            	'ime'=>'markovic',
-	            	'username'=>'marko',
-	                'email' => 'marko@test.com',
-	                'password' => Security::generateHashPass('marko'),
-	                'pravapristupa_id'=>1,
-	                'aktivan' => 0
-	            ],
+					'prezime'=>'korisnik',
+					'ime'=>'korisnik',
+					'username'=>'korisnik',
+					'email' => 'korisnik@korisnik.korisnik',
+					'password' => Security::generateHashPass('korisnik'),
+					'pravapristupa_id'=>2,
+					'aktivan' => 1
+				],
+				[
+
+					'prezime'=>'moderator',
+					'ime'=>'moderator',
+					'username'=>'moderator',
+					'email' => 'mod@mod.mod',
+					'password' => Security::generateHashPass('moderator'),
+					'pravapristupa_id'=>4,
+					'aktivan' => 1
+				],
+				[
+
+					'prezime'=>'marko',
+					'ime'=>'markovic',
+					'username'=>'marko',
+					'email' => 'marko@test.com',
+					'password' => Security::generateHashPass('marko'),
+					'pravapristupa_id'=>1,
+					'aktivan' => 0
+				],
 	           	
 	           	[
 	            	'prezime'=>'Petrovic',

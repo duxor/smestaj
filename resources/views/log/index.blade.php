@@ -1,6 +1,18 @@
 @extends('administracija.masterBackEnd')
 
 @section('content')
+
+    <script>
+        var forma='forma1';
+        function sub(_forma){
+            forma=_forma;
+        }
+        $(document).keypress(function(e) {
+            if(e.which == 13) {
+                $('#'+forma).submit();
+            }
+        });
+    </script>
     <div class="col-sm-7">
         <div class="panel with-nav-tabs panel-default">
             <div class="panel-heading">
@@ -11,7 +23,7 @@
             </div>
             <div class="panel-body">
                 <div class="tab-content">
-                    <div class="tab-pane fade in active" id="tab1default">
+                    <div class="tab-pane fade in active" id="tab1default" onclick="sub('forma1')">
                         <h1>Prijava</h1>
                         <hr/>
                         @if ( $errors->any())
@@ -51,7 +63,7 @@
                         </div>
                         {!! Form::close() !!}
                     </div>
-                    <div class="tab-pane fade" id="tab2default">
+                    <div class="tab-pane fade" id="tab2default" onclick="sub('forma2')">
                         <h1>Registracija korisnika</h1>
                         <hr/>
                         @if ( $errors->any())
@@ -65,7 +77,7 @@
                                 </ul>
                             </div>
                         @endif
-                        {!! Form::open(['url'=>'/profil/registracija','class'=>'form-horizontal','id'=>'forma2']) !!}
+                        {!! Form::open(['url'=>'/log/registracija','class'=>'form-horizontal','id'=>'forma2']) !!}
                         <div id="dusername2" class="form-group has-feedback">
                             {!! Form::label('lusername2','Username',['class'=>'control-label col-sm-2']) !!}
                             <div class="col-sm-10">
