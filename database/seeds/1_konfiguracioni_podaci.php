@@ -119,38 +119,31 @@ class KonfiguracioniPodaci extends Seeder{
                 'nalog_id'=>1
             ],
             [
-                'naziv'=>'Login',
-                'sadrzaj'=>'<p>Tekst je u pripremi.</p>',
-                'icon'=>null,
-                'templejt_id'=>5,
-                'nalog_id'=>1
-            ],
-            [
                 'naziv'=>'Pozadina 1',
                 'sadrzaj'=>'teme/osnovna-paralax/slike/15.jpg',
                 'icon'=>null,
-                'templejt_id'=>6,
+                'templejt_id'=>5,
                 'nalog_id'=>1
             ],
             [
                 'naziv'=>'Pozadina 2',
                 'sadrzaj'=>'teme/osnovna-paralax/slike/19.jpg',
                 'icon'=>null,
-                'templejt_id'=>7,
+                'templejt_id'=>6,
                 'nalog_id'=>1
             ],
             [
                 'naziv'=>'Pozadina 3',
                 'sadrzaj'=>'teme/osnovna-paralax/slike/28.jpg',
                 'icon'=>null,
-                'templejt_id'=>8,
+                'templejt_id'=>7,
                 'nalog_id'=>1
             ],
             [
                 'naziv'=>'Pozadina 4',
                 'sadrzaj'=>'teme/osnovna-paralax/slike/34.jpg',
                 'icon'=>null,
-                'templejt_id'=>9,
+                'templejt_id'=>8,
                 'nalog_id'=>1
             ]
         ]);

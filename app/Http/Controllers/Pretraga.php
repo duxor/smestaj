@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Input;
 use App\Templejt;
 
 class Pretraga extends Controller {
-	public function postIndex(){
+	public function anyIndex(){
 		$tacan_broj=Input::get('tacan_broj')?'':'>';
 
 		$podaci=Templejt::join('sadrzaji','sadrzaji.templejt_id','=','templejt.id')->where('nalog_id','=',1)->where('tema_id','=',1)->orderBy('redoslijed')->get(['slug','naziv','vrsta_sadrzaja_id','icon'])->toArray();
