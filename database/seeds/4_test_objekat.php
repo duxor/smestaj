@@ -7,9 +7,7 @@ use App\Smestaj;
 use App\Grad;
 
 
-class TestObjekat extends Seeder
-{
-
+class TestObjekat extends Seeder{
 		public function run()
 		{
 			Grad::insert([

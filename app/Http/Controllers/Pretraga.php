@@ -11,8 +11,7 @@ class Pretraga extends Controller {
 	public function postIndex(){
 		$tacan_broj=Input::get('tacan_broj')?'':'>';
 
-		$podaci=Templejt::join('sadrzaji','sadrzaji.templejt_id','=','templejt.id')->where('nalog_id','=',1)->where('tema_id','=',1)->orderBy('redoslijed')->get(['slug','naziv','vrsta_sadrzaja_id'])->toArray();
-		$podaci['icon']=['','glyphicon glyphicon-home','glyphicon glyphicon-calendar','glyphicon glyphicon-earphone',''];
+		$podaci=Templejt::join('sadrzaji','sadrzaji.templejt_id','=','templejt.id')->where('nalog_id','=',1)->where('tema_id','=',1)->orderBy('redoslijed')->get(['slug','naziv','vrsta_sadrzaja_id','icon'])->toArray();
 
 		$podaci['broj_osoba']=Input::get('broj_osoba')?Input::get('broj_osoba'):1;
 		$podaci['rezultat']=Objekat::
@@ -47,7 +46,7 @@ class Pretraga extends Controller {
 		foreach($nalozi as $nalog){
 			if($i==0)$i=1;
 			else $niz.=',';
-			$niz.='{"id":"'.$nalog['id'].'","slug":"'.$nalog['slug'].'","type":"Feature","geometry":{"type":"Point","coordinates":['.$nalog['y'].','.$nalog['x'].']},"properties":{"naslov":"'.$nalog['naziv'].'","description":null,"case_number":null,"address":null,"zip_code":null,"beat":null,"accuracy":"9"}}';
+			$niz.='{"id":"'.$nalog['id'].'","slug":"'.$nalog['slug'].'","type":"Feature","geometry":{"type":"Point","coordinates":['.$nalog['x'].','.$nalog['y'].']},"properties":{"naslov":"'.$nalog['naziv'].'","description":null,"case_number":null,"address":null,"zip_code":null,"beat":null,"accuracy":"9"}}';
 		}
 		$niz.=']});';
 		return $niz;

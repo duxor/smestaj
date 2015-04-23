@@ -47,7 +47,8 @@ class KonfiguracioniPodaci extends Seeder{
             ['naziv'=>'link-meni'],//3
             ['naziv'=>'email'],//4
             ['naziv'=>'koordinata'],//5
-            ['naziv'=>'slika']//6
+            ['naziv'=>'slika'],//6
+            ['naziv'=>'za-prosirenje']//6
         ]);
         Tema::insert([
             [//1
@@ -66,20 +67,19 @@ class KonfiguracioniPodaci extends Seeder{
             ['slug'=>'smestaj',     'vrsta_sadrzaja_id'=>1, 'tema_id'=>1],//2
             ['slug'=>'rezervacije', 'vrsta_sadrzaja_id'=>1, 'tema_id'=>1],//3
             ['slug'=>'kontakt',     'vrsta_sadrzaja_id'=>1, 'tema_id'=>1],//4
-            ['slug'=>'login',       'vrsta_sadrzaja_id'=>3, 'tema_id'=>1],//5
-            ['slug'=>'pozadina-1',  'vrsta_sadrzaja_id'=>6, 'tema_id'=>1],//6
-            ['slug'=>'pozadina-2',  'vrsta_sadrzaja_id'=>6, 'tema_id'=>1],//7
-            ['slug'=>'pozadina-3',  'vrsta_sadrzaja_id'=>6, 'tema_id'=>1],//8
-            ['slug'=>'pozadina-4',  'vrsta_sadrzaja_id'=>6, 'tema_id'=>1],//9
-            ['slug'=>'pocetna',     'vrsta_sadrzaja_id'=>3, 'tema_id'=>2],//10
-            ['slug'=>'o-nama',      'vrsta_sadrzaja_id'=>1, 'tema_id'=>2],//11
-            ['slug'=>'smestaj', 'vrsta_sadrzaja_id'=>1, 'tema_id'=>2],//12
-            ['slug'=>'rezervacije',     'vrsta_sadrzaja_id'=>1, 'tema_id'=>2],//13
-            ['slug'=>'kontakt',     'vrsta_sadrzaja_id'=>3, 'tema_id'=>2],//14
-            ['slug'=>'pozadina-1',  'vrsta_sadrzaja_id'=>6, 'tema_id'=>2],//15
-            ['slug'=>'pozadina-2',  'vrsta_sadrzaja_id'=>6, 'tema_id'=>2],//16
-            ['slug'=>'pozadina-3',  'vrsta_sadrzaja_id'=>6, 'tema_id'=>2],//17
-            ['slug'=>'pozadina-4',  'vrsta_sadrzaja_id'=>6, 'tema_id'=>2]//18
+            ['slug'=>'pozadina-1',  'vrsta_sadrzaja_id'=>6, 'tema_id'=>1],//5
+            ['slug'=>'pozadina-2',  'vrsta_sadrzaja_id'=>6, 'tema_id'=>1],//6
+            ['slug'=>'pozadina-3',  'vrsta_sadrzaja_id'=>6, 'tema_id'=>1],//7
+            ['slug'=>'pozadina-4',  'vrsta_sadrzaja_id'=>6, 'tema_id'=>1],//8
+            ['slug'=>'pocetna',     'vrsta_sadrzaja_id'=>3, 'tema_id'=>2],//9
+            ['slug'=>'o-nama',      'vrsta_sadrzaja_id'=>1, 'tema_id'=>2],//10
+            ['slug'=>'smestaj', 'vrsta_sadrzaja_id'=>1, 'tema_id'=>2],//11
+            ['slug'=>'rezervacije',     'vrsta_sadrzaja_id'=>1, 'tema_id'=>2],//12
+            ['slug'=>'kontakt',     'vrsta_sadrzaja_id'=>3, 'tema_id'=>2],//13
+            ['slug'=>'pozadina-1',  'vrsta_sadrzaja_id'=>6, 'tema_id'=>2],//14
+            ['slug'=>'pozadina-2',  'vrsta_sadrzaja_id'=>6, 'tema_id'=>2],//15
+            ['slug'=>'pozadina-3',  'vrsta_sadrzaja_id'=>6, 'tema_id'=>2],//16
+            ['slug'=>'pozadina-4',  'vrsta_sadrzaja_id'=>6, 'tema_id'=>2]//17
         ]);
         Nalog::insert([
             [//1
@@ -152,71 +152,7 @@ class KonfiguracioniPodaci extends Seeder{
                 'icon'=>null,
                 'templejt_id'=>9,
                 'nalog_id'=>1
-            ]/*,
-            ///######################################NALOG:2
-            [
-                'naziv'=>'Početna',
-                'sadrzaj'=>'<p>Tekst je u pripremi.</p>',
-                'icon'=>'glyphicon glyphicon-search',
-                'templejt_id'=>10,
-                'nalog_id'=>2
-            ],
-            [
-                'naziv'=>'O nama',
-                'sadrzaj'=>'<p>Tekst je u pripremi.</p>',
-                'icon'=>'glyphicon glyphicon-user',
-                'templejt_id'=>11,
-                'nalog_id'=>2
-            ],
-            [
-                'naziv'=>'Smeštaj',
-                'sadrzaj'=>'<p>Tekst je u pripremi (Rezervišite online i ostvarite bonus i popuste za naredni period).</p>',
-                'icon'=>'glyphicon glyphicon-home',
-                'templejt_id'=>12,
-                'nalog_id'=>2
-            ],
-            [
-                'naziv'=>'Rezervacije',
-                'sadrzaj'=>'<p>Tekst je u pripremi.</p>',
-                'icon'=>'glyphicon glyphicon-calendar',
-                'templejt_id'=>13,
-                'nalog_id'=>2
-            ],
-            [
-                'naziv'=>'Kontakt',
-                'sadrzaj'=>'<p>Tekst je u pripremi.</p>',
-                'icon'=>'glyphicon glyphicon-earphone',
-                'templejt_id'=>14,
-                'nalog_id'=>2
-            ],
-            [
-                'naziv'=>'Pozadina 1',
-                'sadrzaj'=>'teme/osnovna-paralax/slike/15.jpg',
-                'icon'=>null,
-                'templejt_id'=>15,
-                'nalog_id'=>2
-            ],
-            [
-                'naziv'=>'Pozadina 2',
-                'sadrzaj'=>'teme/osnovna-paralax/slike/19.jpg',
-                'icon'=>null,
-                'templejt_id'=>16,
-                'nalog_id'=>2
-            ],
-            [
-                'naziv'=>'Pozadina 3',
-                'sadrzaj'=>'teme/osnovna-paralax/slike/28.jpg',
-                'icon'=>null,
-                'templejt_id'=>17,
-                'nalog_id'=>2
-            ],
-            [
-                'naziv'=>'Pozadina 4',
-                'sadrzaj'=>'teme/osnovna-paralax/slike/34.jpg',
-                'icon'=>null,
-                'templejt_id'=>18,
-                'nalog_id'=>2
-            ]*/
+            ]
         ]);
         VrstaObjekta::insert([
             ['naziv'=>'Hotel'],
