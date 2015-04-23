@@ -25,7 +25,7 @@ class Pretraga extends Controller {
 		$podaci['grad_id']=Input::get('grad_id');
 		$podaci['tacan_broj']=Input::get('tacan_broj');
 		$podaci['grad_koo']=Grad::find(Input::get('grad_id'),['x','y','z']);
-		return view('aplikacija.osnova.pretraga',compact('podaci'));
+		return view('aplikacija.teme-osnove.osnovna.pretraga',compact('podaci'));
 	}
 	public function postSmestaji(){
 		$smestaj=Objekat::where('naziv','Like','%'.Input::get('naziv').'%')->get()->toArray();

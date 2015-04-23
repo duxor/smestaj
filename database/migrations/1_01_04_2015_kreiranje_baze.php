@@ -210,10 +210,10 @@ class KreiranjeBaze extends Migration{
     {
         Schema::drop('log');
         Schema::drop('pass_reset');
+        Schema::drop('rezervacije');
         Schema::drop('smestaj');
         Schema::drop('vrsta_smestaja');
         Schema::drop('kapacitet');
-        Schema::drop('rezervacije');
         Schema::drop('objekat');
         Schema::drop('vrsta_objekta');
         Schema::drop('grad');

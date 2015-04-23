@@ -54,9 +54,9 @@
         </div>
         <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                @foreach($podaci as $meni)
+                @foreach($podaci as $k=>$meni)
                     @if(isset($meni['vrsta_sadrzaja_id']))
-                        <li><a href="/#{{$meni['slug']}}" @if(isset($podaci['pocetna'])) class="scroll-link" data-id="{{$meni['slug']}}" @endif><i class="{{$meni['icon']}}"></i> @if($meni['vrsta_sadrzaja_id']==1){!! $meni['naziv'] !!}@endif</a></li>
+                        <li><a href="/#{{$meni['slug']}}" @if(isset($podaci['pocetna'])) class="scroll-link" data-id="{{$meni['slug']}}" @endif><i class="{{$podaci['icon'][$k]}}"></i> @if($meni['vrsta_sadrzaja_id']==1){!! $meni['naziv'] !!}@endif</a></li>
                     @endif
                 @endforeach
                 @if(\App\Security::autentifikacijaTest())
