@@ -119,27 +119,9 @@ class Moderacija extends Controller {
 			Objekat::find(Input::get('id'))->update(['naziv'=>Input::get('nazivobjekta'),'opis'=>Input::get('opisobjekta'),
 									'x'=>Input::get('x'),'y'=>Input::get('y'),'z'=>Input::get('z'),'adresa'=>Input::get('adresa'),
 									'vrsta_objekta_id'=>Input::get('vrstaobjekta'),'grad_id'=>Input::get('grad'),'nalog_id'=>Input::get('nalog')]);
-			return Redirect::back();
+			return Redirect::back()->with('message','Uspešno ste izmenili objekat!');
 		}
-		return Security::rediectToLogin();
-	if(Security::autentifikacijaTest(4)){
-            $novi = Objekat::firstOrNew(['id'=>Input::get('id')]);
-            $novi->naziv = Input::get('nazivobjekta'); 
-            $novi->opis = Input::get('opisobjekta');
-            $novi->x = Input::get('x');
-            $novi->y = Input::get('y');
-            $novi->z = Input::get('z');
-            $novi->adresa = Input::get('adresa');
-            $novi->vrsta_objekta_id = Input::get('vrstaobjekta');
-            $novi->grad_id = Input::get('grad');
-            $novi->nalog_id = Input::get('nalog');
-            $novi->save();
-        }else return Security::rediectToLogin();
-
-
-
-	return Security::autentifikacija('moderacija.objekti.edit_objekta',
-			compact('vrstaobjekta','grad','nalog','objekti'), 4);	
+		return Security::rediectToLogin();	
 	}
 
 	public function getNoviObjekat(){
@@ -162,6 +144,7 @@ class Moderacija extends Controller {
             $novi->grad_id = Input::get('grad');
             $novi->nalog_id = Input::get('nalog');
             $novi->save();
+            return Redirect::back()->with('message','Uspešno ste dodali novi objekat!');
         }else return Security::rediectToLogin();		
 	}
 	public function getPregledSmestaja(){

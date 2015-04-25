@@ -2,13 +2,19 @@
 
 @section('content')
 <div class="panel panel-primary clearfix">
-	<div  class="panel-heading">Unos novog objekta</div>
+	<div  class="panel-heading">Izmena objekta</div>
 	    <div class="panel-body">
 			      	<div id="sort" class="row">
 					      	@if(!isset($objekti))
 						        {{$objekti=null}}
 						        <h1 class="col-sm-10">Greska</h1>
 						    @else  
+							@if (Session::get('message'))
+							    <div class="alert alert-success alert-dismissable">
+							        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+							        {{ Session::get('message')}}
+							    </div>
+							@endif
 						    {!!Form::open(['url'=>'/moderator/izmeni-objekat','class'=>'form-horizontal'])!!}
 						    {!!Form::hidden('id',$objekti['id'])!!}
 						   

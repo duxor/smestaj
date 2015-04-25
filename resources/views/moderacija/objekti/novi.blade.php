@@ -5,7 +5,15 @@
 	<div  class="panel-heading">Unos novog objekta</div>
 	    <div class="panel-body">
 			      	<div id="sort" class="row">
+			      			@if (Session::get('message'))
+							    <div class="alert alert-success alert-dismissable">
+							        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+							        {{ Session::get('message')}}
+							    </div>
+							@endif
 						    {!!Form::open(['url'=>'/moderator/novi-objekat','class'=>'form-horizontal'])!!}
+
+
 
 						    <div id="nazivobjekta" class="form-group has-feedback">
 						        {!!Form::label('lnazivobjekta','Naziv objekta',['class'=>'control-label col-sm-2'])!!}
