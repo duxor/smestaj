@@ -16,7 +16,6 @@ class TestObjekat extends Seeder{
 				['naziv'=>'Niš','x'=>'21.991711','y'=>'43.341834','z'=>'13'],
 				['naziv'=>'Užice','x'=>'19.838841','y'=>'43.855317','z'=>'13'],
 				['naziv'=>'Bijeljina','x'=>'19.214315','y'=>'44.757912','z'=>'13']
-				
 			]);
 
 			DB::table('objekat')->insert(
@@ -30,7 +29,7 @@ class TestObjekat extends Seeder{
 		                'aktivan' => '1',
 		                'vrsta_objekta_id' =>'1',
 		                'grad_id'=>'1',
-		                'nalog_id' => '2'
+		                'nalog_id' => 2
 						],
 						[//2
 						'naziv'=>'Green hostel',
@@ -41,7 +40,7 @@ class TestObjekat extends Seeder{
 		                'aktivan' => '1',
 		                'vrsta_objekta_id' =>'2',
 		                'grad_id'=>'1',
-		                'nalog_id' => '3'
+		                'nalog_id' => 2
 						],
 						[//3
 						'naziv'=>'Motel Dexy',
@@ -52,7 +51,7 @@ class TestObjekat extends Seeder{
 		                'aktivan' => '1',
 		                'vrsta_objekta_id' =>'3',
 		                'grad_id'=>'1',
-		                'nalog_id' => '4'
+		                'nalog_id' => 2
 						],
 						[//4
 						'naziv'=>'Naj-smeštaj',
@@ -63,7 +62,7 @@ class TestObjekat extends Seeder{
 		                'aktivan' => '1',
 		                'vrsta_objekta_id' =>'4',
 		                'grad_id'=>'1',
-		                'nalog_id' => '4'
+		                'nalog_id' => 2
 						],//Kraj Beograd
 						[//Pocetak Niš
 						'naziv'=>'Nais-home',
@@ -74,7 +73,7 @@ class TestObjekat extends Seeder{
 		                'aktivan' => '1',
 		                'vrsta_objekta_id' =>'1',
 		                'grad_id'=>'2',
-		                'nalog_id' => '5'
+		                'nalog_id' => 2
 						],
 						[//2
 						'naziv'=>'Hostel-Jug',
@@ -85,7 +84,7 @@ class TestObjekat extends Seeder{
 		                'aktivan' => '1',
 		                'vrsta_objekta_id' =>'2',
 		                'grad_id'=>'2',
-		                'nalog_id' => '5'
+		                'nalog_id' => 2
 						],
 						[//3
 						'naziv'=>'Motel - South Paradise',
@@ -96,7 +95,7 @@ class TestObjekat extends Seeder{
 		                'aktivan' => '1',
 		                'vrsta_objekta_id' =>'3',
 		                'grad_id'=>'2',
-		                'nalog_id' => '6'
+		                'nalog_id' => 2
 						],
 						[//4
 						'naziv'=>'Javni-dom',
@@ -107,7 +106,7 @@ class TestObjekat extends Seeder{
 		                'aktivan' => '1',
 		                'vrsta_objekta_id' =>'4',
 		                'grad_id'=>'2',
-		                'nalog_id' => '6'
+		                'nalog_id' => 3
 						],//Kraj Niš
 						[//Pošetak užice
 						'naziv'=>'Pleasure',
@@ -118,7 +117,7 @@ class TestObjekat extends Seeder{
 		                'aktivan' => '1',
 		                'vrsta_objekta_id' =>'1',
 		                'grad_id'=>'3',
-		                'nalog_id' => '7'
+		                'nalog_id' => 3
 						],
 						[//2
 						'naziv'=>'Hostel Sunny-valley',
@@ -129,7 +128,7 @@ class TestObjekat extends Seeder{
 		                'aktivan' => '1',
 		                'vrsta_objekta_id' =>'2',
 		                'grad_id'=>'3',
-		                'nalog_id' => '7'
+		                'nalog_id' => 3
 						],
 						[//3
 						'naziv'=>'Užički raj',
@@ -140,7 +139,7 @@ class TestObjekat extends Seeder{
 		                'aktivan' => '1',
 		                'vrsta_objekta_id' =>'3',
 		                'grad_id'=>'3',
-		                'nalog_id' => '8'
+		                'nalog_id' => 3
 						],
 						[//4
 						'naziv'=>'Naj-smeštaj',
@@ -151,7 +150,7 @@ class TestObjekat extends Seeder{
 		                'aktivan' => '1',
 		                'vrsta_objekta_id' =>'4',
 		                'grad_id'=>'3',
-		                'nalog_id' => '8'
+		                'nalog_id' => 3
 						],
 						[//Početak Bijeljina
 						'naziv'=>'Semberija',
@@ -162,7 +161,7 @@ class TestObjekat extends Seeder{
 		                'aktivan' => '1',
 		                'vrsta_objekta_id' =>'1',
 		                'grad_id'=>'4',
-		                'nalog_id' => '8'
+		                'nalog_id' => 4
 						],
 						[//2
 						'naziv'=>'Posavska noć',
@@ -173,7 +172,7 @@ class TestObjekat extends Seeder{
 		                'aktivan' => '1',
 		                'vrsta_objekta_id' =>'2',
 		                'grad_id'=>'4',
-		                'nalog_id' => '8'
+		                'nalog_id' => 4
 						],
 						[//3
 						'naziv'=>'Dream',
@@ -184,7 +183,7 @@ class TestObjekat extends Seeder{
 		                'aktivan' => '1',
 		                'vrsta_objekta_id' =>'3',
 		                'grad_id'=>'4',
-		                'nalog_id' => '8'
+		                'nalog_id' => 4
 						],
 						[//4
 						'naziv'=>'Naj-smeštaj',
@@ -195,7 +194,7 @@ class TestObjekat extends Seeder{
 		                'aktivan' => '1',
 		                'vrsta_objekta_id' =>'4',
 		                'grad_id'=>'4',
-		                'nalog_id' => '8'
+		                'nalog_id' => 4
 						]
 
 					]);

@@ -21,7 +21,6 @@ class Aplikacija extends Controller {
 			$podaci['pocetna']=true;
 			$podaci['pozadine']=Templejt::join('sadrzaji','sadrzaji.templejt_id','=','templejt.id')->where('nalog_id','=',1)->where('tema_id','=',1)->where('vrsta_sadrzaja_id','=',6)->orderBy('redoslijed')->get(['sadrzaj'])->toArray();
 			$podaci['grad']=Grad::orderBy('id')->get(['id','naziv'])->lists('naziv','id');
-			//#######################
 			return view("aplikacija.teme.{$nalog['tema_slug']}.index",compact('podaci'));
 		}else return 'Greska!!!';
 		//return "Dobor došli na <b>{$nalog['naziv']}</b> platformu. SLUG:{$nalog['nalog_slug']},TEMA:{$nalog['tema_id']}";

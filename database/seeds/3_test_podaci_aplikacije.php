@@ -1,81 +1,18 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Tema;
 use App\Sadrzaji;
-use App\Templejt;
 use App\Nalog;
+use App\DefaultSadrzaji;
 class TestPodaciAlikacije extends Seeder{
     public function run(){
-        $teme=[
-            [
-                'slug'=>'test-tema-1',
-                'naziv'=>'Test tema 1',
-                'opis'=>'Test tema opis...',
-                'aktivan'=>1
-            ],
-            [
-                'slug'=>'test-tema-2',
-                'naziv'=>'Test tema 2',
-                'opis'=>'Test tema opis...',
-                'aktivan'=>1
-            ],
-            [
-                'slug'=>'test-tema-3',
-                'naziv'=>'Test tema 3',
-                'opis'=>'Test tema opis...',
-                'aktivan'=>1
-            ],
-            [
-                'slug'=>'test-tema-4',
-                'naziv'=>'Test tema 4',
-                'opis'=>'Test tema opis...',
-                'aktivan'=>1
-            ],
-            [
-                'slug'=>'test-tema-5',
-                'naziv'=>'Test tema 5',
-                'opis'=>'Test tema opis...',
-                'aktivan'=>1
-            ],
-            [
-                'slug'=>'test-tema-6',
-                'naziv'=>'Test tema 6',
-                'opis'=>'Test tema opis...',
-                'aktivan'=>1
-            ],
-        ];
-        Tema::insert($teme);
-
-        $teme=Tema::where('id','<>',1)->get(['id'])->toArray();
-        foreach($teme as $tema){
-            $nalog=new Nalog();
-                $nalog->naziv='Nalog broj '.$tema['id'];
-                $nalog->slug='nalog-broj-'.$tema['id'];
-                $nalog->korisnici_id=rand(4,7);
-                $nalog->tema_id=2;
-            $nalog->save();
-
-            $this->templejtSadrzaj($tema['id'],'Početna','pocetna','Opis...',$nalog->id);
-            $this->templejtSadrzaj($tema['id'],'O nama','o-nama','Opis...',$nalog->id);
-            $this->templejtSadrzaj($tema['id'],'Smeštajni kapacitet','smestajni-kapaciteti','Opis...',$nalog->id);
-            $this->templejtSadrzaj($tema['id'],'Nešto prvo','nesto-prvo','Opis...',$nalog->id);
-            $this->templejtSadrzaj($tema['id'],'Nešto drugo','nesto-drugo','Opis...',$nalog->id);
-            $this->templejtSadrzaj($tema['id'],'Kontakt','kontakt','Opis...',$nalog->id);
-        }
-    }
-    function templejtSadrzaj($tema,$naziv,$slug,$opis,$nalog){
-        $templejt=new Templejt();
-            $templejt->slug=$slug;
-            $templejt->vrsta_sadrzaja_id=1;
-            $templejt->tema_id=$tema;
-        $templejt->save();
-
-        $sadrzaj=new Sadrzaji();
-            $sadrzaj->naziv=$naziv;
-            $sadrzaj->sadrzaj=$opis;
-            $sadrzaj->templejt_id=$templejt->id;
-            $sadrzaj->nalog_id=$nalog;
-        $sadrzaj->save();
+        Nalog::insert([
+            ['naziv'=>'Moderatorska App','slug'=>'moderator-app','korisnici_id'=>4],
+            ['naziv'=>'Todorović App','slug'=>'todorovic-app','korisnici_id'=>8],
+            ['naziv'=>'Nenadović App','slug'=>'nenadovic-app','korisnici_id'=>14]
+        ]);
+        $defaulti=DefaultSadrzaji::join('templejt','default_sadrzaji.templejt_id','=','templejt.id')->where('templejt.tema_id',2)->get(['naziv','sadrzaj','icon','templejt_id'])->toArray();
+        foreach($defaulti as $default)
+            Sadrzaji::insert(array_merge($default,['nalog_id'=>2]));
     }
 }

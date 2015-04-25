@@ -11,6 +11,7 @@ use App\Nalog;
 use App\Kapacitet;
 use App\VrstaObjekta;
 use App\VrstaSmestaja;
+use App\DefaultSadrzaji;
 class KonfiguracioniPodaci extends Seeder{
     public function run(){
         PravaPristupa::insert([
@@ -54,12 +55,14 @@ class KonfiguracioniPodaci extends Seeder{
             [//1
                 'slug'=>'osnovna',
                 'naziv'=>'Osnovna',
-                'opis'=>'Osnovna tema.'
+                'opis'=>'Osnovna tema.',
+                'aktivan'=>0
             ],
             [//2
                 'slug'=>'paralax-1',
                 'naziv'=>'Paralax 1',
-                'opis'=>'Osnovna tema moderatorske platforme.'
+                'opis'=>'Osnovna tema moderatorske platforme.',
+                'aktivan'=>1
             ]
         ]);
         Templejt::insert([
@@ -73,8 +76,8 @@ class KonfiguracioniPodaci extends Seeder{
             ['slug'=>'pozadina-4',  'vrsta_sadrzaja_id'=>6, 'tema_id'=>1],//8
             ['slug'=>'pocetna',     'vrsta_sadrzaja_id'=>3, 'tema_id'=>2],//9
             ['slug'=>'o-nama',      'vrsta_sadrzaja_id'=>1, 'tema_id'=>2],//10
-            ['slug'=>'smestaj', 'vrsta_sadrzaja_id'=>1, 'tema_id'=>2],//11
-            ['slug'=>'rezervacije',     'vrsta_sadrzaja_id'=>1, 'tema_id'=>2],//12
+            ['slug'=>'smestaj',     'vrsta_sadrzaja_id'=>1, 'tema_id'=>2],//11
+            ['slug'=>'rezervacije', 'vrsta_sadrzaja_id'=>1, 'tema_id'=>2],//12
             ['slug'=>'kontakt',     'vrsta_sadrzaja_id'=>3, 'tema_id'=>2],//13
             ['slug'=>'pozadina-1',  'vrsta_sadrzaja_id'=>6, 'tema_id'=>2],//14
             ['slug'=>'pozadina-2',  'vrsta_sadrzaja_id'=>6, 'tema_id'=>2],//15
@@ -145,6 +148,62 @@ class KonfiguracioniPodaci extends Seeder{
                 'icon'=>null,
                 'templejt_id'=>8,
                 'nalog_id'=>1
+            ]
+        ]);
+        DefaultSadrzaji::insert([
+            [
+                'naziv'=>'Početna',
+                'sadrzaj'=>'<p>Tekst je u pripremi.</p>',
+                'icon'=>'glyphicon glyphicon-search',
+                'templejt_id'=>9
+            ],
+            [
+                'naziv'=>'O nama',
+                'sadrzaj'=>'<p>Tekst je u pripremi.</p>',
+                'icon'=>'glyphicon glyphicon-user',
+                'templejt_id'=>10
+            ],
+            [
+                'naziv'=>'Smeštaj',
+                'sadrzaj'=>'<p>Tekst je u pripremi.</p>',
+                'icon'=>'glyphicon glyphicon-home',
+                'templejt_id'=>11
+            ],
+            [
+                'naziv'=>'Popusti',
+                'sadrzaj'=>'<p>Tekst je u pripremi (Rezervišite online i ostvarite bonus i popuste za naredni period).</p>',
+                'icon'=>'glyphicon glyphicon-calendar',
+                'templejt_id'=>12
+            ],
+            [
+                'naziv'=>'Kontakt',
+                'sadrzaj'=>'<p>Tekst je u pripremi.</p>',
+                'icon'=>'glyphicon glyphicon-earphone',
+                'templejt_id'=>13
+            ],
+            [
+                'naziv'=>'Pozadina 1',
+                'sadrzaj'=>'teme/osnovna-paralax/slike/15.jpg',
+                'icon'=>null,
+                'templejt_id'=>14
+            ],
+            [
+                'naziv'=>'Pozadina 2',
+                'sadrzaj'=>'teme/osnovna-paralax/slike/19.jpg',
+                'icon'=>null,
+                'templejt_id'=>15
+            ],
+            [
+                'naziv'=>'Pozadina 3',
+                'sadrzaj'=>'teme/osnovna-paralax/slike/28.jpg',
+                'icon'=>null,
+                'templejt_id'=>16
+            ],
+            [
+                'naziv'=>'Pozadina 4',
+                'sadrzaj'=>'teme/osnovna-paralax/slike/34.jpg',
+                'icon'=>null,
+                'templejt_id'=>17
             ]
         ]);
         VrstaObjekta::insert([

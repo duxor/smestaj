@@ -190,6 +190,17 @@ class KreiranjeBaze extends Migration{
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->nullable();
         });
+        Schema::create('default_sadrzaji', function(Blueprint $table)
+        {
+            $table->bigIncrements('id');
+            $table->string('naziv', 45);
+            $table->text('sadrzaj');
+            $table->string('icon', 45)->nullable();
+            $table->unsignedBigInteger('templejt_id');
+            $table->foreign('templejt_id')->references('id')->on('templejt');
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->nullable();
+        });
         Schema::create('rezervacije', function(Blueprint $table)
         {
             $table->bigIncrements('id');
@@ -219,6 +230,7 @@ class KreiranjeBaze extends Migration{
         Schema::drop('grad');
         Schema::drop('komentari');
         Schema::drop('sadrzaji');
+        Schema::drop('default_sadrzaji');
         Schema::drop('newsletter');
         Schema::drop('nalog');
         Schema::drop('templejt');
