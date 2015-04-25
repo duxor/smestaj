@@ -57,9 +57,9 @@
                         <ul class="dropdown-menu">
                             <li class="dropdown-header">Objekti</li>
                             <li class="divider"></li>
-                            <li><a href="{!!url('/moderator/u-pripremi')!!}"><i class="icon-commerical-building "></i> Pregled objekata</a></li>
-                            <li><a href="{!!url('/moderator/u-pripremi')!!}"><i class="icon-building"></i> Novi objekat</a></li>
-                            <li><a href="{!!url('/moderator/u-pripremi')!!}"><i class="icon-th-large-outline"></i> Pregled smeštaja</a></li>
+                            <li><a href="{!!url('/moderator/pregled')!!}"><i class="icon-commerical-building "></i> Pregled objekata</a></li>
+                            <li><a href="{!!url('/moderator/novi-objekat')!!}"><i class="icon-building"></i> Novi objekat</a></li>
+                            <li><a href="{!!url('/moderator/pregled-smestaja')!!}"><i class="icon-th-large-outline"></i> Pregled smeštaja</a></li>
                             <li><a href="{!!url('/moderator/u-pripremi')!!}"><i class="icon-hospital"></i> Novi smeštaj</a></li>
                             <li><a href="{!!url('/moderator/u-pripremi')!!}"><i class="icon-lodging"></i> Slobodni</a></li>
                             <li><a href="{!!url('/moderator/u-pripremi')!!}"><i class="icon-cancel-circled"></i> Zauzeti</a></li>

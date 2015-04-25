@@ -12,6 +12,13 @@ use App\Tema;
 use App\Nalog;
 use App\Templejt;
 use App\Sadrzaji;
+use App\Objekat;
+use App\VrstaObjekta;
+use App\Grad;
+use App\Smestaj;
+use App\VrstaSmestaja;
+use App\Kapacitet;
+
 
 
 class Moderacija extends Controller {
@@ -92,4 +99,60 @@ class Moderacija extends Controller {
 	public function getUPripremi(){
 		return view('moderacija.u-pripremi.index');
 	}
+	public function getPregled(){
+		$objekti=Objekat::join('vrsta_objekta','vrsta_objekta.id','=','objekat.vrsta_objekta_id')
+							->join('grad','grad.id','=','objekat.grad_id')
+							->join('nalog','nalog.id','=','objekat.nalog_id')
+							->get(['objekat.id','objekat.naziv','objekat.opis','objekat.adresa','vrsta_objekta.naziv as vrsta','grad.naziv as grad','nalog.naziv as nalog'])->toArray();
+		return Security::autentifikacija('moderacija.objekti.pregled', compact('objekti'),4);
+	}
+	public function getIzmeniObjekat($id){
+		$vrstaobjekta=VrstaObjekta::lists('naziv','id');
+		$grad=Grad::lists('naziv','id');
+		$nalog=Nalog::lists('naziv','id');
+		$objekti=Objekat::where('id','=',$id)->get(['id','naziv as ime','opis as opis_objekta','x','y','z','adresa','vrsta_objekta_id','grad_id','nalog_id'])->first()->toArray();
+		return Security::autentifikacija('moderacija.objekti.edit_objekta',
+				compact('vrstaobjekta','grad','nalog','objekti'), 4);	
+	}
+	public function postIzmeniObjekat(){
+	if(Security::autentifikacijaTest(4)){
+			Objekat::find(Input::get('id'))->update(['naziv'=>Input::get('nazivobjekta'),'opis'=>Input::get('opisobjekta'),
+									'x'=>Input::get('x'),'y'=>Input::get('y'),'z'=>Input::get('z'),'adresa'=>Input::get('adresa'),
+									'vrsta_objekta_id'=>Input::get('vrstaobjekta'),'grad_id'=>Input::get('grad'),'nalog_id'=>Input::get('nalog')]);
+			return Redirect::back()->with('message','Uspešno ste izmenili objekat!');
+		}
+		return Security::rediectToLogin();	
+	}
+
+	public function getNoviObjekat(){
+
+		$vrstaobjekta=VrstaObjekta::lists('naziv','id');
+		$grad=Grad::lists('naziv','id');
+		$nalog=Nalog::lists('naziv','id');
+		return Security::autentifikacija('moderacija.objekti.novi',compact('vrstaobjekta','grad','nalog'),4);
+	}
+	public function postNoviObjekat(){
+		 if(Security::autentifikacijaTest(4)){
+            $novi = Objekat::firstOrNew(['id'=>Input::get('id')]);
+            $novi->naziv = Input::get('nazivobjekta'); 
+            $novi->opis = Input::get('opisobjekta');
+            $novi->x = Input::get('x');
+            $novi->y = Input::get('y');
+            $novi->z = Input::get('z');
+            $novi->adresa = Input::get('adresa');
+            $novi->vrsta_objekta_id = Input::get('vrstaobjekta');
+            $novi->grad_id = Input::get('grad');
+            $novi->nalog_id = Input::get('nalog');
+            $novi->save();
+            return Redirect::back()->with('message','Uspešno ste dodali novi objekat!');
+        }else return Security::rediectToLogin();		
+	}
+	public function getPregledSmestaja(){
+		$objekti=Smestaj::join('objekat','objekat.id','=','smestaj.objekat_id')
+						->join('vrsta_smestaja','vrsta_smestaja.id','=','smestaj.vrsta_smestaja_id')
+						->join('kapacitet','kapacitet.id','=','smestaj.kapacitet_id')
+							->get(['smestaj.naziv','objekat.naziv as naziv_objekta','vrsta_smestaja.naziv as naziv_smestaja','kapacitet.naziv as naziv_kapaciteta','kapacitet.broj_osoba as broj_osoba'])->toArray();
+return Security::autentifikacija('moderacija.objekti.pregled_smestaja',compact('objekti'),4);
+	}
 }
+ 
