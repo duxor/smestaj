@@ -19,6 +19,7 @@ use App\Korisnici;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class Security {
     private $id;
@@ -67,19 +68,45 @@ class Security {
         $this->setToken(hash('haval256,5', $this->salt.uniqid().openssl_random_pseudo_bytes(50), false));
         return $this->token;
     }
-    public static function registracija($username,$email,$password,$prezime=null,$ime=null){
-        if(isset($username)&&isset($password)&&isset($password)){
-            $korisnik=new Korisnici();
-                $korisnik->username=$username;
-                $korisnik->email=$email;
-                $korisnik->password=Security::generateHashPass($password);
-                $korisnik->prezime=$prezime;
-                $korisnik->ime=$ime;
-                $korisnik->pravapristupa_id=2;
-            $korisnik->save();
-            Security::rediectToLogin();
-        }
-        return'GRESKA UNOSA!';
+    public static function registracija($username,$email,$password,$password_potvrda,$prezime=null,$ime=null){
+        $validator=Validator::make([
+            'username'=>$username,
+            'email'=>$email,
+            'password'=>$password,
+            'password_confirmation'=>$password_potvrda
+        ],[
+            'username'=>'required|min:5|unique:korisnici,username',
+            'email'=>'required|email|unique:korisnici,email',
+            'password'=>'required|min:5|confirmed',
+            'password_confirmation'=>'required|min:5'
+        ],[
+            //username
+            'username.required'=>'Obavezan unos username-a.',
+            'username.min'=>'Minimalna duzina username-a je :min.',
+            'username.unique'=>'Navedeni username je u upotrebi.',
+            //email
+            'email.email'=>'Pogrešno unesen email.',
+            'email.required'=>'Obavezan unos email-a.',
+            'email.unique'=>'Navedeni email je u upotrebi.',
+            //pass
+            'password.required'=>'Obavezan unos password-a.',
+            'password.min'=>'Minimalna duzina password-a je :min.',
+            'password.confirmed'=>'Unesene šifre se ne poklapaju.',
+            //pass_conf
+            'password_confirmation.required'=>'Obavezan unos password-a.',
+            'password_confirmation.min'=>'Minimalna duzina password-a je :min.'
+        ]);
+        if($validator->fails()) return redirect()->back()->withGreska($validator->errors()->toArray())->withInput();
+
+        $korisnik=new Korisnici();
+            $korisnik->username=$username;
+            $korisnik->email=$email;
+            $korisnik->password=Security::generateHashPass($password);
+            $korisnik->prezime=$prezime;
+            $korisnik->ime=$ime;
+            $korisnik->pravapristupa_id=2;
+        $korisnik->save();
+        return Redirect::to('/login')->withPotvrda('Uspešno ste izvršili registraciju. Možete da se prijavite na platformu.');
     }
 //FUNKCIONALNOSTI
 

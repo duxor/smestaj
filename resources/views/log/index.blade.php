@@ -1,7 +1,26 @@
 @extends('administracija.masterBackEnd')
 
 @section('content')
-
+    @if(session()->has('greska'))
+        <div class="alert alert-danger" role="alert">
+            <p>Dogodila se greška: <br>
+            <ol>
+                @foreach(session('greska') as $greske)
+                    @foreach($greske as $greska)
+                        <li>{{$greska}}</li>
+                    @endforeach
+                @endforeach
+            </ol>
+            </p>
+        </div>
+    @endif
+    @if(session()->has('potvrda'))
+        <div class="alert alert-success" role="alert">
+            <p>
+                {{session('potvrda')}}
+            </p>
+        </div>
+    @endif
     <script>
         var forma='forma1';
         function sub(_forma){
@@ -9,7 +28,7 @@
         }
         $(document).keypress(function(e) {
             if(e.which == 13) {
-                $('#'+forma).submit();
+                SubmitForm.submit(forma);
             }
         });
     </script>
@@ -78,50 +97,47 @@
                             </div>
                         @endif
                         {!! Form::open(['url'=>'/log/registracija','class'=>'form-horizontal','id'=>'forma2']) !!}
-                        <div id="dusername2" class="form-group has-feedback">
-                            {!! Form::label('lusername2','Username',['class'=>'control-label col-sm-2']) !!}
+                        <div class="form-group has-feedback">
+                            {!! Form::label('lreg_prezime','Prezime',['class'=>'control-label col-sm-2']) !!}
                             <div class="col-sm-10">
-                                {!! Form::text('username2',Input::old('username2'),['placeholder'=>'Korisničko ime','class'=>'form-control','id'=>'username2']) !!}
-                                <span id="susername2" class="glyphicon form-control-feedback"></span>
-                            </div>
-                        </div>
-
-                        <div id="dpassword2" class="form-group has-feedback">
-                            {!! Form::label('lpassword2','Password',['class'=>'control-label col-sm-2']) !!}
-                            <div class="col-sm-10">
-                                {!! Form::password('password2', ['placeholder'=>'Pristupna šifra','class'=>'form-control','id'=>'password2']) !!}
-                                <span id="spassword2" class="glyphicon form-control-feedback"></span>
-                            </div>
-                        </div>
-                        <div id="dpasswordconfirm" class="form-group has-feedback">
-                            {!! Form::label('lpassword2','Password',['class'=>'control-label col-sm-2']) !!}
-                            <div class="col-sm-10">
-                                {!! Form::password('password_confirmation', ['placeholder'=>'Ponovite šifru','class'=>'form-control','id'=>'password_confirmation']) !!}
-                                <span id="spasswordconfirm" class="glyphicon form-control-feedback"></span>
-                            </div>
-                        </div>
-                        <div id="demail2" class="form-group has-feedback">
-                            {!! Form::label('lemail2','Email',['class'=>'control-label col-sm-2']) !!}
-                            <div class="col-sm-10">
-                                {!! Form::text('email2',Input::old('email2'),['placeholder'=>'Email','class'=>'form-control','id'=>'email2']) !!}
-                                <span id="email2" class="glyphicon form-control-feedback"></span>
+                                {!! Form::text('reg_prezime',Input::old('reg_prezime'),['placeholder'=>'Prezime','class'=>'form-control']) !!}
                             </div>
                         </div>
                         <div class="form-group has-feedback">
-                            {!! Form::label('lprezime2','Prezime',['class'=>'control-label col-sm-2']) !!}
+                            {!! Form::label('lreg_ime','Ime',['class'=>'control-label col-sm-2']) !!}
                             <div class="col-sm-10">
-                                {!! Form::text('prezime2',Input::old('prezime2'),['placeholder'=>'Prezime','class'=>'form-control']) !!}
-                                <span  class="glyphicon form-control-feedback"></span>
+                                {!! Form::text('reg_ime',Input::old('reg_ime'),['placeholder'=>'Ime','class'=>'form-control']) !!}
                             </div>
                         </div>
-                        <div class="form-group has-feedback">
-                            {!! Form::label('lime2','Ime',['class'=>'control-label col-sm-2']) !!}
+                        <div id="dreg_username" class="form-group has-feedback">
+                            {!! Form::label('lreg_username','Username',['class'=>'control-label col-sm-2']) !!}
                             <div class="col-sm-10">
-                                {!! Form::text('ime2',Input::old('ime2'),['placeholder'=>'Ime','class'=>'form-control']) !!}
-                                <span class="glyphicon form-control-feedback"></span>
+                                {!! Form::text('reg_username',Input::old('reg_username'),['placeholder'=>'Korisničko ime','class'=>'form-control','id'=>'reg_username']) !!}
+                                <span id="sreg_username" class="glyphicon form-control-feedback"></span>
                             </div>
                         </div>
 
+                        <div id="dreg_password" class="form-group has-feedback">
+                            {!! Form::label('lreg_password','Password',['class'=>'control-label col-sm-2']) !!}
+                            <div class="col-sm-10">
+                                {!! Form::password('reg_password', ['placeholder'=>'Pristupna šifra','class'=>'form-control','id'=>'reg_password']) !!}
+                                <span id="sreg_password" class="glyphicon form-control-feedback"></span>
+                            </div>
+                        </div>
+                        <div id="dreg_password_potvrda" class="form-group has-feedback">
+                            {!! Form::label('lreg_password_potvrda','Password',['class'=>'control-label col-sm-2']) !!}
+                            <div class="col-sm-10">
+                                {!! Form::password('reg_password_potvrda', ['placeholder'=>'Ponovite šifru','class'=>'form-control','id'=>'reg_password_potvrda']) !!}
+                                <span id="sreg_password_potvrda" class="glyphicon form-control-feedback"></span>
+                            </div>
+                        </div>
+                        <div id="dreg_email" class="form-group has-feedback">
+                            {!! Form::label('lreg_email','Email',['class'=>'control-label col-sm-2']) !!}
+                            <div class="col-sm-10">
+                                {!! Form::email('reg_email',Input::old('reg_email'),['placeholder'=>'Email','class'=>'form-control','id'=>'reg_email']) !!}
+                                <span id="sreg_email" class="glyphicon form-control-feedback"></span>
+                            </div>
+                        </div>
 
                         <div class="form-group">
                             <div class="col-sm-2"></div>
