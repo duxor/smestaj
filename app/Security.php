@@ -105,6 +105,7 @@ class Security {
             $korisnik->prezime=$prezime;
             $korisnik->ime=$ime;
             $korisnik->pravapristupa_id=2;
+            $korisnik->aktivan=1;
         $korisnik->save();
         return Redirect::to('/login')->withPotvrda('Uspešno ste izvršili registraciju. Možete da se prijavite na platformu.');
     }
@@ -126,7 +127,7 @@ class Security {
             $sec->setUsername($username);
             $sec->setPass($password);
 
-            $korisnik = Korisnici::all(['id','username','password','pravapristupa_id'])->where('username',$sec->username)->first();
+            $korisnik = Korisnici::where('username',$sec->username)->where('aktivan',1)->get(['id','username','password','pravapristupa_id'])->first();
             $test = $korisnik ? password_verify($sec->password.$sec->salt, $korisnik->password) : false;
 
             if ($test){
