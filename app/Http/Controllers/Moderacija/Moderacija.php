@@ -130,7 +130,6 @@ class Moderacija extends Controller {
 		}
 		return Security::rediectToLogin();	
 	}
-
 	public function getNoviObjekat(){
 		$vrstaobjekta=VrstaObjekta::lists('naziv','id');
 		$grad=Grad::lists('naziv','id');
@@ -183,5 +182,29 @@ class Moderacija extends Controller {
 		}
 		return Security::rediectToLogin();	
 	
+	}
+	public function getNoviSmestaj(){
+		$kapacitet=Kapacitet::lists('naziv','id');
+		$vrstasmestaja=VrstaSmestaja::lists('naziv','id');
+
+		$objekti=Nalog::where('korisnici_id','=',Session::get('id'))->where('nalog.aktivan','=','1')
+						->join('objekat','objekat.nalog_id','=','nalog.id')
+						->get(['objekat.naziv as naziv_objekta','objekat.id'])->lists('naziv_objekta','id');
+					
+		return Security::autentifikacija('moderacija.objekti.novi_smestaj',compact('kapacitet','vrstasmestaja','objekti'),4);
+	}
+	public function postNoviSmestaj(){
+		if(Security::autentifikacijaTest(4)){
+			$naziv_objekta=Objekat::where('id','=',Input::get('nazivobjekta'))->get(['naziv'])->first()->toArray();
+            $novi = Smestaj::firstOrNew(['id'=>Input::get('id')]);
+            $novi->objekat_id = Input::get('nazivobjekta'); 
+            $novi->aktivan = '1';
+            $novi->kapacitet_id = Input::get('kapacitet');
+            $novi->vrsta_smestaja_id = Input::get('vrstasmestaja');
+            $novi->naziv= $naziv_objekta['naziv'];
+            $novi->save();
+            return Redirect::back()->with('message','Uspešno ste dodali novi smeštaj!');
+        }else return Security::rediectToLogin();
+		
 	}
 }
