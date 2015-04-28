@@ -2,36 +2,53 @@
 
 @section('content')
 @if($objekti)
-<div class="panel panel-primary clearfix">
-	<div  class="panel-heading">Pregled smestaja</div>
-	    <div class="panel-body">
-	    @foreach($objekti as $obj)
-	    		<div class=" well well-sm">
-			      	<div id="sort" class="row">
-						<div style="padding-top:0px;" class="col-xs-4">
-                    		<img  src="http://images.prd.mris.com/image/V2/1/Yu59d899Ocpyr_RnF0-8qNJX1oYibjwp9TiLy-bZvU9vRJ2iC1zSQgFwW-fTCs6tVkKrj99s7FFm5Ygwl88xIA.jpg" alt="" class="img-rounded img-responsive" />
-			    		</div>
-									
-						<div  class="col-xs-4">
-							<h5  style="margin-top:0px; margin-bottom:5px;" ><a href="" >{{$obj['naziv_objekta']}}</a></h5>
-							<i class="glyphicon glyphicon-map-marker"> </i>{{$obj['naziv_smestaja']}}
-							<br/>
-							<i class="glyphicon glyphicon-map-marker"></i>{{$obj['naziv_kapaciteta']}}
-							<br/>
-						 	<i class="glyphicon glyphicon glyphicon-phone"></i> {{$obj['broj_osoba']}}
-							<br/>
-							
+{!! Form::open(['url'=>'/moderator/pregled-smestaja', 'name' => "forma"]) !!}
+	{!! Form::select('nalog', array('-1' => 'Izaberite nalog ...') + $nalog, null, array('name' => 'nalog', "onchange" => "document.forma.submit();") )!!}
+{!! Form::close() !!}
+</br>
+<div class="container">
+    	<div class="row">
+			<div class="col-md-12">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h3 class="panel-title">Pregled smeštaja</h3>
+						<div class="pull-right">
+							<span class="clickable filter" data-toggle="tooltip" title="Filter" data-container="body">
+								<i class="glyphicon glyphicon-filter"></i>
+							</span>
 						</div>
-						<div  class="col-xs-4">
-							
-						</div>  
 					</div>
+					<div class="panel-body" id="sdf">
+						<input type="text" class="form-control" id="dev-table-filter" data-action="filter" data-filters="#dev-table" placeholder="Unesite naziv, vrstu smestaja, kapacitet ili broj osoba!" />
+					</div>
+					<table class="table table-hover" id="dev-table">
+						<thead>
+							<tr>
+								<th>Naziv objekta</th>
+								<th> Vrsta smeštaja</th>
+								<th>Naziv kapaciteta</th>
+								<th>Broj osoba</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+						@foreach($objekti as $obj)
+							<tr>
+								<td>{{$obj['naziv_objekta']}}</td>
+								<td>{{$obj['naziv_smestaja']}}</td>
+								<td>{{$obj['naziv_kapaciteta']}}</td>
+								<td>{{$obj['broj_osoba']}}</td>
+								<td><p data-placement="top" data-toggle="tooltip" title="Ažuriraj"><a href="{!!url('/moderator/izmeni-smestaj/'.$obj['id']) !!}" class="btn btn-xs btn-primary" ><span class="glyphicon glyphicon-pencil"></span></a></p></td>
+							</tr>
+							@endforeach
+
+						</tbody>
+					</table>
+
 				</div>
-			@endforeach
-
-	    </div>
-</div>
-
+			</div>
+		</div>
+	</div>
 @else <h1 class="col-sm-12">Nema objekata u bazi podataka!</h1>
 @endif
 

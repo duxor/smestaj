@@ -7,7 +7,7 @@
 			      	<div id="sort" class="row">
 					      	@if(!isset($objekti))
 						        {{$objekti=null}}
-						        <h1 class="col-sm-10">Greska</h1>
+						        <h1 class="col-sm-10">Greška</h1>
 						    @else  
 							@if (Session::get('message'))
 							    <div class="alert alert-success alert-dismissable">

@@ -20,8 +20,10 @@
     {!! HTML::style('css/bootstrap.min.css') !!}
     {!! HTML::style('css/templejtBackEnd.css') !!}
     {!! HTML::style('css/fontelo.css') !!}
+    {!! HTML::style('css/pregled_smestaja.css') !!}
     {!! HTML::script('js/jquery-3.0.js') !!}
     {!! HTML::script('js/funkcije.js') !!}
+    {!! HTML::script('js/pregled_smestaja.js') !!}
     {!! HTML::script('tinymce/tinymce.min.js') !!}
 
 </head>
@@ -59,7 +61,7 @@
                             <li class="divider"></li>
                             <li><a href="{!!url('/moderator/pregled')!!}"><i class="icon-commerical-building "></i> Pregled objekata</a></li>
                             <li><a href="{!!url('/moderator/novi-objekat')!!}"><i class="icon-building"></i> Novi objekat</a></li>
-                            <li><a href="{!!url('/moderator/pregled-smestaja')!!}"><i class="icon-th-large-outline"></i> Pregled smeštaja</a></li>
+                            <li><a href="{!!url('/moderator/smestaj')!!}"><i class="icon-th-large-outline"></i> Pregled smeštaja</a></li>
                             <li><a href="{!!url('/moderator/u-pripremi')!!}"><i class="icon-hospital"></i> Novi smeštaj</a></li>
                             <li><a href="{!!url('/moderator/u-pripremi')!!}"><i class="icon-lodging"></i> Slobodni</a></li>
                             <li><a href="{!!url('/moderator/u-pripremi')!!}"><i class="icon-cancel-circled"></i> Zauzeti</a></li>
