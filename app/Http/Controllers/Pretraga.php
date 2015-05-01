@@ -5,9 +5,11 @@ use App\Http\Requests;
 
 use App\Nalog;
 use App\Objekat;
+use App\Security;
 use App\Tema;
 use Illuminate\Support\Facades\Input;
 use App\Templejt;
+use Illuminate\Support\Facades\Session;
 
 class Pretraga extends Controller {
 	public function anyIndex(){
@@ -19,9 +21,12 @@ class Pretraga extends Controller {
 		$podaci['rezultat']=Objekat::
 			join('smestaj','smestaj.objekat_id','=','objekat.id')
 			->join('kapacitet','kapacitet.id','=','smestaj.kapacitet_id')
+			->leftjoin('lista_zelja',function($query){
+				$query->on('lista_zelja.smestaj_id','=','smestaj.id')->where('lista_zelja.aktivan','=',1)->where('lista_zelja.korisnici_id','=',Session::get('id'));
+			})
 			->where('grad_id',Input::get('grad_id'))->where('broj_osoba',$tacan_broj.'=',$podaci['broj_osoba'])
 			->where('objekat.aktivan',1)->where('smestaj.aktivan',1)
-			->get(['smestaj.naziv','adresa','broj_osoba'])->toArray();
+			->get(['smestaj.id','smestaj.naziv','adresa','broj_osoba','lista_zelja.id as zelja'])->toArray();
 		$podaci['gradovi']=Grad::lists('naziv','id');
 		$podaci['grad_id']=Input::get('grad_id');
 		$podaci['tacan_broj']=Input::get('tacan_broj');
@@ -42,7 +47,6 @@ class Pretraga extends Controller {
 			->where('grad_id',Input::get('grad_id'))->where('broj_osoba',(Input::get('tacan_broj')?'':'>').'=',Input::get('broj_osoba'))
 			->where('objekat.aktivan',1)->where('smestaj.aktivan',1)
 			->get(['objekat.id','objekat.naziv','slug','x','y','adresa'])->toArray();
-		//$nalozi=Objekat::join('nalog','nalog.id','=','objekat.nalog_id')->whereNotNull('x')->get(['objekat.id','objekat.naziv','slug','x','y','adresa'])->toArray();
 		$niz = 'onLoadMarkers({"type": "FeatureCollection","features": [';
 		$i=0;
 		foreach($nalozi as $nalog){
@@ -92,18 +96,17 @@ class Pretraga extends Controller {
 			->join('smestaj','smestaj.objekat_id','=','objekat.id')
 			->join('kapacitet','kapacitet.id','=','smestaj.kapacitet_id')
 			->leftjoin('lista_zelja',function($query){
-				$query->on('lista_zelja.smestaj_id','=','smestaj.id')->where('lista_zelja.aktivan','=',1);
+				$query->on('lista_zelja.smestaj_id','=','smestaj.id')->where('lista_zelja.aktivan','=',1)->where('lista_zelja.korisnici_id','=',Session::get('id'));
 			})
 			->where('objekat.nalog_id',Input::get('aplikacija'))
 			->where('grad_id',Input::get('grad_id'))->where('broj_osoba',$tacan_broj.'=',$podaci['broj_osoba'])
 			->where('objekat.aktivan',1)->where('smestaj.aktivan',1)
 			->get(['smestaj.id','smestaj.naziv','adresa','broj_osoba','lista_zelja.id as zelja'])->toArray();
-		$podaci['gradovi']=Grad::lists('naziv','id');
 		$podaci['gradovi']=Grad::join('objekat','objekat.grad_id','=','grad.id')->where('objekat.nalog_id',Input::get('aplikacija'))->orderBy('grad.id')->get(['grad.id','grad.naziv'])->lists('naziv','id');
 		$podaci['grad_id']=Input::get('grad_id');
 		$podaci['tacan_broj']=Input::get('tacan_broj');
 		$podaci['grad_koo']=Grad::find(Input::get('grad_id'),['x','y','z']);
-		$podaci['app']=Input::get('aplikacija');
+		$podaci['app']=Input::get('aplikacija');//nalog_id
 		$tema=Tema::find(Nalog::find(Input::get('aplikacija'),['tema_id'])->tema_id, ['slug'])->slug;
 		return view('aplikacija.teme.'.$tema.'.pretraga',compact('podaci'));
 	}

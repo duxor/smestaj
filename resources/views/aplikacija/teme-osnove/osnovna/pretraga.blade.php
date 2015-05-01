@@ -170,10 +170,42 @@
                     <tr><td>Broj mesta:</td><td>{{$smestaj['broj_osoba']}}</td></tr>
                     <tr><td>Adresa:</td><td>{{$smestaj['adresa']}}</td></tr>
                 </table>
-                <a href="#" class="btn btn-lg btn-default"><i class="glyphicon glyphicon-zoom-in"></i> Pregled</a>
+                <a href="/" class="btn btn-lg btn-default"><i class="glyphicon glyphicon-zoom-in"></i> Pregled</a>
                 <a href="#" class="btn btn-lg btn-info"><i class="glyphicon glyphicon-check"></i> Rezervacija</a>
+                @if(\App\Security::autentifikacijaTest())
+                    <button id="button" class="btn btn-lg btn-default _tooltip" @if($smestaj['zelja']) data-zelja="{{$smestaj['zelja']}}" style="color:red" title="Izbaci iz liste zelja" @else data-zelja="false" title="Dodaj u listu želja" @endif data-id="{{$smestaj['id']}}" data-toggle="tooltip" data-placement="bottom"><i class="glyphicon glyphicon-heart"></i></button>
+                @else
+                    <a href="/login" class="btn btn-lg btn-default _tooltip"  title="Dodaj u listu želja" data-toggle="tooltip" data-placement="bottom"><i class="glyphicon glyphicon-heart"></i></a>
+                @endif
             </div><br clear="all">
         @endforeach
+        {!!Form::open()!!}{!!Form::close()!!}
+        <style>._tooltip:hover{color: red}</style>
+        <script>
+            $(document).ready(function(){$('button').tooltip();$('a').tooltip()});
+            $("button").click(function(){
+                $(this).html("u procesu...");
+                var id=$(this).data("id");
+                $.post('/aplikacija/lista-zelja-dodaj',
+                        {
+                            _token: $('input[name="_token"]').val(),
+                            smestaj: $(this).data("id"),
+                            korisnik: "{{Session::get("id")}}",
+                            zelja: $(this).data("zelja")
+                        },
+                        function(data){
+                            $('button[data-id="'+id+'"]').html("<i class='glyphicon glyphicon-heart'></i>");
+                            if($('button[data-id="'+id+'"]').data('zelja')!=false){
+                                $('button[data-id="'+id+'"]').data('zelja',false);
+                                $('button[data-id="'+id+'"]').css("color","black");
+                            } else{
+                                $('button[data-id="'+id+'"]').data('zelja',data);
+                                $('button[data-id="'+id+'"]').css("color","red");
+                            }
+                        }
+                );
+            });
+        </script>
     @else
         <br clear="all"><p>Nema rezultata za date parametre. Proverite parametre i pokušajte ponovo.</p>
     @endif
