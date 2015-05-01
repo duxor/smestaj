@@ -64,7 +64,7 @@
                             <li class="dropdown-header">Posete</li>
                             <li class="divider"></li>
                             <li><a href="{!!url('/moderator/u-pripremi')!!}"><i class="glyphicon glyphicon-eye-open"></i> Pregled</a></li>
-                            <li><a href="{!!url('/moderator/u-pripremi')!!}"><i class="glyphicon glyphicon-heart-empty"></i> Lista želja</a></li>
+                            <li><a href="{!!url('/aplikacija/lista-zelja')!!}"><i class="glyphicon glyphicon-heart-empty"></i> Lista želja</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">

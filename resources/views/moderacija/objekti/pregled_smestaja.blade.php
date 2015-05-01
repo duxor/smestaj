@@ -2,10 +2,12 @@
 
 @section('content')
 @if($objekti)
-{!! Form::open(['url'=>'/moderator/pregled-smestaja', 'name' => "forma"]) !!}
-	{!! Form::select('nalog', array('-1' => 'Izaberite nalog ...') + $nalog, null, array('name' => 'nalog', "onchange" => "document.forma.submit();") )!!}
-{!! Form::close() !!}
-</br>
+<div class="col-sm-4">
+	{!! Form::open(['url'=>'/moderator/pregled-smestaja', 'name' => "forma"]) !!}
+		{!! Form::select('nalog', array('-1' => 'Izaberite nalog ...') + $nalog, null, ['name' => 'nalog', 'class'=>'form-control', "onchange" => "document.forma.submit();"] )!!}
+	{!! Form::close() !!}
+</div>
+</br></br>
 <div class="container">
     	<div class="row">
 			<div class="col-md-12">
