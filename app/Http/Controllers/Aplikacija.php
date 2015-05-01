@@ -32,8 +32,7 @@ class Aplikacija extends Controller {
 	public function getObjekat($slug){
 		return $slug;
 	}
-	public function anyListaZeljaDodaj(){//dd(ListaZelja::find(4)->where('aktivan',1)->get(['id'])->first()->id);
-		//if(!ListaZelja::where('smestaj_id',Input::get('smestaj'))->where('korisnici_id',Input::get('korisnik'))->where('aktivan',1)->first()) {
+	public function postListaZeljaDodaj(){
 		if(Input::get('zelja'))
 		if(Input::get('zelja')=="false") {
 			$lista=new ListaZelja();
@@ -41,7 +40,6 @@ class Aplikacija extends Controller {
 			$lista->korisnici_id=Input::get('korisnik');
 			$lista->save();
 			return $lista->id;
-			//ListaZelja::insert(['smestaj_id'=>Input::get('smestaj'),'korisnici_id'=>Input::get('korisnik')]);
 		}else
 		ListaZelja::find(Input::get('zelja'))->update(['aktivan'=>0]);
 		return ;
