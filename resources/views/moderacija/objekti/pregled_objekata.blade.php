@@ -2,10 +2,12 @@
 
 @section('content')
 @if($objekti)
+<div class="col-sm-4">
 	{!! Form::open(['url'=>'/moderator/pregledobjekata', 'name' => "forma"]) !!}
-		{!! Form::select('nalog', array('-1' => 'Izaberite nalog ...') + $nalog, null, array('name' => 'nalog', "onchange" => "document.forma.submit();") )!!}
+		{!! Form::select('nalog', array('-1' => 'Izaberite nalog ...') + $nalog, null, array('name' => 'nalog','class'=>'form-control', "onchange" => "document.forma.submit();") )!!}
 	{!! Form::close() !!}
-	</br>
+</div>
+	</br>	</br>
 		<div id="forma" class="panel panel-primary clearfix">
 			<div  class="panel-heading">Pregled objekata</div>
 			    <div class="panel-body">
@@ -28,12 +30,11 @@
 								<div  class="col-xs-4">
 									<i class="icon-th-large-outline"></i> Opis: {{$obj['opis']}}
 									<br/><br/>
-									<a href="{!!url('/moderator/izmeni-objekat/'.$obj['id']) !!}" class="btn btn-lg btn-primary" >Ažuriranje</a>
+									<a href="{!!url('/moderator/izmeni-objekat/'.$obj['id']) !!}" class="btn btn-lg btn-primary" ><span class="glyphicon glyphicon-pencil"> </span>  Ažuriranje</a>
 								</div>  
 							</div>
 						</div>
 					@endforeach
-
 			    </div>
 		</div>
 @else <h1 class="col-sm-12">Nema objekata u bazi podataka!</h1>

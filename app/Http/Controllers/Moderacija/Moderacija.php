@@ -19,6 +19,8 @@ use App\Grad;
 use App\Smestaj;
 use App\VrstaSmestaja;
 use App\Kapacitet;
+use Illuminate\Pagination\BootstrapThreePresenter;
+use Illuminate\Support\Facades\Paginator;
 
 
 

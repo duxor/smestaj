@@ -5,7 +5,10 @@ use App\ListaZelja;
 use App\Nalog;
 use App\Templejt;
 use App\Grad;
+use App\Security;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
 
 class Aplikacija extends Controller {
 	public function getIndex($slug=null){
@@ -43,5 +46,21 @@ class Aplikacija extends Controller {
 		}else
 		ListaZelja::find(Input::get('zelja'))->update(['aktivan'=>0]);
 		return ;
+	}
+	public function getListaZelja(){
+		$lista_zelja=ListaZelja::where('korisnici_id','=',Session::get('id'))
+						->where('lista_zelja.aktivan','=','1')
+						->join('smestaj','smestaj.id','=','lista_zelja.smestaj_id')
+						->join('objekat','objekat.id','=','smestaj.objekat_id')
+						->join('vrsta_smestaja','vrsta_smestaja.id','=','smestaj.vrsta_smestaja_id')
+						->join('kapacitet','kapacitet.id','=','smestaj.kapacitet_id')
+						->get(['smestaj.id','smestaj.naziv','objekat.naziv as naziv_objekta',
+							'vrsta_smestaja.naziv as naziv_smestaja','kapacitet.naziv as naziv_kapaciteta','kapacitet.broj_osoba as broj_osoba'])->toArray();
+		return view('korisnik.lista_zelja',compact('lista_zelja'));
+	}
+	public function getUkloniListaZelja($id){
+		ListaZelja::where('korisnici_id','=',Session::get('id'))
+		->where('smestaj_id','=',$id)->update(['aktivan'=>'0']);
+				return Redirect::back();
 	}
 }

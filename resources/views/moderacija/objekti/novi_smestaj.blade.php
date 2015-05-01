@@ -20,19 +20,19 @@
 					    <div class="form-group">
 							{!! Form::label('nazivobjekta','Dodavanje smeštaja u objekat:',['class'=>'control-label col-sm-4']) !!}
 							<div class="col-sm-4">
-								{!!Form::select('nazivobjekta', $objekti, ['class'=>'form-control'])!!}
+								{!!Form::select('nazivobjekta', $objekti, null, ['class'=>'form-control'])!!}
 							</div>
 						</div>
 						<div class="form-group">
 							{!! Form::label('kapacitet','Naziv Kapaciteta',['class'=>'control-label col-sm-4']) !!}
 							<div class="col-sm-4">
-								{!!Form::select('kapacitet',$kapacitet,['class'=>'form-control'])!!}
+								{!!Form::select('kapacitet',$kapacitet,null, ['class'=>'form-control'])!!}
 							</div>
 						</div>
 						<div class="form-group">
 						{!! Form::label('vrstasmestaja','Vrsta Smeštaja',['class'=>'control-label col-sm-4']) !!}
 						<div class="col-sm-4">
-							{!!Form::select('vrstasmestaja',$vrstasmestaja, ['class'=>'form-control'])!!}
+							{!!Form::select('vrstasmestaja',$vrstasmestaja,null, ['class'=>'form-control'])!!}
 						</div>
 					</div>
 					<div class="form-group">
