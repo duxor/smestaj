@@ -185,7 +185,7 @@
         <script>
             $(document).ready(function(){$('button').tooltip();$('a').tooltip()});
             $("button").click(function(){
-                $(this).html("u procesu...");
+                $(this).html("<i class='icon-spin6'></i>");
                 var id=$(this).data("id");
                 $.post('/aplikacija/lista-zelja-dodaj',
                         {

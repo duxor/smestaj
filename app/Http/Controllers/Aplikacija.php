@@ -56,7 +56,7 @@ class Aplikacija extends Controller {
 						->join('kapacitet','kapacitet.id','=','smestaj.kapacitet_id')
 						->get(['smestaj.id','smestaj.naziv','objekat.naziv as naziv_objekta',
 							'vrsta_smestaja.naziv as naziv_smestaja','kapacitet.naziv as naziv_kapaciteta','kapacitet.broj_osoba as broj_osoba'])->toArray();
-		return view('korisnik.lista_zelja',compact('lista_zelja'));
+		return view('korisnik.lista-zelja',compact('lista_zelja'));
 	}
 	public function getUkloniListaZelja($id){
 		ListaZelja::where('korisnici_id','=',Session::get('id'))

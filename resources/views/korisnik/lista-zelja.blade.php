@@ -37,6 +37,6 @@
 			</div>
 		</div>
 	</div>
-
+@else <h1 class="col-sm-12">Lista želja je prazna!</h1>
 	@endif
 @endsection
