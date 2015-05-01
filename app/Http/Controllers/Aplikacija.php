@@ -1,9 +1,11 @@
 <?php namespace App\Http\Controllers;
 
 use App\Http\Requests;
+use App\ListaZelja;
 use App\Nalog;
 use App\Templejt;
 use App\Grad;
+use Illuminate\Support\Facades\Input;
 
 class Aplikacija extends Controller {
 	public function getIndex($slug=null){
@@ -20,12 +22,28 @@ class Aplikacija extends Controller {
 			$podaci=Templejt::join('sadrzaji','sadrzaji.templejt_id','=','templejt.id')->where('nalog_id',$nalog['id'])->where('tema_id',$nalog['tema_id'])->where('vrsta_sadrzaja_id','<>',6)->orderBy('redoslijed')->get(['slug','naziv','sadrzaj','vrsta_sadrzaja_id','icon'])->toArray();
 			$podaci['pocetna']=true;
 			$podaci['pozadine']=Templejt::join('sadrzaji','sadrzaji.templejt_id','=','templejt.id')->where('nalog_id','=',1)->where('tema_id','=',1)->where('vrsta_sadrzaja_id','=',6)->orderBy('redoslijed')->get(['sadrzaj'])->toArray();
-			$podaci['grad']=Grad::orderBy('id')->get(['id','naziv'])->lists('naziv','id');
+			$podaci['grad']=Grad::join('objekat','objekat.grad_id','=','grad.id')->where('objekat.nalog_id',$nalog['id'])->orderBy('grad.id')->get(['grad.id','grad.naziv'])->lists('naziv','id');
+			$podaci['app']=$nalog['id'];
+			//dd($podaci);
 			return view("aplikacija.teme.{$nalog['tema_slug']}.index",compact('podaci'));
 		}else return 'Greska!!!';
 		//return "Dobor došli na <b>{$nalog['naziv']}</b> platformu. SLUG:{$nalog['nalog_slug']},TEMA:{$nalog['tema_id']}";
 	}
 	public function getObjekat($slug){
 		return $slug;
+	}
+	public function anyListaZeljaDodaj(){//dd(ListaZelja::find(4)->where('aktivan',1)->get(['id'])->first()->id);
+		//if(!ListaZelja::where('smestaj_id',Input::get('smestaj'))->where('korisnici_id',Input::get('korisnik'))->where('aktivan',1)->first()) {
+		if(Input::get('zelja'))
+		if(Input::get('zelja')=="false") {
+			$lista=new ListaZelja();
+			$lista->smestaj_id=Input::get('smestaj');
+			$lista->korisnici_id=Input::get('korisnik');
+			$lista->save();
+			return $lista->id;
+			//ListaZelja::insert(['smestaj_id'=>Input::get('smestaj'),'korisnici_id'=>Input::get('korisnik')]);
+		}else
+		ListaZelja::find(Input::get('zelja'))->update(['aktivan'=>0]);
+		return ;
 	}
 }

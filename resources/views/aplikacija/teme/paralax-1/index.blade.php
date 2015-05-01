@@ -15,11 +15,11 @@
             markers = new MM.MarkerLayer();
             map.addLayer(markers);
             loadMarkers();
-            map.setCenterZoom(new com.modestmaps.Location(44.311149,17.7401466), 7);
+            //map.setCenterZoom(new com.modestmaps.Location(44.311149,17.7401466), 7);
         }
         function loadMarkers() {
             var script = document.createElement("script");
-            script.src = "/pretraga/markeri-gradovi";
+            script.src = "/pretraga/aplikacija/{{$podaci['app']}}";
             document.getElementsByTagName("head")[0].appendChild(script);
         }
         function onLoadMarkers(collection) {
@@ -28,7 +28,7 @@
                     locations = [];
             for (var i = 0; i < len; i++) {
                 var feature = features[i],
-                        type = feature.properties.crime_type,
+                        type = feature.properties.naziv,
                         marker = document.createElement("a");
 
                 marker.feature = feature;
@@ -66,7 +66,7 @@
             // tell the map to fit all of the locations in the available space
             map.setExtent(locations);
             //map.setCenterZoom(locations[0],6);
-            map.setCenterZoom(new com.modestmaps.Location(44.311149,17.7401466), 7);//45.311149,15.7401466), 6);
+            //map.setCenterZoom(new com.modestmaps.Location(44.311149,17.7401466), 7);//45.311149,15.7401466), 6);
         }
         function getMarker(target) {
             var marker = target;
@@ -136,7 +136,7 @@
     </style>
 
     <script>
-        //$(document).ready(function(){ initMap(); })
+        $(document).ready(function(){ initMap(); })
     </script>
 @endsection
 
@@ -211,14 +211,100 @@
 
     <div id="skrollr-body">
         {{--pocetna START::--}}
-        <div class="content content-full" id="{{$podaci[0]['slug']}}">
-            <div class="container" style="">
-                <h1>{!!$podaci[0]['naziv']!!}</h1>
-                {!!$podaci[0]['sadrzaj']!!}
+        {{--<div class="content content-full" id="{{$podaci[0]['slug']}}">--}}
+            {{--<div class="container" style="">--}}
+                {{--<h1>{!!$podaci[0]['naziv']!!}</h1>--}}
+                {{--{!!$podaci[0]['sadrzaj']!!}--}}
+            {{--</div>--}}
+        {{--</div>--}}
+        {{--<div class="gap gap-100"></div>--}}
+        {{--pocetna END::--}}
+
+
+        <div class="content content-full" id="{{$podaci[0]['slug']}}"><div id="map" style="height:650px;margin-top:-80px;width:104%;margin-left: -3%;overflow:hidden"></div>
+            <div class="container" style="margin-top: -500px">
+                <div class="col-sm-5">
+                    <div style="
+                        padding: 10px 30px;
+                        background-color: rgba(38,38,38,0.7);
+                        color:#fff;
+                        -webkit-border-radius: 10px;
+                        -moz-border-radius: 10px;
+                        border-radius: 10px;
+                    ">
+                        <p><i class="glyphicon glyphicon-search"></i> Pronađite savršen smeštaj</p>
+                        <div role="tabpanel">
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#tab-rezervacije" aria-controls="tab-rezervacije" role="tab" data-toggle="tab"><i class="glyphicon glyphicon-list-alt"></i> Rezervacije</a></li>
+                                <li role="presentation"><a href="#tab-objekti" aria-controls="tab-objekti" role="tab" data-toggle="tab"><i class="glyphicon glyphicon-home"></i> Objekti</a></li>
+                            </ul>
+                            <div class="tab-content" style="padding:0 10px">
+                                <div role="tabpanel" class="tab-pane fade in active" id="tab-rezervacije">
+
+                                    {!!Form::open(['url'=>'/pretraga/aplikacija','class'=>'form-horizontal'])!!}
+                                    {!!Form::hidden('tacan_broj',1)!!}
+                                    {!!Form::hidden('aplikacija',$podaci['app'])!!}
+                                    <div class="form-group">
+                                        {!!Form::label('lgrad','Grad',['class'=>'control-label'])!!}
+                                        {!!Form::select('grad_id',$podaci['grad'],1,['class'=>'form-control'])!!}
+                                    </div>
+                                    <div class="form-group" id="datarange">
+                                        {!!Form::label('lperiod','Izaberite period',['class'=>'control-label'])!!}
+                                        <div class="input-daterange input-group col-sm-12" id="datepicker">
+                                            {!! Form::text('datumOd', null, ['class'=>'input-sm form-control','placeholder'=>'od...']) !!}
+                                            <span class="input-group-addon">do</span>
+                                            {!! Form::text('datumDo', null, ['class'=>'input-sm form-control','placeholder'=>'do...']) !!}
+                                        </div>
+                                    </div>
+                                    <script>
+                                        $('#datarange .input-daterange').datepicker({
+                                            orientation: "top auto",
+                                            weekStart: 1,
+                                            startDate: "current",
+                                            todayBtn: "linked",
+                                            toggleActive: true,
+                                            format: "yyyy-mm-dd"
+                                        });
+                                    </script>
+                                    <div class="form-group">
+                                        {!!Form::label('lgrad','Broj osoba',['class'=>'control-label'])!!}
+                                        {!!Form::select('broj_osoba',[1=>1,2=>2,3=>3,4=>4,5=>5,6=>6,7=>7,8=>8,9=>9,10=>10,11=>11,12=>12],2,['class'=>'form-control'])!!}
+                                    </div>
+                                    <div class="form-group" style="text-align: right">
+                                        {!!Form::button('<i class="glyphicon glyphicon-search"></i> Pretraga',['class'=>'btn btn-lg btn-primary','type'=>'submit'])!!}
+                                    </div>
+                                    {!!Form::close()!!}
+                                </div>
+                                <div role="tabpanel" class="tab-pane fade" id="tab-objekti">
+                                    Pretraga po nazivu smeštajnog kapaciteta (po brendu).
+                                    {!!Form::open(['url'=>'/pretraga/smestaji','class'=>'form-horizontal'])!!}
+                                    <div class="form-group">
+                                        {!!Form::label('lnaziv','Naziv',['class'=>'col-sm-3'])!!}
+                                        <div class="col-sm-9">
+                                            {!!Form::text('naziv',null,['class'=>'form-control'])!!}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-3"></div>
+                                        <div class="col-sm-9">
+                                            {!!Form::button('Pretraži',['type'=>'submit','class'=>'form-control'])!!}
+                                        </div>
+                                    </div>
+                                    {!!Form::close()!!}
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-sm-7">
+                    <div style="width: 100%; height: 500px"></div>
+                </div>
             </div>
         </div>
         <div class="gap gap-100"></div>
-        {{--pocetna END::--}}
+
 
         {{--Smestaj START::--}}
         <div class="content-full container" id="{{$podaci[1]['slug']}}">

@@ -160,6 +160,17 @@ class KreiranjeBaze extends Migration{
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->nullable();
         });
+        Schema::create('lista_zelja', function(Blueprint $table)
+        {
+            $table->bigIncrements('id');
+            $table->tinyInteger('aktivan')->default(1);
+            $table->unsignedBigInteger('smestaj_id');
+            $table->foreign('smestaj_id')->references('id')->on('smestaj');
+            $table->unsignedBigInteger('korisnici_id');
+            $table->foreign('korisnici_id')->references('id')->on('korisnici');
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->nullable();
+        });
         Schema::create('komentari', function(Blueprint $table)
         {
             $table->bigIncrements('id');
@@ -222,6 +233,7 @@ class KreiranjeBaze extends Migration{
         Schema::drop('log');
         Schema::drop('pass_reset');
         Schema::drop('rezervacije');
+        Schema::drop('lista_zelja');
         Schema::drop('smestaj');
         Schema::drop('vrsta_smestaja');
         Schema::drop('kapacitet');
