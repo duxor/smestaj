@@ -21,6 +21,7 @@
     {!! HTML::style('teme/osnovna-paralax/css/templejt.css') !!}
     {!! HTML::style('css/bootstrap.min.css') !!}
     {!! HTML::style('css/fontello.css') !!}
+    {!! HTML::style('css/animation.css') !!}
     {!! HTML::style('teme/osnovna-paralax/css/parallax.css') !!}
     {!! HTML::style('css/datepicker.css') !!}
 

@@ -186,7 +186,7 @@ class TestObjekat extends Seeder{
 		                'nalog_id' => 4
 						],
 						[//4
-						'naziv'=>'Naj-smeštaj',
+						'naziv'=>'Palace',
 		            	'y'=>'44.751939',
 		            	'x'=>'19.196119',
 		            	'z'=>'1',
@@ -198,14 +198,234 @@ class TestObjekat extends Seeder{
 						]
 
 					]);
-		$objekti=Objekat::get(['id','naziv'])->toArray();
-		foreach($objekti as $objekat){
-			Smestaj::insert([
-				['naziv'=>$objekat['naziv'],'slug'=>'','kapacitet_id'=>3,'vrsta_smestaja_id'=>1,'objekat_id'=>$objekat['id']],
-				['naziv'=>$objekat['naziv'],'slug'=>'','kapacitet_id'=>5,'vrsta_smestaja_id'=>2,'objekat_id'=>$objekat['id']],
-				['naziv'=>$objekat['naziv'],'slug'=>'','kapacitet_id'=>9,'vrsta_smestaja_id'=>1,'objekat_id'=>$objekat['id']],
+
+			DB::table('smestaj')->insert(
+			[
+				[
+					'naziv'=>'Asteris hotel',
+					'slug'=>'hotel-asteris',
+					'kapacitet_id'=>'3',
+					'vrsta_smestaja_id'=>'1',
+					'objekat_id'=>'1'
+				],
+				[
+					'naziv'=>'Asteris hotel',
+					'slug'=>'hotel-asteris',
+					'kapacitet_id'=>'5',
+					'vrsta_smestaja_id'=>'2',
+					'objekat_id'=>'1'
+				],
+				[
+					'naziv'=>'Green hostel',
+					'slug'=>'hostel-green',
+					'kapacitet_id'=>'3',
+					'vrsta_smestaja_id'=>'1',
+					'objekat_id'=>'2'
+				],
+				[
+					'naziv'=>'Green hostel',
+					'slug'=>'hostel-green',
+					'kapacitet_id'=>'5',
+					'vrsta_smestaja_id'=>'2',
+					'objekat_id'=>'2'
+				],
+				[
+					'naziv'=>'Motel Dexy',
+					'slug'=>'motel-dexy',
+					'kapacitet_id'=>'3',
+					'vrsta_smestaja_id'=>'1',
+					'objekat_id'=>'3'
+				],
+				[
+					'naziv'=>'Motel Dexy',
+					'slug'=>'motel-dexy',
+					'kapacitet_id'=>'5',
+					'vrsta_smestaja_id'=>'2',
+					'objekat_id'=>'3'
+				],
+				[
+					'naziv'=>'Naj-smeštaj',
+					'slug'=>'privatni-naj',
+					'kapacitet_id'=>'3',
+					'vrsta_smestaja_id'=>'1',
+					'objekat_id'=>'4'
+				],
+				[
+					'naziv'=>'Naj-smeštaj',
+					'slug'=>'privatni-naj',
+					'kapacitet_id'=>'6',
+					'vrsta_smestaja_id'=>'2',
+					'objekat_id'=>'4'
+				],
+				[
+					'naziv'=>'Nais-home',
+					'slug'=>'hotel-nais',
+					'kapacitet_id'=>'3',
+					'vrsta_smestaja_id'=>'1',
+					'objekat_id'=>'5'
+				],
+				[
+					'naziv'=>'Nais-home',
+					'slug'=>'hotel-nais',
+					'kapacitet_id'=>'4',
+					'vrsta_smestaja_id'=>'2',
+					'objekat_id'=>'5'
+				],
+				[
+					'naziv'=>'Hostel-Jug',
+					'slug'=>'hostel-jug',
+					'kapacitet_id'=>'3',
+					'vrsta_smestaja_id'=>'1',
+					'objekat_id'=>'6'
+				],
+				[
+					'naziv'=>'Hostel-Jug',
+					'slug'=>'hostel-jug',
+					'kapacitet_id'=>'6',
+					'vrsta_smestaja_id'=>'2',
+					'objekat_id'=>'6'
+				],
+				[
+					'naziv'=>'Motel - South Paradise',
+					'slug'=>'motel-south-paradise',
+					'kapacitet_id'=>'3',
+					'vrsta_smestaja_id'=>'1',
+					'objekat_id'=>'7'
+				],
+				[
+					'naziv'=>'Motel - South Paradise',
+					'slug'=>'motel-south-paradise',
+					'kapacitet_id'=>'5',
+					'vrsta_smestaja_id'=>'2',
+					'objekat_id'=>'7'
+				],
+				[
+					'naziv'=>'Javni-dom',
+					'slug'=>'privatni-javni',
+					'kapacitet_id'=>'3',
+					'vrsta_smestaja_id'=>'1',
+					'objekat_id'=>'8'
+				],
+				[
+					'naziv'=>'Javni-dom',
+					'slug'=>'privatni-javni',
+					'kapacitet_id'=>'4',
+					'vrsta_smestaja_id'=>'2',
+					'objekat_id'=>'8'
+				],
+				[
+					'naziv'=>'Pleasure',
+					'slug'=>'hotel-pleasure',
+					'kapacitet_id'=>'3',
+					'vrsta_smestaja_id'=>'1',
+					'objekat_id'=>'9'
+				],
+				[
+					'naziv'=>'Pleasure',
+					'slug'=>'hotel-pleasure',
+					'kapacitet_id'=>'5',
+					'vrsta_smestaja_id'=>'2',
+					'objekat_id'=>'9'
+				],
+				[
+					'naziv'=>'Hostel Sunny-valley',
+					'slug'=>'hostel-sunny-valley',
+					'kapacitet_id'=>'3',
+					'vrsta_smestaja_id'=>'1',
+					'objekat_id'=>'10'
+				],
+				[
+					'naziv'=>'Hostel Sunny-valley',
+					'slug'=>'hostel-sunny-valley',
+					'kapacitet_id'=>'4',
+					'vrsta_smestaja_id'=>'2',
+					'objekat_id'=>'10'
+				],
+				[
+					'naziv'=>'Užički raj',
+					'slug'=>'motel-uzicki-raj',
+					'kapacitet_id'=>'3',
+					'vrsta_smestaja_id'=>'1',
+					'objekat_id'=>'11'
+				],
+				[
+					'naziv'=>'Užički raj',
+					'slug'=>'motel-uzicki-raj',
+					'kapacitet_id'=>'4',
+					'vrsta_smestaja_id'=>'2',
+					'objekat_id'=>'11'
+				],
+				[
+					'naziv'=>'Naj-smeštaj',
+					'slug'=>'privatni-naj',
+					'kapacitet_id'=>'3',
+					'vrsta_smestaja_id'=>'1',
+					'objekat_id'=>'12'
+				],
+				[
+					'naziv'=>'Naj-smeštaj',
+					'slug'=>'privatni-naj',
+					'kapacitet_id'=>'4',
+					'vrsta_smestaja_id'=>'2',
+					'objekat_id'=>'12'
+				],
+				[
+					'naziv'=>'Semberija',
+					'slug'=>'hotel-semberija',
+					'kapacitet_id'=>'3',
+					'vrsta_smestaja_id'=>'1',
+					'objekat_id'=>'13'
+				],
+				[
+					'naziv'=>'Semberija',
+					'slug'=>'hotel-semberija',
+					'kapacitet_id'=>'5',
+					'vrsta_smestaja_id'=>'2',
+					'objekat_id'=>'13'
+				],
+				[
+					'naziv'=>'Posavska noć',
+					'slug'=>'hostel-posavska-noc',
+					'kapacitet_id'=>'3',
+					'vrsta_smestaja_id'=>'1',
+					'objekat_id'=>'14'
+				],
+				[
+					'naziv'=>'Posavska noć',
+					'slug'=>'hostel-posavska-noc',
+					'kapacitet_id'=>'5',
+					'vrsta_smestaja_id'=>'2',
+					'objekat_id'=>'14'
+				],
+				[
+					'naziv'=>'Dream',
+					'slug'=>'motel-dream',
+					'kapacitet_id'=>'3',
+					'vrsta_smestaja_id'=>'1',
+					'objekat_id'=>'15'
+				],
+				[
+					'naziv'=>'Dream',
+					'slug'=>'motel-dream',
+					'kapacitet_id'=>'6',
+					'vrsta_smestaja_id'=>'2',
+					'objekat_id'=>'15'
+				],
+				[
+					'naziv'=>'Palace',
+					'slug'=>'privatni-palace',
+					'kapacitet_id'=>'3',
+					'vrsta_smestaja_id'=>'1',
+					'objekat_id'=>'16'
+				],
+				[
+					'naziv'=>'Palace',
+					'slug'=>'privatni-palace',
+					'kapacitet_id'=>'6',
+					'vrsta_smestaja_id'=>'2',
+					'objekat_id'=>'16'
+				]
 			]);
-		}
 	}
 
 }
