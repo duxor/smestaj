@@ -29,7 +29,6 @@
 								<td>
 									{!!Form::open(['url'=>'/aplikacija/lista-zelja-dodaj','class'=>'form-horizontal'])!!}
 				    					{!!Form::hidden('zelja',$lista['id'])!!}
-										
 										<p data-placement="top" data-toggle="tooltip" title="Ukloni iz liste"><button  class="btn btn-xs btn-primary" type="submit" ><span class="glyphicon glyphicon-remove"></span></button></p>
 									{!!Form::close()!!}
 								</td>

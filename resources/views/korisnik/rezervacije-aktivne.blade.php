@@ -1,4 +1,4 @@
-@extends('moderacija.master-moderator')
+@extends('korisnik.master')
 @section('content')
 
 @if($rezervacije)
@@ -19,7 +19,7 @@
 								<th>Vrsta smeštaja</th>
 								<th>Broj osoba</th>
 								<th>Napomena</th>
-								<th>Rezervisao korisnik</th>
+								<th></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -32,6 +32,7 @@
 								<td>{{$rez['vrsta_smestaja_naziv']}}</td>
 								<td>{{$rez['broj_osoba']}}</td>
 								<td>{{$rez['napomena']}}</td>
+								<td><p data-placement="top" data-toggle="tooltip" title="Ažuriraj"><a href="{!!url('/rezervacije/izmeni-rezervaciju/'.$rez['id']) !!}" class="btn btn-xs btn-primary" ><span class="glyphicon glyphicon-pencil"></span></a></p></td>
 							</tr>
 							@endforeach
 
@@ -41,7 +42,7 @@
 			</div>
 		</div>
 	</div>
-@else <h1 class="col-sm-12">Nemaaktuelnih rezervacija!</h1>
+@else <h1 class="col-sm-12">Nema aktuelnih rezervacija!</h1>
 @endif
-	
+
 @endsection

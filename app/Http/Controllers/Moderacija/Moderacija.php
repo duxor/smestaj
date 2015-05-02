@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Pagination;
 use App\Security;
 use App\Tema;
 use App\Nalog;
@@ -19,8 +18,7 @@ use App\Grad;
 use App\Smestaj;
 use App\VrstaSmestaja;
 use App\Kapacitet;
-use Illuminate\Pagination\BootstrapThreePresenter;
-use Illuminate\Support\Facades\Paginator;
+
 
 
 
@@ -157,7 +155,7 @@ class Moderacija extends Controller {
 
 	public function getSmestaj(){
 		$nalog=Nalog::where('korisnici_id','=',Session::get('id'))->where('aktivan','=','1')->lists('naziv','id');
-		return Security::autentifikacija('moderacija.objekti.smestaj', compact('objekti','nalog'),4);
+		return Security::autentifikacija('moderacija.rezervacija.aktuelno', compact('objekti','nalog'),4);
 	}
 	public function postPregledSmestaja(){
 		$nal=Input::get('nalog');

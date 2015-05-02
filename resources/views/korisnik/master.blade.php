@@ -72,7 +72,7 @@
                         <ul class="dropdown-menu">
                             <li class="dropdown-header">Rezervacije</li>
                             <li class="divider"></li>
-                            <li><a href="{!!url('/moderator/u-pripremi')!!}"><i class="glyphicon glyphicon-wrench"></i> Aktivne</a></li>
+                            <li><a href="{!!url('/rezervacije/aktivne')!!}"><i class="glyphicon glyphicon-wrench"></i> Aktivne</a></li>
                             <li><a href="{!!url('/moderator/u-pripremi')!!}"><i class="glyphicon glyphicon-pencil"></i> Arhiva</a></li>
                         </ul>
                     </li>
