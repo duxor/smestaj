@@ -26,7 +26,13 @@
 								<td>{{$lista['naziv_smestaja']}}</td>
 								<td>{{$lista['naziv_kapaciteta']}}</td>
 								<td>{{$lista['broj_osoba']}}</td>
-								<td><p data-placement="top" data-toggle="tooltip" title="Ukloni iz liste"><a href="{!!url('/aplikacija/ukloni-lista-zelja/'.$lista['id']) !!}" class="btn btn-xs btn-primary" ><span class="glyphicon glyphicon-remove"></span></a></p></td>
+								<td>
+									{!!Form::open(['url'=>'/aplikacija/lista-zelja-dodaj','class'=>'form-horizontal'])!!}
+				    					{!!Form::hidden('zelja',$lista['id'])!!}
+										
+										<p data-placement="top" data-toggle="tooltip" title="Ukloni iz liste"><button  class="btn btn-xs btn-primary" type="submit" ><span class="glyphicon glyphicon-remove"></span></button></p>
+									{!!Form::close()!!}
+								</td>
 							</tr>
 							@endforeach
 

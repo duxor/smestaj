@@ -44,8 +44,9 @@ class Aplikacija extends Controller {
 			$lista->save();
 			return $lista->id;
 		}else
-		ListaZelja::find(Input::get('zelja'))->update(['aktivan'=>0]);
-		return ;
+		ListaZelja::where('korisnici_id','=',Session::get('id'))
+		->where('smestaj_id','=',Input::get('zelja'))->update(['aktivan'=>'0']);
+				return Redirect::back();
 	}
 	public function getListaZelja(){
 		$lista_zelja=ListaZelja::where('korisnici_id','=',Session::get('id'))
@@ -57,10 +58,5 @@ class Aplikacija extends Controller {
 						->get(['smestaj.id','smestaj.naziv','objekat.naziv as naziv_objekta',
 							'vrsta_smestaja.naziv as naziv_smestaja','kapacitet.naziv as naziv_kapaciteta','kapacitet.broj_osoba as broj_osoba'])->toArray();
 		return view('korisnik.lista-zelja',compact('lista_zelja'));
-	}
-	public function getUkloniListaZelja($id){
-		ListaZelja::where('korisnici_id','=',Session::get('id'))
-		->where('smestaj_id','=',$id)->update(['aktivan'=>'0']);
-				return Redirect::back();
 	}
 }
