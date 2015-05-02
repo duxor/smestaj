@@ -91,10 +91,13 @@
                         <ul class="dropdown-menu">
                             <li class="dropdown-header">Galerija</li>
                             <li class="divider"></li>
-                            <li><a href="{!!url('/moderator/u-pripremi')!!}">Osnovne</a></li>
-                            <li><a href="{!!url('/moderator/u-pripremi')!!}">Slajderi</a></li>
-                            <li><a href="{!!url('/moderator/u-pripremi')!!}">Pozadine</a></li>
-                            <li><a href="{!!url('/moderator/u-pripremi')!!}">Korisničke</a></li>
+                            @if($podaci['aplikacije'])
+                            @foreach($podaci['aplikacije'] as $aplikacije)
+                                <li><a href="/moderator/{{$aplikacije['slug']}}/galerije">{{$aplikacije['naziv']}}</a></li>
+                            @endforeach
+                            @else
+                                <li>Ne postoji ni jedna aplikacija u evidenciji.</li>
+                            @endif
                         </ul>
                     </li>
                     <li class="dropdown">

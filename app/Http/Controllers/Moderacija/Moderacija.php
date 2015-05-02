@@ -20,16 +20,17 @@ use App\VrstaSmestaja;
 use App\Kapacitet;
 
 
-
-
 class Moderacija extends Controller {
+	public function getRefresh(){
+		return Redirect::back();
+	}
 	public function getIndex(){
-		$aplikacije=Nalog::join ('korisnici', 'nalog.korisnici_id','=','korisnici.id' )
+		$podaci['aplikacije']=Nalog::join ('korisnici', 'nalog.korisnici_id','=','korisnici.id' )
 			->join('tema','nalog.tema_id','=','tema.id')
 			->where('korisnici.id',Session::get('id'))
 			->get(['nalog.id','nalog.naziv as naziv','nalog.slug','nalog.aktivan','tema.naziv as tema','korisnici.ime'])
 			->toArray();
-		return Security::autentifikacija('moderacija.aplikacija.index', compact('aplikacije'),4);
+		return Security::autentifikacija('moderacija.aplikacija.index', compact('podaci'),4);
 	}
 	public function getPodesavanja($slug=null){
 		$podaci['aplikacije']=$slug?Nalog::where('aktivan',1)->where('korisnici_id',Session::get('id'))->where('slug',$slug)->get(['id','slug','naziv','saradnja','tema_id'])->toArray():Nalog::where('aktivan',1)->where('korisnici_id',Session::get('id'))->get(['id','slug','naziv','saradnja','tema_id'])->toArray();
