@@ -45,7 +45,7 @@ class Aplikacija extends Controller {
 			return $lista->id;
 		}else
 		ListaZelja::where('korisnici_id','=',Session::get('id'))
-		->where('smestaj_id','=',Input::get('zelja'))->update(['aktivan'=>'0']);
+		->where('id','=',Input::get('zelja'))->update(['aktivan'=>'0']);
 				return Redirect::back();
 	}
 	public function getListaZelja(){
