@@ -15,8 +15,6 @@
             spotlight = new SpotlightLayer();
             map.addLayer(spotlight);
             markers = new MM.MarkerLayer();
-            //map.setCenterZoom(new com.modestmaps.Location(45.311149,15.7401466), 6);
-
             map.addLayer(markers);
             loadMarkers();
         }
@@ -31,22 +29,15 @@
                     locations = [];
             for (var i = 0; i < len; i++) {
                 var feature = features[i],
-                        type = feature.properties.naslov,//crime_type,
+                        type = feature.properties.naslov,
                         marker = document.createElement("a");
                 marker.feature = feature;
                 marker.type = type;
                 // give it a title
-                marker.setAttribute("title", [
-                    type//, "on", feature.properties.date_time
-                ]);//.join(" "));
+                marker.setAttribute("title", [type]);
                 marker.setAttribute("class", "report");
                 // set the href to link to crimespotting's crime page
                 marker.setAttribute("href", feature.link);
-                   ////properties.date_time.substr(0, 10),
-                 /*type.replace(/ /g, "_"),
-                 feature.id
-                 ].join("/"));
-                 */
                 // create an image icon
                 var img = marker.appendChild(document.createElement("a"));
                 img.setAttribute("class","glyphicon glyphicon-screenshot");//glyphicon glyphicon-pushpin");//("src", "../geojson/icons/" + type.replace(/ /g, "_") + ".png");
@@ -174,7 +165,7 @@
                 <a href="/{{$smestaj['slugApp']}}/{{$smestaj['slugSmestaj']}}" class="btn btn-lg btn-default"><i class="glyphicon glyphicon-zoom-in"></i> Pregled</a>
                 <a href="#" class="btn btn-lg btn-info"><i class="glyphicon glyphicon-check"></i> Rezervacija</a>
                 @if(\App\Security::autentifikacijaTest())
-                    <button id="button" class="btn btn-lg btn-default _tooltip" @if($smestaj['zelja']) data-zelja="{{$smestaj['zelja']}}" style="color:red" title="Izbaci iz liste zelja" @else data-zelja="false" title="Dodaj u listu želja" @endif data-id="{{$smestaj['id']}}" data-toggle="tooltip" data-placement="bottom"><i class="glyphicon glyphicon-heart"></i></button>
+                    <button id="zelja" class="btn btn-lg btn-default _tooltip" @if($smestaj['zelja']) data-zelja="{{$smestaj['zelja']}}" style="color:red" title="Izbaci iz liste zelja" @else data-zelja="false" title="Dodaj u listu želja" @endif data-id="{{$smestaj['id']}}" data-toggle="tooltip" data-placement="bottom"><i class="glyphicon glyphicon-heart"></i></button>
                 @else
                     <a href="/login" class="btn btn-lg btn-default _tooltip"  title="Dodaj u listu želja" data-toggle="tooltip" data-placement="bottom"><i class="glyphicon glyphicon-heart"></i></a>
                 @endif
@@ -184,8 +175,8 @@
         <style>._tooltip:hover{color: red}</style>
         <script>
             $(document).ready(function(){$('button').tooltip();$('a').tooltip()});
-            $("button").click(function(){
-                $(this).html("<i class='icon-spin6'></i>");
+            $("button#zelja").click(function(){
+                $(this).html("<i class='icon-spin6'></i> U procesu...");
                 var id=$(this).data("id");
                 $.post('/aplikacija/lista-zelja-dodaj',
                         {
