@@ -15,6 +15,7 @@ Route::get('/login','Log@getLogin');
 Route::controller('/profil','Profil');
 Route::controller('/pretraga','Pretraga');
 Route::controller('/aplikacija','Aplikacija');
+Route::controller('/rezervacije','Rezervacije');
 
 Route::get('/{slug?}','Aplikacija@getIndex');
 
