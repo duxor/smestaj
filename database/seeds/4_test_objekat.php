@@ -201,9 +201,9 @@ class TestObjekat extends Seeder{
 		$objekti=Objekat::get(['id','naziv'])->toArray();
 		foreach($objekti as $objekat){
 			Smestaj::insert([
-				['naziv'=>$objekat['naziv'],'slug'=>'moderator-app','kapacitet_id'=>3,'vrsta_smestaja_id'=>1,'objekat_id'=>$objekat['id']],
-				['naziv'=>$objekat['naziv'],'slug'=>'todorovic-app','kapacitet_id'=>5,'vrsta_smestaja_id'=>2,'objekat_id'=>$objekat['id']],
-				['naziv'=>$objekat['naziv'],'slug'=>'nenadovic-app','kapacitet_id'=>9,'vrsta_smestaja_id'=>1,'objekat_id'=>$objekat['id']],
+				['naziv'=>$objekat['naziv'],'slug'=>'','kapacitet_id'=>3,'vrsta_smestaja_id'=>1,'objekat_id'=>$objekat['id']],
+				['naziv'=>$objekat['naziv'],'slug'=>'','kapacitet_id'=>5,'vrsta_smestaja_id'=>2,'objekat_id'=>$objekat['id']],
+				['naziv'=>$objekat['naziv'],'slug'=>'','kapacitet_id'=>9,'vrsta_smestaja_id'=>1,'objekat_id'=>$objekat['id']],
 			]);
 		}
 	}
