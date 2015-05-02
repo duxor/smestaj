@@ -18,5 +18,6 @@ Route::controller('/aplikacija','Aplikacija');
 Route::controller('/rezervacije','Rezervacije');
 
 Route::get('/{slug?}','Aplikacija@getIndex');
+Route::get('/{slugApp}/{slugSmestaj}','Aplikacija@getSmestaj');
 
 //Route::controller('/','Glavni');

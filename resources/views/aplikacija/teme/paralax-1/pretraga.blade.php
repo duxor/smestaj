@@ -171,7 +171,7 @@
                     <tr><td>Broj mesta:</td><td>{{$smestaj['broj_osoba']}}</td></tr>
                     <tr><td>Adresa:</td><td>{{$smestaj['adresa']}}</td></tr>
                 </table>
-                <a href="#" class="btn btn-lg btn-default"><i class="glyphicon glyphicon-zoom-in"></i> Pregled</a>
+                <a href="/{{$smestaj['slugApp']}}/{{$smestaj['slugSmestaj']}}" class="btn btn-lg btn-default"><i class="glyphicon glyphicon-zoom-in"></i> Pregled</a>
                 <a href="#" class="btn btn-lg btn-info"><i class="glyphicon glyphicon-check"></i> Rezervacija</a>
                 @if(\App\Security::autentifikacijaTest())
                     <button id="button" class="btn btn-lg btn-default _tooltip" @if($smestaj['zelja']) data-zelja="{{$smestaj['zelja']}}" style="color:red" title="Izbaci iz liste zelja" @else data-zelja="false" title="Dodaj u listu želja" @endif data-id="{{$smestaj['id']}}" data-toggle="tooltip" data-placement="bottom"><i class="glyphicon glyphicon-heart"></i></button>

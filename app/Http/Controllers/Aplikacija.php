@@ -31,8 +31,9 @@ class Aplikacija extends Controller {
 			return view("aplikacija.teme.{$nalog['tema_slug']}.index",compact('podaci'));
 		}else return'Aplikacija nije aktivna!';
 	}
-	public function getObjekat($slug){
-		return $slug;
+	public function getSmestaj($slugApp,$slugSmestaj){
+		return $slugApp.'/'.$slugSmestaj;
+		return view("aplikacija.teme.{$nalog['tema_slug']}.smestaj",compact('podaci'));
 	}
 	public function postListaZeljaDodaj(){
 		if(Input::get('zelja'))
