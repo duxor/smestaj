@@ -210,7 +210,7 @@ class TestObjekat extends Seeder{
 				],
 				[
 					'naziv'=>'Asteris hotel',
-					'slug'=>'hotel-asteris',
+					'slug'=>'hotel-asteris-apartmani',
 					'kapacitet_id'=>'5',
 					'vrsta_smestaja_id'=>'2',
 					'objekat_id'=>'1'
@@ -224,7 +224,7 @@ class TestObjekat extends Seeder{
 				],
 				[
 					'naziv'=>'Green hostel',
-					'slug'=>'hostel-green',
+					'slug'=>'hostel-green-apartmani',
 					'kapacitet_id'=>'5',
 					'vrsta_smestaja_id'=>'2',
 					'objekat_id'=>'2'
@@ -238,7 +238,7 @@ class TestObjekat extends Seeder{
 				],
 				[
 					'naziv'=>'Motel Dexy',
-					'slug'=>'motel-dexy',
+					'slug'=>'motel-dexy-apartmani',
 					'kapacitet_id'=>'5',
 					'vrsta_smestaja_id'=>'2',
 					'objekat_id'=>'3'
@@ -252,7 +252,7 @@ class TestObjekat extends Seeder{
 				],
 				[
 					'naziv'=>'Naj-smeštaj',
-					'slug'=>'privatni-naj',
+					'slug'=>'privatni-naj-apartmani',
 					'kapacitet_id'=>'6',
 					'vrsta_smestaja_id'=>'2',
 					'objekat_id'=>'4'
@@ -266,7 +266,7 @@ class TestObjekat extends Seeder{
 				],
 				[
 					'naziv'=>'Nais-home',
-					'slug'=>'hotel-nais',
+					'slug'=>'hotel-nais-apartmani',
 					'kapacitet_id'=>'4',
 					'vrsta_smestaja_id'=>'2',
 					'objekat_id'=>'5'
@@ -280,7 +280,7 @@ class TestObjekat extends Seeder{
 				],
 				[
 					'naziv'=>'Hostel-Jug',
-					'slug'=>'hostel-jug',
+					'slug'=>'hostel-jug-apartmani',
 					'kapacitet_id'=>'6',
 					'vrsta_smestaja_id'=>'2',
 					'objekat_id'=>'6'
@@ -294,7 +294,7 @@ class TestObjekat extends Seeder{
 				],
 				[
 					'naziv'=>'Motel - South Paradise',
-					'slug'=>'motel-south-paradise',
+					'slug'=>'motel-south-paradise-apartmani',
 					'kapacitet_id'=>'5',
 					'vrsta_smestaja_id'=>'2',
 					'objekat_id'=>'7'
@@ -308,7 +308,7 @@ class TestObjekat extends Seeder{
 				],
 				[
 					'naziv'=>'Javni-dom',
-					'slug'=>'privatni-javni',
+					'slug'=>'privatni-javni-apartmani',
 					'kapacitet_id'=>'4',
 					'vrsta_smestaja_id'=>'2',
 					'objekat_id'=>'8'
@@ -322,7 +322,7 @@ class TestObjekat extends Seeder{
 				],
 				[
 					'naziv'=>'Pleasure',
-					'slug'=>'hotel-pleasure',
+					'slug'=>'hotel-pleasure-apartmani',
 					'kapacitet_id'=>'5',
 					'vrsta_smestaja_id'=>'2',
 					'objekat_id'=>'9'
@@ -336,7 +336,7 @@ class TestObjekat extends Seeder{
 				],
 				[
 					'naziv'=>'Hostel Sunny-valley',
-					'slug'=>'hostel-sunny-valley',
+					'slug'=>'hostel-sunny-valley-apartmani',
 					'kapacitet_id'=>'4',
 					'vrsta_smestaja_id'=>'2',
 					'objekat_id'=>'10'
@@ -350,7 +350,7 @@ class TestObjekat extends Seeder{
 				],
 				[
 					'naziv'=>'Užički raj',
-					'slug'=>'motel-uzicki-raj',
+					'slug'=>'motel-uzicki-raj-apartmani',
 					'kapacitet_id'=>'4',
 					'vrsta_smestaja_id'=>'2',
 					'objekat_id'=>'11'
@@ -364,7 +364,7 @@ class TestObjekat extends Seeder{
 				],
 				[
 					'naziv'=>'Roxy-smeštaj',
-					'slug'=>'privatni-roxy',
+					'slug'=>'privatni-roxy-apartmani',
 					'kapacitet_id'=>'4',
 					'vrsta_smestaja_id'=>'2',
 					'objekat_id'=>'12'
@@ -378,7 +378,7 @@ class TestObjekat extends Seeder{
 				],
 				[
 					'naziv'=>'Semberija',
-					'slug'=>'hotel-semberija',
+					'slug'=>'hotel-semberija-apartmani',
 					'kapacitet_id'=>'5',
 					'vrsta_smestaja_id'=>'2',
 					'objekat_id'=>'13'
@@ -392,7 +392,7 @@ class TestObjekat extends Seeder{
 				],
 				[
 					'naziv'=>'Posavska noć',
-					'slug'=>'hostel-posavska-noc',
+					'slug'=>'hostel-posavska-noc-apartmani',
 					'kapacitet_id'=>'5',
 					'vrsta_smestaja_id'=>'2',
 					'objekat_id'=>'14'
@@ -406,7 +406,7 @@ class TestObjekat extends Seeder{
 				],
 				[
 					'naziv'=>'Dream',
-					'slug'=>'motel-dream',
+					'slug'=>'motel-dream-apartmani',
 					'kapacitet_id'=>'6',
 					'vrsta_smestaja_id'=>'2',
 					'objekat_id'=>'15'
@@ -420,7 +420,7 @@ class TestObjekat extends Seeder{
 				],
 				[
 					'naziv'=>'Palace',
-					'slug'=>'privatni-palace',
+					'slug'=>'privatni-palace-apartmani',
 					'kapacitet_id'=>'6',
 					'vrsta_smestaja_id'=>'2',
 					'objekat_id'=>'16'
