@@ -142,7 +142,7 @@ class TestObjekat extends Seeder{
 		                'nalog_id' => 3
 						],
 						[//4
-						'naziv'=>'Naj-smeštaj',
+						'naziv'=>'Roxy-smeštaj',
 		            	'y'=>'43.860567',
 		            	'x'=>'19.840139',
 		            	'z'=>'1',
@@ -356,15 +356,15 @@ class TestObjekat extends Seeder{
 					'objekat_id'=>'11'
 				],
 				[
-					'naziv'=>'Naj-smeštaj',
-					'slug'=>'privatni-naj',
+					'naziv'=>'Roxy-smeštaj',
+					'slug'=>'privatni-roxy',
 					'kapacitet_id'=>'3',
 					'vrsta_smestaja_id'=>'1',
 					'objekat_id'=>'12'
 				],
 				[
-					'naziv'=>'Naj-smeštaj',
-					'slug'=>'privatni-naj',
+					'naziv'=>'Roxy-smeštaj',
+					'slug'=>'privatni-roxy',
 					'kapacitet_id'=>'4',
 					'vrsta_smestaja_id'=>'2',
 					'objekat_id'=>'12'
