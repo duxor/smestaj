@@ -49,8 +49,10 @@ class KonfiguracioniPodaci extends Seeder{
             ['naziv'=>'email'],//4
             ['naziv'=>'koordinata'],//5
             ['naziv'=>'slika'],//6
-            ['naziv'=>'galerija'],//7
-            ['naziv'=>'za-prosirenje']//8
+            ['naziv'=>'galerija-osnovna'],//7----->/galerija/{username}
+            ['naziv'=>'galerija-aplikativna'],//8->/galerija/{username}/aplikacije/{slugApp}/{slugTema}
+            ['naziv'=>'galerija-korisnicka'],//9-->/galerija/{username}/korisnicke-galerije
+            ['naziv'=>'za-prosirenje']//10
         ]);
         Tema::insert([
             [//1
@@ -75,7 +77,7 @@ class KonfiguracioniPodaci extends Seeder{
             ['slug'=>'pozadina-2',  'vrsta_sadrzaja_id'=>6, 'tema_id'=>1],//6
             ['slug'=>'pozadina-3',  'vrsta_sadrzaja_id'=>6, 'tema_id'=>1],//7
             ['slug'=>'pozadina-4',  'vrsta_sadrzaja_id'=>6, 'tema_id'=>1],//8
-            ['slug'=>'osnovna',     'vrsta_sadrzaja_id'=>7, 'tema_id'=>1],//9
+            ['slug'=>'osnovne',     'vrsta_sadrzaja_id'=>7, 'tema_id'=>1],//9
             ['slug'=>'slajder-1',   'vrsta_sadrzaja_id'=>7, 'tema_id'=>1],//10
             ['slug'=>'pozadine-1',  'vrsta_sadrzaja_id'=>7, 'tema_id'=>1],//11
             ['slug'=>'prosirenje-1','vrsta_sadrzaja_id'=>7, 'tema_id'=>1],//12
@@ -92,9 +94,9 @@ class KonfiguracioniPodaci extends Seeder{
             ['slug'=>'pozadina-2',  'vrsta_sadrzaja_id'=>6, 'tema_id'=>2],//22
             ['slug'=>'pozadina-3',  'vrsta_sadrzaja_id'=>6, 'tema_id'=>2],//23
             ['slug'=>'pozadina-4',  'vrsta_sadrzaja_id'=>6, 'tema_id'=>2],//24
-            ['slug'=>'osnovna',     'vrsta_sadrzaja_id'=>7, 'tema_id'=>2],//25
-            ['slug'=>'slajder-1',   'vrsta_sadrzaja_id'=>7, 'tema_id'=>2],//26
-            ['slug'=>'pozadine-1',  'vrsta_sadrzaja_id'=>7, 'tema_id'=>2],//27
+            ['slug'=>'osnovne',     'vrsta_sadrzaja_id'=>7, 'tema_id'=>2],//25
+            ['slug'=>'slajder-1',   'vrsta_sadrzaja_id'=>8, 'tema_id'=>2],//26
+            ['slug'=>'pozadine-1',  'vrsta_sadrzaja_id'=>8, 'tema_id'=>2],//27
             ['slug'=>'prosirenje-1','vrsta_sadrzaja_id'=>7, 'tema_id'=>2],//28
             ['slug'=>'prosirenje-2','vrsta_sadrzaja_id'=>7, 'tema_id'=>2],//29
             ['slug'=>'prosirenje-3','vrsta_sadrzaja_id'=>7, 'tema_id'=>2],//30
@@ -223,19 +225,19 @@ class KonfiguracioniPodaci extends Seeder{
             ],
             [
                 'naziv'=>'Galerija osnovnih fotografija',
-                'sadrzaj'=>'',
+                'sadrzaj'=>null,
                 'icon'=>null,
                 'templejt_id'=>25
             ],
             [
-                'naziv'=>'Pozadine',
-                'sadrzaj'=>'',
+                'naziv'=>'Slajderi',
+                'sadrzaj'=>null,
                 'icon'=>null,
                 'templejt_id'=>26
             ],
             [
-                'naziv'=>'Slajderi',
-                'sadrzaj'=>'',
+                'naziv'=>'Pozadine',
+                'sadrzaj'=>null,
                 'icon'=>null,
                 'templejt_id'=>27
             ]
