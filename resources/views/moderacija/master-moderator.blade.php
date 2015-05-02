@@ -86,7 +86,17 @@
                             <li><a href="{!!url('/moderator/u-pripremi')!!}"><i class="glyphicon glyphicon-zoom-in"></i> Pretraga</a></li>
                         </ul>
                     </li>
-                    <li><a href="{!!url('moderator/u-pripremi')!!}" id="galerija" data-toggle="tooltip" data-placement="bottom" title="Galerija"><i class="glyphicon glyphicon-picture"></i></a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="galerija" data-toggle="tooltip" data-placement="bottom" title="Galerija"><i class="glyphicon glyphicon-picture"></i></a>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-header">Galerija</li>
+                            <li class="divider"></li>
+                            <li><a href="{!!url('/moderator/u-pripremi')!!}">Osnovne</a></li>
+                            <li><a href="{!!url('/moderator/u-pripremi')!!}">Slajderi</a></li>
+                            <li><a href="{!!url('/moderator/u-pripremi')!!}">Pozadine</a></li>
+                            <li><a href="{!!url('/moderator/u-pripremi')!!}">Korisničke</a></li>
+                        </ul>
+                    </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="analitika" data-toggle="tooltip" data-placement="bottom" title="Analitika"><i class="glyphicon glyphicon-stats"></i></a>
                         <ul class="dropdown-menu">
