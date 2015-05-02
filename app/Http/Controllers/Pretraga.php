@@ -48,13 +48,13 @@ class Pretraga extends Controller {
 			->join('kapacitet','kapacitet.id','=','smestaj.kapacitet_id')
 			->where('grad_id',Input::get('grad_id'))->where('broj_osoba',(Input::get('tacan_broj')?'':'>').'=',Input::get('broj_osoba'))
 			->where('objekat.aktivan',1)->where('smestaj.aktivan',1)
-			->get(['objekat.id','objekat.naziv','slug','x','y','adresa'])->toArray();
+			->get(['objekat.id','objekat.naziv','nalog.slug as slugApp','smestaj.slug as slugSmestaj','x','y','adresa'])->toArray();
 		$niz = 'onLoadMarkers({"type": "FeatureCollection","features": [';
 		$i=0;
 		foreach($nalozi as $nalog){
 			if($i==0)$i=1;
 			else $niz.=',';
-			$niz.='{"id":"'.$nalog['id'].'","slug":"'.$nalog['slug'].'","type":"Feature","geometry":{"type":"Point","coordinates":['.$nalog['x'].','.$nalog['y'].']},"properties":{"naslov":"'.$nalog['naziv'].'","description":null,"case_number":null,"address":null,"zip_code":null,"beat":null,"accuracy":"9"}}';
+			$niz.='{"id":"'.$nalog['id'].'","link":"/'.$nalog['slugApp'].'/'.$nalog['slugSmestaj'].'","type":"Feature","geometry":{"type":"Point","coordinates":['.$nalog['x'].','.$nalog['y'].']},"properties":{"naslov":"'.$nalog['naziv'].'","description":null,"case_number":null,"address":null,"zip_code":null,"beat":null,"accuracy":"9"}}';
 		}
 		$niz.=']});';
 		return $niz;

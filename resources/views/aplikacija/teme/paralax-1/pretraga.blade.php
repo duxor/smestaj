@@ -41,7 +41,7 @@
                 ]);//.join(" "));
                 marker.setAttribute("class", "report");
                 // set the href to link to crimespotting's crime page
-                marker.setAttribute("href", "/" + feature.slug);
+                marker.setAttribute("href", feature.link);
                    ////properties.date_time.substr(0, 10),
                  /*type.replace(/ /g, "_"),
                  feature.id
