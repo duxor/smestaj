@@ -15,7 +15,7 @@
                         <div class="panel-body">
                             <div class="col-sm-7">
                                 <a href="/moderator/{{$podaci['aplikacija']}}/galerije/galerija/{{$galerija['id']}}/{{$galerija['slug']}}" class="btn btn-lg btn-info"><span class="glyphicon glyphicon-pencil"></span> Uredi</a></a>
-                                @if($galerija['vrsta_sadrzaja_id']!=7)
+                                @if($galerija['vrsta_sadrzaja_id']>8)
                                     <a href="#" class="btn btn-lg btn-warning"><span class="glyphicon glyphicon-check"></span> Promeni status</a>
                                     <a href="#" class="btn btn-lg btn-danger"><span class="glyphicon glyphicon-trash"></span> Obriši</a>
                                 @endif
