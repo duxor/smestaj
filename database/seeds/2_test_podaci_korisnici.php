@@ -76,7 +76,7 @@ class TestPodaciKorisnici extends Seeder
 	            	'username'=>'ivan',
 	                'email' => 'ivan@test.com',
 	                'password' => Security::generateHashPass('ivan'),
-	                'pravapristupa_id'=>'2',
+	                'pravapristupa_id'=>2,
 	                'aktivan' => 1
 	            ],
 	           	[
