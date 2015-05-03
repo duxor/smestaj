@@ -152,6 +152,7 @@ class KreiranjeBaze extends Migration{
             $table->foreign('objekat_id')->references('id')->on('objekat');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->nullable();
+            $table->string('naslovna_foto', 255)->nullable();
         });
         Schema::create('sadrzaji', function(Blueprint $table)
         {

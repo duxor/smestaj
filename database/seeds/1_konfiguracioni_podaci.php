@@ -69,38 +69,38 @@ class KonfiguracioniPodaci extends Seeder{
             ]
         ]);
         Templejt::insert([
-            ['slug'=>'pocetna',     'vrsta_sadrzaja_id'=>3, 'tema_id'=>1],//1
-            ['slug'=>'smestaj',     'vrsta_sadrzaja_id'=>1, 'tema_id'=>1],//2
-            ['slug'=>'rezervacije', 'vrsta_sadrzaja_id'=>1, 'tema_id'=>1],//3
-            ['slug'=>'kontakt',     'vrsta_sadrzaja_id'=>1, 'tema_id'=>1],//4
-            ['slug'=>'pozadina-1',  'vrsta_sadrzaja_id'=>6, 'tema_id'=>1],//5
-            ['slug'=>'pozadina-2',  'vrsta_sadrzaja_id'=>6, 'tema_id'=>1],//6
-            ['slug'=>'pozadina-3',  'vrsta_sadrzaja_id'=>6, 'tema_id'=>1],//7
-            ['slug'=>'pozadina-4',  'vrsta_sadrzaja_id'=>6, 'tema_id'=>1],//8
-            ['slug'=>'osnovne',     'vrsta_sadrzaja_id'=>7, 'tema_id'=>1],//9
-            ['slug'=>'slajder-1',   'vrsta_sadrzaja_id'=>7, 'tema_id'=>1],//10
-            ['slug'=>'pozadine-1',  'vrsta_sadrzaja_id'=>7, 'tema_id'=>1],//11
-            ['slug'=>'prosirenje-1','vrsta_sadrzaja_id'=>7, 'tema_id'=>1],//12
-            ['slug'=>'prosirenje-2','vrsta_sadrzaja_id'=>7, 'tema_id'=>1],//13
-            ['slug'=>'prosirenje-3','vrsta_sadrzaja_id'=>7, 'tema_id'=>1],//14
-            ['slug'=>'prosirenje-4','vrsta_sadrzaja_id'=>7, 'tema_id'=>1],//15
+            ['slug'=>'pocetna',     'vrsta_sadrzaja_id'=>3, 'tema_id'=>1,   'redoslijed'=>1],//1
+            ['slug'=>'smestaj',     'vrsta_sadrzaja_id'=>1, 'tema_id'=>1,   'redoslijed'=>3],//2
+            ['slug'=>'rezervacije', 'vrsta_sadrzaja_id'=>1, 'tema_id'=>1,   'redoslijed'=>5],//3
+            ['slug'=>'kontakt',     'vrsta_sadrzaja_id'=>1, 'tema_id'=>1,   'redoslijed'=>7],//4
+            ['slug'=>'pozadina-1',  'vrsta_sadrzaja_id'=>6, 'tema_id'=>1,   'redoslijed'=>20],//5
+            ['slug'=>'pozadina-2',  'vrsta_sadrzaja_id'=>6, 'tema_id'=>1,   'redoslijed'=>22],//6
+            ['slug'=>'pozadina-3',  'vrsta_sadrzaja_id'=>6, 'tema_id'=>1,   'redoslijed'=>24],//7
+            ['slug'=>'pozadina-4',  'vrsta_sadrzaja_id'=>6, 'tema_id'=>1,   'redoslijed'=>26],//8
+            ['slug'=>'osnovne',     'vrsta_sadrzaja_id'=>7, 'tema_id'=>1,   'redoslijed'=>40],//9
+            ['slug'=>'slajder-1',   'vrsta_sadrzaja_id'=>7, 'tema_id'=>1,   'redoslijed'=>42],//10
+            ['slug'=>'pozadine-1',  'vrsta_sadrzaja_id'=>7, 'tema_id'=>1,   'redoslijed'=>44],//11
+            ['slug'=>'prosirenje-1','vrsta_sadrzaja_id'=>7, 'tema_id'=>1,   'redoslijed'=>90],//12
+            ['slug'=>'prosirenje-2','vrsta_sadrzaja_id'=>7, 'tema_id'=>1,   'redoslijed'=>90],//13
+            ['slug'=>'prosirenje-3','vrsta_sadrzaja_id'=>7, 'tema_id'=>1,   'redoslijed'=>90],//14
+            ['slug'=>'prosirenje-4','vrsta_sadrzaja_id'=>7, 'tema_id'=>1,   'redoslijed'=>90],//15
 
-            ['slug'=>'pocetna',     'vrsta_sadrzaja_id'=>3, 'tema_id'=>2],//16
-            ['slug'=>'o-nama',      'vrsta_sadrzaja_id'=>1, 'tema_id'=>2],//17
-            ['slug'=>'smestaj',     'vrsta_sadrzaja_id'=>1, 'tema_id'=>2],//18
-            ['slug'=>'rezervacije', 'vrsta_sadrzaja_id'=>1, 'tema_id'=>2],//19
-            ['slug'=>'kontakt',     'vrsta_sadrzaja_id'=>3, 'tema_id'=>2],//20
-            ['slug'=>'pozadina-1',  'vrsta_sadrzaja_id'=>6, 'tema_id'=>2],//21
-            ['slug'=>'pozadina-2',  'vrsta_sadrzaja_id'=>6, 'tema_id'=>2],//22
-            ['slug'=>'pozadina-3',  'vrsta_sadrzaja_id'=>6, 'tema_id'=>2],//23
-            ['slug'=>'pozadina-4',  'vrsta_sadrzaja_id'=>6, 'tema_id'=>2],//24
-            ['slug'=>'osnovne',     'vrsta_sadrzaja_id'=>7, 'tema_id'=>2],//25
-            ['slug'=>'slajder-1',   'vrsta_sadrzaja_id'=>8, 'tema_id'=>2],//26
-            ['slug'=>'pozadine-1',  'vrsta_sadrzaja_id'=>8, 'tema_id'=>2],//27
-            ['slug'=>'prosirenje-1','vrsta_sadrzaja_id'=>7, 'tema_id'=>2],//28
-            ['slug'=>'prosirenje-2','vrsta_sadrzaja_id'=>7, 'tema_id'=>2],//29
-            ['slug'=>'prosirenje-3','vrsta_sadrzaja_id'=>7, 'tema_id'=>2],//30
-            ['slug'=>'prosirenje-4','vrsta_sadrzaja_id'=>7, 'tema_id'=>2],//31
+            ['slug'=>'pocetna',     'vrsta_sadrzaja_id'=>3, 'tema_id'=>2,   'redoslijed'=>1],//16
+            ['slug'=>'o-nama',      'vrsta_sadrzaja_id'=>1, 'tema_id'=>2,   'redoslijed'=>3],//17
+            ['slug'=>'smestaj',     'vrsta_sadrzaja_id'=>1, 'tema_id'=>2,   'redoslijed'=>5],//18
+            ['slug'=>'rezervacije', 'vrsta_sadrzaja_id'=>1, 'tema_id'=>2,   'redoslijed'=>7],//19
+            ['slug'=>'kontakt',     'vrsta_sadrzaja_id'=>3, 'tema_id'=>2,   'redoslijed'=>9],//20
+            ['slug'=>'pozadina-1',  'vrsta_sadrzaja_id'=>6, 'tema_id'=>2,   'redoslijed'=>20],//21
+            ['slug'=>'pozadina-2',  'vrsta_sadrzaja_id'=>6, 'tema_id'=>2,   'redoslijed'=>22],//22
+            ['slug'=>'pozadina-3',  'vrsta_sadrzaja_id'=>6, 'tema_id'=>2,   'redoslijed'=>24],//23
+            ['slug'=>'pozadina-4',  'vrsta_sadrzaja_id'=>6, 'tema_id'=>2,   'redoslijed'=>26],//24
+            ['slug'=>'osnovne',     'vrsta_sadrzaja_id'=>7, 'tema_id'=>2,   'redoslijed'=>40],//25
+            ['slug'=>'slajder-1',   'vrsta_sadrzaja_id'=>8, 'tema_id'=>2,   'redoslijed'=>42],//26
+            ['slug'=>'pozadine-1',  'vrsta_sadrzaja_id'=>8, 'tema_id'=>2,   'redoslijed'=>44],//27
+            ['slug'=>'prosirenje-1','vrsta_sadrzaja_id'=>7, 'tema_id'=>2,   'redoslijed'=>90],//28
+            ['slug'=>'prosirenje-2','vrsta_sadrzaja_id'=>7, 'tema_id'=>2,   'redoslijed'=>90],//29
+            ['slug'=>'prosirenje-3','vrsta_sadrzaja_id'=>7, 'tema_id'=>2,   'redoslijed'=>90],//30
+            ['slug'=>'prosirenje-4','vrsta_sadrzaja_id'=>7, 'tema_id'=>2,   'redoslijed'=>90],//31
         ]);
         Nalog::insert([
             [//1
