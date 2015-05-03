@@ -91,8 +91,8 @@
                         <ul class="dropdown-menu">
                             <li class="dropdown-header">Galerija</li>
                             <li class="divider"></li>
-                            @if($podaci['aplikacije'])
-                            @foreach($podaci['aplikacije'] as $aplikacije)
+                            @if(\App\OsnovneMetode::aplikacije())
+                            @foreach(\App\OsnovneMetode::aplikacije() as $aplikacije)
                                 <li><a href="/moderator/{{$aplikacije['slug']}}/galerije">{{$aplikacije['naziv']}}</a></li>
                             @endforeach
                             @else

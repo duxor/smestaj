@@ -25,7 +25,7 @@ class Moderacija extends Controller {
 		return Redirect::back();
 	}
 	public function getIndex(){
-		$podaci['aplikacije']=Nalog::join ('korisnici', 'nalog.korisnici_id','=','korisnici.id' )
+		$podaci['aplikacije']=Nalog::join ('korisnici', 'nalog.korisnici_id','=','korisnici.id')
 			->join('tema','nalog.tema_id','=','tema.id')
 			->where('korisnici.id',Session::get('id'))
 			->get(['nalog.id','nalog.naziv as naziv','nalog.slug','nalog.aktivan','tema.naziv as tema','korisnici.ime'])
