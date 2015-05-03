@@ -171,7 +171,7 @@ class Moderacija extends Controller {
 
 	public function getSmestaj(){
 		$nalog=Nalog::where('korisnici_id','=',Session::get('id'))->where('aktivan','=','1')->lists('naziv','id');
-		return Security::autentifikacija('moderacija.rezervacija.aktuelno', compact('objekti','nalog'),4);
+		return Security::autentifikacija('moderacija.objekti.smestaj', compact('nalog'),4);
 	}
 	public function postPregledSmestaja(){
 		$nal=Input::get('nalog');
