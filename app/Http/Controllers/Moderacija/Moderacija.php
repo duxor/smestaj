@@ -74,19 +74,34 @@ class Moderacija extends Controller {
 		}
 		return Redirect::back();
 	}
-	public function getSadrzaji(){
-		$temaid=Nalog::where('id',Session::get('id'))->get(['tema_id'])->toArray();
-		$podaci=Sadrzaji::join('nalog', 'sadrzaji.nalog_id','=','nalog.id')->where('nalog.tema_id', $temaid)->get(['sadrzaji.id','sadrzaji.naziv as sadrzaj_naziv','sadrzaj','templejt_id','nalog_id'])->toArray();
-		return Security::autentifikacija('moderacija.aplikacija.sadrzaji',compact('podaci'),4);
+	public function anySadrzaji($appSlug=null){
+		if($appSlug) {
+			$podaci['sadrzaji'] = Nalog::join('sadrzaji', 'sadrzaji.nalog_id', '=', 'nalog.id')
+				->join('templejt', 'templejt.id', '=', 'sadrzaji.templejt_id')
+				->where('nalog.slug', $appSlug)
+				->where('nalog.korisnici_id', Session::get('id'))
+				->where('templejt.vrsta_sadrzaja_id','<',6)
+				->get(['sadrzaji.id', 'sadrzaji.naziv as sadrzaj_naziv', 'sadrzaj', 'templejt_id', 'nalog_id', 'templejt.vrsta_sadrzaja_id'])->toArray();
+			$podaci['pozadine'] = Nalog::join('sadrzaji', 'sadrzaji.nalog_id', '=', 'nalog.id')
+				->join('templejt', 'templejt.id', '=', 'sadrzaji.templejt_id')
+				->where('nalog.slug', $appSlug)
+				->where('nalog.korisnici_id', Session::get('id'))
+				->where('templejt.vrsta_sadrzaja_id',6)
+				->get(['sadrzaji.id', 'sadrzaji.naziv as sadrzaj_naziv', 'sadrzaj', 'templejt_id', 'nalog_id', 'templejt.vrsta_sadrzaja_id'])->toArray();
 		}
+		$podaci['aplikacije']=Nalog::where('korisnici_id',Session::get('id'))->lists('naziv','slug');
+		$podaci['aplikacije']=array_merge(['0'=>'Izaberite aplikaciju'],$podaci['aplikacije']);
+		$podaci['app']['slug']=$appSlug;
+		$podaci['app']['tema']=Nalog::join('tema','tema.id','=','nalog.tema_id')->where('nalog.slug',$appSlug)->get(['tema.slug'])->first()->slug;
+		return Security::autentifikacija('moderacija.aplikacija.sadrzaji',compact('podaci'),4);
+	}
 	
-	public function postSadrzaji($id){
-		if(Security::autentifikacijaTest(4))
-		{
+	public function postSadrzajiUpdate($id){
+		if(Security::autentifikacijaTest(4)){
 				Sadrzaji::find($id)->update(['naziv'=>Input::get('naziv'),'sadrzaj'=>Input::get('sadrzaj')]);
 				return Redirect::back();
 		}
-	return Security::rediectToLogin();
+		return Security::rediectToLogin();
 	}
 
 	public function getKomentari(){

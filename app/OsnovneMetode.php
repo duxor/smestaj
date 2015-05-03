@@ -14,4 +14,11 @@ class OsnovneMetode {
     public static function aplikacije(){
         return Nalog::where('korisnici_id',Session::get('id'))->get(['slug','naziv'])->toArray();
     }
+    public static function dugmiciZaIzborPozadine($pozadine,$setpozadina){
+        $dugmici='';
+        foreach($pozadine as $pozadina){
+            $dugmici.="<button class='btn btn-info' data-dismiss='modal' onclick=\"pozadina({$pozadina['id']},'{$setpozadina}')\">{$pozadina['sadrzaj_naziv']}</button>";
+        }
+        return $dugmici;
+    }
 }
