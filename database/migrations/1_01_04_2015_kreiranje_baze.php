@@ -31,6 +31,9 @@ class KreiranjeBaze extends Migration{
             $table->timestamp('updated_at')->nullable();
             $table->unsignedBigInteger('pravapristupa_id');
             $table->foreign('pravapristupa_id')->references('id')->on('pravapristupa');
+            $table->string('adresa', 250)->nullable();
+            $table->string('grad', 45)->nullable();
+            $table->string('telefon', 45)->nullable();
         });
         Schema::create('log', function(Blueprint $table)
         {
