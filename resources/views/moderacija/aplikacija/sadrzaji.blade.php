@@ -5,8 +5,6 @@
         {!!Form::select('slug',$podaci['aplikacije'],isset($podaci['app'])?$podaci['app']['slug']:null,['class'=>'form-control'])!!}
     {!!Form::close()!!}
     <div class="col-sm-6"></div>
-    <div class="col-sm-1"><a href="#pozadine" class="btn btn-warning">Pozadine <i class="glyphicon glyphicon-download"></i></a></div>
-    <br clear="all">
     <script>
         $(document).ready($('select').change(function(){
             $('#app').attr("action", '/moderator/sadrzaji/'+$(this).val());
@@ -14,6 +12,8 @@
         }));
     </script>
     @if(isset($podaci['sadrzaji']))
+        <div class="col-sm-1"><a href="#pozadine" class="btn btn-warning"><i class="glyphicon glyphicon-download"></i> Pozadine</a></div>
+        <br clear="all">
         @foreach($podaci['sadrzaji'] as $podatak)
             <hr>
             {!!Form::open(['url'=>'/moderator/sadrzaji-update/'.$podatak['id'],'class'=>'form-horizontal'])!!}
@@ -38,16 +38,24 @@
         @if($podaci['pozadine'])
             @foreach($podaci['pozadine'] as $pozadina)
                 <hr>
+                <div class="alert alert-success" role="alert" style="display: none" id="div-{{$pozadina['id']}}"></div>
                 <div class="col-sm-3"><img id="pozadina-{{$pozadina['id']}}" src="/{{$pozadina['sadrzaj']}}" width="100%"></div>
                 <div class="col-sm-9">
                     @if($pozadina['sadrzaj_naziv'])Naziv: {{$pozadina['sadrzaj_naziv']}}@endif
-                    {!!Form::open(['url'=>'/moderator/sadrzaji-update/'.$pozadina['id']])!!}
-                        {!!Form::hidden('sadrzaj',$pozadina['sadrzaj'],['id'=>'sadrzaji-'.$pozadina['id']])!!}
-                        {!!Form::button('<i class="glyphicon glyphicon-pencil"></i> Izmeni',['class'=>'btn btn-lg btn-info','data-toggle'=>'modal','data-target'=>'#foto'])!!}
-                        {!!Form::button('<i class="glyphicon glyphicon-floppy-disk"></i> Sačuvaj',['class'=>'btn btn-lg btn-primary','type'=>'submit'])!!}
-                    {!!Form::close()!!}
+                    <p>{!!Form::hidden('sadrzaj',$pozadina['sadrzaj'],['id'=>'sadrzaji-'.$pozadina['id']])!!}
+                    {!!Form::button('<i class="glyphicon glyphicon-pencil"></i> Izmeni',['class'=>'btn btn-lg btn-info','data-toggle'=>'modal','data-target'=>'#foto'])!!}
+                    {!!Form::button('<i class="glyphicon glyphicon-floppy-disk"></i> Sačuvaj',['class'=>'btn btn-lg btn-primary','onclick'=>'pozadinasubmit('.$pozadina['id'].')'])!!}
+                    </p>
                 </div><br clear="all">
             @endforeach
+            <script>
+                function pozadinasubmit(id){
+                    $.post("/moderator/sadrzaji-update/"+id+"/1", {_token:'{{csrf_token()}}',sadrzaj:$('#sadrzaji-'+id).val()},function(rezultat) {
+                        $('#div-'+id).html(rezultat);$('#div-'+id).fadeToggle("slow");
+                        window.setTimeout(function(){$('#div-'+id).fadeToggle("slow")}, 3000);
+                    });
+                }
+            </script>
         @endif
     @endif
 

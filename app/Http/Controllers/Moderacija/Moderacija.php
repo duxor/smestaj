@@ -95,13 +95,13 @@ class Moderacija extends Controller {
 		return Security::autentifikacija('moderacija.aplikacija.sadrzaji',compact('podaci'),4);
 	}
 	
-	public function postSadrzajiUpdate($id){
+	public function postSadrzajiUpdate($id,$ajax=null){
 		if(Security::autentifikacijaTest(4)){
 			if(Input::has('naziv'))
 				Sadrzaji::find($id)->update(['naziv'=>Input::get('naziv'),'sadrzaj'=>Input::get('sadrzaj')]);
 			else
 				Sadrzaji::find($id)->update(['sadrzaj'=>Input::get('sadrzaj')]);
-			return Redirect::back();
+			return $ajax?'Uspešno ste izvršili izmenu.':Redirect::back();
 		}
 		return Security::rediectToLogin();
 	}
