@@ -98,8 +98,11 @@ class Moderacija extends Controller {
 	
 	public function postSadrzajiUpdate($id){
 		if(Security::autentifikacijaTest(4)){
+			if(Input::has('naziv'))
 				Sadrzaji::find($id)->update(['naziv'=>Input::get('naziv'),'sadrzaj'=>Input::get('sadrzaj')]);
-				return Redirect::back();
+			else
+				Sadrzaji::find($id)->update(['sadrzaj'=>Input::get('sadrzaj')]);
+			return Redirect::back();
 		}
 		return Security::rediectToLogin();
 	}

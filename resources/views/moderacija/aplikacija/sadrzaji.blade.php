@@ -39,8 +39,8 @@
                     @if($pozadina['sadrzaj_naziv'])Naznv: {{$pozadina['sadrzaj_naziv']}}@endif
                     {!!Form::open(['url'=>'/moderator/sadrzaji-update/'.$pozadina['id']])!!}
                         {!!Form::hidden('sadrzaj',$pozadina['sadrzaj'],['id'=>'sadrzaji-'.$pozadina['id']])!!}
-                        {!!Form::button('Izmeni',['class'=>'btn btn-lg btn-info','data-toggle'=>'modal','data-target'=>'#foto'])!!}
-                        {!!Form::button('Sačuvaj',['class'=>'btn btn-lg btn-primary','type'=>'submit'])!!}
+                        {!!Form::button('<i class="glyphicon glyphicon-pencil"></i> Izmeni',['class'=>'btn btn-lg btn-info','data-toggle'=>'modal','data-target'=>'#foto'])!!}
+                        {!!Form::button('<i class="glyphicon glyphicon-floppy-disk"></i> Sačuvaj',['class'=>'btn btn-lg btn-primary','type'=>'submit'])!!}
                     {!!Form::close()!!}
                 </div><br clear="all">
             @endforeach
