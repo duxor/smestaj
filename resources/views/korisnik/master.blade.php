@@ -22,6 +22,8 @@
     {!! HTML::script('js/jquery-3.0.js') !!}
     {!! HTML::script('js/funkcije.js') !!}
     {!! HTML::script('tinymce/tinymce.min.js') !!}
+    {!! HTML::style('css/datepicker.css') !!}
+    {!! HTML::script('js/datepicker.js') !!}
 
 </head>
 <body>
