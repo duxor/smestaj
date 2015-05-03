@@ -41,7 +41,7 @@
 			</div>
 		</div>
 	</div>
-@else <h1 class="col-sm-12">Nemaaktuelnih rezervacija!</h1>
+@else <h1 class="col-sm-12">Nema aktuelnih rezervacija!</h1>
 @endif
 	
 @endsection
