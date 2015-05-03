@@ -88,11 +88,10 @@ class Moderacija extends Controller {
 				->where('nalog.korisnici_id', Session::get('id'))
 				->where('templejt.vrsta_sadrzaja_id',6)
 				->get(['sadrzaji.id', 'sadrzaji.naziv as sadrzaj_naziv', 'sadrzaj', 'templejt_id', 'nalog_id', 'templejt.vrsta_sadrzaja_id'])->toArray();
+			$podaci['app']=Nalog::join('tema','tema.id','=','nalog.tema_id')->where('nalog.slug',$appSlug)->get(['tema.slug as tema','nalog.slug'])->first()->toArray();
 		}
 		$podaci['aplikacije']=Nalog::where('korisnici_id',Session::get('id'))->lists('naziv','slug');
 		$podaci['aplikacije']=array_merge(['0'=>'Izaberite aplikaciju'],$podaci['aplikacije']);
-		$podaci['app']['slug']=$appSlug;
-		$podaci['app']['tema']=Nalog::join('tema','tema.id','=','nalog.tema_id')->where('nalog.slug',$appSlug)->get(['tema.slug'])->first()->slug;
 		return Security::autentifikacija('moderacija.aplikacija.sadrzaji',compact('podaci'),4);
 	}
 	

@@ -2,7 +2,7 @@
 @section('content')
     <h1>Podešavanje sadrzaja</h1>
     {!!Form::open(['id'=>'app'])!!}
-        {!!Form::select('slug',$podaci['aplikacije'],null,['class'=>'form-control'])!!}
+        {!!Form::select('slug',$podaci['aplikacije'],isset($podaci['app'])?$podaci['app']['slug']:null,['class'=>'form-control'])!!}
     {!!Form::close()!!}
     <script>
         $(document).ready($('select').change(function(){
@@ -10,7 +10,7 @@
             $('#app').submit();
         }));
     </script>
-    @if($podaci['sadrzaji'])
+    @if(isset($podaci['sadrzaji']))
         @foreach($podaci['sadrzaji'] as $podatak)
             <hr>
             {!!Form::open(['url'=>'/moderator/sadrzaji-update/'.$podatak['id'],'class'=>'form-horizontal'])!!}
@@ -45,8 +45,6 @@
                 </div><br clear="all">
             @endforeach
         @endif
-    @else
-        <p>Ne postoje podaci u evidenciji.</p>
     @endif
 
     <script type="text/javascript">
@@ -71,6 +69,7 @@
 @endsection
 
 @section('body')
+    @if(isset($podaci['sadrzaji']))
     <div class="modal fade" id="foto">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -93,4 +92,5 @@
             </div>
         </div>
     </div>
+    @endif
 @endsection
