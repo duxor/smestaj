@@ -34,6 +34,7 @@ class KreiranjeBaze extends Migration{
             $table->string('adresa', 250)->nullable();
             $table->string('grad', 45)->nullable();
             $table->string('telefon', 45)->nullable();
+            $table->string('fotografija', 255)->nullable();
         });
         Schema::create('log', function(Blueprint $table)
         {
