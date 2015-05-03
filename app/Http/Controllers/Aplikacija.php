@@ -23,7 +23,7 @@ class Aplikacija extends Controller {
 		$nalog=Nalog::join('tema','tema.id','=','nalog.tema_id')->where('nalog.slug',$slug)->where('nalog.aktivan',1)->get(['nalog.id','tema_id','nalog.naziv','nalog.slug as nalog_slug','tema.slug as tema_slug'])->first();
 		if($nalog){
 			$nalog=$nalog->toArray();
-			$podaci=Templejt::join('sadrzaji','sadrzaji.templejt_id','=','templejt.id')->where('nalog_id',$nalog['id'])->where('tema_id',$nalog['tema_id'])->where('vrsta_sadrzaja_id','<>',6)->orderBy('redoslijed')->get(['slug','naziv','sadrzaj','vrsta_sadrzaja_id','icon'])->toArray();
+			$podaci=Templejt::join('sadrzaji','sadrzaji.templejt_id','=','templejt.id')->where('nalog_id',$nalog['id'])->where('tema_id',$nalog['tema_id'])->where('vrsta_sadrzaja_id','<',6)->orderBy('redoslijed')->get(['slug','naziv','sadrzaj','vrsta_sadrzaja_id','icon'])->toArray();
 			$podaci['pocetna']=true;
 			$podaci['pozadine']=Templejt::join('sadrzaji','sadrzaji.templejt_id','=','templejt.id')->where('nalog_id',$nalog['id'])->where('tema_id',$nalog['tema_id'])->where('vrsta_sadrzaja_id',6)->orderBy('redoslijed')->get(['sadrzaj'])->toArray();
 			$podaci['grad']=Grad::join('objekat','objekat.grad_id','=','grad.id')->where('objekat.nalog_id',$nalog['id'])->orderBy('grad.id')->get(['grad.id','grad.naziv'])->lists('naziv','id');

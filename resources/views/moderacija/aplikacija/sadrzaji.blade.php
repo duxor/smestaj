@@ -1,9 +1,12 @@
 @extends('moderacija.master-moderator')
 @section('content')
-    <h1>Podešavanje sadrzaja</h1>
-    {!!Form::open(['id'=>'app'])!!}
+    <h1>Podešavanja sadrzaja i pozadine</h1>
+    {!!Form::open(['id'=>'app','class'=>'col-sm-5'])!!}
         {!!Form::select('slug',$podaci['aplikacije'],isset($podaci['app'])?$podaci['app']['slug']:null,['class'=>'form-control'])!!}
     {!!Form::close()!!}
+    <div class="col-sm-6"></div>
+    <div class="col-sm-1"><a href="#pozadine" class="btn btn-warning">Pozadine <i class="glyphicon glyphicon-download"></i></a></div>
+    <br clear="all">
     <script>
         $(document).ready($('select').change(function(){
             $('#app').attr("action", '/moderator/sadrzaji/'+$(this).val());
@@ -31,12 +34,13 @@
                 </div>
             {!!Form::close()!!}
         @endforeach
+        <i id="pozadine"></i>
         @if($podaci['pozadine'])
             @foreach($podaci['pozadine'] as $pozadina)
                 <hr>
                 <div class="col-sm-3"><img id="pozadina-{{$pozadina['id']}}" src="/{{$pozadina['sadrzaj']}}" width="100%"></div>
                 <div class="col-sm-9">
-                    @if($pozadina['sadrzaj_naziv'])Naznv: {{$pozadina['sadrzaj_naziv']}}@endif
+                    @if($pozadina['sadrzaj_naziv'])Naziv: {{$pozadina['sadrzaj_naziv']}}@endif
                     {!!Form::open(['url'=>'/moderator/sadrzaji-update/'.$pozadina['id']])!!}
                         {!!Form::hidden('sadrzaj',$pozadina['sadrzaj'],['id'=>'sadrzaji-'.$pozadina['id']])!!}
                         {!!Form::button('<i class="glyphicon glyphicon-pencil"></i> Izmeni',['class'=>'btn btn-lg btn-info','data-toggle'=>'modal','data-target'=>'#foto'])!!}
