@@ -97,39 +97,11 @@
         }
     </script>
     <style>
-        .report {
-            margin-left: -13px;
-            margin-top: -13px;
-            width: 26px;
-            height: 26px;
-        }
-        .report img {
-            border: none !important;
-        }
-        .report:hover {
-            z-index: 1000;
-        }
-        #map canvas {
-            transition-property: opacity;
-            -webkit-transition-property: opacity;
-            -moz-transition-property: opacity;
-            -ms-transition-property: opacity;
-            -o-transition-property: opacity;
-            transition-duration: .6s;
-            -webkit-transition-duration: .6s;
-            -moz-transition-duration: .6s;
-            -ms-transition-duration: .6s;
-            -o-transition-duration: .6s;
-            transition-delay: .1s;
-            -webkit-transition-delay: .1s;
-            -moz-transition-delay: .1s;
-            -ms-transition-delay: .1s;
-            -o-transition-delay: .1s;
-            opacity: 0;
-        }
-        #map canvas.active {
-            opacity: 1;
-        }
+        .report {margin-left: -13px;margin-top: -13px;width: 26px;height: 26px;}
+        .report img {border: none !important;}
+        .report:hover {z-index: 1000}
+        #map canvas {transition-property: opacity;-webkit-transition-property: opacity;-moz-transition-property: opacity;-ms-transition-property: opacity;-o-transition-property: opacity;transition-duration: .6s;-webkit-transition-duration: .6s;-moz-transition-duration: .6s;-ms-transition-duration: .6s;-o-transition-duration: .6s;transition-delay: .1s;-webkit-transition-delay: .1s;-moz-transition-delay: .1s;-ms-transition-delay: .1s;-o-transition-delay: .1s;opacity: 0;}
+        #map canvas.active {opacity: 1}
     </style>
 
     <script>

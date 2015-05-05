@@ -19,7 +19,7 @@
         }
         function loadMarkers() {
             var script = document.createElement("script");
-            script.src = "/pretraga/aplikacija/{{$podaci['app']}}";
+            script.src = "/pretraga/aplikacija/{{$podaci['app']['id']}}";
             document.getElementsByTagName("head")[0].appendChild(script);
         }
         function onLoadMarkers(collection) {
@@ -210,17 +210,6 @@
     {{--Kontakt END::--}}
 
     <div id="skrollr-body">
-        {{--pocetna START::--}}
-        {{--<div class="content content-full" id="{{$podaci[0]['slug']}}">--}}
-            {{--<div class="container" style="">--}}
-                {{--<h1>{!!$podaci[0]['naziv']!!}</h1>--}}
-                {{--{!!$podaci[0]['sadrzaj']!!}--}}
-            {{--</div>--}}
-        {{--</div>--}}
-        {{--<div class="gap gap-100"></div>--}}
-        {{--pocetna END::--}}
-
-
         <div class="content content-full" id="{{$podaci[0]['slug']}}"><div id="map" style="height:650px;margin-top:-80px;width:104%;margin-left: -3%;overflow:hidden"></div>
             <div class="container" style="margin-top: -500px">
                 <div class="col-sm-5">
@@ -236,14 +225,12 @@
                         <div role="tabpanel">
                             <ul class="nav nav-tabs" role="tablist">
                                 <li role="presentation" class="active"><a href="#tab-rezervacije" aria-controls="tab-rezervacije" role="tab" data-toggle="tab"><i class="glyphicon glyphicon-list-alt"></i> Rezervacije</a></li>
-                                <li role="presentation"><a href="#tab-objekti" aria-controls="tab-objekti" role="tab" data-toggle="tab"><i class="glyphicon glyphicon-home"></i> Objekti</a></li>
                             </ul>
                             <div class="tab-content" style="padding:0 10px">
                                 <div role="tabpanel" class="tab-pane fade in active" id="tab-rezervacije">
-
-                                    {!!Form::open(['url'=>'/pretraga/aplikacija','class'=>'form-horizontal'])!!}
+                                    {!!Form::open(['url'=>'/'.$podaci['app']['slug'].'/pretraga','class'=>'form-horizontal'])!!}
                                     {!!Form::hidden('tacan_broj',1)!!}
-                                    {!!Form::hidden('aplikacija',$podaci['app'])!!}
+                                    {!!Form::hidden('aplikacija',$podaci['app']['id'])!!}
                                     <div class="form-group">
                                         {!!Form::label('lgrad','Grad',['class'=>'control-label'])!!}
                                         {!!Form::select('grad_id',$podaci['grad'],1,['class'=>'form-control'])!!}
@@ -256,16 +243,7 @@
                                             {!! Form::text('datumDo', null, ['class'=>'input-sm form-control','placeholder'=>'do...']) !!}
                                         </div>
                                     </div>
-                                    <script>
-                                        $('#datarange .input-daterange').datepicker({
-                                            orientation: "top auto",
-                                            weekStart: 1,
-                                            startDate: "current",
-                                            todayBtn: "linked",
-                                            toggleActive: true,
-                                            format: "yyyy-mm-dd"
-                                        });
-                                    </script>
+                                    <script>$('#datarange .input-daterange').datepicker({orientation: "top auto",weekStart: 1,startDate: "current",todayBtn: "linked",toggleActive: true,format: "yyyy-mm-dd"});</script>
                                     <div class="form-group">
                                         {!!Form::label('lgrad','Broj osoba',['class'=>'control-label'])!!}
                                         {!!Form::select('broj_osoba',[1=>1,2=>2,3=>3,4=>4,5=>5,6=>6,7=>7,8=>8,9=>9,10=>10,11=>11,12=>12],2,['class'=>'form-control'])!!}

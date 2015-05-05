@@ -8,6 +8,7 @@ use App\Objekat;
 use App\Tema;
 use Illuminate\Support\Facades\Input;
 use App\Templejt;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 
 class Pretraga extends Controller {
@@ -89,8 +90,8 @@ class Pretraga extends Controller {
 	}
 
 	//################# APP
-	public function postAplikacija(){
-		if(Input::get('aplikacija')=='') return'';//nalog.id
+	public function postAplikacija($slugApp){
+		if(Input::get('aplikacija')=='') return Redirect::to('/'.$slugApp);//nalog.id
 		$tacan_broj=Input::get('tacan_broj')?'':'>';
 		$podaci=$this->defaultPodaci();//templejt sa menijem bez podataka
 		$podaci['broj_osoba']=Input::get('broj_osoba')?Input::get('broj_osoba'):1;
@@ -98,19 +99,21 @@ class Pretraga extends Controller {
 		join('nalog','nalog.id','=','objekat.nalog_id')
 			->join('smestaj','smestaj.objekat_id','=','objekat.id')
 			->join('kapacitet','kapacitet.id','=','smestaj.kapacitet_id')
+			->join('vrsta_smestaja','vrsta_smestaja.id','=','smestaj.vrsta_smestaja_id')
 			->leftjoin('lista_zelja',function($query){
 				$query->on('lista_zelja.smestaj_id','=','smestaj.id')->where('lista_zelja.aktivan','=',1)->where('lista_zelja.korisnici_id','=',Session::get('id'));
 			})
 			->where('objekat.nalog_id',Input::get('aplikacija'))
 			->where('grad_id',Input::get('grad_id'))->where('broj_osoba',$tacan_broj.'=',$podaci['broj_osoba'])
 			->where('objekat.aktivan',1)->where('smestaj.aktivan',1)
-			->get(['nalog.slug as slugApp','smestaj.id','smestaj.slug as slugSmestaj','smestaj.naziv','adresa','broj_osoba','lista_zelja.id as zelja'])->toArray();
+			->get(['nalog.naziv as nazivApp','nalog.slug as slugApp','vrsta_smestaja.naziv as vrsta_smestaja','smestaj.id',
+				'smestaj.slug as slugSmestaj','smestaj.naziv','adresa','broj_osoba','lista_zelja.id as zelja','naslovna_foto'])->toArray();
 		$podaci['gradovi']=Grad::join('objekat','objekat.grad_id','=','grad.id')->where('objekat.nalog_id',Input::get('aplikacija'))->orderBy('grad.id')->get(['grad.id','grad.naziv'])->lists('naziv','id');
 		$podaci['grad_id']=Input::get('grad_id');
 		$podaci['tacan_broj']=Input::get('tacan_broj');
 		$podaci['grad_koo']=Grad::find(Input::get('grad_id'),['x','y','z']);
 		$podaci['app']=Input::get('aplikacija');//nalog_id
-		$tema=Tema::find(Nalog::find(Input::get('aplikacija'),['tema_id'])->tema_id, ['slug'])->slug;
+		$tema=Tema::find(Nalog::find(Input::get('aplikacija'),['tema_id'])->tema_id, ['slug'])->slug;dd($podaci);
 		return view('aplikacija.teme.'.$tema.'.pretraga',compact('podaci'));
 	}
 	//################# EndApp

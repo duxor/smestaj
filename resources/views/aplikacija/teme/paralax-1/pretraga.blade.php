@@ -151,22 +151,26 @@
             <hr>
             <div class="col-sm-4">
                 <a href="#">
-                    <img style="height: 150px;" src="/teme/osnovna-paralax/slike/15.jpg" alt="...">
+                    <img style="height: 150px;" @if($smestaj['naslovna_foto'])src="{{$smestaj['naslovna_foto']}}" @else src="/teme/osnovna-paralax/slike/15.jpg" @endif>
                 </a>
+                <p>
+                    <a href="/{{$smestaj['slugApp']}}/{{$smestaj['slugSmestaj']}}" class="btn btn-lg btn-default"><i class="glyphicon glyphicon-zoom-in"></i> Pregled</a>
+                    <a  href="#" class="btn btn-lg btn-info"><i class="glyphicon glyphicon-check"></i> Rezervacija</a>
+                    @if(\App\Security::autentifikacijaTest())
+                        <button id="zelja" class="btn btn-lg btn-default _tooltip" @if($smestaj['zelja']) data-zelja="{{$smestaj['zelja']}}" style="color:red" title="Izbaci iz liste zelja" @else data-zelja="false" title="Dodaj u listu želja" @endif data-id="{{$smestaj['id']}}" data-toggle="tooltip" data-placement="bottom"><i class="glyphicon glyphicon-heart"></i></button>
+                    @else
+                        <a href="/login" class="btn btn-lg btn-default _tooltip"  title="Dodaj u listu želja" data-toggle="tooltip" data-placement="bottom"><i class="glyphicon glyphicon-heart"></i></a>
+                    @endif
+                </p>
             </div>
             <div class="col-sm-8">
-                <h3>{{$smestaj['naziv']}}</h3>
+                <h3>{{$smestaj['nazivApp']}}</h3>
                 <table class="moja-tabela">
+                    <tr><td>Naziv objekta:</td><td>{{$smestaj['naziv']}}</td></tr>
+                    <tr><td>Vrsta objekta:</td><td>{{$smestaj['vrsta_smestaja']}}</td></tr>
                     <tr><td>Broj mesta:</td><td>{{$smestaj['broj_osoba']}}</td></tr>
                     <tr><td>Adresa:</td><td>{{$smestaj['adresa']}}</td></tr>
                 </table>
-                <a href="/{{$smestaj['slugApp']}}/{{$smestaj['slugSmestaj']}}" class="btn btn-lg btn-default"><i class="glyphicon glyphicon-zoom-in"></i> Pregled</a>
-                <a href="#" class="btn btn-lg btn-info"><i class="glyphicon glyphicon-check"></i> Rezervacija</a>
-                @if(\App\Security::autentifikacijaTest())
-                    <button id="zelja" class="btn btn-lg btn-default _tooltip" @if($smestaj['zelja']) data-zelja="{{$smestaj['zelja']}}" style="color:red" title="Izbaci iz liste zelja" @else data-zelja="false" title="Dodaj u listu želja" @endif data-id="{{$smestaj['id']}}" data-toggle="tooltip" data-placement="bottom"><i class="glyphicon glyphicon-heart"></i></button>
-                @else
-                    <a href="/login" class="btn btn-lg btn-default _tooltip"  title="Dodaj u listu želja" data-toggle="tooltip" data-placement="bottom"><i class="glyphicon glyphicon-heart"></i></a>
-                @endif
             </div><br clear="all">
         @endforeach
         {!!Form::open()!!}{!!Form::close()!!}
