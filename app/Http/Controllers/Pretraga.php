@@ -113,7 +113,7 @@ class Pretraga extends Controller {
 		$podaci['tacan_broj']=Input::get('tacan_broj');
 		$podaci['grad_koo']=Grad::find(Input::get('grad_id'),['x','y','z']);
 		$podaci['app']=Input::get('aplikacija');//nalog_id
-		$tema=Tema::find(Nalog::find(Input::get('aplikacija'),['tema_id'])->tema_id, ['slug'])->slug;dd($podaci);
+		$tema=Tema::find(Nalog::find(Input::get('aplikacija'),['tema_id'])->tema_id, ['slug'])->slug;
 		return view('aplikacija.teme.'.$tema.'.pretraga',compact('podaci'));
 	}
 	//################# EndApp
