@@ -58,7 +58,7 @@
             <ul class="nav navbar-nav">
                 @foreach($podaci as $meni)
                     @if(isset($meni['vrsta_sadrzaja_id']))
-                        <li><a href="/#{{$meni['slug']}}" @if(isset($podaci['pocetna'])) class="scroll-link" data-id="{{$meni['slug']}}" @endif><i class="{{$meni['icon']}}"></i> @if($meni['vrsta_sadrzaja_id']==1){!! $meni['naziv'] !!}@endif</a></li>
+                        <li><a href="/{{$podaci['app']['slug']}}/#{{$meni['slug']}}" @if(isset($podaci['pocetna'])) class="scroll-link" data-id="{{$meni['slug']}}" @endif><i class="{{$meni['icon']}}"></i> @if($meni['vrsta_sadrzaja_id']==1){!!$meni['naziv']!!}@endif</a></li>
                     @endif
                 @endforeach
                 @if(\App\Security::autentifikacijaTest())

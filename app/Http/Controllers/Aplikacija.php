@@ -3,6 +3,7 @@
 use App\Http\Requests;
 use App\ListaZelja;
 use App\Nalog;
+use App\Sadrzaji;
 use App\Templejt;
 use App\Grad;
 use App\Security;
@@ -11,6 +12,10 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 
 class Aplikacija extends Controller {
+	public function nalog($slugApp){return Nalog::join('tema','tema.id','=','nalog.tema_id')->where('nalog.slug',$slugApp)->where('nalog.aktivan',1)->get(['nalog.id','tema_id','nalog.naziv','nalog.slug as nalog_slug','tema.slug as tema_slug'])->first();}
+	public function templejt($nalog){return Templejt::join('sadrzaji','sadrzaji.templejt_id','=','templejt.id')->where('nalog_id',$nalog['id'])->where('tema_id',$nalog['tema_id'])->where('vrsta_sadrzaja_id','<',6)->orderBy('redoslijed')->get(['slug','naziv','sadrzaj','vrsta_sadrzaja_id','icon'])->toArray();}
+	public function pozadine($nalog){return Templejt::join('sadrzaji','sadrzaji.templejt_id','=','templejt.id')->where('nalog_id',$nalog['id'])->where('tema_id',$nalog['tema_id'])->where('vrsta_sadrzaja_id',6)->orderBy('redoslijed')->get(['sadrzaj'])->toArray();}
+
 	public function getIndex($slug=null){
 		if(!$slug){//Osnovna
 			$podaci=Templejt::join('sadrzaji','sadrzaji.templejt_id','=','templejt.id')->where('nalog_id','=',1)->where('tema_id','=',1)->where('vrsta_sadrzaja_id','<>',6)->orderBy('redoslijed')->get(['slug','naziv','sadrzaj','vrsta_sadrzaja_id','icon'])->toArray();
@@ -20,12 +25,12 @@ class Aplikacija extends Controller {
 			return view('aplikacija.teme-osnove.osnovna.index',compact('podaci'));
 		}
 		//####################### Mod App
-		$nalog=Nalog::join('tema','tema.id','=','nalog.tema_id')->where('nalog.slug',$slug)->where('nalog.aktivan',1)->get(['nalog.id','tema_id','nalog.naziv','nalog.slug as nalog_slug','tema.slug as tema_slug'])->first();
+		$nalog=$this->nalog($slug);
 		if($nalog){
 			$nalog=$nalog->toArray();
-			$podaci=Templejt::join('sadrzaji','sadrzaji.templejt_id','=','templejt.id')->where('nalog_id',$nalog['id'])->where('tema_id',$nalog['tema_id'])->where('vrsta_sadrzaja_id','<',6)->orderBy('redoslijed')->get(['slug','naziv','sadrzaj','vrsta_sadrzaja_id','icon'])->toArray();
+			$podaci=$this->templejt($nalog);
 			$podaci['pocetna']=true;
-			$podaci['pozadine']=Templejt::join('sadrzaji','sadrzaji.templejt_id','=','templejt.id')->where('nalog_id',$nalog['id'])->where('tema_id',$nalog['tema_id'])->where('vrsta_sadrzaja_id',6)->orderBy('redoslijed')->get(['sadrzaj'])->toArray();
+			$podaci['pozadine']=$this->pozadine($nalog);
 			$podaci['grad']=Grad::join('objekat','objekat.grad_id','=','grad.id')->where('objekat.nalog_id',$nalog['id'])->orderBy('grad.id')->get(['grad.id','grad.naziv'])->lists('naziv','id');
 			$podaci['app']['id']=$nalog['id'];
 			$podaci['app']['slug']=$slug;
@@ -33,8 +38,13 @@ class Aplikacija extends Controller {
 		}else return'Aplikacija nije aktivna!';
 	}
 	public function getSmestaj($slugApp,$slugSmestaj){
-		return $slugApp.'/'.$slugSmestaj;
-		return view("aplikacija.teme.{$nalog['tema_slug']}.smestaj",compact('podaci'));
+		//return $slugApp.'/'.$slugSmestaj;
+		$podaci=Sadrzaji::join('templejt','templejt.id','=','sadrzaji.templejt_id')->join('nalog','nalog.id','=','sadrzaji.nalog_id')->where('nalog.korisnici_id',Session::get('id'))->where('vrsta_sadrzaja_id','<',6)->get(['templejt.slug','sadrzaji.naziv','sadrzaji.icon','vrsta_sadrzaja_id'])->toArray();
+		$podaci['app']['slug']=$slugApp;
+		$podaci['pozadine']=$this->pozadine($this->nalog($slugApp));
+//dd($podaci);
+		$tema=Nalog::join('tema','tema.id','=','nalog.tema_id')->where('nalog.slug',$slugApp)->get(['tema.slug'])->first()->slug;
+		return view("aplikacija.teme.{$tema}.smestaj",compact('podaci'));
 	}
 	public function postListaZeljaDodaj(){
 		if(Input::get('zelja'))

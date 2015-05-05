@@ -150,7 +150,7 @@
 
         <div
                 class="parallax-image parallax-image-100"
-                style="background-image:url('{{$podaci['pozadine'][0]['sadrzaj']}}')"
+                style="background-image:url('/{{$podaci['pozadine'][0]['sadrzaj']}}')"
                 data-anchor-target="#{{$podaci[0]['slug']}} + .gap"
                 data-bottom-top="transform: translate3d(0px, -80%, 0px);"
                 data-top-bottom="transform: translate3d(0px, 80%, 0px);"
@@ -167,7 +167,7 @@
 
         <div
                 class="parallax-image parallax-image-100"
-                style="background-image:url('{{$podaci['pozadine'][1]['sadrzaj']}}')"
+                style="background-image:url('/{{$podaci['pozadine'][1]['sadrzaj']}}')"
                 data-anchor-target="#{{$podaci[1]['slug']}} + .gap"
                 data-bottom-top="transform: translate3d(0px, -80%, 0px);"
                 data-top-bottom="transform: translate3d(0px, 80%, 0px);"
@@ -184,7 +184,7 @@
 
         <div
                 class="parallax-image parallax-image-50"
-                style="background-image:url('{{$podaci['pozadine'][2]['sadrzaj']}}')"
+                style="background-image:url('/{{$podaci['pozadine'][2]['sadrzaj']}}')"
                 data-anchor-target="#{{$podaci[2]['slug']}} + .gap"
                 data-bottom-top="transform: translate3d(0px, -60%, 0px);"
                 data-top-bottom="transform: translate3d(0px, 60%, 0px);"
@@ -201,7 +201,7 @@
 
         <div
                 class="parallax-image parallax-image-50"
-                style="background-image:url('{{$podaci['pozadine'][3]['sadrzaj']}}')"
+                style="background-image:url('/{{$podaci['pozadine'][3]['sadrzaj']}}')"
                 data-anchor-target="#{{$podaci[3]['slug']}} + .gap"
                 data-bottom-top="transform: translate3d(0px, -60%, 0px);"
                 data-top-bottom="transform: translate3d(0px, 60%, 0px);"
