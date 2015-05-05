@@ -165,7 +165,7 @@
                 </a>
                 <p>
                     <a href="/{{$smestaj['slugApp']}}/{{$smestaj['slugSmestaj']}}" class="btn btn-lg btn-default"><i class="glyphicon glyphicon-zoom-in"></i> Pregled</a>
-                    <button  class="btn btn-lg btn-info" data-toggle="modal" data-target="#rezervacija{{$smestaj['id']}}"><span class="glyphicon glyphicon-check"></span> Rezervacija</button>
+                    <a  href="#" class="btn btn-lg btn-info"><i class="glyphicon glyphicon-check"></i> Rezervacija</a>
                     @if(\App\Security::autentifikacijaTest())
                         <button id="zelja" class="btn btn-lg btn-default _tooltip" @if($smestaj['zelja']) data-zelja="{{$smestaj['zelja']}}" style="color:red" title="Izbaci iz liste zelja" @else data-zelja="false" title="Dodaj u listu želja" @endif data-id="{{$smestaj['id']}}" data-toggle="tooltip" data-placement="bottom"><i class="glyphicon glyphicon-heart"></i></button>
                     @else
@@ -182,69 +182,6 @@
                     <tr><td>Adresa:</td><td>{{$smestaj['adresa']}}</td></tr>
                 </table>
             </div><br clear="all">
-
-             <div class="modal fade" id="rezervacija{{$smestaj['id']}}" tabindex="-1" role="dialog" >
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                <h2>Rezervacije korisnika</h2>
-                            </div>
-                            <div class="modal-body">
-                                {!!Form::open(['url'=>'/rezervacije/rezervisi','class'=>'form-horizontal'])!!}
-                                        {!!Form::hidden('id_smestaja',$smestaj['id'])!!}
-                                  
-
-                                    <div class="form-group" id="datarange">
-                                    {!! Form::label('pocetak','Početak rezervacije:',['class'=>'control-label col-sm-4']) !!}
-                                        <div class="input-daterange input-group" id="datepicker">
-                                            <div class="col-sm-4">
-                                                {!! Form::text('datumOd',date("y-m-d"), null, ['class'=>'input-sm form-control ','placeholder'=>'od...']) !!}
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group" id="datarange">
-                                    {!! Form::label('kraj','Kraj rezervacije:',['class'=>'control-label col-sm-4']) !!}
-                                        <div class="input-daterange input-group" id="datepicker">
-                                            <div class="col-sm-4">
-                                                {!! Form::text('datumDo','Izaberite datum', null, ['class'=>'input-sm form-control ','placeholder'=>'od...']) !!}
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <script>
-                                        $('#datarange .input-daterange').datepicker({
-                                            orientation: "top auto",
-                                            weekStart: 1,
-                                            startDate: "current",
-                                            todayBtn: "linked",
-                                            toggleActive: true,
-                                            format: "yyyy-mm-dd"
-                                        });
-                                    </script>
-                              <div id="broj osoba" class="form-group has-feedback">
-                                {!!Form::label('brojosoba','Broj osoba:',['class'=>'control-label col-sm-4'])!!}
-                                <div class="col-sm-4">
-                                    {!!Form::text('brojosoba','Unesite broj osoba',['class'=>'form-control','placeholder'=>'Broj osoba'])!!}
-                                </div>
-                            </div>
-
-                                <div class="form-group has-feedback">
-                                    {!! Form::label('napomena','Napomena:',['class'=>'control-label col-sm-4']) !!}
-                                    <div class="col-sm-8">
-                                        {!! Form::textarea('napomena', null, ['class'=>'form-control', 'placeholder'=>'Upišite napomenu']) !!}     
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                {!! Form::button('<span class="glyphicon glyphicon-remove"></span> Otkaži rezervaciju', ['class'=>'btn btn-lg btn-warning',' data-dismiss'=>'modal']) !!}
-                                {!! Form::button('<span class="glyphicon glyphicon-ok"></span> Rezerviši', ['class'=>'btn btn-lg btn-success','type'=>'submit']) !!}
-                                {!! Form::close() !!}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
         @endforeach
         {!!Form::open()!!}{!!Form::close()!!}
         <style>._tooltip:hover{color: red}</style>
@@ -274,13 +211,6 @@
                 );
             });
         </script>
-
-
-
-
-
-
-
     @else
         <br clear="all"><p>Nema rezultata za date parametre. Proverite parametre i pokušajte ponovo.</p>
     @endif
