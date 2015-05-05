@@ -44,7 +44,6 @@
                 img.setAttribute("style","color:red");
                 markers.addMarker(marker, feature);
                 locations.push(marker.location);
-
                 if (type in locationsByType) {
                     locationsByType[type].push(marker.location);
                 } else {
@@ -79,7 +78,6 @@
                 }
             }
         }
-
         function onMarkerOut(e) {
             var marker = getMarker(e.target);
             if (marker) {
@@ -177,7 +175,7 @@
             $(document).ready(function(){$('button').tooltip();$('a').tooltip()});
             $("button#zelja").click(function(){
                 $(this).css("color","black");
-                $(this).html("<i class='icon-spin6'></i> U procesu...");
+                $(this).html("<i class='icon-spin6 animate-spin'></i> U procesu...");
                 var id=$(this).data("id");
                 $.post('/aplikacija/lista-zelja-dodaj',
                         {
