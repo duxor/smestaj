@@ -177,7 +177,7 @@
             $(document).ready(function(){$('button').tooltip();$('a').tooltip()});
             $("button#zelja").click(function(){
                 $(this).css("color","black");
-                $(this).html("<i class='icon-spin6'></i> U procesu...");
+                $(this).html("<i class='icon-spin6 animate-spin'></i> U procesu...");
                 var id=$(this).data("id");
                 $.post('/aplikacija/lista-zelja-dodaj',
                         {
