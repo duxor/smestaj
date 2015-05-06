@@ -75,7 +75,8 @@ class Profil extends Controller {
 		$data=Input::all();
 		$rules = array(
 	        'username'	=> 'Required|Between:5,12',
-	        'email'     => 'Required|Between:3,64|Email'
+	        'email'     => 'Required|Between:3,64|Email',
+	        
 			);
 		$v=Validator::make($data,$rules);
 		if($v->fails())
@@ -83,6 +84,8 @@ class Profil extends Controller {
 			return Redirect::to('/profil/edit-nalog')->withErrors($v->errors());
 		}
 		//kraj validacije
+
+
 		$pass=Input::get('password');
 		$has_pass=Security::generateHashPass($pass);
 
@@ -95,7 +98,8 @@ class Profil extends Controller {
 		$korisnik->adresa=Input::get('adresa');
 		$korisnik->grad=Input::get('grad');
 		$korisnik->telefon=Input::get('telefon');
-		$korisnik->fotografija=Input::get('fotografija');
+	
+
 		$korisnik->save();
 		$ids=Session::get('id');
 		$procenat_popunjenosti=$this->proverapopunjenostiprofila();
