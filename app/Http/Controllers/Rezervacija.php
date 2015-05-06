@@ -9,6 +9,14 @@ use App\Security;
 use App\Rezervacije;
 use App\Kapacitet;
 class Rezervacija extends Controller {
+	public function postIndex(){
+		return '_token='.Input::get('_token')
+		.'<br>od='.Input::get('od')
+		.'<br>do='.Input::get('do')
+		.'<br>broj_osoba='.Input::get('broj_osoba')
+		.'<br>korisnik_id='.Input::get('korisnik_id')
+		.'<br>smestaj_id='.Input::get('smestaj_id');
+	}
 	public function getAktivne(){
 		$broj_osoba=Rezervacije::where('rezervacije.korisnici_id','=',Session::get('id'))
 					->where('rezervacije.aktivan','=',1)
