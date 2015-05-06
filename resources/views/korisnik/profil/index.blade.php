@@ -24,7 +24,7 @@
                 </div>
               </div>
               <div class="row">
-                <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" style="width:100px;" src="{!!$korisnik['fotografija']!!}" class="img-circle"> </div>
+                <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" style="width:100px;" src="" class="img-circle"> </div>
 
                 <div class=" col-md-9 col-lg-9 "> 
                   <table class="table table-user-information">

@@ -28,7 +28,7 @@
               <div class="row">
                 <div class="col-md-4" align="center"> 
                   <div class="row">
-                    <img alt="User Pic" style="width:100px;" src="{{$korisnik['fotografija']}}" class="img-circle img-responsive">
+                    <img alt="User Pic" style="width:100px;" src="" class="img-circle img-responsive">
                   </div>
                   <div class="row">
                     {!! Form::file('image',['class'=>'form-control']) !!}
