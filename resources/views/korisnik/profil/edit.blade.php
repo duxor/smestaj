@@ -30,12 +30,8 @@
                   <div class="row">
                     <img alt="User Pic" style="width:100px;" src="" class="img-circle img-responsive">
                   </div>
-                  <div class="row">
-                    {!! Form::file('image',['class'=>'form-control']) !!}
-                  </div>
                 </div>
-             
-
+            
                 <div class=" col-md-8"> 
                   <table class="table table-user-information">
                     <tbody>
@@ -64,7 +60,7 @@
                       </tr>
                       <tr>
                         <td>Password:</td>
-                        <td>{!! Form::password('password', ['class'=>'form-control','id'=>'password'])!!}</td>
+                        <td>{!! Form::password('password', ['class'=>'form-control'])!!}</td>
                       </tr>
                       <tr>
                         <td>Email:</td>

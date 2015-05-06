@@ -74,7 +74,7 @@ class Profil extends Controller {
 		//pocetak validacije
 		$data=Input::all();
 		$rules = array(
-	        'username'	=> 'Required|Between:5,12',
+	        'username'	=> 'Required|Between:5,45',
 	        'email'     => 'Required|Between:3,64|Email',
 	        
 			);
