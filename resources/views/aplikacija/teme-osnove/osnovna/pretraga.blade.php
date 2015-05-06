@@ -198,14 +198,13 @@
                             <div id="rezerve" style="display:none"></div>
                         </div>
                     </div>
-                    <div class="modal-footer"><i class='icon-spin6 animate-spin' style="color: rgba(0,0,0,0)"></i>
+                    <div class="modal-footer">
                         {!! Form::button('<span class="glyphicon glyphicon-remove"></span> Otkaži rezervaciju',['class'=>'btn btn-lg btn-warning','data-dismiss'=>'modal']) !!}
                         {!! Form::button('<span class="glyphicon glyphicon-ok"></span> Rezerviši', ['class'=>'btn btn-lg btn-success rezervisi']) !!}
                     </div>
                 </div>
             </div>
-        </div>
-        {!!Form::open()!!}{!!Form::close()!!}
+        </div><i class='icon-spin6 animate-spin' style="color: rgba(0,0,0,0)"></i>
         <style>._tooltip:hover{color: red}</style>
         <script>
             $(document).ready(function(){$('button').tooltip();$('a').tooltip()});
@@ -257,13 +256,13 @@
                             zelja: $(this).data("zelja")
                         },
                         function(data){
-                            $('button[data-id="'+id+'"]').html("<i class='glyphicon glyphicon-heart'></i>");
-                            if($('button[data-id="'+id+'"]').data('zelja')!=false){
-                                $('button[data-id="'+id+'"]').data('zelja',false);
-                                $('button[data-id="'+id+'"]').css("color","black");
+                            $('button#zelja[data-id="'+id+'"]').html("<i class='glyphicon glyphicon-heart'></i>");
+                            if($('button#zelja[data-id="'+id+'"]').data('zelja')!=false){
+                                $('button#zelja[data-id="'+id+'"]').data('zelja',false);
+                                $('button#zelja[data-id="'+id+'"]').css("color","black");
                             } else{
-                                $('button[data-id="'+id+'"]').data('zelja',data);
-                                $('button[data-id="'+id+'"]').css("color","red");
+                                $('button#zelja[data-id="'+id+'"]').data('zelja',data);
+                                $('button#zelja[data-id="'+id+'"]').css("color","red");
                             }
                         }
                 );

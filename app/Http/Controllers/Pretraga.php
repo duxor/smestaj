@@ -22,17 +22,19 @@ class Pretraga extends Controller {
 		$podaci['broj_osoba']=Input::get('broj_osoba')?Input::get('broj_osoba'):1;
 		$podaci['rezultat']=Objekat::
 			join('smestaj','smestaj.objekat_id','=','objekat.id')
-			->join('nalog','nalog.id','=','objekat.nalog_id')
-			->join('kapacitet','kapacitet.id','=','smestaj.kapacitet_id')
-			->join('vrsta_smestaja','vrsta_smestaja.id','=','smestaj.vrsta_smestaja_id')
+			->leftjoin('nalog','nalog.id','=','objekat.nalog_id')
+			->leftjoin('kapacitet','kapacitet.id','=','smestaj.kapacitet_id')
+			->leftjoin('vrsta_smestaja','vrsta_smestaja.id','=','smestaj.vrsta_smestaja_id')
 			->leftjoin('lista_zelja',function($query){
 				$query->on('lista_zelja.smestaj_id','=','smestaj.id')->where('lista_zelja.aktivan','=',1)->where('lista_zelja.korisnici_id','=',Session::get('id'));
 			})
+			->groupby('id')
 			->where('grad_id',Input::get('grad_id'))->where('broj_osoba',$tacan_broj.'=',$podaci['broj_osoba'])
 			->where('objekat.aktivan',1)->where('smestaj.aktivan',1)
 			->orderBy('smestaj.naziv')
 			->select('nalog.naziv as nazivApp','nalog.slug as slugApp','vrsta_smestaja.naziv as vrsta_smestaja','smestaj.id',
 				'smestaj.slug as slugSmestaj','smestaj.naziv','adresa','broj_osoba','lista_zelja.id as zelja','naslovna_foto')->get()->toArray();
+		//dd($podaci);
 		$podaci['gradovi']=Grad::lists('naziv','id');
 		$podaci['grad_id']=Input::get('grad_id');
 		$podaci['tacan_broj']=Input::get('tacan_broj');
