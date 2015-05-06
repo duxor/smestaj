@@ -3,15 +3,11 @@
 <div class="container">
 <div class="row">
 	<div class="col-md-8">
-		<div class="well well-lg">
 			<div class="row">
 			 	<div class="col-xs-12  toppad" >
 		          	<div class="panel panel-info">
-		            	<div class="panel-heading">
-		              		<h3 class="panel-title">asdf</h3>
-		            	</div>
 		            	<div class="panel-body">
-		            		<div class="media col-md-3">
+		            		<div class="media col-md-5">
 		            		<figure class="pull-left">
 							    <img class="media-object img-rounded img-responsive"  src="http://placehold.it/350x250" alt="placehold.it/350x250" >
 							</figure>
@@ -57,24 +53,11 @@
 		        	</div>
 		        </div>
 			</div>
-		</div>
-
-
-
-	</div>
-	<div class="col-md-4">
-		<div class="row">
-			<div class="embed-responsive embed-responsive-4by3">
-			    <iframe class="embed-responsive-item" src="https://www.google.com/maps/embed/v1/place?q=tarska%203%2C%20beograd&key=AIzaSyANkR_6WBUEKhO58qGQo0thZmNpvSCqRZE"></iframe>
-			</div>
-	   	</div>
-	</div>
-</div>
-</div>
+ <!--Komentari - START -->
 <div class="container">
-	<div class="row" style="margin-top:40px;">
-		<div class="col-md-8">
-    	<div class="well well-sm">
+    <div class="row" style="margin-top:40px;">
+        <div class="col-md-8">
+        <div class="well well-sm">
             <div class="text-right">
                 <a class="btn btn-success btn-green" href="#reviews-anchor" id="open-review-box">Ostavite komentar</a>
             </div>
@@ -96,9 +79,56 @@
             </div>
         </div> 
          
-		</div>
-	</div>
+        </div>
+    </div>
 </div>
+ <!--Komentari - KRAJ -->
+	</div>
+	<div class="col-md-4">
+        <div class="row">
+             <!-- Responsive calendar - START -->
+            <div class="responsive-calendar">
+            <div class="controls">
+                <a class="pull-left" data-go="prev"><div class="btn btn-primary">Prev</div></a>
+                <h4><span data-head-year></span> <span data-head-month></span></h4>
+                <a class="pull-right" data-go="next"><div class="btn btn-primary">Next</div></a>
+            </div><hr/>
+            <div class="day-headers">
+              <div class="day header">Mon</div>
+              <div class="day header">Tue</div>
+              <div class="day header">Wed</div>
+              <div class="day header">Thu</div>
+              <div class="day header">Fri</div>
+              <div class="day header">Sat</div>
+              <div class="day header">Sun</div>
+            </div>
+            <div class="days" data-group="days">
+              
+            </div>
+          </div>
+          <!-- Responsive calendar - END -->
+           <script type="text/javascript">
+          $(document).ready(function () {
+            $(".responsive-calendar").responsiveCalendar({
+              time: '2015-05',
+              events: {
+                "2015-05-30": {"number": 5, "url": "http://w3widgets.com/responsive-slider"},
+                "2015-05-26": {"number": 1, "url": "http://w3widgets.com"}, 
+                "2015-05-03":{"number": 1}, 
+                "2015-05-12": {}}
+            });
+          });
+        </script>
+        </div>
+    		<div class="row">
+    			<div class="embed-responsive embed-responsive-4by3">
+    			    <iframe class="embed-responsive-item" src="https://www.google.com/maps/embed/v1/place?q=tarska%203%2C%20beograd&key=AIzaSyANkR_6WBUEKhO58qGQo0thZmNpvSCqRZE"></iframe>
+    			</div>
+    	   	</div>
+    	</div>
+    </div>
+</div>
+
 <div class="container">
     <div class="row">
         <div class="panel panel-default widget">
