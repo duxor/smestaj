@@ -23,12 +23,20 @@
                   </div>
                 </div>
               </div>
-             {!! Form::open(['url'=>'/profil/edit-nalog','id'=>'forma','class'=>'form-horizontal']) !!}
+             {!! Form::open(['url'=>'/profil/edit-nalog','id'=>'forma','enctype'=>'multipart/form-data','class'=>'form-horizontal']) !!}
              {!! Form::hidden('id', $korisnik['id']) !!}
               <div class="row">
-                <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=100" class="img-circle"> </div>
+                <div class="col-md-4" align="center"> 
+                  <div class="row">
+                    <img alt="User Pic" style="width:100px;" src="{{$korisnik['fotografija']}}" class="img-circle img-responsive">
+                  </div>
+                  <div class="row">
+                    {!! Form::file('image',['class'=>'form-control']) !!}
+                  </div>
+                </div>
+             
 
-                <div class=" col-md-9 col-lg-9 "> 
+                <div class=" col-md-8"> 
                   <table class="table table-user-information">
                     <tbody>
                       @if ( $errors->any())
