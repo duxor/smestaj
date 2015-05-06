@@ -17,6 +17,13 @@
             </div>
             <div class="panel-body">
               <div class="row">
+                <div class="progress">
+                  <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="2" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em; width: {{$procenat_popunjenosti}}%;">
+                  Popunjenost profila:   {{$procenat_popunjenosti}}%
+                  </div>
+                </div>
+              </div>
+              <div class="row">
                 <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=100" class="img-circle"> </div>
 
                 <div class=" col-md-9 col-lg-9 "> 

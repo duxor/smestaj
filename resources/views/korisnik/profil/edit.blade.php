@@ -16,6 +16,13 @@
               <h3 class="panel-title">Profil korisnika:</h3> 
             </div>
             <div class="panel-body">
+            <div class="row">
+                <div class="progress">
+                  <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="2" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em; width: {{$procenat_popunjenosti}}%;">
+                  Popunjenost profila:   {{$procenat_popunjenosti}}%
+                  </div>
+                </div>
+              </div>
              {!! Form::open(['url'=>'/profil/edit-nalog','id'=>'forma','class'=>'form-horizontal']) !!}
              {!! Form::hidden('id', $korisnik['id']) !!}
               <div class="row">
@@ -49,12 +56,24 @@
                       </tr>
                       <tr>
                         <td>Password:</td>
-                        <td>{!! Form::password('password', ['class'=>'form-control'])!!}</td>
+                        <td>{!! Form::password('password', ['class'=>'form-control','id'=>'password'])!!}</td>
                       </tr>
                       <tr>
                         <td>Email:</td>
                         <td>{!! Form::text('email',$korisnik['email'], ['class'=>'form-control', 'placeholder'=>'Email','id'=>'email','type'=>'email'])!!}</td>
-                      </tr>                    
+                      </tr> 
+                      <tr>
+                        <td>Adresa:</td>
+                        <td>{!! Form::text('adresa',$korisnik['adresa'], ['class'=>'form-control', 'placeholder'=>'Adresa'])!!}</td>
+                      </tr>
+                      <tr>
+                        <td>Grad:</td>
+                        <td>{!! Form::text('grad',$korisnik['grad'], ['class'=>'form-control', 'placeholder'=>'Grad'])!!}</td>
+                      </tr>
+                      <tr>
+                        <td>Telefon:</td>
+                        <td>{!! Form::text('telefon',$korisnik['telefon'], ['class'=>'form-control', 'placeholder'=>'Telefon'])!!}</td>
+                      </tr>                  
                     </tbody>
                   </table>
                   {!! Form::button('<span class="glyphicon glyphicon-floppy-disk"></span> Sačuvaj', ['class'=>'btn btn-lg btn-primary','onClick'=>'SubmitForm.submit(\'forma\')']) !!}

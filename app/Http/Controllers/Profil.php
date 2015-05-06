@@ -20,9 +20,25 @@ class Profil extends Controller {
 		if(Security::autentifikacijaTest())
 		{
 			$ids=Session::get('id');
-			$korisnik=Korisnici::where('id', '=', $ids)->get(['id','ime','prezime','email','username'])->first()->toArray();
-			return view('korisnik.profil.index', compact('korisnik'));
+			$korisnik=Korisnici::where('id', '=', $ids)->get(['id','ime','prezime','email','username','adresa','grad','telefon','fotografija'])->first()->toArray();
+			$counter = 0;
+			$procenat_popunjenosti=$this->proverapopunjenostiprofila();
+
+			return view('korisnik.profil.index', compact('korisnik','procenat_popunjenosti'));
 		}return view('korisnik.prijava.index');
+    }
+    private function proverapopunjenostiprofila(){
+			$ids=Session::get('id');
+			$korisnik=Korisnici::where('id', '=', $ids)->get(['id','ime','prezime','email','username','adresa','grad','telefon','fotografija'])->first()->toArray();
+			$counter = 0;
+			foreach($korisnik as $value)
+			{
+			  if($value === null || $value==='')
+			    $counter++;
+			}
+			$counter=9-$counter;
+			$procenat_popunjenosti=round($counter/9*100,0);
+			return $procenat_popunjenosti;
     }
     public function getLogin(){
     	if(Security::autentifikacijaTest()) return redirect('/profil/');
@@ -33,7 +49,7 @@ class Profil extends Controller {
     		$data=Input::all();
 			$rules = array(
 	        'username'	=> 'Required|Between:5,12',
-	        'password'  =>'Required|AlphaNum|Between:4,8|',
+	        'password'  =>'Required|AlphaNum|Between:4,8|'
 			);
 
 			$v=Validator::make($data,$rules);
@@ -48,9 +64,10 @@ class Profil extends Controller {
 	public function getEditNalog(){
 		if(Security::autentifikacijaTest())
 		{
+			$procenat_popunjenosti=$this->proverapopunjenostiprofila();
 			$ids=Session::get('id');
-			$korisnik=Korisnici::where('id', '=', $ids)->get(['id','ime','prezime','email','username'])->first()->toArray();
-			return view('korisnik.profil.edit',compact('korisnik'));
+			$korisnik=Korisnici::where('id', '=', $ids)->get(['id','ime','prezime','email','username','adresa','grad','telefon','fotografija'])->first()->toArray();
+			return view('korisnik.profil.edit',compact('korisnik','procenat_popunjenosti'));
 		}return view('korisnik.prijava.index');
 	}
 	public function postEditNalog(){
@@ -58,8 +75,7 @@ class Profil extends Controller {
 		$data=Input::all();
 		$rules = array(
 	        'username'	=> 'Required|Between:5,12',
-	        'email'     => 'Required|Between:3,64|Email',
-	        'password'  =>'AlphaNum|Between:4,8|',
+	        'email'     => 'Required|Between:3,64|Email'
 			);
 		$v=Validator::make($data,$rules);
 		if($v->fails())
@@ -70,17 +86,21 @@ class Profil extends Controller {
 		$pass=Input::get('password');
 		$has_pass=Security::generateHashPass($pass);
 
-		$korisnik= Korisnici::firstOrNew(['id'=>Input::get('id')],['id','prezime','ime' ,'username','password','email']);  
+		$korisnik= Korisnici::firstOrNew(['id'=>Input::get('id')],['id','prezime','ime' ,'username','password','email','adresa','grad','telefon','fotografija']);  
 		$korisnik->prezime=Input::get('prezime');
 		$korisnik->ime=Input::get('ime');
 		$korisnik->username=Input::get('username');
 		$korisnik->password=$has_pass;
-		$korisnik->email=Input::get('email');;
+		$korisnik->email=Input::get('email');
+		$korisnik->adresa=Input::get('adresa');
+		$korisnik->grad=Input::get('grad');
+		$korisnik->telefon=Input::get('telefon');
+		$korisnik->fotografija=Input::get('fotografija');
 		$korisnik->save();
 		$ids=Session::get('id');
-		
+		$procenat_popunjenosti=$this->proverapopunjenostiprofila();
 		$korisnik=Korisnici::where('id', '=', $ids)->get(['id','ime','prezime','email','username'])->first()->toArray();
-		return view('korisnik.profil.index',compact('korisnik'));
+		return view('korisnik.profil.index',compact('korisnik','procenat_popunjenosti'));
 	}
 	public function postRegistracija(){
 			$un=Input::get('username2');

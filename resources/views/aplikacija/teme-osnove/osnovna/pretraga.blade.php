@@ -161,26 +161,20 @@
                                 <h2>Rezervacije korisnika</h2>
                             </div>
                             <div class="modal-body">
+                            <div class="container-fluid">
                                 {!!Form::open(['url'=>'/rezervacije/rezervisi','class'=>'form-horizontal'])!!}
                                         {!!Form::hidden('id_smestaja',$smestaj['id'])!!}
-                                  
+                                
+                                  <div class="form-group" id="datarange">
+                                        {!!Form::label('lperiod','Izaberite period:',['class'=>'control-label col-sm-4'])!!}
+                                        <div class="input-daterange input-group col-sm-8" id="datepicker">
+                                            {!! Form::text('datumOd', date("Y-m-d"), ['class'=>'input-sm form-control','placeholder'=>'od...']) !!}
+                                            <span class="input-group-addon">do</span>
+                                            {!! Form::text('datumDo', null, ['class'=>'input-sm form-control','placeholder'=>'do...']) !!}
+                                        </div>
+                                    </div> 
+                              
 
-                                    <div class="form-group" id="datarange">
-                                    {!! Form::label('pocetak','Početak rezervacije:',['class'=>'control-label col-sm-4']) !!}
-                                        <div class="input-daterange input-group" id="datepicker">
-                                            <div class="col-sm-4">
-                                                {!! Form::text('datumOd',date("y-m-d"), null, ['class'=>'input-sm form-control ','placeholder'=>'od...']) !!}
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group" id="datarange">
-                                    {!! Form::label('kraj','Kraj rezervacije:',['class'=>'control-label col-sm-4']) !!}
-                                        <div class="input-daterange input-group" id="datepicker">
-                                            <div class="col-sm-4">
-                                                {!! Form::text('datumDo','Izaberite datum', null, ['class'=>'input-sm form-control ','placeholder'=>'od...']) !!}
-                                            </div>
-                                        </div>
-                                    </div>
                                     <script>
                                         $('#datarange .input-daterange').datepicker({
                                             orientation: "top auto",
@@ -204,7 +198,7 @@
                                         {!! Form::textarea('napomena', null, ['class'=>'form-control', 'placeholder'=>'Upišite napomenu']) !!}     
                                     </div>
                                 </div>
-                            </div>
+                            </div></div>
                             <div class="modal-footer">
                                 {!! Form::button('<span class="glyphicon glyphicon-remove"></span> Otkaži rezervaciju', ['class'=>'btn btn-lg btn-warning',' data-dismiss'=>'modal']) !!}
                                 {!! Form::button('<span class="glyphicon glyphicon-ok"></span> Rezerviši', ['class'=>'btn btn-lg btn-success','type'=>'submit']) !!}
