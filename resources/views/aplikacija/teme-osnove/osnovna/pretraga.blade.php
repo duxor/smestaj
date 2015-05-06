@@ -161,6 +161,7 @@
                     </div>
                     <div class="modal-body">
                         <div id="container-fluid">
+                            <div id="vrti" style="display:none"><center><i class='icon-spin6 animate-spin' style="font-size: 350%"></i></center></div>
                             <div class="forma form-horizontal">
                                 {!!Form::hidden('id_smestaja')!!}
                                 <div class="form-group">
@@ -224,6 +225,8 @@
             $("button.rezervisi").click(function(){
                 var dugme=$(this).html();
                 $(this).html("<i class='icon-spin6 animate-spin'></i> U procesu...");
+                $('.forma').css('display','none');
+                $('#vrti').fadeToggle();
                 $.post('/rezervisi',
                         {
                             _token:'{{csrf_token()}}',
@@ -236,9 +239,9 @@
                         function(data){
                             $("button.rezervisi").html(dugme);
                             $('#rezerve').html('<div class="alert alert-success" role="alert">'+data+'</div>');
-                            $('.forma').css('display','none');
+                            $('#vrti').fadeToggle();
                             $('#rezerve').fadeToggle('slow');
-                            window.setTimeout(function(){$('#rezerve').fadeToggle('slow');$('.forma').fadeToggle('slow');},3000);
+                            window.setTimeout(function(){$('#rezerve').fadeToggle('slow');$('.forma').fadeToggle('slow')},3000);
                         }
                 );
             });
