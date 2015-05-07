@@ -53,6 +53,7 @@
 		        	</div>
 		        </div>
 			</div>
+            
  <!--Komentari - START -->
 <div class="container">
     <div class="row" style="margin-top:40px;">
