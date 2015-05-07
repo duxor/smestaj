@@ -24,6 +24,7 @@
     {!! HTML::style('css/animation.css') !!}
     {!! HTML::style('teme/osnovna-paralax/css/parallax.css') !!}
     {!! HTML::style('css/datepicker.css') !!}
+    {!! HTML::style('css/responsive-calendar.css') !!}
 
     @if(isset($podaci['x']))
         {!! HTML::script('http://maps.googleapis.com/maps/api/js') !!}
@@ -36,6 +37,7 @@
     {!!HTML::script('js/map/modestmaps.js')!!}
     {!!HTML::script('js/map/modestmaps.markers.js')!!}
     {!!HTML::script('js/map/spotlight.js')!!}
+    {!!HTML::script('js/responsive-calendar.js')!!}
     @yield('head')
 </head>
 
