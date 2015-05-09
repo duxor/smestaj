@@ -140,13 +140,14 @@ var SubmitForm = {
  ###
 */
 var Komunikacija = {
-    posalji: function(token,url,podaci,poruka,wait,hide){
+    posalji: function(url,podaciID,poruka,wait,hide){
+        var podaci=this.podaci('',null,podaciID,{});
         $('#'+hide).css('display','none');
         $('#'+wait).fadeToggle();
         $.post(url,
             {
-                _token:token,
-                podaci:podaci
+                _token:podaci['_token'],
+                podaci:JSON.stringify(podaci)
             },
             function(data){
                 data=JSON.parse(data);
@@ -159,5 +160,14 @@ var Komunikacija = {
                 },3000);
             }
         );
+    },
+    podaci:function(i,inputi,podaciID,podaci){
+        if(inputi==null) {
+            var inputi = $('#' + podaciID + ' :input');
+            i = inputi.length - 1;
+        }
+        podaci[inputi[i].name]=inputi[i].value;
+        if(i==0) return podaci;
+        return this.podaci(i-1,inputi,null,podaci);
     }
 }

@@ -34,15 +34,18 @@ class Rezervacija extends Controller {
 		return Security::autentifikacija('korisnik.rezervacije-aktivne', compact('rezervacije','broj_osoba'),2);
 	}
 	public function postRezervisi(){
-		$rez= new Rezervacije;
-		$rez->od=Input::get('datumOd');
-		$rez->do=Input::get('datumDo');
-		$rez->korisnici_id=Session::get('id');
-		$rez->smestaj_id=Input::get('id_smestaja');
-		$rez->napomena=Input::get('napomena');
+		$podaci=json_decode(Input::get('podaci'));
+		$rez= new Rezervacije();
+		$rez->od=$podaci->datumOd;
+		$rez->do=$podaci->datumDo;
+		$rez->korisnici_id=$podaci->id_korisnika;
+		$rez->smestaj_id=$podaci->id_smestaja;
+		$rez->napomena=$podaci->napomena;
+		$rez->broj_osoba=$podaci->broj_osoba;
 		$rez->save();
-		$message[]='Uspešno ste izvršili rezervaciju';
-		return Redirect::to('/rezervacije/aktivne')->with(compact('message'));
+		//$message[]='Uspešno ste izvršili rezervaciju';
+		return json_encode(['msg'=>'Uspešno ste izvršili rezervaciju.','check'=>1]);
+		//return Redirect::to('/rezervacije/aktivne')->with(compact('message'));
 	}
 	public function postIzmeniRezervaciju(){
 		$message=[];
