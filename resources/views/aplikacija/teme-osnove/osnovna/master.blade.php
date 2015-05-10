@@ -42,19 +42,32 @@
 <body>
 {{--navigacija START::--}}
 <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div id="IznadNav" style="background-color: #fff;background-image:url('/teme/osnovna-paralax/slike/logo/urban-png-70x1920.jpg');height: 70px"><a href="/"><img src="/teme/osnovna-paralax/slike/logo/logo500x1201.png"></a></div>
+    <script>
+        $(document).scroll(function(){
+            if($(document).scrollTop()<$(document).height()*0.1){
+                $("#IznadNav").slideDown();
+                $('#brend').fadeOut();
+            }
+            else if($(document).scrollTop()>$(document).height()*0.15) {
+                $("#IznadNav").slideUp();
+                $('#brend').fadeIn();
+            }
+        });
+    </script>
     <div class="container">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="/" class="navbar-brand">
-                najSmeštaj
+            <a href="/" id="brend" class="navbar-brand" style="display: none;margin-top: -15px">
+                <img src="/teme/osnovna-paralax/slike/logo/logo50x200.jpg">
             </a>
         </div>
-        <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
+        <div class="collapse navbar-collapse navbar-right" id="navbar">
             <ul class="nav navbar-nav">
                 @foreach($podaci as $meni)
                     @if(isset($meni['vrsta_sadrzaja_id']))
