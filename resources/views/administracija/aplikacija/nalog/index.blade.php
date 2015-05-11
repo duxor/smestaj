@@ -36,10 +36,10 @@
                 @endforeach
                 </tbody>
             </table>
-            <a href="{!!url('/administracija/nalog/nalog-novi')!!}" class="btn btn-lg btn-default"><i class="glyphicon glyphicon-plus"></i> Novi nalog</a>
         @else
             <p>Ne postoji ni jedan nalog u evidenciji.</p>
         @endif
     @endif
+    <a href="{!!url('/administracija/nalog/nalog-novi')!!}" class="btn btn-lg btn-default"><i class="glyphicon glyphicon-plus"></i> Nova aplikacija</a>
 
 @endsection

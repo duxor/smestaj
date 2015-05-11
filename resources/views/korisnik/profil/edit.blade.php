@@ -1,16 +1,14 @@
-@extends('administracija.masterBackEnd')
+@extends('korisnik.master')
 
-@section('body')
+@section('content')
 
-<div class="container">
       <div class="row">
       <div class="col-md-5  toppad  pull-right col-md-offset-3 ">
        <br>
 
       </div>
-        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
-   
-   
+        <div class="col-sm-12 col-md-6 col-md-offset-3 toppad" >
+
           <div class="panel panel-info">
             <div class="panel-heading">
               <h3 class="panel-title">Profil korisnika:</h3> 
@@ -19,7 +17,7 @@
             <div class="row">
                 <div class="progress">
                   <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="2" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em; width: {{$procenat_popunjenosti}}%;">
-                  Popunjenost profila:   {{$procenat_popunjenosti}}%
+                  Popunjenost profila: {{$procenat_popunjenosti}}%
                   </div>
                 </div>
               </div>
@@ -28,7 +26,10 @@
               <div class="row">
                 <div class="col-md-4" align="center"> 
                   <div class="row">
-                    <img alt="User Pic" style="width:100px;" src="" class="img-circle img-responsive">
+                    <a href="#" data-toggle="modal" data-target="#dodajFoto">
+                      <img id="foto" data-toggle="tooltip" data-placement="bottom" title="Izmeni fotografiju" style="width:200px;height: 200px" src="/galerije/{{Session::get('username')}}/osnovne/profilna.jpg" class="img-circle img-responsive">
+                      <script>$(document).ready(function(){$('#foto').tooltip()})</script>
+                    </a>
                   </div>
                 </div>
             
@@ -80,7 +81,7 @@
                       </tr>                  
                     </tbody>
                   </table>
-                  {!! Form::button('<span class="glyphicon glyphicon-floppy-disk"></span> Sačuvaj', ['class'=>'btn btn-lg btn-primary','onClick'=>'SubmitForm.submit(\'forma\')']) !!}
+                  {!! Form::button('<span class="glyphicon glyphicon-floppy-disk"></span> Sačuvaj',['class'=>'btn btn-lg btn-primary','onClick'=>'SubmitForm.submit(\'forma\')'])!!}
                 </div>
               </div>
               {!! Form::close() !!}
@@ -88,6 +89,33 @@
           </div>
         </div>
       </div>
+@endsection
+@section('body')
+  <div class="modal fade" id="dodajFoto">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button class="close" data-dismiss="modal">&times;</button>
+          <h2>Dodaj novu fotografiju</h2>
+        </div>
+        <div class="modal-body">
+          <input id="input-700" name="image" type="file" multiple=false class="file-loading">
+        </div>
+        <div class="modal-footer">
+          <a href="/profil" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-ok"></span> Završeno dodavanje</a>
+        </div>
+      </div>
     </div>
-  
-@stop
+  </div>
+  {!! HTML::style('/dragdrop/css/fileinput.css') !!}
+  {!! HTML::script('/dragdrop/js/fileinput.min.js') !!}
+  <script>
+    $("#input-700").fileinput({
+      uploadExtraData: {username: '{{Session('username')}}', _token:'{{csrf_token()}}'},
+      uploadUrl: '/profil/upload-profilna',
+      uploadAsync: true,
+      maxFileCount: 10,
+      overwriteInitial: true
+    });
+  </script>
+@endsection

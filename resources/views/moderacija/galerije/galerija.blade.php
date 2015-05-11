@@ -31,7 +31,6 @@
 @endsection
 
 @section('body')
-
     <div class="modal fade" id="dodajFoto">
         <div class="modal-dialog">
             <div class="modal-content">
