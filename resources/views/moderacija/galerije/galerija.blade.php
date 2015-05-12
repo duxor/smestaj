@@ -1,12 +1,15 @@
 @extends('moderacija.master-moderator')
 @section('content')
-    <h2>Uredi galeriju fotografija</h2>
-    <div id="poruka" style="display: none;background-color: #005fb3"></div>
+    <h2>Uredi galeriju fotografija</h2><i class='icon-spin6 animate-spin' style="color: rgba(0,0,0,0)"></i>
+    <div id="poruka" style="display: none"></div>
     <div id="wait" style="display:none"><center><i class='icon-spin6 animate-spin' style="font-size: 350%"></i></center></div>
-    <div id="hide">
-        <div class="form-group">{!!Form::text('naslov',$podaci['galerija']['naziv'],['class'=>'form-control'])!!}</div>
+    <div id="hide" style="margin-bottom: 20px">
+        {!!Form::hidden('_token',csrf_token())!!}
+        {!!Form::hidden('galerija_id',$podaci['galerija']['id'])!!}
+        {!!Form::hidden('korisnik_id',Session::get('id'))!!}
+        <div class="form-group">{!!Form::text('naziv',$podaci['galerija']['naziv'],['class'=>'form-control'])!!}</div>
         <div class="form-group">{!!Form::textarea('sadrzaj',$podaci['galerija']['sadrzaj'],['class'=>'form-control'])!!}</div>
-        {!! Form::button('<span class="glyphicon glyphicon-ok"></span> Rezerviši',['class'=>'btn btn-lg btn-success','onclick'=>'Komunikacija.posalji("/rezervisi",\'hide\',\'poruka\',\'wait\',\'hide\')' ]) !!}
+        {!!Form::button('<span class="glyphicon glyphicon-save"></span> Sačuvaj',['class'=>'btn btn-lg btn-primary','onclick'=>'Komunikacija.posalji("/moderator/'.$podaci['slugApp'].'/galerije/galerija-update","hide","poruka","wait","hide")'])!!}
     </div>
     <a href="#" class="btn btn-lg btn-warning" data-toggle="modal" data-target="#dodajFoto"><span class="glyphicon glyphicon-picture"></span> Dodaj fotografije</a>
     @if($podaci['slike'])

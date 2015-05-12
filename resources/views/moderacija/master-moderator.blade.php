@@ -20,6 +20,7 @@
     {!! HTML::style('css/bootstrap.min.css') !!}
     {!! HTML::style('css/templejtBackEnd.css') !!}
     {!! HTML::style('css/fontello.css') !!}
+    {!! HTML::style('css/animation.css') !!}
     {!! HTML::style('css/pregled_smestaja.css') !!}
     {!! HTML::script('js/jquery-3.0.js') !!}
     {!! HTML::script('js/funkcije.js') !!}

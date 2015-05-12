@@ -87,7 +87,11 @@ class Galerija extends Controller {
 		return Redirect::back();
 	}
 	//Popuna podataka o odredjenoj galeriji
-	public function postGlaerijaUpdate(){
-		return json_encode(['msg'=>'prezime='.Input::get('podaci')['prezime'].' ime='.Input::get('podaci')['ime'],'check'=>1]);
+	public function postGalerijaUpdate(){
+		$podaci=json_decode(Input::get('podaci'));
+		if(!Security::autentifikacijaTest(4) or Session::get('id')!=$podaci->korisnik_id or !Sadrzaji::join('nalog','nalog.id','=','sadrzaji.nalog_id')->where('nalog.korisnici_id',Session::get('id'))->where('sadrzaji.id',$podaci->galerija_id)->get(['sadrzaji.id']))
+			return json_encode(['msg'=>'Greska!!! Proverite podatke i obratite pažnju na legalnost onoga što radite.','check'=>0]);
+		$galerija=Sadrzaji::where('id',$podaci->galerija_id)->update(['naziv'=>$podaci->naziv,'sadrzaj'=>$podaci->sadrzaj]);//find($podaci->galerija_id,['id','naziv','sadrzaj']);
+		return json_encode(['msg'=>$galerija?'Uspešno ste ažurirali galeriju fotografija.':'Desila se greška. Proverite podatke i pokušjte ponovo.','check'=>$galerija?1:0]);
 	}
 }
