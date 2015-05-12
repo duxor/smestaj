@@ -1,16 +1,13 @@
 @extends('moderacija.master-moderator')
 @section('content')
-    {!! Form::open(['url'=>'#','class'=>'form-horizontal container']) !!}
-        <div class="form-group">
-            {!! Form::text('naslov',$podaci['galerija']['naziv'],['class'=>'form-control']) !!}
-        </div>
-        <div class="form-group">
-            {!! Form::textarea('sadrzaj',$podaci['galerija']['sadrzaj'],['class'=>'form-control']) !!}
-        </div>
-        <div class="form-group">
-            {!! Form::button('<span class="glyphicon glyphicon-floppy-disk"></span> Sačuvaj',['class'=>'btn btn-lg btn-primary','type'=>'submit']) !!}
-        </div>
-    {!! Form::close() !!}
+    <h2>Uredi galeriju fotografija</h2>
+    <div id="poruka" style="display: none;background-color: #005fb3"></div>
+    <div id="wait" style="display:none"><center><i class='icon-spin6 animate-spin' style="font-size: 350%"></i></center></div>
+    <div id="hide">
+        <div class="form-group">{!!Form::text('naslov',$podaci['galerija']['naziv'],['class'=>'form-control'])!!}</div>
+        <div class="form-group">{!!Form::textarea('sadrzaj',$podaci['galerija']['sadrzaj'],['class'=>'form-control'])!!}</div>
+        {!! Form::button('<span class="glyphicon glyphicon-ok"></span> Rezerviši',['class'=>'btn btn-lg btn-success','onclick'=>'Komunikacija.posalji("/rezervisi",\'hide\',\'poruka\',\'wait\',\'hide\')' ]) !!}
+    </div>
     <a href="#" class="btn btn-lg btn-warning" data-toggle="modal" data-target="#dodajFoto"><span class="glyphicon glyphicon-picture"></span> Dodaj fotografije</a>
     @if($podaci['slike'])
             <div class="row">

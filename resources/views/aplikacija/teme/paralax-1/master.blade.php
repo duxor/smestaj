@@ -18,22 +18,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
     <title>najSmestaj</title>
-    {!! HTML::style('teme/osnovna-paralax/css/templejt.css') !!}
-    {!! HTML::style('css/bootstrap.min.css') !!}
-    {!! HTML::style('css/fontello.css') !!}
-    {!! HTML::style('css/animation.css') !!}
-    {!! HTML::style('teme/osnovna-paralax/css/parallax.css') !!}
-    {!! HTML::style('css/datepicker.css') !!}
-    {!! HTML::style('css/responsive-calendar.css') !!}
+    {!!HTML::style('teme/osnovna-paralax/css/templejt.css')!!}
+    {!!HTML::style('css/bootstrap.min.css')!!}
+    {!!HTML::style('css/fontello.css')!!}
+    {!!HTML::style('css/animation.css')!!}
+    {!!HTML::style('teme/osnovna-paralax/css/parallax.css')!!}
+    {!!HTML::style('css/datepicker.css')!!}
+    {!!HTML::style('css/responsive-calendar.css')!!}
 
-    @if(isset($podaci['x']))
-        {!! HTML::script('http://maps.googleapis.com/maps/api/js') !!}
-        <script>var mx="{{$podaci['x']}}", my="{{$podaci['y']}}";</script>
-        {!! HTML::script('js/gmap1.js') !!}
-    @endif
-    {!! HTML::script('js/jquery-3.0.js') !!}
-    {!! HTML::script('js/datepicker.js') !!}
-    {!! HTML::script('js/komentari.js') !!}
+    {!!HTML::script('js/jquery-3.0.js')!!}
+    {!!HTML::script('js/datepicker.js')!!}
+    {!!HTML::script('js/komentari.js')!!}
     {!!HTML::script('js/map/modestmaps.js')!!}
     {!!HTML::script('js/map/modestmaps.markers.js')!!}
     {!!HTML::script('js/map/spotlight.js')!!}

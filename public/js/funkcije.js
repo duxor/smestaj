@@ -123,7 +123,7 @@ var SubmitForm = {
  ###            </center>
  ###        </div>
  ###        <div id="hide">
- ###            <button class="btn btn-lg btn-danger" onclick="Komunikacija.posalji('{{csrf_token()}}','/pretraga/test',{prezime:'Perisic',ime:'Dusan'},'poruka','wait','hide')">Test</button>
+ ###            <button class="btn btn-lg btn-danger" onclick="Komunikacija.posalji('/pretraga/test',{_token:'{{csrf_token()}}',prezime:'Perisic',ime:'Dusan'},'poruka','wait','hide')">Test</button>
  ###        </div>
  ###
  ### LARAVEL metoda:
@@ -131,9 +131,8 @@ var SubmitForm = {
  ###		return json_encode(['msg'=>'prezime='.Input::get('podaci')['prezime'].' ime='.Input::get('podaci')['ime'],'check'=>1]);
  ###	}
  ### VARIJABLE
- ### token = jedinstven i kreira se preko laravel ugradjene funkcije csrf_token()
  ### url = adresa kojoj se prosledjuju podaci
- ### podaci = niz koji sadrzi sve podatke koje se prosledjuju
+ ### podaciID = promjenjiva koja sadrzi ID elementa koji obuhvata sve input elemente za prenos podataka, ukljucujuci i _token=csrf_token()
  ### poruka = ID elementa u kome ce da se ispisuje poruka
  ### wait = ID elementa koji sadrzi wait animaciju
  ### hide = ID elementa ciji sadrzaj treba da se sakrije dok je wait aktivan
