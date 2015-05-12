@@ -41,3 +41,9 @@ nav li a, p{
     padding: 5px 10px 0 0;
     font-size: 21px
 }
+@media(max-width: 400px){
+    .navbar-brand img{margin-top: -15px}
+}
+@media(min-width: 767px) and (max-width: 991px){
+    .navbar-brand img{margin-top: 30px}
+}

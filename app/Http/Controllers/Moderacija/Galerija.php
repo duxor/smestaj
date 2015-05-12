@@ -10,13 +10,11 @@ use App\OsnovneMetode;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 class Galerija extends Controller {
+	//Pregled svih galerija
 	public function getIndex($slugApp){
 		if(!Security::autentifikacijaTest(4)) return Security::rediectToLogin();
-
 		if(!Nalog::where('slug',$slugApp)->where('korisnici_id',Session::get('id'))->get(['id'])->first())return'Greska!';
-
-		$podaci['galerije']=Sadrzaji::
-			join('nalog','nalog.id','=','sadrzaji.nalog_id')
+		$podaci['galerije']=Sadrzaji::join('nalog','nalog.id','=','sadrzaji.nalog_id')
 			->join('templejt','templejt.id','=','sadrzaji.templejt_id')
 			->join('tema','tema.id','=','nalog.tema_id')
 			->where('nalog.aktivan',1)
@@ -30,10 +28,9 @@ class Galerija extends Controller {
 		$podaci['aplikacija']=$slugApp;
 		return Security::autentifikacija('moderacija.galerije.pregled', compact('podaci'));
 	}
-
+	//Pregled odredjene galerije
 	public function anyGalerija($slugApp,$sadrzajId,$slugGalerije=null){
 		if (!Security::autentifikacijaTest(4))return Security::rediectToLogin();
-
 		$podaci['aplikacije']=OsnovneMetode::aplikacije();
 		$podaci['galerija']=Sadrzaji::join('templejt','templejt.id','=','sadrzaji.templejt_id')
 			->join('tema','tema.id','=','templejt.tema_id')
@@ -43,6 +40,7 @@ class Galerija extends Controller {
 		$podaci['slugApp']=$slugApp;
 		return Security::autentifikacija('moderacija.galerije.galerija', compact('podaci'));
 	}
+	//Upload fotografija
 	public function postUpload(){
 		if(!Security::autentifikacijaTest(4)){
 			echo json_encode(['error'=>'Niste prijavljeni na platformu.']);
@@ -81,10 +79,19 @@ class Galerija extends Controller {
 		echo json_encode($output);
 		return;
 	}
+	//Fizicko BRISANJE odredjene fotografije iz galerije
 	public function postUkloniFoto($slugApp){
 		if(!Security::autentifikacijaTest())return Security::rediectToLogin();
 		if(!Nalog::where('slug',$slugApp)->where('korisnici_id',Session::get('id'))->get())return Security::rediectToLogin();
 		unlink(Input::get('slika'));
 		return Redirect::back();
+	}
+	//Popuna podataka o odredjenoj galeriji
+	public function postGalerijaUpdate(){
+		$podaci=json_decode(Input::get('podaci'));
+		if(!Security::autentifikacijaTest(4) or Session::get('id')!=$podaci->korisnik_id or !Sadrzaji::join('nalog','nalog.id','=','sadrzaji.nalog_id')->where('nalog.korisnici_id',Session::get('id'))->where('sadrzaji.id',$podaci->galerija_id)->get(['sadrzaji.id']))
+			return json_encode(['msg'=>'Greska!!! Proverite podatke i obratite pažnju na legalnost onoga što radite.','check'=>0]);
+		$galerija=Sadrzaji::where('id',$podaci->galerija_id)->update(['naziv'=>$podaci->naziv,'sadrzaj'=>$podaci->sadrzaj]);//find($podaci->galerija_id,['id','naziv','sadrzaj']);
+		return json_encode(['msg'=>$galerija?'Uspešno ste ažurirali galeriju fotografija.':'Desila se greška. Proverite podatke i pokušjte ponovo.','check'=>$galerija?1:0]);
 	}
 }

@@ -2,6 +2,7 @@
 use App\Http\Controllers\Controller;
 
 use App\Korisnici;
+use App\OsnovneMetode;
 use App\PravaPristupa;
 use App\Security;
 use Illuminate\Support\Facades\Redirect;
@@ -31,6 +32,7 @@ class Korisnik extends Controller {
             $novi->email = Input::get('email');
             $novi->pravaPristupa_id = Input::get('pravaPristupa_id');
             $novi->save();
+            if(!Input::get('id')) OsnovneMetode::kreiranjeKorisnika($novi->username);
             return redirect('/administracija/korisnik');
         }else return Security::rediectToLogin();
     }

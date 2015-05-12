@@ -116,37 +116,37 @@ var SubmitForm = {
  ### Napomena: 	Klasa je pisana kao dodatak Laravel framework-a
  ### ------------------------------------------------------------------
  ### Primjer:
- ### HTML:  <div id="poruka" style="display: none;background-color: #005fb3"></div>
- ###        <div id="wait" style="display:none">
- ###            <center>
- ###                <i class='icon-spin6 animate-spin' style="font-size: 350%"></i>
- ###            </center>
- ###        </div>
+ ### HTML:  <div id="poruka" style="display: none"></div>
+ ###        <div id="wait" style="display:none"><center><i class='icon-spin6 animate-spin' style="font-size: 350%"></i></center></div>
  ###        <div id="hide">
- ###            <button class="btn btn-lg btn-danger" onclick="Komunikacija.posalji('{{csrf_token()}}','/pretraga/test',{prezime:'Perisic',ime:'Dusan'},'poruka','wait','hide')">Test</button>
+ ###            {!!Form::hidden('_token',csrf_token())!!}
+ ###            {!!Form::text('prezime',null,['class'=>'form-control'])!!}
+ ###            {!!Form::text('ime',null,['class'=>'form-control'])!!}
+ ###            {!!Form::button('<span class="glyphicon glyphicon-save"></span> Sačuvaj',['class'=>'btn btn-lg btn-primary','onclick'=>'Komunikacija.posalji("/url","hide","poruka","wait","hide")'])!!}
  ###        </div>
  ###
  ### LARAVEL metoda:
  ### 	public function postTest(){
- ###		return json_encode(['msg'=>'prezime='.Input::get('podaci')['prezime'].' ime='.Input::get('podaci')['ime'],'check'=>1]);
+ ###        $podaci=json_decode(Input::get('podaci'));
+ ###		return json_encode(['msg'=>'prezime='.$podci->prezime.' ime='.$podaci->ime,'check'=>1]);
  ###	}
- ### VARIJABLE
- ### token = jedinstven i kreira se preko laravel ugradjene funkcije csrf_token()
+ ### VARIJABLE:
  ### url = adresa kojoj se prosledjuju podaci
- ### podaci = niz koji sadrzi sve podatke koje se prosledjuju
+ ### podaciID = promjenjiva koja sadrzi ID elementa koji obuhvata sve input elemente za prenos podataka, ukljucujuci i _token=csrf_token()
  ### poruka = ID elementa u kome ce da se ispisuje poruka
  ### wait = ID elementa koji sadrzi wait animaciju
  ### hide = ID elementa ciji sadrzaj treba da se sakrije dok je wait aktivan
  ###
 */
 var Komunikacija = {
-    posalji: function(token,url,podaci,poruka,wait,hide){
+    posalji: function(url,podaciID,poruka,wait,hide){
+        var podaci=this.podaci('',null,podaciID,{});
         $('#'+hide).css('display','none');
         $('#'+wait).fadeToggle();
         $.post(url,
             {
-                _token:token,
-                podaci:podaci
+                _token:podaci['_token'],
+                podaci:JSON.stringify(podaci)
             },
             function(data){
                 data=JSON.parse(data);
@@ -159,5 +159,14 @@ var Komunikacija = {
                 },3000);
             }
         );
+    },
+    podaci:function(i,inputi,podaciID,podaci){
+        if(inputi==null) {
+            var inputi = $('#' + podaciID + ' :input');
+            i = inputi.length - 1;
+        }
+        podaci[inputi[i].name]=inputi[i].value;
+        if(i==0) return podaci;
+        return this.podaci(i-1,inputi,null,podaci);
     }
 }

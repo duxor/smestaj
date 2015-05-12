@@ -18,22 +18,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
     <title>najSmestaj</title>
-    {!! HTML::style('teme/osnovna-paralax/css/templejt.css') !!}
-    {!! HTML::style('css/bootstrap.min.css') !!}
-    {!! HTML::style('css/fontello.css') !!}
-    {!! HTML::style('css/animation.css') !!}
-    {!! HTML::style('teme/osnovna-paralax/css/parallax.css') !!}
-    {!! HTML::style('css/datepicker.css') !!}
-    {!! HTML::style('css/responsive-calendar.css') !!}
+    {!!HTML::style('teme/osnovna-paralax/css/templejt.css')!!}
+    {!!HTML::style('css/bootstrap.min.css')!!}
+    {!!HTML::style('css/fontello.css')!!}
+    {!!HTML::style('css/animation.css')!!}
+    {!!HTML::style('teme/osnovna-paralax/css/parallax.css')!!}
+    {!!HTML::style('css/datepicker.css')!!}
+    {!!HTML::style('css/responsive-calendar.css')!!}
 
-    @if(isset($podaci['x']))
-        {!! HTML::script('http://maps.googleapis.com/maps/api/js') !!}
-        <script>var mx="{{$podaci['x']}}", my="{{$podaci['y']}}";</script>
-        {!! HTML::script('js/gmap1.js') !!}
-    @endif
-    {!! HTML::script('js/jquery-3.0.js') !!}
-    {!! HTML::script('js/datepicker.js') !!}
-    {!! HTML::script('js/komentari.js') !!}
+    {!!HTML::script('js/jquery-3.0.js')!!}
+    {!!HTML::script('js/datepicker.js')!!}
+    {!!HTML::script('js/komentari.js')!!}
     {!!HTML::script('js/map/modestmaps.js')!!}
     {!!HTML::script('js/map/modestmaps.markers.js')!!}
     {!!HTML::script('js/map/spotlight.js')!!}
@@ -44,6 +39,19 @@
 <body>
 {{--navigacija START::--}}
 <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div id="IznadNav" style="background-color: #fff;background-image:url('/teme/osnovna-paralax/slike/logo/urban-png-70x1920.jpg');height: 70px"><a href="/"><img src="/teme/osnovna-paralax/slike/logo/logo500x1201.png"></a></div>
+    <script>
+        $(document).scroll(function(){
+            if($(document).scrollTop()<$(document).height()*0.1){
+                $("#IznadNav").slideDown();
+                $('#brend').fadeOut();
+            }
+            else if($(document).scrollTop()>$(document).height()*0.15) {
+                $("#IznadNav").slideUp();
+                $('#brend').fadeIn();
+            }
+        });
+    </script>
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -52,8 +60,8 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="/" class="navbar-brand">
-                najSmeštaj
+            <a href="/" id="brend" class="navbar-brand" style="display: none;margin-top: -15px">
+                <img src="/teme/osnovna-paralax/slike/logo/logo50x200.jpg">
             </a>
         </div>
         <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">

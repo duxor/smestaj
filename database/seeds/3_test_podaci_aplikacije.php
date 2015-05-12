@@ -11,8 +11,11 @@ class TestPodaciAlikacije extends Seeder{
             ['naziv'=>'Todorović App','slug'=>'todorovic-app','korisnici_id'=>8],
             ['naziv'=>'Nenadović App','slug'=>'nenadovic-app','korisnici_id'=>14]
         ]);
-        $defaulti=DefaultSadrzaji::join('templejt','default_sadrzaji.templejt_id','=','templejt.id')->where('templejt.tema_id',2)->get(['naziv','sadrzaj','icon','templejt_id'])->toArray();
-        foreach($defaulti as $default)
-            Sadrzaji::insert(array_merge($default,['nalog_id'=>2]));
+        $apps=Nalog::where('id','>',1)->get(['id','tema_id']);
+        foreach($apps as $app){
+            $defaulti=DefaultSadrzaji::join('templejt','default_sadrzaji.templejt_id','=','templejt.id')->where('templejt.tema_id',$app['tema_id'])->get(['naziv','sadrzaj','icon','templejt_id'])->toArray();
+            foreach($defaulti as $default)
+                Sadrzaji::insert(array_merge($default,['nalog_id'=>$app['id']]));
+        }
     }
 }

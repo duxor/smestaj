@@ -162,8 +162,10 @@
                     <div class="modal-body">
                         <div id="container-fluid">
                             <div id="vrti" style="display:none"><center><i class='icon-spin6 animate-spin' style="font-size: 350%"></i></center></div>
-                            <div class="forma form-horizontal">
-                                {!!Form::hidden('id_smestaja')!!}
+                            <div id="forma" class="form-horizontal">
+                                {!!Form::hidden('id_smestaja',null,['id'=>'id_smestaja'])!!}
+                                {!!Form::hidden('id_korisnika',Session::get('id'))!!}
+                                {!!Form::hidden('_token',csrf_token())!!}
                                 <div class="form-group">
                                     <div class="col-sm-4"><img id="foto" style="width:100%"></div>
                                     <div class="col-sm-8">
@@ -185,22 +187,22 @@
                                 <div id="broj osoba" class="form-group has-feedback">
                                     {!!Form::label('brojosoba','Broj osoba',['class'=>'control-label col-sm-4'])!!}
                                     <div class="col-sm-4">
-                                        {!!Form::select('brojosoba',[],null,['class'=>'form-control','id'=>'bro'])!!}
+                                        {!!Form::select('broj_osoba',[],null,['class'=>'form-control','id'=>'broj_osoba'])!!}
                                     </div>
                                 </div>
                                 <div class="form-group has-feedback">
                                     {!! Form::label('napomena','Napomena',['class'=>'control-label col-sm-4']) !!}
                                     <div class="col-sm-8">
-                                        {!! Form::textarea('napomena', null, ['class'=>'form-control', 'placeholder'=>'Upišite napomenu']) !!}
+                                        {!! Form::textarea('napomena',null,['class'=>'form-control','placeholder'=>'Upišite napomenu','id'=>'napomena']) !!}
                                     </div>
                                 </div>
                             </div>
-                            <div id="rezerve" style="display:none"></div>
+                            <div id="poruka" style="display:none"></div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        {!! Form::button('<span class="glyphicon glyphicon-remove"></span> Otkaži rezervaciju',['class'=>'btn btn-lg btn-warning','data-dismiss'=>'modal']) !!}
-                        {!! Form::button('<span class="glyphicon glyphicon-ok"></span> Rezerviši', ['class'=>'btn btn-lg btn-success rezervisi']) !!}
+                        {!! Form::button('<span class="glyphicon glyphicon-remove"></span> Otkaži',['class'=>'btn btn-lg btn-warning','data-dismiss'=>'modal']) !!}
+                        {!! Form::button('<span class="glyphicon glyphicon-ok"></span> Rezerviši',['class'=>'btn btn-lg btn-success','onclick'=>'Komunikacija.posalji("/rezervisi",\'forma\',\'poruka\',\'vrti\',\'forma\')' ]) !!}
                     </div>
                 </div>
             </div>
@@ -219,30 +221,7 @@
                 for (i=1;i<=$(this).data('maxosoba');i++){
                     option += '<option value="'+ i + '">' + i + '</option>';
                 }
-                $('#bro').html(option);
-            });
-            $("button.rezervisi").click(function(){
-                var dugme=$(this).html();
-                $(this).html("<i class='icon-spin6 animate-spin'></i> U procesu...");
-                $('.forma').css('display','none');
-                $('#vrti').fadeToggle();
-                $.post('/rezervisi',
-                        {
-                            _token:'{{csrf_token()}}',
-                            od: $('#datumod').val(),
-                            do: $('#datumdo').val(),
-                            broj_osoba: $('#bro').val(),
-                            korisnik_id: '{{Session::get('id')}}',
-                            smestaj_id: $('#id_smestaja').val()
-                        },
-                        function(data){
-                            $("button.rezervisi").html(dugme);
-                            $('#rezerve').html('<div class="alert alert-success" role="alert">'+data+'</div>');
-                            $('#vrti').fadeToggle();
-                            $('#rezerve').fadeToggle('slow');
-                            window.setTimeout(function(){$('#rezerve').fadeToggle('slow');$('.forma').fadeToggle('slow')},3000);
-                        }
-                );
+                $('#broj_osoba').html(option);
             });
             $("button#zelja").click(function(){
                 $(this).css("color","black");

@@ -21,7 +21,7 @@
                 @foreach($nalozi as $nalog)
                     <tr>
                         <td><a href="/administracija/nalog/sadrzaji/{!!$nalog['slug']!!}" class="btn btn-default"><i class="glyphicon glyphicon-eye-open"></i></a></td>
-                        <td>{{$nalog['naziv']}}</td>
+                        <td><a target="_blank" href="{{url('/')}}/{{$nalog['slug']}}">{{$nalog['naziv']}}</a></td>
                         <td>{{$nalog['slug']}}</td>
                         <td>
                         <a href="{!!url('/administracija/nalog/nalog-status/'.$nalog['id'])!!}">@if($nalog['aktivan']==1) <span class="glyphicon glyphicon-ok"></span> @else <span class="glyphicon glyphicon-remove"></span>@endif</a>
@@ -36,10 +36,10 @@
                 @endforeach
                 </tbody>
             </table>
-            <a href="{!!url('/administracija/nalog/nalog-novi')!!}" class="btn btn-lg btn-default"><i class="glyphicon glyphicon-plus"></i> Novi nalog</a>
         @else
             <p>Ne postoji ni jedan nalog u evidenciji.</p>
         @endif
     @endif
+    <a href="{!!url('/administracija/nalog/nalog-novi')!!}" class="btn btn-lg btn-default"><i class="glyphicon glyphicon-plus"></i> Nova aplikacija</a>
 
 @endsection
