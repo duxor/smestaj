@@ -204,7 +204,6 @@ class Moderacija extends Controller {
 	public function getNoviSmestaj(){
 		$kapacitet=Kapacitet::lists('naziv','id');
 		$vrstasmestaja=VrstaSmestaja::lists('naziv','id');
-
 		$objekti=Nalog::where('korisnici_id','=',Session::get('id'))->where('nalog.aktivan','=','1')
 						->join('objekat','objekat.nalog_id','=','nalog.id')
 						->get(['objekat.naziv as naziv_objekta','objekat.id'])->lists('naziv_objekta','id');
@@ -220,6 +219,7 @@ class Moderacija extends Controller {
             $novi->kapacitet_id = Input::get('kapacitet');
             $novi->vrsta_smestaja_id = Input::get('vrstasmestaja');
             $novi->naziv= $naziv_objekta['naziv'];
+            $novi->cena_osoba = Input::get('cena');
             $novi->save();
             return Redirect::back()->with('message','Uspešno ste dodali novi smeštaj!');
         }else return Security::rediectToLogin();

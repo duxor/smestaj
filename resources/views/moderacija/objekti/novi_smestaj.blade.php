@@ -30,18 +30,24 @@
 							</div>
 						</div>
 						<div class="form-group">
-						{!! Form::label('vrstasmestaja','Vrsta Smeštaja',['class'=>'control-label col-sm-4']) !!}
-						<div class="col-sm-4">
-							{!!Form::select('vrstasmestaja',$vrstasmestaja,null, ['class'=>'form-control'])!!}
+							{!! Form::label('vrstasmestaja','Vrsta Smeštaja',['class'=>'control-label col-sm-4']) !!}
+							<div class="col-sm-4">
+								{!!Form::select('vrstasmestaja',$vrstasmestaja,null, ['class'=>'form-control'])!!}
+							</div>
 						</div>
-					</div>
+						<div class="form-group">
+					        {!!Form::label('cena','Cena',['class'=>'control-label col-sm-4'])!!}
+					        <div class="col-sm-4">
+					            {!!Form::text('cena',null,['class'=>'form-control','placeholder'=>'Unesite cenu...'])!!}
+					        </div>
+					    </div>
+
 					<div class="form-group">
 				        <div class="col-sm-2"></div>
 				        <div class="col-sm-10">
 				            {!!Form::button('<span class="glyphicon glyphicon-floppy-disk"></span> Dodaj smeštaj', ['class'=>'btn btn-lg btn-primary','type'=>'submit'])!!}
 				        </div>
 				    </div>
-				   
 
 				    {!!Form::close()!!}
 				     @endif
