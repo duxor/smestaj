@@ -59,7 +59,7 @@
 			        </div>
 			    </div>
 			    <div class="form-group">
-					{!! Form::label('nalog','Nalog',['class'=>'control-label col-sm-2']) !!}
+					{!! Form::label('nalog','Aplikacija',['class'=>'control-label col-sm-2']) !!}
 					<div class="col-sm-10">
 					@if ($nalog==null)<?php $nalog=['Nemate aktivnih aplikacija'] ?>  @endif
 						{!!Form::select('nalog',$nalog,['class'=>'form-control'])!!}
