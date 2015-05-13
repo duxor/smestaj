@@ -103,6 +103,70 @@
 </div>
 
 @yield('body')
+{{--MODAL:: posalji mail START::--}}
+<div class="modal fade" id="posaljiMail">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h2>Kontaktirajte nas putem email-a</h2>
+            </div>
+            <div class="modal-body"><i class='icon-spin6 animate-spin' style="color: rgba(0,0,0,0)"></i>
+                <div id="_poruka" style="display: none"></div>
+                <div id="wait" style="display:none"><center><i class='icon-spin6 animate-spin' style="font-size: 350%"></i></center></div>
+                {!! Form::open(['class'=>'form-horizontal','id'=>'kontaktForma']) !!}
+                {!!Form::hidden('app',$podaci['app']['id'])!!}
+                {!!Form::hidden('korisnik',Session::get('id'))!!}
+                <div id="dprezime" class="form-group has-feedback">
+                    {!! Form::label('lprezime','Prezime',['class'=>'control-label col-sm-2']) !!}
+                    <div class="col-sm-10">
+                        {!! Form::text('prezime', null, ['class'=>'form-control', 'placeholder'=>'Prezime', 'id'=>'prezime']) !!}
+                        <span id="sprezime" class="glyphicon form-control-feedback"></span>
+                    </div>
+                </div>
+                <div id="dime" class="form-group has-feedback">
+                    {!! Form::label('lime','Ime',['class'=>'control-label col-sm-2']) !!}
+                    <div class="col-sm-10">
+                        {!! Form::text('ime', null, ['class'=>'form-control', 'placeholder'=>'Ime', 'id'=>'ime']) !!}
+                        <span id="sime" class="glyphicon form-control-feedback"></span>
+                    </div>
+                </div>
+                <div id="demail" class="form-group has-feedback">
+                    {!! Form::label('lemail','Email',['class'=>'control-label col-sm-2']) !!}
+                    <div class="col-sm-10">
+                        {!! Form::email('email', null, ['class'=>'form-control', 'placeholder'=>'Email','id'=>'email']) !!}
+                        <span id="semail" class="glyphicon form-control-feedback"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    {!! Form::label('ltelefon','Telefon',['class'=>'control-label col-sm-2']) !!}
+                    <div class="col-sm-10">
+                        {!! Form::text('telefon', null, ['class'=>'form-control', 'placeholder'=>'Telefon']) !!}
+                    </div>
+                </div>
+                <div id="dporuka" class="form-group has-feedback">
+                    {!! Form::label('lporuka','Poruka',['class'=>'control-label col-sm-2']) !!}
+                    <div class="col-sm-10">
+                        {!! Form::textarea('poruka', null, ['class'=>'form-control', 'placeholder'=>'Poruka','id'=>'poruka']) !!}
+                        <span id="sporuka" class="glyphicon form-control-feedback"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                {!! Form::button('<span class="glyphicon glyphicon-envelope"></span> Pošalji', ['class'=>'btn btn-lg btn-primary posalji']) !!}
+                {!! Form::button('<span class="glyphicon glyphicon-trash"></span> Obriši sve', ['class'=>'btn btn-lg btn-danger', 'type'=>'reset']) !!}
+                {!! Form::close() !!}
+                <script>
+                    $('button.posalji').click(function(){
+                        if(!SubmitForm.check('kontaktForma')){ alert('Proverite sve podatke i pokušajte ponovo.'); return; }
+                        Komunikacija.posalji('/aplikacija/kontaktiraj-moderatora','kontaktForma','_poruka','wait','kontaktForma');
+                    });
+                </script>
+            </div>
+        </div>
+    </div>
+</div>
+{{--MODAL:: posalji mail END::--}}
 {!! HTML::script('teme/osnovna-paralax/js/skrollr.min.js') !!}
 <script type="text/javascript">
     skrollr.init({
