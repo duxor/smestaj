@@ -25,14 +25,8 @@
     {!! HTML::style('teme/osnovna-paralax/css/parallax.css') !!}
     {!! HTML::style('css/datepicker.css') !!}
 
-    @if(isset($podaci['x']))
-        {!! HTML::script('http://maps.googleapis.com/maps/api/js') !!}
-        <script>var mx="{{$podaci['x']}}", my="{{$podaci['y']}}";</script>
-        {!! HTML::script('js/gmap1.js') !!}
-    @endif
     {!! HTML::script('js/jquery-3.0.js') !!}
     {!! HTML::script('js/datepicker.js') !!}
-
     {!!HTML::script('js/map/modestmaps.js')!!}
     {!!HTML::script('js/map/modestmaps.markers.js')!!}
     {!!HTML::script('js/map/spotlight.js')!!}
