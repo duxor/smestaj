@@ -51,9 +51,9 @@
                             <li class="divider"></li>
                             <li><a href="{!!url('/moderator/podesavanja')!!}"><i class="glyphicon glyphicon-wrench"></i> Podešavanja</a></li>
                             <li><a href="{!!url('/moderator/sadrzaji')!!}"><i class="glyphicon glyphicon-pencil"></i> Sadržaji</a></li>
-                            <li><a href="{!!url('/moderator/komentari')!!}"><i class="glyphicon glyphicon-comment"></i> Komentari</a></li>
+                            <li><a href="{!!url('/moderator/u-pripremi')!!}"><i class="glyphicon glyphicon-comment"></i> Komentari</a></li>
                             <li><a href="{!!url('/moderator/u-pripremi')!!}"><i class="glyphicon glyphicon-envelope"></i> Newsletter</a></li>
-                        </ul>
+                        </ul>{{--/moderator/komentari--}}
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="objekti" data-toggle="tooltip" data-placement="bottom" title="Objekti"><i class="glyphicon glyphicon-home"></i></a>

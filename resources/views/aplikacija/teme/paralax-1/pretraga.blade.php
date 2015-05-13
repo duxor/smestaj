@@ -1,4 +1,4 @@
-@extends('aplikacija.teme-osnove.osnovna.master')
+@extends('aplikacija.teme.paralax-1.master')
 @section('head')
     <script type="text/javascript">
         var map, markers, spotlight, locationsByType = {};
@@ -131,7 +131,7 @@
 @section('content')
     <h1>Pretraga</h1>
     {!!Form::open(['url'=>'/pretraga/aplikacija','class'=>'form-inline col-sm-11'])!!}
-    {!!Form::hidden('aplikacija',$podaci['app'])!!}
+    {!!Form::hidden('aplikacija',$podaci['app']['id'])!!}
     <div class="form-group">
         <label>Broj mesta (Tačan  broj {!!Form::checkbox('tacan_broj',1,$podaci['tacan_broj'])!!})</label>
         {!!Form::select('broj_osoba',[1=>1,2=>2,3=>3,4=>4,5=>5,6=>6,7=>7,8=>8,9=>9,10=>10,11=>11,12=>12],$podaci['broj_osoba'],['class'=>'form-control'])!!}

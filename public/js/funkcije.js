@@ -1,4 +1,3 @@
-
 $(document).ready(function() {
 	// navigation click actions	
 	$('.scroll-link').on('click', function(event){
@@ -72,20 +71,23 @@ $(document).ready(function() {
  */
 var SubmitForm = {
 	submit: function(formaID){
-		var test = 1;
-		var input = document.forms[formaID].getElementsByTagName('input');
-		var area = document.forms[formaID].getElementsByTagName('textarea');
-		var inputL = input.length,
-			areaL = area.length;
-		for(i=0; i< Math.max(inputL,areaL); i++){
-			if(i < inputL && input[i].getAttribute('id'))
-				test = this.succErr(input[i].getAttribute('type')=='email'?'email':'input',input[i].getAttribute('id'), test);
-			if(i < areaL && area[i].getAttribute('id'))
-				test = this.succErr('area',area[i].getAttribute('id'), test);
-		}
-		if(test) $('#'+formaID).submit();
+		if(this.check(formaID)) $('#'+formaID).submit();
 		else alert('Popunite sve podatke.');
 	},
+    check:function(formaID){
+        var test=1;
+        var input = document.forms[formaID].getElementsByTagName('input');
+        var area = document.forms[formaID].getElementsByTagName('textarea');
+        var inputL = input.length,
+            areaL = area.length;
+        for(i=0; i< Math.max(inputL,areaL); i++){
+            if(i < inputL && input[i].getAttribute('id'))
+                test = this.succErr(input[i].getAttribute('type')=='email'?'email':'input',input[i].getAttribute('id'), test);
+            if(i < areaL && area[i].getAttribute('id'))
+                test = this.succErr('area',area[i].getAttribute('id'), test);
+        }
+        return test;
+    },
 	testEmail: function(email){
 		var i1 = email.indexOf('@'),
 			i2 = email.indexOf('.');
@@ -156,7 +158,7 @@ var Komunikacija = {
                 window.setTimeout(function(){
                     $('#'+poruka).fadeToggle('slow');
                     $('#'+hide).fadeToggle('slow')
-                },3000);
+                },4000);
             }
         );
     },

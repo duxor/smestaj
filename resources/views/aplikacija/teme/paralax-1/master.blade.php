@@ -18,13 +18,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
     <title>najSmestaj</title>
-    {!!HTML::style('teme/osnovna-paralax/css/templejt.css')!!}
     {!!HTML::style('css/bootstrap.min.css')!!}
     {!!HTML::style('css/fontello.css')!!}
     {!!HTML::style('css/animation.css')!!}
-    {!!HTML::style('teme/osnovna-paralax/css/parallax.css')!!}
+    {!!HTML::style('teme/paralax-1/css/parallax.css')!!}
     {!!HTML::style('css/datepicker.css')!!}
     {!!HTML::style('css/responsive-calendar.css')!!}
+    {!!HTML::style('teme/paralax-1/css/templejt.css')!!}
 
     {!!HTML::script('js/jquery-3.0.js')!!}
     {!!HTML::script('js/datepicker.js')!!}
@@ -68,7 +68,9 @@
             <ul class="nav navbar-nav">
                 @foreach($podaci as $meni)
                     @if(isset($meni['vrsta_sadrzaja_id']))
-                        <li><a href="/{{$podaci['app']['slug']}}/#{{$meni['slug']}}" @if(isset($podaci['pocetna'])) class="scroll-link" data-id="{{$meni['slug']}}" @endif><i class="{{$meni['icon']}}"></i> @if($meni['vrsta_sadrzaja_id']==1){!!$meni['naziv']!!}@endif</a></li>
+                        @if($meni['vrsta_sadrzaja_id']<4)
+                            <li><a href="/{{$podaci['app']['slug']}}/#{{$meni['slug']}}" @if(isset($podaci['pocetna'])) class="scroll-link" data-id="{{$meni['slug']}}" @endif @if($meni['slug']=='kontakt') data-toggle="modal" data-target="#posaljiMail" @endif><i class="{{$meni['icon']}}"></i> @if($meni['vrsta_sadrzaja_id']==1){!!$meni['naziv']!!}@endif</a></li>
+                        @endif
                     @endif
                 @endforeach
                 @if(\App\Security::autentifikacijaTest())
