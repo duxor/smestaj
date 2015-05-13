@@ -34,8 +34,8 @@ class Profil extends Controller {
 			  if($value === null || $value==='')
 			    $counter++;
 			}
-			$counter=9-$counter;
-			$procenat_popunjenosti=round($counter/9*100,0);
+			$counter=8-$counter;
+			$procenat_popunjenosti=round($counter/8*100,0);
 			return $procenat_popunjenosti;
     }
 /*    public function getLogin(){
