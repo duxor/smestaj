@@ -58,6 +58,7 @@ class KreiranjeBaze extends Migration{
             $table->foreign('korisnici_id')->references('id')->on('korisnici');
             $table->unsignedBigInteger('od_id')->nullable();
             $table->string('od_email', 45)->nullable();
+            $table->string('telefon', 45)->nullable();
             $table->string('naslov', 45)->nullable();
             $table->text('poruka');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));

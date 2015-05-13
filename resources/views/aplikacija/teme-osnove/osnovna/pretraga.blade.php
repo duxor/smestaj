@@ -109,7 +109,7 @@
     </script>
 @endsection
 @section('content')
-    <h1>Pretraga</h1>
+    <h1 style="margin-top: 70px">Pretraga</h1>
     {!!Form::open(['url'=>'/pretraga','class'=>'form-inline col-sm-11'])!!}
     <div class="form-group">
         <label>Broj mesta (Tačan  broj {!!Form::checkbox('tacan_broj',1,$podaci['tacan_broj'])!!})</label>

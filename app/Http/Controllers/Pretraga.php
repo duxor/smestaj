@@ -12,12 +12,12 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 
 class Pretraga extends Controller {
-	public function defaultPodaci(){
-		return Templejt::join('sadrzaji','sadrzaji.templejt_id','=','templejt.id')->where('nalog_id','=',1)->where('tema_id','=',1)->orderBy('redoslijed')->get(['slug','naziv','vrsta_sadrzaja_id','icon'])->toArray();
+	public function defaultPodaci($appID){
+		return Templejt::join('sadrzaji','sadrzaji.templejt_id','=','templejt.id')->where('nalog_id',$appID)->where('tema_id',Nalog::find($appID,['tema_id'])->tema_id)->orderBy('redoslijed')->get(['slug','naziv','vrsta_sadrzaja_id','icon'])->toArray();
 	}
 	public function anyIndex(){
 		$tacan_broj=Input::get('tacan_broj')?'':'>';
-		$podaci=$this->defaultPodaci();
+		$podaci=$this->defaultPodaci(1);
 		$podaci['broj_osoba']=Input::get('broj_osoba')?Input::get('broj_osoba'):1;
 		$podaci['rezultat']=Objekat::
 			join('smestaj','smestaj.objekat_id','=','objekat.id')
@@ -94,7 +94,7 @@ class Pretraga extends Controller {
 	public function postAplikacija($slugApp){
 		if(Input::get('aplikacija')=='') return Redirect::to('/'.$slugApp);//nalog.id
 		$tacan_broj=Input::get('tacan_broj')?'':'>';
-		$podaci=$this->defaultPodaci();//templejt sa menijem bez podataka
+		$podaci=$this->defaultPodaci(Input::get('aplikacija'));//templejt sa menijem bez podataka
 		$podaci['broj_osoba']=Input::get('broj_osoba')?Input::get('broj_osoba'):1;
 		$podaci['rezultat']=Objekat::
 		join('nalog','nalog.id','=','objekat.nalog_id')
