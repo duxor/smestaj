@@ -339,6 +339,7 @@
                     <div id="_poruka" style="display: none"></div>
                     <div id="wait" style="display:none"><center><i class='icon-spin6 animate-spin' style="font-size: 350%"></i></center></div>
                     {!! Form::open(['class'=>'form-horizontal','id'=>'kontaktForma']) !!}
+                    {!!Form::hidden('app',$podaci['app']['id'])!!}
                     <div id="dprezime" class="form-group has-feedback">
                         {!! Form::label('lprezime','Prezime',['class'=>'control-label col-sm-2']) !!}
                         <div class="col-sm-10">

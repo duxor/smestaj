@@ -1,7 +1,9 @@
 <?php namespace App\Http\Controllers;
 
 use App\Http\Requests;
+use App\Korisnici;
 use App\ListaZelja;
+use App\Mailbox;
 use App\Nalog;
 use App\Sadrzaji;
 use App\Templejt;
@@ -103,6 +105,13 @@ class Aplikacija extends Controller {
 			$msg.='</ol>';
 			return json_encode(['msg'=>$msg,'check'=>0]);
 		}
+		$mail=new Mailbox();
+		if($podaci->user){ $userId=Korisnici::where('username',$podaci->user)->get(['id'])->id; if($userId) $mail->od_id=$userId; }
+		$mail->od_email=$podaci->email;
+		$mail->naslov='SA SAJTA '.(isset($podaci->kome)?'('.$podaci->kome.')':null);
+		$mail->poruka=$podaci->poruka;
+		$mail->korisnici_id=2;
+		$mail->save();
 		return json_encode(['msg'=>'Poruka uspešno poslata. Hvala.','check'=>1]);
 	}
 	public function postKontaktirajModeratora(){
@@ -144,7 +153,8 @@ class Aplikacija extends Controller {
 					$msg.='<li>'.$greska.'</li>';
 			$msg.='</ol>';
 			return json_encode(['msg'=>$msg,'check'=>0]);
-		}
+		}//$podaci->app 'korisnici_id','od_id','od_email','naslov','poruka'
+		//$zaID=Korisnici::join('nalog','nalog.korisnici_id','=','korisnici.id')->where('nalog')
 		return json_encode(['msg'=>'Poruka uspešno poslata. Hvala.','check'=>1]);
 	}
 }

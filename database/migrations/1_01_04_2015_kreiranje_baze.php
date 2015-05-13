@@ -51,6 +51,18 @@ class KreiranjeBaze extends Migration{
             $table->unsignedBigInteger('korisnici_id');
             $table->foreign('korisnici_id')->references('id')->on('korisnici');
         });
+        Schema::create('mailbox', function(Blueprint $table)
+        {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('korisnici_id');
+            $table->foreign('korisnici_id')->references('id')->on('korisnici');
+            $table->unsignedBigInteger('od_id')->nullable();
+            $table->string('od_email', 45)->nullable();
+            $table->string('naslov', 45)->nullable();
+            $table->text('poruka');
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->nullable();
+        });
         Schema::create('vrsta_objekta', function(Blueprint $table)
         {
             $table->bigIncrements('id');
@@ -258,6 +270,7 @@ class KreiranjeBaze extends Migration{
         Schema::drop('tema');
         Schema::drop('vrsta_sadrzaja');
 
+        Schema::drop('mailbox');
         Schema::drop('korisnici');
         Schema::drop('pravaPristupa');
     }
