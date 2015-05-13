@@ -15,8 +15,6 @@
 
 namespace App;
 
-use App\Korisnici;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;

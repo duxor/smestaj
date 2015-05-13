@@ -10,7 +10,7 @@ use App\Security;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
-
+use Illuminate\Support\Facades\Validator;
 class Aplikacija extends Controller {
 	public function nalog($slugApp){return Nalog::join('tema','tema.id','=','nalog.tema_id')->where('nalog.slug',$slugApp)->where('nalog.aktivan',1)->get(['nalog.id','tema_id','nalog.naziv','nalog.slug as nalog_slug','tema.slug as tema_slug'])->first();}
 	public function templejt($nalog){return Templejt::join('sadrzaji','sadrzaji.templejt_id','=','templejt.id')->where('nalog_id',$nalog['id'])->where('tema_id',$nalog['tema_id'])->where('vrsta_sadrzaja_id','<',6)->orderBy('redoslijed')->get(['slug','naziv','sadrzaj','vrsta_sadrzaja_id','icon'])->toArray();}
@@ -66,5 +66,43 @@ class Aplikacija extends Controller {
 						->get(['smestaj.id','smestaj.naziv','objekat.naziv as naziv_objekta',
 							'vrsta_smestaja.naziv as naziv_smestaja','kapacitet.naziv as naziv_kapaciteta','kapacitet.broj_osoba as broj_osoba'])->toArray();
 		return view('korisnik.lista-zelja',compact('lista_zelja'));
+	}
+	public function postKontaktirajAdministraciju(){
+		$podaci=json_decode(Input::get('podaci'));
+		$validator=Validator::make([
+			'prezime'=>$podaci->prezime,
+			'ime'=>$podaci->ime,
+			'email'=>$podaci->email,
+			'poruka'=>$podaci->poruka
+		],[
+			'prezime'=>'required|min:4|alpha',
+			'ime'=>'required|min:3|alpha',
+			'email'=>'required|email',
+			'poruka'=>'required|min:5'
+		],[
+			//prezime
+			'prezime.required'=>'Obavezan unos prezimena.',
+			'prezime.min'=>'Minimalna duzina prezimena je :min.',
+			'prezime.alfa'=>'Prezime može da sadrži samo znake alfabeta.',
+			//ime
+			'ime.required'=>'Obavezan unos imena.',
+			'ime.min'=>'Minimalna duzina imena je :min.',
+			'ime.alfa'=>'Ime može da sadrži samo znake alfabeta.',
+			//email
+			'email.email'=>'Pogrešno unesen email.',
+			'email.required'=>'Obavezan unos email-a.',
+			//poruka
+			'poruka.required'=>'Obavezan unos poruke.',
+			'poruka.min'=>'Minimalna duzina poruke je :min.'
+		]);
+		if($validator->fails()){
+			$msg='<p>Dogodila se greška: <br><ol>';
+			foreach($validator->errors()->toArray() as $greske)
+				foreach($greske as $greska)
+					$msg.='<li>'.$greska.'</li>';
+			$msg.='</ol>';
+			return json_encode(['msg'=>$msg,'check'=>0]);
+		}
+		return json_encode(['msg'=>'Poruka uspešno poslata. Hvala.','check'=>1]);
 	}
 }
