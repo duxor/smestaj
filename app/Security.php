@@ -18,6 +18,8 @@ namespace App;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
+use App\Korisnici;
+use Illuminate\Support\Facades\DB;
 
 class Security {
     private $id;
