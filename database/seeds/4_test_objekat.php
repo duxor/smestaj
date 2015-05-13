@@ -206,224 +206,256 @@ class TestObjekat extends Seeder{
 					'slug'=>'hotel-asteris',
 					'kapacitet_id'=>3,
 					'vrsta_smestaja_id'=>1,
-					'objekat_id'=>1
+					'objekat_id'=>1,
+					'cena_osoba'=>2400
 				],
 				[
 					'naziv'=>'Asteris hotel',
 					'slug'=>'hotel-asteris-apartmani',
 					'kapacitet_id'=>5,
 					'vrsta_smestaja_id'=>2,
-					'objekat_id'=>1
+					'objekat_id'=>1,
+					'cena_osoba'=>2100
 				],
 				[
 					'naziv'=>'Green hostel',
 					'slug'=>'hostel-green',
 					'kapacitet_id'=>3,
 					'vrsta_smestaja_id'=>1,
-					'objekat_id'=>'2'
+					'objekat_id'=>'2',
+					'cena_osoba'=>1400
 				],
 				[
 					'naziv'=>'Green hostel',
 					'slug'=>'hostel-green-apartmani',
 					'kapacitet_id'=>5,
 					'vrsta_smestaja_id'=>2,
-					'objekat_id'=>2
+					'objekat_id'=>2,
+					'cena_osoba'=>3700
 				],
 				[
 					'naziv'=>'Motel Dexy',
 					'slug'=>'motel-dexy',
 					'kapacitet_id'=>3,
 					'vrsta_smestaja_id'=>1,
-					'objekat_id'=>'3'
+					'objekat_id'=>'3',
+					'cena_osoba'=>4900
 				],
 				[
 					'naziv'=>'Motel Dexy',
 					'slug'=>'motel-dexy-apartmani',
 					'kapacitet_id'=>5,
 					'vrsta_smestaja_id'=>2,
-					'objekat_id'=>3
+					'objekat_id'=>3,
+					'cena_osoba'=>3750
 				],
 				[
 					'naziv'=>'Naj smeštaj',
 					'slug'=>'privatni-naj',
 					'kapacitet_id'=>3,
 					'vrsta_smestaja_id'=>1,
-					'objekat_id'=>4
+					'objekat_id'=>4,
+					'cena_osoba'=>2800
 				],
 				[
 					'naziv'=>'Naj smeštaj',
 					'slug'=>'privatni-naj-apartmani',
 					'kapacitet_id'=>6,
 					'vrsta_smestaja_id'=>2,
-					'objekat_id'=>4
+					'objekat_id'=>4,
+					'cena_osoba'=>1100
 				],
 				[
 					'naziv'=>'Nais home',
 					'slug'=>'hotel-nais',
 					'kapacitet_id'=>3,
 					'vrsta_smestaja_id'=>1,
-					'objekat_id'=>5
+					'objekat_id'=>5,
+					'cena_osoba'=>4300
 				],
 				[
 					'naziv'=>'Nais home',
 					'slug'=>'hotel-nais-apartmani',
 					'kapacitet_id'=>4,
 					'vrsta_smestaja_id'=>2,
-					'objekat_id'=>5
+					'objekat_id'=>5,
+					'cena_osoba'=>6800
 				],
 				[
 					'naziv'=>'Hostel Jug',
 					'slug'=>'hostel-jug',
 					'kapacitet_id'=>3,
 					'vrsta_smestaja_id'=>1,
-					'objekat_id'=>6
+					'objekat_id'=>6,
+					'cena_osoba'=>1600
 				],
 				[
 					'naziv'=>'Hostel Jug',
 					'slug'=>'hostel-jug-apartmani',
 					'kapacitet_id'=>6,
 					'vrsta_smestaja_id'=>2,
-					'objekat_id'=>6
+					'objekat_id'=>6,
+					'cena_osoba'=>4300
 				],
 				[
 					'naziv'=>'Motel South Paradise',
 					'slug'=>'motel-south-paradise',
 					'kapacitet_id'=>3,
 					'vrsta_smestaja_id'=>1,
-					'objekat_id'=>7
+					'objekat_id'=>7,
+					'cena_osoba'=>3400
 				],
 				[
 					'naziv'=>'Motel South Paradise',
 					'slug'=>'motel-south-paradise-apartmani',
 					'kapacitet_id'=>5,
 					'vrsta_smestaja_id'=>2,
-					'objekat_id'=>7
+					'objekat_id'=>7,
+					'cena_osoba'=>5400
 				],
 				[
 					'naziv'=>'Javni dom',
 					'slug'=>'privatni-javni',
 					'kapacitet_id'=>3,
 					'vrsta_smestaja_id'=>1,
-					'objekat_id'=>8
+					'objekat_id'=>8,
+					'cena_osoba'=>4700
 				],
 				[
 					'naziv'=>'Javni dom',
 					'slug'=>'privatni-javni-apartmani',
 					'kapacitet_id'=>4,
 					'vrsta_smestaja_id'=>2,
-					'objekat_id'=>8
+					'objekat_id'=>8,
+					'cena_osoba'=>6200
 				],
 				[
 					'naziv'=>'Pleasure',
 					'slug'=>'hotel-pleasure',
 					'kapacitet_id'=>3,
 					'vrsta_smestaja_id'=>1,
-					'objekat_id'=>9
+					'objekat_id'=>9,
+					'cena_osoba'=>2600
 				],
 				[
 					'naziv'=>'Pleasure',
 					'slug'=>'hotel-pleasure-apartmani',
 					'kapacitet_id'=>5,
 					'vrsta_smestaja_id'=>2,
-					'objekat_id'=>9
+					'objekat_id'=>9,
+					'cena_osoba'=>6600
 				],
 				[
 					'naziv'=>'Hostel Sunny valley',
 					'slug'=>'hostel-sunny-valley',
 					'kapacitet_id'=>3,
 					'vrsta_smestaja_id'=>1,
-					'objekat_id'=>10
+					'objekat_id'=>10,
+					'cena_osoba'=>4500
 				],
 				[
 					'naziv'=>'Hostel Sunny valley',
 					'slug'=>'hostel-sunny-valley-apartmani',
 					'kapacitet_id'=>4,
 					'vrsta_smestaja_id'=>2,
-					'objekat_id'=>10
+					'objekat_id'=>10,
+					'cena_osoba'=>2500
 				],
 				[
 					'naziv'=>'Užički raj',
 					'slug'=>'motel-uzicki-raj',
 					'kapacitet_id'=>3,
 					'vrsta_smestaja_id'=>1,
-					'objekat_id'=>11
+					'objekat_id'=>11,
+					'cena_osoba'=>3200
 				],
 				[
 					'naziv'=>'Užički raj',
 					'slug'=>'motel-uzicki-raj-apartmani',
 					'kapacitet_id'=>4,
 					'vrsta_smestaja_id'=>2,
-					'objekat_id'=>11
+					'objekat_id'=>11,
+					'cena_osoba'=>2700
 				],
 				[
 					'naziv'=>'Roxy smeštaj',
 					'slug'=>'privatni-roxy',
 					'kapacitet_id'=>3,
 					'vrsta_smestaja_id'=>1,
-					'objekat_id'=>12
+					'objekat_id'=>12,
+					'cena_osoba'=>3300
 				],
 				[
 					'naziv'=>'Roxy smeštaj',
 					'slug'=>'privatni-roxy-apartmani',
 					'kapacitet_id'=>4,
 					'vrsta_smestaja_id'=>2,
-					'objekat_id'=>12
+					'objekat_id'=>12,
+					'cena_osoba'=>5400
 				],
 				[
 					'naziv'=>'Semberija',
 					'slug'=>'hotel-semberija',
 					'kapacitet_id'=>3,
 					'vrsta_smestaja_id'=>1,
-					'objekat_id'=>13
+					'objekat_id'=>13,
+					'cena_osoba'=>5400
 				],
 				[
 					'naziv'=>'Semberija',
 					'slug'=>'hotel-semberija-apartmani',
 					'kapacitet_id'=>5,
 					'vrsta_smestaja_id'=>2,
-					'objekat_id'=>13
+					'objekat_id'=>13,
+					'cena_osoba'=>4300
 				],
 				[
 					'naziv'=>'Posavska noć',
 					'slug'=>'hostel-posavska-noc',
 					'kapacitet_id'=>3,
 					'vrsta_smestaja_id'=>1,
-					'objekat_id'=>14
+					'objekat_id'=>14,
+					'cena_osoba'=>5400
 				],
 				[
 					'naziv'=>'Posavska noć',
 					'slug'=>'hostel-posavska-noc-apartmani',
 					'kapacitet_id'=>5,
 					'vrsta_smestaja_id'=>2,
-					'objekat_id'=>14
+					'objekat_id'=>14,
+					'cena_osoba'=>2400
 				],
 				[
 					'naziv'=>'Dream',
 					'slug'=>'motel-dream',
 					'kapacitet_id'=>3,
 					'vrsta_smestaja_id'=>1,
-					'objekat_id'=>15
+					'objekat_id'=>15,
+					'cena_osoba'=>2300
 				],
 				[
 					'naziv'=>'Dream',
 					'slug'=>'motel-dream-apartmani',
 					'kapacitet_id'=>6,
 					'vrsta_smestaja_id'=>2,
-					'objekat_id'=>15
+					'objekat_id'=>15,
+					'cena_osoba'=>2100
 				],
 				[
 					'naziv'=>'Palace',
 					'slug'=>'privatni-palace',
 					'kapacitet_id'=>3,
 					'vrsta_smestaja_id'=>1,
-					'objekat_id'=>16
+					'objekat_id'=>16,
+					'cena_osoba'=>3600
 				],
 				[
 					'naziv'=>'Palace',
 					'slug'=>'privatni-palace-apartmani',
 					'kapacitet_id'=>6,
 					'vrsta_smestaja_id'=>2,
-					'objekat_id'=>16
+					'objekat_id'=>16,
+					'cena_osoba'=>4300
 				]
 			]);
 	}

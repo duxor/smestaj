@@ -6,6 +6,7 @@ use App\ListaZelja;
 use App\Mailbox;
 use App\Nalog;
 use App\Sadrzaji;
+use App\Smestaj;
 use App\Templejt;
 use App\Grad;
 use App\Security;
@@ -43,7 +44,10 @@ class Aplikacija extends Controller {
 		$podaci=Sadrzaji::join('templejt','templejt.id','=','sadrzaji.templejt_id')->join('nalog','nalog.id','=','sadrzaji.nalog_id')->where('nalog.slug',$slugApp)->where('vrsta_sadrzaja_id','<',6)->get(['templejt.slug','sadrzaji.naziv','sadrzaji.icon','vrsta_sadrzaja_id'])->toArray();
 		$podaci['app']['slug']=$slugApp;
 		$podaci['pozadine']=$this->pozadine($this->nalog($slugApp));
-		$podaci['smestaj']=null;//PROSLIJEDITI PODATKE O SMJESTAJU
+		$podaci['smestaj']=Smestaj::join('kapacitet','kapacitet.id','=','smestaj.kapacitet_id')
+			->join('vrsta_smestaja','vrsta_smestaja.id','=','smestaj.vrsta_smestaja_id')
+			->where('slug',$slugSmestaj)
+			->get(['smestaj.naziv','slug','kapacitet.naziv as naziv_kapaciteta','broj_osoba','vrsta_smestaja.naziv as vrsta_smestaja','naslovna_foto','cena_osoba'])->first()->toArray();
 		$tema=Nalog::join('tema','tema.id','=','nalog.tema_id')->where('nalog.slug',$slugApp)->get(['tema.slug'])->first()->slug;
 		return view("aplikacija.teme.{$tema}.smestaj",compact('podaci'));
 	}

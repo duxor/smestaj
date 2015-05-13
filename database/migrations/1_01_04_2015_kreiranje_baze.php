@@ -166,6 +166,7 @@ class KreiranjeBaze extends Migration{
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->nullable();
             $table->string('naslovna_foto', 255)->nullable();
+            $table->float('cena_osoba')->nullable();
         });
         Schema::create('sadrzaji', function(Blueprint $table)
         {
@@ -237,6 +238,7 @@ class KreiranjeBaze extends Migration{
             $table->dateTime('od');
             $table->dateTime('do');
             $table->tinyInteger('broj_osoba');
+            $table->float('cena_ukupna');
             $table->unsignedBigInteger('korisnici_id');
             $table->foreign('korisnici_id')->references('id')->on('korisnici');
             $table->unsignedBigInteger('smestaj_id');
