@@ -153,8 +153,15 @@ class Aplikacija extends Controller {
 					$msg.='<li>'.$greska.'</li>';
 			$msg.='</ol>';
 			return json_encode(['msg'=>$msg,'check'=>0]);
-		}//$podaci->app 'korisnici_id','od_id','od_email','naslov','poruka'
-		//$zaID=Korisnici::join('nalog','nalog.korisnici_id','=','korisnici.id')->where('nalog')
+		}
+		$mail=new Mailbox();
+		$mail->od_id=isset($podaci->korisnik)?$podaci->korisnik:null;
+		$mail->korisnici_id=Nalog::find($podaci->app,['korisnici_id'])->korisnici_id;
+		$mail->od_email=$podaci->email;
+		$mail->naslov='PORUKA SA SAJTA';
+		$mail->poruka=$podaci->poruka;
+		$mail->telefon=$podaci->telefon;
+		$mail->save();
 		return json_encode(['msg'=>'Poruka uspešno poslata. Hvala.','check'=>1]);
 	}
 }
