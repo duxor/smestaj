@@ -3,6 +3,50 @@
 <div class="container">
 <div class="row">
 	<div class="col-md-8">
+        <div class="row">
+            <div class="col-xs-12  toppad" >
+                <div class="panel-body">
+                    <div class="media col-md-5">
+                    <figure class="pull-left">
+                        <img class="media-object img-rounded img-responsive"  src="{!!$podaci['smestaj']['naslovna_foto']!!}" alt="placehold.it/350x250" >
+                    </figure>   
+                    </div>
+                    <div class="col-md-6">
+                        <table class="table table-user-information">
+                            <tbody>
+
+                              <tr>
+                                <td><i class="glyphicon glyphicon-map-marker">&nbsp;</i>Naziv objekta:</td>
+                                <td>{!!$podaci['smestaj']['naziv']!!}</td>
+                              </tr>
+                              <tr>
+                                <td><i class="glyphicon glyphicon-home">&nbsp;</i>Kapacitet:</td>
+                                <td>{!!$podaci['smestaj']['naziv_kapaciteta']!!}</td>
+                              </tr>
+                              <tr>
+                                <td><i class="glyphicon glyphicon-home">&nbsp;</i>Broj osoba:</td>
+                                <td>{!!$podaci['smestaj']['broj_osoba']!!}</td>
+                              </tr>                                    
+                              <tr>
+                                <tr>
+                                <td><i class="glyphicon glyphicon glyphicon-phone">&nbsp;</i>Vrsta smeštaja:</td>
+                                <td>{!!$podaci['smestaj']['vrsta_smestaja']!!}</td>
+                              </tr>
+                              <tr>
+                                <td><i class="glyphicon glyphicon glyphicon-envelope">&nbsp;</i>Cena po osobi:</td>
+                                <td>{!!$podaci['smestaj']['cena_osoba']!!}</td>
+                              </tr>
+                   
+                              </tr>
+                             
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <hr>
         <div class='row'>
             <div class='col-md-10'>
               <div class="carousel slide media-carousel" id="media">
@@ -10,13 +54,13 @@
                   <div class="item  active">
                     <div class="row">
                       <div class="col-md-4">
-                        <a class="thumbnail fancybox" href="#"><img alt="" src="http://placehold.it/150x150"></a>
+                        <a class="thumbnail fancybox" rel="ligthbox" href="#"><img alt="" src="http://placehold.it/150x150"></a>
                       </div>          
                       <div class="col-md-4">
-                        <a class="thumbnail fancybox" href="#"><img alt="" src="http://placehold.it/150x150"></a>
+                        <a class="thumbnail fancybox"  rel="ligthbox" href="#"><img alt="" src="http://placehold.it/150x150"></a>
                       </div>
                       <div class="col-md-4">
-                        <a class="thumbnail fancybox" href="#"><img alt="" src="http://placehold.it/150x150"></a>
+                        <a class="thumbnail fancybox"  rel="ligthbox"href="#"><img alt="" src="http://placehold.it/150x150"></a>
                       </div>        
                     </div>
                   </div>
@@ -52,59 +96,21 @@
               </div>                          
             </div>
         </div>
-        <hr>
-        <div class="row">
-            <div class="col-xs-12  toppad" >
-                <div class="panel panel-info">
-                    <div class="panel-body">
-                        <div class="media col-md-5">
-                        <figure class="pull-left">
-                            <img class="media-object img-rounded img-responsive"  src="http://placehold.it/350x250" alt="placehold.it/350x250" >
-                        </figure>
-                            
-                        </div>
-                        <div class="col-md-6">
-                            <table class="table table-user-information">
-                                <tbody>
 
-                                  <tr>
-                                    <td><i class="glyphicon glyphicon-map-marker">&nbsp;</i>Grad:</td>
-                                    <td></td>
-                                  </tr>
-                                  <tr>
-                                    <td><i class="glyphicon glyphicon-home">&nbsp;</i>Adresa:</td>
-                                    <td></td>
-                                  </tr>
-                                                    
-                                  <tr>
+        <script>
+        $(document).ready(function(){
+                //FANCYBOX
+                //https://github.com/fancyapps/fancyBox
+                $(".fancybox").fancybox({
+                    openEffect: "none",
+                    closeEffect: "none"
+                });
 
-                                    <tr>
-                                    <td><i class="glyphicon glyphicon glyphicon-phone">&nbsp;</i>Telefon:</td>
-                                    <td></td>
-                                  </tr>
-                                  <tr>
-                                    <td><i class="glyphicon glyphicon glyphicon-envelope">&nbsp;</i>Email:</td>
-                                    <td><a href="mailto:"></a></td>
-                                  </tr>
-                                  <tr>
-                                    <td><i class="glyphicon glyphicon-home">&nbsp;</i>Kapacitet:</td>
-                                    <td></td>
-                                  </tr>
-                                  <tr>
-                                    <td><i class="glyphicon glyphicon-home">&nbsp;</i>Vrsta smeštaja:</td>
-                                    <td></td>
-                                  </tr>
-                       
-                                  </tr>
-                                 
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-        </div>
+                
+            });
+            });
+        </script>
+    
         <hr>
             <div class="row" style="margin-top:40px;">
                 <div class="col-md-8">
@@ -132,6 +138,7 @@
                  
                 </div>
             </div> <!--Komentari - KRAJ -->
+            <hr>
 
     </div>
     <div class="col-md-4">

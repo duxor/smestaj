@@ -26,6 +26,9 @@
     {!!HTML::style('css/datepicker.css')!!}
     {!!HTML::style('css/responsive-calendar.css')!!}
     {!!HTML::style('teme/paralax-1/css/templejt.css')!!}
+    {!! HTML::style('css/slider.css') !!}
+
+
 
     {!!HTML::script('js/jquery-3.0.js')!!}
     {!!HTML::script('js/datepicker.js')!!}
@@ -34,6 +37,7 @@
     {!!HTML::script('js/map/modestmaps.markers.js')!!}
     {!!HTML::script('js/map/spotlight.js')!!}
     {!!HTML::script('js/responsive-calendar.js')!!}
+
 
     @yield('head')
 </head>
