@@ -40,11 +40,10 @@ class Aplikacija extends Controller {
 		}else return'Aplikacija nije aktivna!';
 	}
 	public function getSmestaj($slugApp,$slugSmestaj){
-		//return $slugApp.'/'.$slugSmestaj;
-		$podaci=Sadrzaji::join('templejt','templejt.id','=','sadrzaji.templejt_id')->join('nalog','nalog.id','=','sadrzaji.nalog_id')->where('nalog.korisnici_id',Session::get('id'))->where('vrsta_sadrzaja_id','<',6)->get(['templejt.slug','sadrzaji.naziv','sadrzaji.icon','vrsta_sadrzaja_id'])->toArray();
+		$podaci=Sadrzaji::join('templejt','templejt.id','=','sadrzaji.templejt_id')->join('nalog','nalog.id','=','sadrzaji.nalog_id')->where('nalog.slug',$slugApp)->where('vrsta_sadrzaja_id','<',6)->get(['templejt.slug','sadrzaji.naziv','sadrzaji.icon','vrsta_sadrzaja_id'])->toArray();
 		$podaci['app']['slug']=$slugApp;
 		$podaci['pozadine']=$this->pozadine($this->nalog($slugApp));
-//dd($podaci);
+		$podaci['smestaj']=null;//PROSLIJEDITI PODATKE O SMJESTAJU
 		$tema=Nalog::join('tema','tema.id','=','nalog.tema_id')->where('nalog.slug',$slugApp)->get(['tema.slug'])->first()->slug;
 		return view("aplikacija.teme.{$tema}.smestaj",compact('podaci'));
 	}
