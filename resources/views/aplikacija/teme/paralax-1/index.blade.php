@@ -331,26 +331,33 @@
     <div class="modal fade" id="posaljiMail">
         <div class="modal-dialog">
             <div class="modal-content">
-
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h2>Kontaktirajte nas putem email-a</h2>
                 </div>
-                <div class="modal-body">
-                    {!! Form::open(['url'=>'/posalji-email','class'=>'form-horizontal','id'=>'kontaktForma']) !!}
-                    <div id="dk_ime" class="form-group has-feedback">
-                        {!! Form::label('lime','Ime',['class'=>'control-label col-sm-2']) !!}
+                <div class="modal-body"><i class='icon-spin6 animate-spin' style="color: rgba(0,0,0,0)"></i>
+                    <div id="_poruka" style="display: none"></div>
+                    <div id="wait" style="display:none"><center><i class='icon-spin6 animate-spin' style="font-size: 350%"></i></center></div>
+                    {!! Form::open(['class'=>'form-horizontal','id'=>'kontaktForma']) !!}
+                    <div id="dprezime" class="form-group has-feedback">
+                        {!! Form::label('lprezime','Prezime',['class'=>'control-label col-sm-2']) !!}
                         <div class="col-sm-10">
-                            {!! Form::text('k_ime', null, ['class'=>'form-control', 'placeholder'=>'Ime i Prezime', 'id'=>'k_ime']) !!}
-                            <span id="sk_ime" class="glyphicon form-control-feedback"></span>
+                            {!! Form::text('prezime', null, ['class'=>'form-control', 'placeholder'=>'Prezime', 'id'=>'prezime']) !!}
+                            <span id="sprezime" class="glyphicon form-control-feedback"></span>
                         </div>
                     </div>
-
-                    <div id="dk_email" class="form-group has-feedback">
+                    <div id="dime" class="form-group has-feedback">
+                        {!! Form::label('lime','Ime',['class'=>'control-label col-sm-2']) !!}
+                        <div class="col-sm-10">
+                            {!! Form::text('ime', null, ['class'=>'form-control', 'placeholder'=>'Ime', 'id'=>'ime']) !!}
+                            <span id="sime" class="glyphicon form-control-feedback"></span>
+                        </div>
+                    </div>
+                    <div id="demail" class="form-group has-feedback">
                         {!! Form::label('lemail','Email',['class'=>'control-label col-sm-2']) !!}
                         <div class="col-sm-10">
-                            {!! Form::email('k_email', null, ['class'=>'form-control', 'placeholder'=>'Email','id'=>'k_email']) !!}
-                            <span id="sk_email" class="glyphicon form-control-feedback"></span>
+                            {!! Form::email('email', null, ['class'=>'form-control', 'placeholder'=>'Email','id'=>'email']) !!}
+                            <span id="semail" class="glyphicon form-control-feedback"></span>
                         </div>
                     </div>
 
@@ -361,18 +368,24 @@
                         </div>
                     </div>
 
-                    <div id="dk_poruka" class="form-group has-feedback">
+                    <div id="dporuka" class="form-group has-feedback">
                         {!! Form::label('lporuka','Poruka',['class'=>'control-label col-sm-2']) !!}
                         <div class="col-sm-10">
-                            {!! Form::textarea('k_poruka', null, ['class'=>'form-control', 'placeholder'=>'Poruka','id'=>'k_poruka']) !!}
-                            <span id="sk_poruka" class="glyphicon form-control-feedback"></span>
+                            {!! Form::textarea('poruka', null, ['class'=>'form-control', 'placeholder'=>'Poruka','id'=>'poruka']) !!}
+                            <span id="sporuka" class="glyphicon form-control-feedback"></span>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    {!! Form::button('<span class="glyphicon glyphicon-envelope"></span> Pošalji', ['class'=>'btn btn-lg btn-primary', 'onClick'=>'SubmitForma.submit("kontaktForma")']) !!}
+                    {!! Form::button('<span class="glyphicon glyphicon-envelope"></span> Pošalji', ['class'=>'btn btn-lg btn-primary posalji']) !!}
                     {!! Form::button('<span class="glyphicon glyphicon-trash"></span> Obriši sve', ['class'=>'btn btn-lg btn-danger', 'type'=>'reset']) !!}
                     {!! Form::close() !!}
+                    <script>
+                        $('button.posalji').click(function(){
+                            if(!SubmitForm.check('kontaktForma')){ alert('Proverite sve podatke i pokušajte ponovo.'); return; }
+                            Komunikacija.posalji('/aplikacija/kontaktiraj-moderatora','kontaktForma','_poruka','wait','kontaktForma');
+                        });
+                    </script>
                 </div>
             </div>
         </div>

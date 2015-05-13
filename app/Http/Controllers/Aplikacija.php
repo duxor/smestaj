@@ -105,4 +105,46 @@ class Aplikacija extends Controller {
 		}
 		return json_encode(['msg'=>'Poruka uspešno poslata. Hvala.','check'=>1]);
 	}
+	public function postKontaktirajModeratora(){
+		$podaci=json_decode(Input::get('podaci'));
+		$validator=Validator::make([
+			'prezime'=>$podaci->prezime,
+			'ime'=>$podaci->ime,
+			'email'=>$podaci->email,
+			'telefon'=>$podaci->telefon,
+			'poruka'=>$podaci->poruka
+		],[
+			'prezime'=>'required|min:4|alpha',
+			'ime'=>'required|min:3|alpha',
+			'email'=>'required|email',
+			'telefon'=>'numeric',
+			'poruka'=>'required|min:5'
+		],[
+			//prezime
+			'prezime.required'=>'Obavezan unos prezimena.',
+			'prezime.min'=>'Minimalna duzina prezimena je :min.',
+			'prezime.alfa'=>'Prezime može da sadrži samo znake alfabeta.',
+			//ime
+			'ime.required'=>'Obavezan unos imena.',
+			'ime.min'=>'Minimalna duzina imena je :min.',
+			'ime.alfa'=>'Ime može da sadrži samo znake alfabeta.',
+			//email
+			'email.email'=>'Pogrešno unesen email.',
+			'email.required'=>'Obavezan unos email-a.',
+			//telefon
+			'telefon.numeric'=>'Telefon treba da se sastoji samo iz brojeva.',
+			//poruka
+			'poruka.required'=>'Obavezan unos poruke.',
+			'poruka.min'=>'Minimalna duzina poruke je :min.'
+		]);
+		if($validator->fails()){
+			$msg='<p>Dogodila se greška: <br><ol>';
+			foreach($validator->errors()->toArray() as $greske)
+				foreach($greske as $greska)
+					$msg.='<li>'.$greska.'</li>';
+			$msg.='</ol>';
+			return json_encode(['msg'=>$msg,'check'=>0]);
+		}
+		return json_encode(['msg'=>'Poruka uspešno poslata. Hvala.','check'=>1]);
+	}
 }

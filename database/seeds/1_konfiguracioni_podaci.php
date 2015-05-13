@@ -126,7 +126,7 @@ class KonfiguracioniPodaci extends Seeder{
                 'nalog_id'=>1
             ],
             [
-                'naziv'=>'Popusti',
+                'naziv'=>'Rezervacije',
                 'sadrzaj'=>'<p>Tekst je u pripremi (Rezervišite online i ostvarite bonus i popuste za naredni period).</p>',
                 'icon'=>'glyphicon glyphicon-calendar',
                 'templejt_id'=>3,
@@ -134,7 +134,7 @@ class KonfiguracioniPodaci extends Seeder{
             ],
             [
                 'naziv'=>'Kontakt',
-                'sadrzaj'=>'<p>Tekst je u pripremi.</p>',
+                'sadrzaj'=>'<p>Naša tehnička podrška je aktivna 24/7 radeći na realizaciji aktuelnih zahteva korisnika, obezbeđujući i unapređujući punu funkcionalnost platforme. U tom kontekstu budite slobodni da nas kontaktirate i ostavite svoj utisak, sugestiju ili kritiku, a mi ćemo se truditi da realizujemo i prilagodimo platformu Vašim potrebama.</p>',
                 'icon'=>'glyphicon glyphicon-earphone',
                 'templejt_id'=>4,
                 'nalog_id'=>1

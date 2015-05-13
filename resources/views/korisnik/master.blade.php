@@ -37,7 +37,9 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="{!! url('/') !!}" class="navbar-brand">najSmeštaj</a>
+            <a href="/" id="brend" class="navbar-brand" style="margin-top: -15px">
+                <img src="/teme/osnovna-paralax/slike/logo/logo50x200.jpg">
+            </a>
         </div>
         <div id="dMenija" class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
