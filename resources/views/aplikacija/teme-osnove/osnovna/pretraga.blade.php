@@ -134,7 +134,7 @@
                 </a>
                 <p>
                     <a href="/{{$smestaj['slugApp']}}/{{$smestaj['slugSmestaj']}}" class="btn btn-lg btn-default"><i class="glyphicon glyphicon-zoom-in"></i> Pregled</a>
-                    <button class="btn btn-lg btn-info m" data-toggle="modal" data-target="#rezervacija" data-id="{{$smestaj['id']}}" data-app="{{$smestaj['nazivApp']}}" data-naziv="{{$smestaj['naziv']}}" data-vrobjekta="{{$smestaj['vrsta_smestaja']}}" data-maxosoba="{{$smestaj['broj_osoba']}}" data-adresa="{{$smestaj['adresa']}}" data-img="/teme/osnovna-paralax/slike/15.jpg"><span class="glyphicon glyphicon-check"></span> Rezervacija</button>
+                    <button class="btn btn-lg btn-info m" data-toggle="modal" data-target="#rezervacija" data-cena="{{$smestaj['cena_osoba']}}" data-id="{{$smestaj['id']}}" data-app="{{$smestaj['nazivApp']}}" data-naziv="{{$smestaj['naziv']}}" data-vrobjekta="{{$smestaj['vrsta_smestaja']}}" data-maxosoba="{{$smestaj['broj_osoba']}}" data-adresa="{{$smestaj['adresa']}}" data-img="/teme/osnovna-paralax/slike/15.jpg"><span class="glyphicon glyphicon-check"></span> Rezervacija</button>
                     @if(\App\Security::autentifikacijaTest())
                         <button id="zelja" class="btn btn-lg btn-default _tooltip" @if($smestaj['zelja']) data-zelja="{{$smestaj['zelja']}}" style="color:red" title="Izbaci iz liste zelja" @else data-zelja="false" title="Dodaj u listu želja" @endif data-id="{{$smestaj['id']}}" data-toggle="tooltip" data-placement="bottom"><i class="glyphicon glyphicon-heart"></i></button>
                     @else
@@ -143,12 +143,13 @@
                 </p>
             </div>
             <div class="col-sm-8">
-                <h3>{{$smestaj['nazivApp']}}</h3>
+                <h3 style="margin-top: -4px">{{$smestaj['nazivApp']}}</h3>
                 <table class="moja-tabela">
                     <tr><td>Naziv objekta:</td><td>{{$smestaj['naziv']}}</td></tr>
                     <tr><td>Vrsta objekta:</td><td>{{$smestaj['vrsta_smestaja']}}</td></tr>
                     <tr><td>Broj mesta:</td><td>{{$smestaj['broj_osoba']}}</td></tr>
                     <tr><td>Adresa:</td><td>{{$smestaj['adresa']}}</td></tr>
+                    <tr><td>Cena (po osobi):</td><td>{{$smestaj['cena_osoba']}}</td></tr>
                 </table>
             </div><br clear="all">
         @endforeach
@@ -166,6 +167,8 @@
                                 {!!Form::hidden('id_smestaja',null,['id'=>'id_smestaja'])!!}
                                 {!!Form::hidden('id_korisnika',Session::get('id'))!!}
                                 {!!Form::hidden('_token',csrf_token())!!}
+                                {!!Form::hidden('cena')!!}
+                                {!!Form::hidden('ukupna_cena')!!}
                                 <div class="form-group">
                                     <div class="col-sm-4"><img id="foto" style="width:100%"></div>
                                     <div class="col-sm-8">
@@ -196,9 +199,15 @@
                                         {!! Form::textarea('napomena',null,['class'=>'form-control','placeholder'=>'Upišite napomenu','id'=>'napomena']) !!}
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    {!! Form::label('lcena','Cena',['class'=>'control-label col-sm-4']) !!}
+                                    <div class="col-sm-8">
+                                        {!! Form::label('lcena','Cena',['class'=>'control-label','id'=>'cena']) !!}
+                                    </div>
+                                </div>
                             </div>
-                            <div id="poruka" style="display:none"></div>
                         </div>
+                        <div id="poruka" style="display:none"></div>
                     </div>
                     <div class="modal-footer">
                         {!! Form::button('<span class="glyphicon glyphicon-remove"></span> Otkaži',['class'=>'btn btn-lg btn-warning','data-dismiss'=>'modal']) !!}
@@ -217,11 +226,17 @@
                 $('#adresa').html($(this).data('adresa'));
                 $('#id_smestaja').val($(this).data('id'));
                 $('#foto').attr('src',$(this).data('img'));
+                $('#cena').html($(this).data('cena')+' din');
+                $('input[name=cena]').val($(this).data('cena'));
                 var option = '';
                 for (i=1;i<=$(this).data('maxosoba');i++){
                     option += '<option value="'+ i + '">' + i + '</option>';
                 }
                 $('#broj_osoba').html(option);
+            });
+            $('#broj_osoba').change(function(){
+                $('#cena').html($('input[name=cena]').val()*$(this).val()+' din');
+                $('input[name=ukupna_cena]').val($('input[name=cena]').val()*$(this).val());
             });
             $("button#zelja").click(function(){
                 $(this).css("color","black");

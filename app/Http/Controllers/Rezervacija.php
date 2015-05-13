@@ -42,10 +42,9 @@ class Rezervacija extends Controller {
 		$rez->smestaj_id=$podaci->id_smestaja;
 		$rez->napomena=$podaci->napomena;
 		$rez->broj_osoba=$podaci->broj_osoba;
+		$rez->cena_ukupna=$podaci->ukupna_cena;
 		$rez->save();
-		//$message[]='Uspešno ste izvršili rezervaciju';
 		return json_encode(['msg'=>'Uspešno ste izvršili rezervaciju.','check'=>1]);
-		//return Redirect::to('/rezervacije/aktivne')->with(compact('message'));
 	}
 	public function postIzmeniRezervaciju(){
 		$message=[];
