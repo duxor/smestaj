@@ -10,6 +10,7 @@ use App\Smestaj;
 use App\Templejt;
 use App\Grad;
 use App\Security;
+use App\Komentari;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
@@ -47,7 +48,7 @@ class Aplikacija extends Controller {
 			->join('vrsta_smestaja','vrsta_smestaja.id','=','smestaj.vrsta_smestaja_id')
 			->join('objekat','objekat.id','=','smestaj.objekat_id')
 			->where('slug',$slugSmestaj)
-			->get(['smestaj.naziv','slug','kapacitet.naziv as naziv_kapaciteta','broj_osoba','vrsta_smestaja.naziv as vrsta_smestaja','naslovna_foto','cena_osoba','x','y','z'])->first()->toArray();
+			->get(['smestaj.id','smestaj.naziv','slug','kapacitet.naziv as naziv_kapaciteta','broj_osoba','vrsta_smestaja.naziv as vrsta_smestaja','naslovna_foto','cena_osoba','x','y','z'])->first()->toArray();
 		$tema=Nalog::join('tema','tema.id','=','nalog.tema_id')->where('nalog.slug',$slugApp)->get(['tema.slug','nalog.id'])->first();
 		$podaci['app']['slug']=$slugApp;
 		$podaci['app']['id']=$tema->id;//=nalog.id=appID
@@ -62,6 +63,19 @@ class Aplikacija extends Controller {
 			$lista->save();
 			return $lista->id;
 		}else return ListaZelja::where('korisnici_id',Session::get('id'))->where('id',Input::get('zelja'))->update(['aktivan'=>0]);
+	}
+	public function postPosaljiKomentar(){
+		$id_smestaja=Input::get('id_smestaja');
+		$id_korisnika=Session::get('id');
+		$komentar=Input::get('komentar');
+		$ocena=Input::get('rating');
+		$kom=new Komentari();
+		$kom->komentar=$komentar;
+		$kom->korisnici_id=$id_korisnika;
+		$kom->smestaj_id=$id_smestaja;
+		$kom->ocena=$ocena;
+		$kom->save();
+		return Redirect::back()->with('message','Uspešno ste ostavili komentar');
 	}
 	public function getListaZelja(){
 		$lista_zelja=ListaZelja::where('korisnici_id','=',Session::get('id'))
