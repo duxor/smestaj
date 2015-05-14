@@ -194,7 +194,7 @@
                                             <a href="http://www.jquery2dotnet.com/2013/10/google-style-login-page-desing-usign.html">
                                                 Google Style Login Page Design Using Bootstrap</a>
                                             <div class="mic-info">
-                                                By: <a href="#">{{$kom['username']}}</a> on {{$kom['created_at']}}
+                                                By: <a href="#">{{$kom['username']}}</a> on {{$kom['created_at']}} Ocena:{{$kom['ocena']}}
                                             </div>
                                         </div>
                                         <div class="comment-text">
