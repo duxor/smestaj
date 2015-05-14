@@ -14,37 +14,31 @@
                     <div class="col-md-6">
                         <table class="table table-user-information">
                             <tbody>
-
-                              <tr>
-                                <td><i class="glyphicon glyphicon-map-marker">&nbsp;</i>Naziv objekta:</td>
-                                <td>{!!$podaci['smestaj']['naziv']!!}</td>
-                              </tr>
-                              <tr>
-                                <td><i class="glyphicon glyphicon-home">&nbsp;</i>Kapacitet:</td>
-                                <td>{!!$podaci['smestaj']['naziv_kapaciteta']!!}</td>
-                              </tr>
-                              <tr>
-                                <td><i class="glyphicon glyphicon-home">&nbsp;</i>Broj osoba:</td>
-                                <td>{!!$podaci['smestaj']['broj_osoba']!!}</td>
-                              </tr>                                    
-                              <tr>
                                 <tr>
-                                <td><i class="glyphicon glyphicon glyphicon-phone">&nbsp;</i>Vrsta smeštaja:</td>
-                                <td>{!!$podaci['smestaj']['vrsta_smestaja']!!}</td>
-                              </tr>
-                              <tr>
-                                <td><i class="glyphicon glyphicon glyphicon-envelope">&nbsp;</i>Cena po osobi:</td>
-                                <td>{!!$podaci['smestaj']['cena_osoba']!!}</td>
-                              </tr>
-                   
-                              </tr>
-                             
+                                    <td><i class="glyphicon glyphicon-map-marker">&nbsp;</i>Naziv objekta:</td>
+                                    <td>{!!$podaci['smestaj']['naziv']!!}</td>
+                                </tr>
+                                <tr>
+                                    <td><i class="glyphicon glyphicon-home">&nbsp;</i>Kapacitet:</td>
+                                    <td>{!!$podaci['smestaj']['naziv_kapaciteta']!!}</td>
+                                </tr>
+                                <tr>
+                                    <td><i class="glyphicon glyphicon-home">&nbsp;</i>Broj osoba:</td>
+                                    <td>{!!$podaci['smestaj']['broj_osoba']!!}</td>
+                                </tr>
+                                <tr>
+                                    <td><i class="glyphicon glyphicon glyphicon-phone">&nbsp;</i>Vrsta smeštaja:</td>
+                                    <td>{!!$podaci['smestaj']['vrsta_smestaja']!!}</td>
+                                </tr>
+                                <tr>
+                                    <td><i class="glyphicon glyphicon glyphicon-envelope">&nbsp;</i>Cena po osobi:</td>
+                                    <td>{!!$podaci['smestaj']['cena_osoba']!!} din</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
-            
         </div>
         <hr>
         <div class='row'>
