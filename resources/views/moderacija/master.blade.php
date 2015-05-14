@@ -51,9 +51,9 @@
                         <ul class="dropdown-menu">
                             <li class="dropdown-header">Poruke</li>
                             <li class="divider"></li>
-                            <li><a href="/moderator/mailbox/kreiraj"><i class="glyphicon glyphicon-edit"></i> Kreiraj poruku</a></li>
-                            <li><a href="/moderator/mailbox/inbox"><i class="glyphicon glyphicon-log-in"></i> Inbox @if(\App\OsnovneMetode::brojNeprocitanihPoruka()>0)<i class="badge">{{\App\OsnovneMetode::brojNeprocitanihPoruka()}}</i>@endif </a></li>
-                            <li><a href="/moderator/mailbox/poslate"><i class="glyphicon glyphicon-share"></i> Poslate</a></li>
+                            <li><a href="/moderacija/mailbox/kreiraj"><i class="glyphicon glyphicon-edit"></i> Kreiraj poruku</a></li>
+                            <li><a href="/moderacija/mailbox/inbox"><i class="glyphicon glyphicon-log-in"></i> Inbox @if(\App\OsnovneMetode::brojNeprocitanihPoruka()>0)<i class="badge">{{\App\OsnovneMetode::brojNeprocitanihPoruka()}}</i>@endif </a></li>
+                            <li><a href="/moderacija/mailbox/poslate"><i class="glyphicon glyphicon-share"></i> Poslate</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
