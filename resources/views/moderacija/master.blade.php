@@ -51,9 +51,9 @@
                         <ul class="dropdown-menu">
                             <li class="dropdown-header">Poruke</li>
                             <li class="divider"></li>
-                            <li><a href="/mailbox/kreiraj"><i class="glyphicon glyphicon-edit"></i> Kreiraj poruku</a></li>
-                            <li><a href="/mailbox/inbox"><i class="glyphicon glyphicon-log-in"></i> Inbox</a></li>
-                            <li><a href="/mailbox/poslate"><i class="glyphicon glyphicon-share"></i> Poslate</a></li>
+                            <li><a href="/moderator/mailbox/kreiraj"><i class="glyphicon glyphicon-edit"></i> Kreiraj poruku</a></li>
+                            <li><a href="/moderator/mailbox/inbox"><i class="glyphicon glyphicon-log-in"></i> Inbox</a></li>
+                            <li><a href="/moderator/mailbox/poslate"><i class="glyphicon glyphicon-share"></i> Poslate</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
