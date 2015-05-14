@@ -76,7 +76,7 @@
     </div><!-- KRAJ row -->
 <br clear="all"><hr>
     <div class='row'>
-        <div class='col-md-9'>
+        <div class='col-md-8'>
             <div class="row">
               <div class="carousel slide media-carousel" id="media">
                 <div class="carousel-inner">
@@ -150,9 +150,10 @@
                 </div> <!--Komentari - KRAJ -->
             </div><!-- KRAJ row -->                          
         </div><!-- KRAJ md-9 -->
-        <div class="col-md-3"><!-- pocetak mapa-->
+        <div class="col-md-4"><!-- pocetak mapa-->
                 <div class="embed-responsive embed-responsive-4by3">
-                    <iframe class="embed-responsive-item" src="https://www.google.com/maps/embed/v1/place?q=tarska%203%2C%20beograd&key=AIzaSyANkR_6WBUEKhO58qGQo0thZmNpvSCqRZE"></iframe>
+                    <img src="https://maps.googleapis.com/maps/api/staticmap?center={!!$podaci['smestaj']['y']!!},{!!$podaci['smestaj']['x']!!}&zoom=14&size=400x400&markers=color:green%7Clabel:G%7C{!!$podaci['smestaj']['y']!!},{!!$podaci['smestaj']['x']!!}"></img>
+
                 </div>
         </div><!-- kraj mapa-->
     </div><!-- KRAJ row -->
