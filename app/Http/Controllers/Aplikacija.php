@@ -45,8 +45,9 @@ class Aplikacija extends Controller {
 		$podaci['pozadine']=$this->pozadine($this->nalog($slugApp));
 		$podaci['smestaj']=Smestaj::join('kapacitet','kapacitet.id','=','smestaj.kapacitet_id')
 			->join('vrsta_smestaja','vrsta_smestaja.id','=','smestaj.vrsta_smestaja_id')
+			->join('objekat','objekat.id','=','smestaj.objekat_id')
 			->where('slug',$slugSmestaj)
-			->get(['smestaj.naziv','slug','kapacitet.naziv as naziv_kapaciteta','broj_osoba','vrsta_smestaja.naziv as vrsta_smestaja','naslovna_foto','cena_osoba'])->first()->toArray();
+			->get(['smestaj.naziv','slug','kapacitet.naziv as naziv_kapaciteta','broj_osoba','vrsta_smestaja.naziv as vrsta_smestaja','naslovna_foto','cena_osoba','x','y','z'])->first()->toArray();
 		$tema=Nalog::join('tema','tema.id','=','nalog.tema_id')->where('nalog.slug',$slugApp)->get(['tema.slug','nalog.id'])->first();
 		$podaci['app']['slug']=$slugApp;
 		$podaci['app']['id']=$tema->id;//=nalog.id=appID
