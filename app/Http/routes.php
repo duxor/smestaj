@@ -19,6 +19,8 @@ Route::controller('/aplikacija','Aplikacija');
 Route::post('/rezervisi','Rezervacija@postRezervisi');
 Route::controller('/rezervacija','Moderacija\Rezervacija');
 
+Route::controller('/mailbox','Mailbox');
+
 Route::get('/{slug?}','Aplikacija@getIndex');
 Route::any('/{slugApp}/pretraga','Pretraga@postAplikacija');
 Route::get('/{slugApp}/{slugSmestaj}','Aplikacija@getSmestaj');
