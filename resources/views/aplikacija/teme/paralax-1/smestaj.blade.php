@@ -182,9 +182,8 @@
                             78</span>
                     </div>
                     <div class="panel-body">
-
+                @if($komentari)
                     @foreach($komentari as $kom)
-
                         <ul class="list-group">
                             <li class="list-group-item">
                                 <div class="row">
@@ -216,8 +215,11 @@
                                 </div>
                             </li>
                         </ul>
-                        @endforeach
-                        <a href="#" class="btn btn-primary btn-sm btn-block" role="button"><span class="glyphicon glyphicon-refresh"></span> More</a>
+                    @endforeach
+                    <a href="#" class="btn btn-primary btn-sm btn-block" role="button"><span class="glyphicon glyphicon-refresh"></span> More</a>
+                @else <h3 class="col-sm-12" >Nema komentara u bazi!</h3><br clear="all"><hr>
+                @endif
+                        
                     </div>
                 </div>
             </div>
