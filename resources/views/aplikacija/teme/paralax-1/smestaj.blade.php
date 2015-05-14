@@ -143,10 +143,10 @@
                             <div class="col-md-12">
                                 <form accept-charset="UTF-8" action="" method="post">
                                     <input id="ratings-hidden" name="rating" type="hidden"> 
-                                    <textarea class="form-control animated" cols="50" id="new-review" name="komentar" placeholder="Unesite komentar ovde ..." rows="5"></textarea>
+                                    <textarea class="form-control animated" cols="50" id="new-review" name="komentar" placeholder="Unesite komentar..." rows="5"></textarea>
                     
                                     <div class="text-right">
-                                        <div class="stars starrr" data-rating="0"></div>
+                                        <div class="stars starrr" style="color:green;" data-rating="0"></div>
                                         <a class="btn btn-danger btn-sm" href="#" id="close-review-box" style="display:none; margin-right: 10px;">
                                         <span class="glyphicon glyphicon-remove"></span>Otkaži</a>
                                         <button class="btn btn-success btn-lg" type="submit">Pošalji komentar</button>
@@ -182,6 +182,9 @@
                             78</span>
                     </div>
                     <div class="panel-body">
+
+                    @foreach($komentari as $kom)
+
                         <ul class="list-group">
                             <li class="list-group-item">
                                 <div class="row">
@@ -192,11 +195,11 @@
                                             <a href="http://www.jquery2dotnet.com/2013/10/google-style-login-page-desing-usign.html">
                                                 Google Style Login Page Design Using Bootstrap</a>
                                             <div class="mic-info">
-                                                By: <a href="#">Bhaumik Patel</a> on 2 Aug 2013
+                                                By: <a href="#">{{$kom['username']}}</a> on {{$kom['created_at']}}
                                             </div>
                                         </div>
                                         <div class="comment-text">
-                                            Awesome design
+                                            {{$kom['komentar']}}
                                         </div>
                                         <div class="action">
                                             <button type="button" class="btn btn-primary btn-xs" title="Edit">
@@ -213,6 +216,7 @@
                                 </div>
                             </li>
                         </ul>
+                        @endforeach
                         <a href="#" class="btn btn-primary btn-sm btn-block" role="button"><span class="glyphicon glyphicon-refresh"></span> More</a>
                     </div>
                 </div>
