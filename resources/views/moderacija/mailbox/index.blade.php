@@ -1,4 +1,4 @@
-@extends('moderacija.master-moderator')
+@extends("{$podaci['prava']}.master")
 @section('content')
 
 @endsection

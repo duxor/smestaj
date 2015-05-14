@@ -1,4 +1,4 @@
-@extends('moderacija.master-moderator')
+@extends('moderacija.master')
 @section('content')
     <h1>Podešavanja sadrzaja i pozadine</h1>
     {!!Form::open(['id'=>'app','class'=>'col-sm-5'])!!}

@@ -1,4 +1,4 @@
-@extends('moderacija.master-moderator')
+@extends('moderacija.master')
 @section('content')
     @if($podaci['galerije'])
         <div class="panel-group" id="galerije" role="tablist" aria-multiselectable="true">

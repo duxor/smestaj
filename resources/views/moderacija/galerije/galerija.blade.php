@@ -1,4 +1,4 @@
-@extends('moderacija.master-moderator')
+@extends('moderacija.master')
 @section('content')
     <h2>Uredi galeriju fotografija</h2><i class='icon-spin6 animate-spin' style="color: rgba(0,0,0,0)"></i>
     <div id="poruka" style="display: none"></div>

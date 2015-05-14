@@ -1,4 +1,4 @@
-@extends('moderacija.master-moderator')
+@extends('moderacija.master')
 
 @section('content')
 <div class="col-sm-4">

@@ -1,5 +1,7 @@
 <?php
 
+Route::controller('/{pravaSlug}/mailbox','MailboxC');
+
 Route::controller('/administracija/korisnik','Administracija\Korisnik');
 Route::controller('/administracija/aplikacija','Administracija\Aplikacija');
 Route::controller('/administracija/nalog','Administracija\Nalozi');
@@ -19,7 +21,6 @@ Route::controller('/aplikacija','Aplikacija');
 Route::post('/rezervisi','Rezervacija@postRezervisi');
 Route::controller('/rezervacija','Moderacija\Rezervacija');
 
-Route::controller('/mailbox','Mailbox');
 
 Route::get('/{slug?}','Aplikacija@getIndex');
 Route::any('/{slugApp}/pretraga','Pretraga@postAplikacija');
