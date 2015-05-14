@@ -87,4 +87,7 @@ class OsnovneMetode {
         rmdir($dirname);
         return true;
     }
+    public static function brojNeprocitanihPoruka(){
+        return Mailbox::where('korisnici_id',Session::get('id'))->where('procitano',0)->count();
+    }
 }

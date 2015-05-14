@@ -47,6 +47,16 @@
             <ul class="nav navbar-nav navbar-right">
                 @if(\App\Security::autentifikacijaTest(4))
                     <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-toggle="tooltip" data-placement="bottom" id="mailbox" title="Poruke"><i class="glyphicon glyphicon-envelope"></i>@if(\App\OsnovneMetode::brojNeprocitanihPoruka()>0)<i class="badge">{{\App\OsnovneMetode::brojNeprocitanihPoruka()}}</i>@endif</a>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-header">Poruke</li>
+                            <li class="divider"></li>
+                            <li><a href="/mailbox/kreiraj"><i class="glyphicon glyphicon-edit"></i> Kreiraj poruku</a></li>
+                            <li><a href="/mailbox/inbox"><i class="glyphicon glyphicon-log-in"></i> Inbox</a></li>
+                            <li><a href="/mailbox/poslate"><i class="glyphicon glyphicon-share"></i> Poslate</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="osnovno" data-toggle="tooltip" data-placement="bottom" title="Osnovno"><i class="glyphicon glyphicon-cog"></i></a>
                         <ul class="dropdown-menu">
                             <li class="dropdown-header">Osnovno</li>
@@ -133,6 +143,7 @@
     $(function(){$('#galerija').tooltip()})
     $(function(){$('#analitika').tooltip()})
     $(function(){$('#profil').tooltip()})
+    $(function(){$('#mailbox').tooltip()})
 </script>
 
 <div class="container">
