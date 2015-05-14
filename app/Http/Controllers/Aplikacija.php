@@ -54,10 +54,12 @@ class Aplikacija extends Controller {
 		$podaci['app']['id']=$tema->id;//=nalog.id=appID
 		
 		$id_smestaja=Smestaj::where('slug','=',$slugSmestaj)->get(['smestaj.id'])->first();
-		$komentari=Komentari::where('smestaj_id','=',$id_smestaja->id)
+		$komentari=Komentari::orderBy('created_at','desc')->where('smestaj_id','=',$id_smestaja->id)
 				->join('korisnici','korisnici.id','=','komentari.korisnici_id')
 				->get(['komentar','ocena','komentari.created_at','korisnici.username'])->toArray();
-		return view("aplikacija.teme.{$tema->slug}.smestaj",compact('podaci','komentari'));
+		$prosecna_ocena=Komentari::where('smestaj_id','=',$id_smestaja->id)
+				->avg('ocena');
+		return view("aplikacija.teme.{$tema->slug}.smestaj",compact('podaci','komentari','prosecna_ocena'));
 	}
 	public function postListaZeljaDodaj(){
 		if(Input::get('zelja'))

@@ -30,7 +30,7 @@
                           </tr>
                           <tr>
                             <td><i class="glyphicon glyphicon-euro">&nbsp;</i>Cena po osobi:</td>
-                            <td>{!!$podaci['smestaj']['cena_osoba']!!}</td>
+                            <td>{!!$podaci['smestaj']['cena_osoba']!!} din.</td>
                           </tr>
                         </tbody>
                     </table>
@@ -124,48 +124,17 @@
                 <a data-slide="next" href="#media" class="right carousel-control">›</a>
               </div>
             </div><!-- KRAJ row --> 
-            @if (Session::get('message'))
-                        <div class="alert alert-success alert-dismissable">
-                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                            {{ Session::get('message')}}
-                        </div>
-            @endif
-            {!!Form::open(['url'=>'/aplikacija/posalji-komentar','class'=>'form-horizontal'])!!}
-            {!!Form::hidden('id_smestaja',$podaci['smestaj']['id'])!!}
-            <div class="row" style="margin-top:40px;">
-                <div class="col-md-12">
-                    <div class="well well-sm">
-                        <div class="text-right">
-                            <a class="btn btn-success btn-green" href="#reviews-anchor" id="open-review-box">Ostavite komentar</a>
-                        </div>
-                    
-                        <div class="row" id="post-review-box" style="display:none;">
-                            <div class="col-md-12">
-                                <form accept-charset="UTF-8" action="" method="post">
-                                    <input id="ratings-hidden" name="rating" type="hidden"> 
-                                    <textarea class="form-control animated" cols="50" id="new-review" name="komentar" placeholder="Unesite komentar..." rows="5"></textarea>
-                    
-                                    <div class="text-right">
-                                        <div class="stars starrr" style="color:green;" data-rating="0"></div>
-                                        <a class="btn btn-danger btn-sm" href="#" id="close-review-box" style="display:none; margin-right: 10px;">
-                                        <span class="glyphicon glyphicon-remove"></span>Otkaži</a>
-                                        <button class="btn btn-success btn-lg" type="submit">Pošalji komentar</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>                 
-                    </div>
-                </div> <!--Komentari - KRAJ -->
-            {!!Form::close()!!}
-            </div><!-- KRAJ row -->                          
+                          
         </div><!-- KRAJ md-9 -->
         <div class="col-md-4"><!-- pocetak mapa-->
                 <div class="embed-responsive embed-responsive-4by3">
-                    <img src="https://maps.googleapis.com/maps/api/staticmap?center={!!$podaci['smestaj']['y']!!},{!!$podaci['smestaj']['x']!!}&zoom=14&size=400x400&markers=color:green%7Clabel:G%7C{!!$podaci['smestaj']['y']!!},{!!$podaci['smestaj']['x']!!}"></img>
+                    <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyANkR_6WBUEKhO58qGQo0thZmNpvSCqRZE&q={!!$podaci['smestaj']['y']!!},{!!$podaci['smestaj']['x']!!}&zoom=15&center={!!$podaci['smestaj']['y']!!},{!!$podaci['smestaj']['x']!!}"></iframe>
 
                 </div>
         </div><!-- kraj mapa-->
     </div><!-- KRAJ row -->
+
+<br clear="all"><hr>
 
 <div class="row"><!--Komentari -->
     <div class="col-md-12">
@@ -176,28 +145,46 @@
                 <div class="panel panel-default widget">
                     <div class="panel-heading">
                         <span class="glyphicon glyphicon-comment"></span>
-                        <h3 class="panel-title">
-                            Recent Comments</h3>
-                        <span class="label label-info">
-                            78</span>
+                        <h3 class="panel-title" style=" display:inline">
+                             Ocena smeštaja:  </h3>
+                        <span class="label label-info" >
+                            {!! round($prosecna_ocena,1)!!} </span>
+                              {!!Form::open(['url'=>'/aplikacija/posalji-komentar','class'=>'form-horizontal'])!!}
+                                 {!!Form::hidden('id_smestaja',$podaci['smestaj']['id'])!!}
+                           <span><div class="row"> <a class="btn btn-success btn-green pull-right" href="#reviews-anchor" id="open-review-box"><span class="glyphicon glyphicon-bullhorn"> </span>  Ostavite komentar</a></div></span>
+                            <div class="row" id="post-review-box" style="display:none; margin-top:15px;">
+                            <div class="col-md-12">
+                                <form accept-charset="UTF-8" action="" method="post">
+                                    <input id="ratings-hidden" name="rating" type="hidden"> 
+                                    <textarea class="form-control animated" cols="50" id="new-review" name="komentar" placeholder="Unesite komentar..." rows="5"></textarea>
+                    
+                                    <div class="text-right">
+                                        <div class="stars starrr" style="color:green;" data-rating="3"></div>
+                                        <a class="btn btn-danger btn-sm" href="#" id="close-review-box" style="display:none; margin-right: 10px;">
+                                        <span class="glyphicon glyphicon-remove"></span>Otkaži</a>
+                                        <button class="btn btn-success btn-lg" type="submit">Pošalji komentar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div> 
+                         {!!Form::close()!!}
                     </div>
-                    <div class="panel-body">
+                    <div class="panel-body" style=" padding:0px;">
                 @if($komentari)
                     @foreach($komentari as $kom)
-                        <ul class="list-group">
-                            <li class="list-group-item">
+                        <ul class="list-group"style=" margin-bottom: 0; ">
+                            <li class="list-group-item" style="border-radius: 0;border: 0;border-top: 1px solid #ddd;">
                                 <div class="row">
                                     <div class="col-xs-2 col-md-1">
                                         <img src="http://placehold.it/80" class="img-circle img-responsive" alt="" /></div>
                                     <div class="col-xs-10 col-md-11">
                                         <div>
-                                            <a href="http://www.jquery2dotnet.com/2013/10/google-style-login-page-desing-usign.html">
-                                                Google Style Login Page Design Using Bootstrap</a>
-                                            <div class="mic-info">
-                                                By: <a href="#">{{$kom['username']}}</a> on {{$kom['created_at']}} Ocena:{{$kom['ocena']}}
+                                            <div class="mic-info" style=" color: #666666;font-size: 11px;">
+                                                <strong>Ocenio:</strong> <a href="#">{{$kom['username']}}</a>,  {{$kom['created_at']}}, <strong>Ocena: </strong>{{$kom['ocena']}}
                                             </div>
                                         </div>
                                         <div class="comment-text">
+                                        <h6 style=" color: #666666;font-size: 12px;"><strong>Komentar:</strong></h6>
                                             {{$kom['komentar']}}
                                         </div>
                                         <div class="action">
@@ -216,7 +203,7 @@
                             </li>
                         </ul>
                     @endforeach
-                    <a href="#" class="btn btn-primary btn-sm btn-block" role="button"><span class="glyphicon glyphicon-refresh"></span> More</a>
+                    <a href="#" class="btn btn-primary btn-sm btn-block" style="border-top-left-radius:0px;border-top-right-radius:0px;;"role="button"><span class="glyphicon glyphicon-refresh"></span> More</a>
                 @else <h3 class="col-sm-12" >Nema komentara u bazi!</h3><br clear="all"><hr>
                 @endif
                         
