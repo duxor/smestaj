@@ -147,8 +147,8 @@
                             <span class="glyphicon glyphicon-comment"></span>
                             <h3 class="panel-title" style=" display:inline">Ocena smeštaja: </h3><span class="label label-info" >{!!round($prosecna_ocena,1)!!}</span>
                         </div>
-                        <div class="panel-body"><a class="btn btn-success btn-green pull-right" @if(\App\Security::autentifikacijaTest()) id="komentarisi" @else id="prijaviSe" @endif><span class="glyphicon glyphicon-bullhorn"> </span>  Ostavite komentar</a>
-                            @if(!\App\Security::autentifikacijaTest())
+                        <div class="panel-body"><a class="btn btn-success btn-green pull-right" @if(\App\Security::autentifikacijaTest(2,'min')) id="komentarisi" @else id="prijaviSe" @endif><span class="glyphicon glyphicon-bullhorn"> </span>  Ostavite komentar</a>
+                            @if(!\App\Security::autentifikacijaTest(2,'min'))
                                 <script>$('#prijaviSe').click(function(){document.location='/log/login';});</script>
                             @else
                                 <div id="poruka" style="display: none;margin-top: 25px"></div>

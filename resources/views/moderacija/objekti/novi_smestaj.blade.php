@@ -38,7 +38,7 @@
 						<div class="form-group">
 					        {!!Form::label('cena','Cena',['class'=>'control-label col-sm-4'])!!}
 					        <div class="col-sm-4">
-					            {!!Form::text('cena',null,['class'=>'form-control','placeholder'=>'Unesite cenu...'])!!}
+					            {!!Form::text('cena',null,['class'=>'form-control','placeholder'=>'Unesite cenu u dinarima...'])!!}
 					        </div>
 					    </div>
 

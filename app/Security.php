@@ -151,8 +151,8 @@ class Security {
         return Security::rediectToLogin();
     }
 //#REDIRECTORI[autentifikacija, logout, redirect, redirectToLogin]
-    public static function autentifikacija($target,$dodaci=null,$prava=2){
-        return Security::autentifikacijaTest($prava) ? $dodaci ? view($target, $dodaci) : view($target) : Security::rediectToLogin();
+    public static function autentifikacija($target,$dodaci=null,$prava=2,$min=null){
+        return Security::autentifikacijaTest($prava,$min) ? $dodaci ? view($target, $dodaci) : view($target) : Security::rediectToLogin();
     }
     public static function logout($end=null){
         if(Session::has('id')){
