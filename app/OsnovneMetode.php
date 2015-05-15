@@ -98,4 +98,9 @@ class OsnovneMetode {
         }
         return'korisnik';
     }
+    public static function arrayGenertor($n,$i=1,$array=[]){
+        $array[$i]=$i; $i++;
+        if($i>$n) return $array;
+        return OsnovneMetode::arrayGenertor($n,$i,$array);
+    }
 }

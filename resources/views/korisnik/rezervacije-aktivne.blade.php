@@ -36,42 +36,30 @@
 							@foreach($rezervacije as $rez)
 								<tr>
 									{!!Form::open(['url'=>'/rezervacije/izmeni-rezervaciju','class'=>'form-horizontal'])!!}
-									{!!Form::hidden('smestaj_id',$rez['smestaj_id'])!!}
-									<td>
-										<div class="form-group" id="datarange">
-		                                        <div class="input-daterange input-group" id="datepicker">
-		                                            {!! Form::text('datumOd',$rez['od'],['class'=>'input-sm form-control','placeholder'=>'od...']) !!}
-		                                        </div>
-		                                </div>
-									</td>
-									<td>
-										<div class="form-group" id="datarange">
-	                                        <div class="input-daterange input-group" id="datepicker">
-	                                            {!! Form::text('datumDo',$rez['do'],['class'=>'input-sm form-control','placeholder'=>'do...']) !!}
-	                                        </div>
-	                                	</div>
-									</td>
-										
-									<td>{{$rez['naziv']}}</td>
-									<td>{{$rez['naziv_kapaciteta']}}</td>
-									<td>{{$rez['vrsta_smestaja_naziv']}}</td>
-									<td>{!!Form::text('broj_osoba',$rez['broj_osoba'],['class'=>'form-control'])!!}</td>
-									<td style="font-size:12px;">{{$rez['napomena']}}</td>
-									<td>
-									<div class="form-group">
-					    				{!!Form::hidden('rezervacija',$rez['id'])!!}
-										<p data-placement="top" data-toggle="tooltip" title="Sačuvaj izmene"><button  class="btn btn-xs btn-success" type="submit" ><span class="glyphicon glyphicon-floppy-disk"></span></button></p>
-										{!!Form::close()!!}
+										{!!Form::hidden('smestaj_id',$rez['smestaj_id'])!!}
+										<td><div class="form-group" id="datarange"><div class="input-daterange input-group" id="datepicker">
+											{!! Form::text('datumOd',$rez['od'],['class'=>'input-sm form-control','placeholder'=>'od...']) !!}
+										</div> </div></td>
+										<td><div class="form-group" id="datarange"><div class="input-daterange input-group" id="datepicker">
+											{!! Form::text('datumDo',$rez['do'],['class'=>'input-sm form-control','placeholder'=>'do...']) !!}
+										</div></div></td>
+										<td>{{$rez['naziv']}}</td>
+										<td>{{$rez['naziv_kapaciteta']}}</td>
+										<td>{{$rez['vrsta_smestaja_naziv']}}</td>
+										<td>{!!Form::select('broj_osoba',\App\OsnovneMetode::arrayGenertor($rez['br_osoba_kapaciteta']), $rez['broj_osoba'],['class'=>'form-control'])!!}</td>
+										<td style="font-size:12px;">{{$rez['napomena']}}</td>
+										<td><div class="form-group">
+											{!!Form::hidden('rezervacija',$rez['id'])!!}
+											<p data-placement="top" data-toggle="tooltip" title="Sačuvaj izmene"><button  class="btn btn-xs btn-success" type="submit" ><span class="glyphicon glyphicon-floppy-disk"></span></button></p>
+									{!!Form::close()!!}
 									</div>
 									</td>
-									<td>
-									<div class="form-group">
+									<td><div class="form-group">
 										{!!Form::open(['url'=>'/rezervacije/otkazi-rezervaciju','class'=>'form-horizontal'])!!}
 					    					{!!Form::hidden('rezervacija',$rez['id'])!!}
 											<p data-placement="top" data-toggle="tooltip" title="Otkaži rezervaciju"><button  class="btn btn-xs btn-danger" type="submit"><span class="glyphicon glyphicon-remove"></span></button></p>
 										{!!Form::close()!!}
-									</div>
-									</td>
+									</div></td>
 								</tr>
 							@endforeach
 
