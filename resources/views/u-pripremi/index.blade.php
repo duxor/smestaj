@@ -1,4 +1,4 @@
-@extends('moderacija.master')
+@extends(\App\OsnovneMetode::osnovniNav().'.master')
 
 @section('content')
     <h1>Stranica je u pripremi.</h1>

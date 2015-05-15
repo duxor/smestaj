@@ -113,12 +113,15 @@ class Security {
     public static function comeFromUrl(){
         return isset($_SERVER['HTTP_REFERER'])?parse_url($_SERVER['HTTP_REFERER'])['path']:null;
     }
+    public static function forgetFromUrl(){
+        Session::forget('return_to_url');
+    }
 //FUNKCIONALNOSTI
 
 //#TESTERI[autentifikacija, input, login]
-    public static function autentifikacijaTest($prava=2){
+    public static function autentifikacijaTest($prava=2,$min=null){
         if (Session::has('id') and Session::has('token') and Session::has('prava_pristupa')) {
-            return Korisnici::where('id',Session::get('id'))->where('token', Session::get('token'))->where('pravapristupa_id','>=',$prava)->exists();// $korisnik ? true : false;
+            return Korisnici::where('id',Session::get('id'))->where('token', Session::get('token'))->where('pravapristupa_id',($min=='min'?'>':'').'=',$prava)->exists();// $korisnik ? true : false;
         } else return false;
     }
     private function inputTest($in){
@@ -151,7 +154,7 @@ class Security {
     public static function autentifikacija($target,$dodaci=null,$prava=2){
         return Security::autentifikacijaTest($prava) ? $dodaci ? view($target, $dodaci) : view($target) : Security::rediectToLogin();
     }
-    public static function logout(){
+    public static function logout($end=null){
         if(Session::has('id')){
             $korisnik = Korisnici::all(['id','token'])->find(Session::get('id'));
             $korisnik->token = null;
@@ -159,7 +162,7 @@ class Security {
         }
         Session::flush();
         $url_to_redirect=Security::comeFromUrl();
-        if($url_to_redirect) return redirect($url_to_redirect);
+        if($url_to_redirect&&!$end) return redirect($url_to_redirect);
         return redirect('/');
     }
     public function redirect(){

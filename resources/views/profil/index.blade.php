@@ -1,4 +1,4 @@
-@extends('korisnik.master')
+@extends(\App\OsnovneMetode::osnovniNav().".master")
 
 @section('body')
 
@@ -65,7 +65,7 @@
                     </tbody>
                   </table>
                   
-                 <a href="{!!url('/profil/edit-nalog/')!!}" class="btn btn-lg btn-primary"><i class="glyphicon glyphicon-pencil"></i> Uredi profil</a>
+                 <a href="/{{\App\OsnovneMetode::osnovniNav()}}/profil/edit-nalog/" class="btn btn-lg btn-primary"><i class="glyphicon glyphicon-pencil"></i> Uredi profil</a>
                 </div>
               </div>
             </div>            

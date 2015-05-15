@@ -87,9 +87,9 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i> Profil <i class="caret"></i></a>
                         <ul class="dropdown-menu">
-                            <li><a href="/profil"><i class="glyphicon glyphicon-eye-open"></i> Pregled</a></li>
-                            <li><a href="/profil/edit-nalog"><i class="glyphicon glyphicon-pencil"></i> Uredi</a></li>
-                            <li><a href="{!!url('/log/logout')!!}"><i class="glyphicon glyphicon-off"></i> Odjava</a></li>
+                            <li><a href="/{{\App\OsnovneMetode::osnovniNav()}}/profil"><i class="glyphicon glyphicon-eye-open"></i> Pregled</a></li>
+                            <li><a href="/{{\App\OsnovneMetode::osnovniNav()}}/profil/edit-nalog"><i class="glyphicon glyphicon-pencil"></i> Uredi</a></li>
+                            <li><a href="{!!url('/log/logout/end')!!}"><i class="glyphicon glyphicon-off"></i> Odjava</a></li>
                         </ul>
                     </li>
                 @endif

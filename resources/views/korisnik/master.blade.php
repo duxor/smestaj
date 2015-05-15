@@ -61,8 +61,8 @@
                         <ul class="dropdown-menu">
                             <li class="dropdown-header">Smeštaj</li>
                             <li class="divider"></li>
-                            <li><a href="{!!url('/moderator/u-pripremi')!!}"><i class="glyphicon glyphicon-search"></i> Pretraga</a></li>
-                            <li><a href="{!!url('/moderator/u-pripremi')!!}"><i class="glyphicon glyphicon-thumbs-up"></i> Preporuke</a></li>
+                            <li><a href="{!!url('/korisnik/u-pripremi')!!}"><i class="glyphicon glyphicon-search"></i> Pretraga</a></li>
+                            <li><a href="{!!url('/korisnik/u-pripremi')!!}"><i class="glyphicon glyphicon-thumbs-up"></i> Preporuke</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -70,8 +70,8 @@
                         <ul class="dropdown-menu">
                             <li class="dropdown-header">Popusti</li>
                             <li class="divider"></li>
-                            <li><a href="{!!url('/moderator/u-pripremi')!!}"><i class="glyphicon glyphicon-bookmark"></i> Bonus</a></li>
-                            <li><a href="{!!url('/moderator/u-pripremi')!!}"><i class="glyphicon glyphicon-search"></i> Pretraga</a></li>
+                            <li><a href="{!!url('/korisnik/u-pripremi')!!}"><i class="glyphicon glyphicon-bookmark"></i> Bonus</a></li>
+                            <li><a href="{!!url('/korisnik/u-pripremi')!!}"><i class="glyphicon glyphicon-search"></i> Pretraga</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -79,7 +79,7 @@
                         <ul class="dropdown-menu">
                             <li class="dropdown-header">Posete</li>
                             <li class="divider"></li>
-                            <li><a href="{!!url('/moderator/u-pripremi')!!}"><i class="glyphicon glyphicon-eye-open"></i> Pregled</a></li>
+                            <li><a href="{!!url('/korisnik/u-pripremi')!!}"><i class="glyphicon glyphicon-eye-open"></i> Pregled</a></li>
                             <li><a href="{!!url('/aplikacija/lista-zelja')!!}"><i class="glyphicon glyphicon-heart-empty"></i> Lista želja</a></li>
                         </ul>
                     </li>
@@ -89,36 +89,25 @@
                             <li class="dropdown-header">Rezervacije</li>
                             <li class="divider"></li>
                             <li><a href="{!!url('/rezervacije/aktivne')!!}"><i class="glyphicon glyphicon-wrench"></i> Aktivne</a></li>
-                            <li><a href="{!!url('/moderator/u-pripremi')!!}"><i class="glyphicon glyphicon-pencil"></i> Arhiva</a></li>
+                            <li><a href="{!!url('/korisnik/u-pripremi')!!}"><i class="glyphicon glyphicon-pencil"></i> Arhiva</a></li>
                         </ul>
                     </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="poruke" data-toggle="tooltip" data-placement="bottom" title="Poruke"><i class="glyphicon glyphicon-envelope"></i></a>
-                        <ul class="dropdown-menu">
-                            <li class="dropdown-header">Poruke</li>
-                            <li class="divider"></li>
-                            <li><a href="{!!url('/moderator/u-pripremi')!!}"><i class="glyphicon glyphicon-wrench"></i> Nova</a></li>
-                            <li><a href="{!!url('/moderator/u-pripremi')!!}"><i class="glyphicon glyphicon-pencil"></i> Primljene</a></li>
-                            <li><a href="{!!url('/moderator/u-pripremi')!!}"><i class="glyphicon glyphicon-pencil"></i> Poslate</a></li>
-                        </ul>
-                    </li>
-
-                    <li><a href="{!!url('moderator/u-pripremi')!!}" id="galerija" data-toggle="tooltip" data-placement="bottom" title="Galerija"><i class="glyphicon glyphicon-picture"></i></a></li>
+                    <li><a href="{!!url('korisnik/u-pripremi')!!}" id="galerija" data-toggle="tooltip" data-placement="bottom" title="Galerija"><i class="glyphicon glyphicon-picture"></i></a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="analitika" data-toggle="tooltip" data-placement="bottom" title="Analitika"><i class="glyphicon glyphicon-stats"></i></a>
                         <ul class="dropdown-menu">
                             <li class="dropdown-header">Analitika</li>
                             <li class="divider"></li>
-                            <li><a href="{!!url('/moderator/u-pripremi')!!}"><i class="glyphicon glyphicon-euro"></i> Finansije</a></li>
-                            <li><a href="{!!url('/moderator/u-pripremi')!!}"><i class="glyphicon glyphicon-user"></i> Korisnici</a></li>
+                            <li><a href="{!!url('/korisnik/u-pripremi')!!}"><i class="glyphicon glyphicon-euro"></i> Finansije</a></li>
+                            <li><a href="{!!url('/korisnik/u-pripremi')!!}"><i class="glyphicon glyphicon-user"></i> Korisnici</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="profil" data-toggle="tooltip" data-placement="bottom" title="Profil"><i class="glyphicon glyphicon-user"></i></a>
                         <ul class="dropdown-menu">
-                            <li><a href="/profil"><i class="glyphicon glyphicon-eye-open"></i> Pregled</a></li>
-                            <li><a href="/profil/edit-nalog"><i class="glyphicon glyphicon-pencil"></i> Uredi</a></li>
-                            <li><a href="{!!url('/log/logout')!!}"><i class="glyphicon glyphicon-off"></i> Odjava</a></li>
+                            <li><a href="/{{\App\OsnovneMetode::osnovniNav()}}/profil"><i class="glyphicon glyphicon-eye-open"></i> Pregled</a></li>
+                            <li><a href="/{{\App\OsnovneMetode::osnovniNav()}}/profil/edit-nalog"><i class="glyphicon glyphicon-pencil"></i> Uredi</a></li>
+                            <li><a href="{!!url('/log/logout/end')!!}"><i class="glyphicon glyphicon-off"></i> Odjava</a></li>
                         </ul>
                     </li>
                 @endif

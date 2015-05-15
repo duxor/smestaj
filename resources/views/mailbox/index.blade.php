@@ -1,4 +1,4 @@
-@extends("{$podaci['prava']}.master")
+@extends(\App\OsnovneMetode::osnovniNav().".master")
 @section('content')
     <div class="col-sm-3">
         <ul class="nav nav-pills nav-stacked">
@@ -29,7 +29,7 @@
             setActive('inbox');
             $('#show').hide();
             $('#wait').show();
-            $.post('/{{$podaci['prava']}}/mailbox/ucitaj-inbox',{
+            $.post('/{{\App\OsnovneMetode::osnovniNav()}}/mailbox/ucitaj-inbox',{
                 _token:'{{csrf_token()}}'
             },function(data){
                 var podaci=JSON.parse(data);
@@ -52,7 +52,7 @@
             }
             $('#show').hide();
             $('#wait').show();
-            $.post('/{{$podaci['prava']}}/mailbox/ucitaj-'+url,{
+            $.post('/{{\App\OsnovneMetode::osnovniNav()}}/mailbox/ucitaj-'+url,{
                 _token:'{{csrf_token()}}',
                 id:id
             },function(data){
@@ -96,7 +96,7 @@
                     '<textarea name="poruka" class="form-control" placeholder="Poruka" rows="7"></textarea>'+
                 '</div>'+
                 '<div class="form-group">'+
-                    '<button class="btn btn-lg btn-primary" onclick="Komunikacija.posalji(\'/{{$podaci['prava']}}/mailbox/posalji-poruku\',\'zaSlanje\',\'poruka\',\'wait\',\'show\')"><i class="glyphicon glyphicon-envelope"></i> Pošalji</div>'+
+                    '<button class="btn btn-lg btn-primary" onclick="Komunikacija.posalji(\'/{{\App\OsnovneMetode::osnovniNav()}}/mailbox/posalji-poruku\',\'zaSlanje\',\'poruka\',\'wait\',\'show\')"><i class="glyphicon glyphicon-envelope"></i> Pošalji</div>'+
                 '</div>'+
             '</div>');
             $('#wait').hide();
@@ -106,7 +106,7 @@
             setActive('poslate');
             $('#show').hide();
             $('#wait').show();
-            $.post('/{{$podaci['prava']}}/mailbox/poslate',{
+            $.post('/{{\App\OsnovneMetode::osnovniNav()}}/mailbox/poslate',{
                 _token:'{{csrf_token()}}'
             },function(data){
                 var podaci=JSON.parse(data);

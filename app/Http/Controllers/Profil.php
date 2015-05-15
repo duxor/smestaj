@@ -2,6 +2,7 @@
 
 
 use App\Http\Controllers\Controller;
+use App\OsnovneMetode;
 use App\Templejt;
 use App\Korisnici;
 use App\Security;
@@ -14,17 +15,13 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
 class Profil extends Controller {
-
-
 	public function getIndex(){
-		if(Security::autentifikacijaTest())
-		{
-			$ids=Session::get('id');
-			$korisnik=Korisnici::where('id', '=', $ids)->get(['id','ime','prezime','email','username','adresa','grad','telefon','fotografija'])->first()->toArray();
-			$counter = 0;
-			$procenat_popunjenosti=$this->proverapopunjenostiprofila();
-			return view('korisnik.profil.index', compact('korisnik','procenat_popunjenosti'));
-		}return view('korisnik.prijava.index');
+		if(!Security::autentifikacijaTest(2,'min'))return Security::rediectToLogin();
+		$ids=Session::get('id');
+		$korisnik=Korisnici::where('id', '=', $ids)->get(['id','ime','prezime','email','username','adresa','grad','telefon','fotografija'])->first()->toArray();
+		$counter = 0;
+		$procenat_popunjenosti=$this->proverapopunjenostiprofila();
+		return view('profil.index', compact('korisnik','procenat_popunjenosti'));
     }
     private function proverapopunjenostiprofila(){
 			$korisnik=Korisnici::where('id',Session::get('id'))->get(['id','ime','prezime','email','username','adresa','grad','telefon','fotografija'])->first()->toArray();
@@ -38,37 +35,15 @@ class Profil extends Controller {
 			$procenat_popunjenosti=round($counter/8*100,0);
 			return $procenat_popunjenosti;
     }
-/*    public function getLogin(){
-    	if(Security::autentifikacijaTest()) return redirect('/profil/');
-        return view('korisnik.prijava.index');
-	}
-
-    public function postLogin(){
-    		$data=Input::all();
-			$rules = array(
-	        'username'	=> 'Required|Between:5,12',
-	        'password'  =>'Required|AlphaNum|Between:4,8|'
-			);
-
-			$v=Validator::make($data,$rules);
-
-			if($v->fails())
-			{
-				return Redirect::to('/profil/login')->withErrors($v->errors());
-			}
-		return Security::login(Input::get('username'),Input::get('password'));
-	}
-*/
-	public function getEditNalog(){
-		if(Security::autentifikacijaTest())
-		{
-			$procenat_popunjenosti=$this->proverapopunjenostiprofila();
-			$ids=Session::get('id');
-			$korisnik=Korisnici::where('id', '=', $ids)->get(['id','ime','prezime','email','username','adresa','grad','telefon','fotografija'])->first()->toArray();
-			return view('korisnik.profil.edit',compact('korisnik','procenat_popunjenosti'));
-		}return view('korisnik.prijava.index');
+	public function getEditNalog($pravaSlug){
+		if(!Security::autentifikacijaTest(2,'min'))return Security::rediectToLogin();
+		$procenat_popunjenosti=$this->proverapopunjenostiprofila();
+		$ids=Session::get('id');
+		$korisnik=Korisnici::where('id', '=', $ids)->get(['id','ime','prezime','email','username','adresa','grad','telefon','fotografija'])->first()->toArray();
+		return view('profil.edit',compact('korisnik','procenat_popunjenosti','pravaSlug'));
 	}
 	public function postEditNalog(){
+		if(!Security::autentifikacijaTest(2,'min'))return Security::rediectToLogin();
 		//pocetak validacije
 		$data=Input::all();
 		$rules = [
@@ -78,7 +53,7 @@ class Profil extends Controller {
 		$v=Validator::make($data,$rules);
 		if($v->fails())
 		{
-			return Redirect::to('/profil/edit-nalog')->withErrors($v->errors());
+			return Redirect::to(OsnovneMetode::osnovniNav().'/profil/edit-nalog')->withErrors($v->errors());
 		}
 		//kraj validacije
 
@@ -93,10 +68,10 @@ class Profil extends Controller {
 		if(Input::get('telefon'))$korisnik->telefon=Input::get('telefon');
 		$korisnik->save();
 		$procenat_popunjenosti=$this->proverapopunjenostiprofila();
-		return Redirect::to('/profil');
+		return Redirect::to(OsnovneMetode::osnovniNav().'/profil');
 	}
 	public function postRegistracija(){
-			$un=Input::get('username2');
+			/*$un=Input::get('username2');
 			$email=Input::get('email2');
 			$password=Input::get('password2');
 			$password_confirm=Input::get('password_confirmation');
@@ -111,11 +86,11 @@ class Profil extends Controller {
 			if($v->fails())
 			{
 				return Redirect::to('/profil/login')->withErrors($v->errors());
-			}
+			}*/
         	Security::registracija(Input::get('username2'),Input::get('email2'),Input::get('password2'),Input::get('prezime2'), Input::get('ime2'));
 	}
 	public function postUploadProfilna(){
-		if(!Security::autentifikacijaTest(2)){
+		if(!Security::autentifikacijaTest(2,'min')){
 			echo json_encode(['error'=>'Niste prijavljeni na platformu.']);
 			return;
 		}

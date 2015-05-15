@@ -40,14 +40,14 @@
 									<td>
 										<div class="form-group" id="datarange">
 		                                        <div class="input-daterange input-group" id="datepicker">
-		                                            {!! Form::text('datumOd',$rez['od'], null, ['class'=>'input-sm form-control','placeholder'=>'od...']) !!}
+		                                            {!! Form::text('datumOd',$rez['od'],['class'=>'input-sm form-control','placeholder'=>'od...']) !!}
 		                                        </div>
 		                                </div>
 									</td>
 									<td>
 										<div class="form-group" id="datarange">
 	                                        <div class="input-daterange input-group" id="datepicker">
-	                                            {!! Form::text('datumDo',$rez['do'], null, ['class'=>'input-sm form-control','placeholder'=>'do...']) !!}
+	                                            {!! Form::text('datumDo',$rez['do'],['class'=>'input-sm form-control','placeholder'=>'do...']) !!}
 	                                        </div>
 	                                	</div>
 									</td>
@@ -55,12 +55,7 @@
 									<td>{{$rez['naziv']}}</td>
 									<td>{{$rez['naziv_kapaciteta']}}</td>
 									<td>{{$rez['vrsta_smestaja_naziv']}}</td>
-									<td>
-										
-									            {!!Form::text('broj_osoba',$rez['broj_osoba'],null,['class'=>'form-control'])!!}
-									        
-									    
-									</td>
+									<td>{!!Form::text('broj_osoba',$rez['broj_osoba'],['class'=>'form-control'])!!}</td>
 									<td style="font-size:12px;">{{$rez['napomena']}}</td>
 									<td>
 									<div class="form-group">

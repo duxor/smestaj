@@ -90,4 +90,12 @@ class OsnovneMetode {
     public static function brojNeprocitanihPoruka(){
         return Mailbox::where('korisnici_id',Session::get('id'))->where('procitano',0)->count();
     }
+    public static function osnovniNav(){
+        switch(Session::get('prava_pristupa')){
+            case 5:return'administracija';
+            case 4:return'moderacija';
+            case 2:return'korisnik';
+        }
+        return'korisnik';
+    }
 }

@@ -1,4 +1,4 @@
-@extends('korisnik.master')
+@extends(\App\OsnovneMetode::osnovniNav().".master")
 
 @section('content')
 
@@ -21,7 +21,7 @@
                   </div>
                 </div>
               </div>
-             {!! Form::open(['url'=>'/profil/edit-nalog','id'=>'forma','enctype'=>'multipart/form-data','class'=>'form-horizontal']) !!}
+             {!! Form::open(['url'=>\App\OsnovneMetode::osnovniNav().'/profil/edit-nalog','id'=>'forma','enctype'=>'multipart/form-data','class'=>'form-horizontal']) !!}
              {!! Form::hidden('id', $korisnik['id']) !!}
               <div class="row">
                 <div class="col-md-4" align="center"> 
@@ -102,7 +102,7 @@
           <input id="input-700" name="image" type="file" multiple=false class="file-loading">
         </div>
         <div class="modal-footer">
-          <a href="/profil" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-ok"></span> Završeno dodavanje</a>
+          <a href="/{{\App\OsnovneMetode::osnovniNav()}}/profil" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-ok"></span> Završeno dodavanje</a>
         </div>
       </div>
     </div>
@@ -112,7 +112,7 @@
   <script>
     $("#input-700").fileinput({
       uploadExtraData: {username: '{{Session('username')}}', _token:'{{csrf_token()}}'},
-      uploadUrl: '/profil/upload-profilna',
+      uploadUrl: '/{{\App\OsnovneMetode::osnovniNav()}}/profil/upload-profilna',
       uploadAsync: true,
       maxFileCount: 10,
       overwriteInitial: true
