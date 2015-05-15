@@ -111,7 +111,7 @@ class Security {
         return Redirect::to('/login')->withPotvrda('Uspešno ste izvršili registraciju. Možete da se prijavite na platformu.')->with(['return_to_url'=>$return_to_url]);
     }
     public static function comeFromUrl(){
-        return parse_url($_SERVER['HTTP_REFERER'])['path'];
+        return isset($_SERVER['HTTP_REFERER'])?parse_url($_SERVER['HTTP_REFERER'])['path']:null;
     }
 //FUNKCIONALNOSTI
 

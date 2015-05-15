@@ -1,4 +1,4 @@
-@extends('administracija.masterBackEnd')
+@extends('administracija.master')
 
 @section('content')
     <div class="col-sm-2"></div>

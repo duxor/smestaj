@@ -36,34 +36,48 @@
                 if(podaci.length){
                     var inbox='<table class="table table-striped table-hover"><thead><tr><td>Pošiljalac</td><td>Naslov</td><td>Vreme prijema</td></tr></thead><tbody>';
                     for(var i=0;i<podaci.length;i++)
-                        inbox+='<tr onclick="getPoruka(\''+podaci[i].id+'\')" class="citajPoruku '+(podaci[i].procitano==0?'success':'')+'"><td>'+podaci[i].od_email+'</td><td>'+podaci[i].naslov+'</td><td>'+podaci[i].created_at+'</td></tr>';
+                        inbox+='<tr onclick="getPoruka(\''+podaci[i].id+'\',\'inbox\')" class="citajPoruku '+(podaci[i].procitano==0?'success':'')+'"><td>'+(podaci[i].username?podaci[i].username:podaci[i].od_email)+'</td><td>'+podaci[i].naslov+'</td><td>'+podaci[i].created_at+'</td></tr>';
                     $('#show').html(inbox+'</thead></table>');
                 }else $('#show').html('<p>Nemate poruka u prijemnom sandučetu.</p>');
                 $('#wait').hide();
                 $('#show').fadeIn();
             });
         }
-        function getPoruka(id){
-            setActive('inbox');
+        function getPoruka(id,akcija){
+            setActive(akcija);
+            var url,str;
+            switch(akcija){
+                case'inbox':url='poruku';str='Od';break;
+                case'poslate':url='poslatu';str='Za';break;
+            }
             $('#show').hide();
             $('#wait').show();
-            $.post('/{{$podaci['prava']}}/mailbox/ucitaj-poruku',{
+            $.post('/{{$podaci['prava']}}/mailbox/ucitaj-'+url,{
                 _token:'{{csrf_token()}}',
                 id:id
             },function(data){
                 var podaci=JSON.parse(data);
                 if(podaci){
                     var poruka='<div>' +
-                                '<p><b>Od:</b> '+podaci.od_email+'</p>' +
-                                '<p><b>Naslov: '+podaci.naslov+'</b></p>' +
+                                '<p><b>'+str+':</b> '+(podaci.username?'<span id="username">'+podaci.username+'</span> <button onclick="odgovori()" class="btn btn-primary"><i class="glyphicon glyphicon-share-alt"></i></button>':podaci.od_email)+'</p>' +
+                                '<p><b>Naslov: <span id="naslov">'+podaci.naslov+'</span></b></p>' +
                                 '<p><b>Datum:</b> '+podaci.created_at+'</p>' +
-                                '<p><b>Poruka:</b> <br>'+podaci.poruka+'</p>' +
+                                '<p><b>Poruka:</b><hr> <br><span id="poruka">'+podaci.poruka+'</span></p>' +
                             '</div>';
                     $('#show').html(poruka);
                 }else $('#show').html('<p>Došlo je do greške u čitanju poruke.</p>');
                 $('#wait').hide();
                 $('#show').fadeIn();
             });
+        }
+        function odgovori(){
+            var username=$('#username').text(),
+                    naslov=$('#naslov').text(),
+                    poruka=$('#poruka').text();
+            kreirajNovu();
+            $('input[name=za]').val(username);
+            $('input[name=naslov]').val('Odgovor: '+naslov);
+            $(':input[name=poruka]').val('\n--------------\n'+poruka);
         }
         function kreirajNovu(){
             setActive('nova');
@@ -73,13 +87,13 @@
             '<div id="zaSlanje" class="form-horizontal">'+
                 '{!!Form::hidden('_token',csrf_token())!!}'+
                 '<div class="form-group">'+
-                    '<input name="za" class="form-control" placeholder="Email primaoca">'+
+                    '<input name="za" class="form-control" placeholder="Username primaoca">'+
                 '</div>'+
                 '<div class="form-group">'+
                     '<input name="naslov" class="form-control" placeholder="Naslov">'+
                 '</div>'+
                 '<div class="form-group">'+
-                    '<textarea name="poruka" class="form-control" placeholder="Poruka"></textarea>'+
+                    '<textarea name="poruka" class="form-control" placeholder="Poruka" rows="7"></textarea>'+
                 '</div>'+
                 '<div class="form-group">'+
                     '<button class="btn btn-lg btn-primary" onclick="Komunikacija.posalji(\'/{{$podaci['prava']}}/mailbox/posalji-poruku\',\'zaSlanje\',\'poruka\',\'wait\',\'show\')"><i class="glyphicon glyphicon-envelope"></i> Pošalji</div>'+
@@ -99,7 +113,7 @@
                 if(podaci.length){
                     var inbox='<table class="table table-striped table-hover"><thead><tr><td>Primalac</td><td>Naslov</td><td>Vreme prijema</td></tr></thead><tbody>';
                     for(var i=0;i<podaci.length;i++)
-                        inbox += '<tr onclick="getPoruka(\'' + podaci[i].id + '\')" class="citajPoruku"><td>' + podaci[i].username + '</td><td>' + podaci[i].naslov + '</td><td>' + podaci[i].created_at + '</td></tr>';
+                        inbox += '<tr onclick="getPoruka(\'' + podaci[i].id + '\',\'poslate\')" class="citajPoruku"><td>' + podaci[i].username + '</td><td>' + podaci[i].naslov + '</td><td>' + podaci[i].created_at + '</td></tr>';
                     $('#show').html(inbox+'</tbody></table>');
                 }else $('#show').html('<p>Nemate poruka u prijemnom sandučetu.</p>');
                 $('#wait').hide();

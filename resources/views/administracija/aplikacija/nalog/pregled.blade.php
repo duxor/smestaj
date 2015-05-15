@@ -1,4 +1,4 @@
-@extends('administracija.masterBackEnd')
+@extends('administracija.master')
 @section('content')
     <h1>Pregled aplikacija</h1>
     @if(isset($podaci))

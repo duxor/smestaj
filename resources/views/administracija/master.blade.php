@@ -20,6 +20,8 @@
     {!! HTML::style('css/bootstrap.min.css') !!}
     {!! HTML::style('css/templejtBackEnd.css') !!}
     {!! HTML::script('js/jquery-3.0.js') !!}
+    {!!HTML::style('css/fontello.css')!!}
+    {!!HTML::style('css/animation.css')!!}
     {!! HTML::script('js/funkcije.js') !!}
     {!! HTML::script('tinymce/tinymce.min.js') !!}
 
@@ -42,6 +44,16 @@
         <div id="dMenija" class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
                 @if(\App\Security::autentifikacijaTest(5))
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-toggle="tooltip" data-placement="bottom" id="mailbox" title="Poruke"><i class="glyphicon glyphicon-envelope"></i>@if(\App\OsnovneMetode::brojNeprocitanihPoruka()>0)<i class="badge">{{\App\OsnovneMetode::brojNeprocitanihPoruka()}}</i>@endif</a>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-header">Poruke</li>
+                            <li class="divider"></li>
+                            <li><a href="/administracija/mailbox/kreiraj"><i class="glyphicon glyphicon-edit"></i> Kreiraj poruku</a></li>
+                            <li><a href="/administracija/mailbox"><i class="glyphicon glyphicon-log-in"></i> Inbox @if(\App\OsnovneMetode::brojNeprocitanihPoruka()>0)<i class="badge">{{\App\OsnovneMetode::brojNeprocitanihPoruka()}}</i>@endif </a></li>
+                            <li><a href="/administracija/mailbox/poslate"><i class="glyphicon glyphicon-share"></i> Poslate</a></li>
+                        </ul>
+                    </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i> Korisnici <i class="caret"></i></a>
                         <ul class="dropdown-menu">

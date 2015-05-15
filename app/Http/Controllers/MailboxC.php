@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 use App\Http\Requests;
+use App\Korisnici;
 use App\Mailbox;
 use App\Security;
 use Illuminate\Support\Facades\Session;
@@ -16,7 +17,11 @@ class MailboxC extends Controller {
 		return redirect("/{$pravaSlug}/mailbox")->withAkcija('nova');
 	}
 	public function postPosaljiPoruku(){
-		return json_encode(['msg'=>'Poruka je uspešno poslata. <h1>Ova funkcionalnost je u fazi razvoja.</h1>','check'=>1]);
+		$podaci=json_decode(Input::get('podaci'));
+		$primalac=Korisnici::where('username',$podaci->za)->get(['id'])->first();
+		if(!$primalac) return json_encode(['msg'=>'Došlo je do greške. <b>Ne postoji korisnik sa navedenim username-om.</b>','check'=>0]);
+		Mailbox::insert(['korisnici_id'=>$primalac->id,'od_id'=>Session::get('id'),'od_email'=>Korisnici::find(Session::get('id'),['email'])->email,'naslov'=>$podaci->naslov,'poruka'=>$podaci->poruka]);
+		return json_encode(['msg'=>'Poruka je uspešno poslata.','check'=>1]);
 	}
 //INBOX
 	public function anyIndex($pravaSlug){
@@ -27,12 +32,15 @@ class MailboxC extends Controller {
 		return $this->mailbox($pravaSlug,'inbox');
 	}
 	public function postUcitajInbox(){
-		return json_encode(Mailbox::where('korisnici_id',Session::get('id'))->orderby('created_at','DESC')->get(['id','od_email','naslov','procitano','created_at'])->toArray());
+		return json_encode(Mailbox::leftjoin('korisnici','korisnici.id','=','mailbox.od_id')
+			->where('korisnici_id',Session::get('id'))
+			->orderby('mailbox.created_at','DESC')
+			->get(['mailbox.id','od_email','username','naslov','procitano','mailbox.created_at'])->toArray());
 	}
 	public function postUcitajPoruku(){
 		if(!Security::autentifikacijaTest())return Security::rediectToLogin();
 		Mailbox::where('id',Input::get('id'))->update(['procitano'=>1]);
-		return json_encode(Mailbox::where('korisnici_id',Session::get('id'))->where('id',Input::get('id'))->where('korisnici_id',Session::get('id'))->get(['od_email','naslov','poruka','procitano','created_at'])->first());
+		return json_encode(Mailbox::leftjoin('korisnici','korisnici.id','=','mailbox.od_id')->where('korisnici_id',Session::get('id'))->where('mailbox.id',Input::get('id'))->get(['od_email','username','naslov','poruka','procitano','mailbox.created_at'])->first());
 	}
 //POSLATE
 	public function getPoslate($pravaSlug){
@@ -43,6 +51,6 @@ class MailboxC extends Controller {
 	}
 	public function postUcitajPoslatu(){
 		if(!Security::autentifikacijaTest())return Security::rediectToLogin();
-		return json_encode(Mailbox::join('korisnici','korisnici.id','=','mailbox.korisnici_id')->where('od_id',Session::get('id'))->where('id',Input::get('id'))->get(['od_email','naslov','poruka','procitano','created_at'])->first());
+		return json_encode(Mailbox::leftjoin('korisnici','korisnici.id','=','mailbox.korisnici_id')->where('od_id',Session::get('id'))->where('mailbox.id',Input::get('id'))->get(['od_email','username','naslov','poruka','procitano','mailbox.created_at'])->first());
 	}
 }
