@@ -76,16 +76,8 @@ var SubmitForm = {
 	},
     check:function(formaID){
         var test=1;
-        var input = document.forms[formaID].getElementsByTagName('input');
-        var area = document.forms[formaID].getElementsByTagName('textarea');
-        var inputL = input.length,
-            areaL = area.length;
-        for(i=0; i< Math.max(inputL,areaL); i++){
-            if(i < inputL && input[i].getAttribute('id'))
-                test = this.succErr(input[i].getAttribute('type')=='email'?'email':'input',input[i].getAttribute('id'), test);
-            if(i < areaL && area[i].getAttribute('id'))
-                test = this.succErr('area',area[i].getAttribute('id'), test);
-        }
+        var inputi = $('#'+formaID+' :input:visible[id]');
+        for(i=0; i< inputi.length; i++)test = this.succErr(inputi[i], test);
         return test;
     },
 	testEmail: function(email){
@@ -94,19 +86,18 @@ var SubmitForm = {
 		if((i1 < 1 || i2 < 1) || (i1 > i2)) return false;
 		else return true;
 	},
-	succErr: function(tip, ime, t){
-		var polje = tip == 'input' || tip == 'email' ? 'input[name="'+ime+'"]' : tip == 'area' ? '#'+ime : null;
-		if($(polje).val().length > 2 && (tip=='email'?this.testEmail($(polje).val()):true)){
-			$('#d'+ime).removeClass('has-error');
-			$('#d'+ime).addClass('has-success');
-			$('#s'+ime).removeClass('glyphicon-remove');
-			$('#s'+ime).addClass('glyphicon-ok');
+	succErr: function(input, t){
+		if($(input).val().length > 2 && ($(input).attr('type')=='email'?this.testEmail($(input).val()):true)){
+			$('#d'+input.name).removeClass('has-error');
+			$('#d'+input.name).addClass('has-success');
+			$('#s'+input.name).removeClass('glyphicon-remove');
+			$('#s'+input.name).addClass('glyphicon-ok');
 			return t;
 		}else{
-			$('#d'+ime).removeClass('has-success');
-			$('#d'+ime).addClass('has-error');
-			$('#s'+ime).removeClass('glyphicon-ok');
-			$('#s'+ime).addClass('glyphicon-remove');
+			$('#d'+input.name).removeClass('has-success');
+			$('#d'+input.name).addClass('has-error');
+			$('#s'+input.name).removeClass('glyphicon-ok');
+			$('#s'+input.name).addClass('glyphicon-remove');
 			return 0;
 		}
 	}
