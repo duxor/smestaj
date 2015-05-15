@@ -76,7 +76,7 @@
             <div style="margin-left: -1em;position: absolute;width: 100%;height: 100%">
                 <img style="height: 100%;width: 100%" src="/teme/osnovna-paralax/slike/pozadina/<?php echo rand(1,5)?>.jpg">
             </div>
-            <div class="container" style="margin-top:50px">{{--margin-top: -500px;--}}
+            <div class="container" style="margin-top:50px">
                 <div class="col-sm-5" style="z-index: 5">
                     <div style="
                         padding: 10px 30px;
@@ -94,7 +94,6 @@
                             </ul>
                             <div class="tab-content" style="padding:0 10px">
                                 <div role="tabpanel" class="tab-pane fade in active" id="tab-rezervacije">
-
                                     {!!Form::open(['url'=>'/pretraga','class'=>'form-horizontal'])!!}
                                     {!!Form::hidden('tacan_broj',1)!!}
                                     <div class="form-group">
@@ -104,7 +103,7 @@
                                     <div class="form-group" id="datarange">
                                         {!!Form::label('lperiod','Izaberite period',['class'=>'control-label'])!!}
                                         <div class="input-daterange input-group col-sm-12" id="datepicker">
-                                            {!! Form::text('datumOd', null, ['class'=>'input-sm form-control','placeholder'=>'od...']) !!}
+                                            {!! Form::text('datumOd',null,['class'=>'input-sm form-control','placeholder'=>'od...']) !!}
                                             <span class="input-group-addon">do</span>
                                             {!! Form::text('datumDo', null, ['class'=>'input-sm form-control','placeholder'=>'do...']) !!}
                                         </div>
@@ -129,7 +128,7 @@
                                     {!!Form::close()!!}
                                 </div>
                                 <div role="tabpanel" class="tab-pane fade" id="tab-objekti">
-                                    Pretraga po nazivu smeštajnog kapaciteta (po brendu).
+                                    Pretraga po nazivu objekta (brenda).
                                     {!!Form::open(['url'=>'/pretraga/smestaji','class'=>'form-horizontal'])!!}
                                     <div class="form-group">
                                         {!!Form::label('lnaziv','Naziv',['class'=>'col-sm-3'])!!}

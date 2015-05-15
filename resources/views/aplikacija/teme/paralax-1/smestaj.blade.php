@@ -6,7 +6,7 @@
             <div class="panel-body">
                 <div class="media col-md-5">
                 <figure class="pull-left">
-                    <img class="media-object img-rounded img-responsive"  src="{!!$podaci['smestaj']['naslovna_foto']!!}" alt="placehold.it/350x250" >
+                    <img class="media-object img-rounded img-responsive"  src="{!!$podaci['smestaj']['naslovna_foto']!!}" alt="Naslovna fotografija" >
                 </figure>   
                 </div>
                 <div class="col-md-6">
