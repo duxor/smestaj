@@ -11,13 +11,18 @@ class MailboxC extends Controller {
 		$podaci['akcija']=$akcija;
 		return Security::autentifikacija('mailbox.index',compact('podaci'));
 	}
-	public function getIndex($pravaSlug){
-		return redirect($pravaSlug.'/mailbox/inbox');
-	}
+//POSALJI
 	public function getKreiraj($pravaSlug){
-		return $this->mailbox($pravaSlug,'nova');
+		return redirect("/{$pravaSlug}/mailbox")->withAkcija('nova');
+	}
+	public function postPosaljiPoruku(){
+		return json_encode(['msg'=>'Poruka je uspešno poslata. <h1>Ova funkcionalnost je u fazi razvoja.</h1>','check'=>1]);
 	}
 //INBOX
+	public function anyIndex($pravaSlug){
+		$akcija=Session::has('akcija')?Session::get('akcija'):'inbox';
+		return $this->mailbox($pravaSlug,$akcija);
+	}
 	public function getInbox($pravaSlug){
 		return $this->mailbox($pravaSlug,'inbox');
 	}
@@ -29,11 +34,15 @@ class MailboxC extends Controller {
 		Mailbox::where('id',Input::get('id'))->update(['procitano'=>1]);
 		return json_encode(Mailbox::where('korisnici_id',Session::get('id'))->where('id',Input::get('id'))->where('korisnici_id',Session::get('id'))->get(['od_email','naslov','poruka','procitano','created_at'])->first());
 	}
-	public function postPosaljiPoruku(){
-		return json_encode(['msg'=>'Poruka je uspešno poslata.','check'=>1]);
-	}
-
+//POSLATE
 	public function getPoslate($pravaSlug){
-		return $this->mailbox($pravaSlug,'poslate');
+		return redirect("/{$pravaSlug}/mailbox")->withAkcija('poslate');
+	}
+	public function postPoslate(){
+		return json_encode(Mailbox::join('korisnici','korisnici.id','=','mailbox.korisnici_id')->where('od_id',Session::get('id'))->orderby('created_at','DESC')->get(['mailbox.id','korisnici.username','naslov','mailbox.created_at'])->toArray());
+	}
+	public function postUcitajPoslatu(){
+		if(!Security::autentifikacijaTest())return Security::rediectToLogin();
+		return json_encode(Mailbox::join('korisnici','korisnici.id','=','mailbox.korisnici_id')->where('od_id',Session::get('id'))->where('id',Input::get('id'))->get(['od_email','naslov','poruka','procitano','created_at'])->first());
 	}
 }

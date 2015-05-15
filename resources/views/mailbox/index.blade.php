@@ -2,9 +2,9 @@
 @section('content')
     <div class="col-sm-3">
         <ul class="nav nav-pills nav-stacked">
-            <li role="presentation" @if($podaci['akcija']=='nova') class="active" @endif><a href="#"onclick="kreirajNovu()">Kreiraj poruku</a></li>
-            <li role="presentation" @if($podaci['akcija']=='inbox') class="active" @endif><a href="#"onclick="getInbox()">Inbox</a></li>
-            <li role="presentation" @if($podaci['akcija']=='poslate') class="active" @endif><a href="#">Poslate</a></li>
+            <li id="nova" role="presentation"><a href="#"onclick="kreirajNovu()">Kreiraj poruku</a></li>
+            <li id="inbox" role="presentation"><a href="#"onclick="getInbox()">Inbox</a></li>
+            <li id="poslate" role="presentation"><a href="#"onclick="getPoslate()">Poslate</a></li>
         </ul>
     </div>
     <div id="work-area" class="col-sm-9">
@@ -16,12 +16,17 @@
     <script>
         $(document).ready(function(){
             switch('{{$podaci['akcija']}}'){
-                case'nova':break;
+                case'nova':kreirajNovu();break;
                 case'inbox':getInbox();break;
-                case'poslate':break;
+                case'poslate':getPoslate();setActive('poslate');break;
             }
         });
+        function setActive(ID){
+            $('.active').removeClass('active');
+            $('#'+ID).addClass('active');
+        }
         function getInbox(){
+            setActive('inbox');
             $('#show').hide();
             $('#wait').show();
             $.post('/{{$podaci['prava']}}/mailbox/ucitaj-inbox',{
@@ -29,16 +34,17 @@
             },function(data){
                 var podaci=JSON.parse(data);
                 if(podaci.length){
-                    var inbox='<table class="table table-hover">';
+                    var inbox='<table class="table table-striped table-hover"><thead><tr><td>Pošiljalac</td><td>Naslov</td><td>Vreme prijema</td></tr></thead><tbody>';
                     for(var i=0;i<podaci.length;i++)
                         inbox+='<tr onclick="getPoruka(\''+podaci[i].id+'\')" class="citajPoruku '+(podaci[i].procitano==0?'success':'')+'"><td>'+podaci[i].od_email+'</td><td>'+podaci[i].naslov+'</td><td>'+podaci[i].created_at+'</td></tr>';
-                    $('#show').html(inbox+'</table>');
+                    $('#show').html(inbox+'</thead></table>');
                 }else $('#show').html('<p>Nemate poruka u prijemnom sandučetu.</p>');
                 $('#wait').hide();
                 $('#show').fadeIn();
             });
         }
         function getPoruka(id){
+            setActive('inbox');
             $('#show').hide();
             $('#wait').show();
             $.post('/{{$podaci['prava']}}/mailbox/ucitaj-poruku',{
@@ -49,7 +55,7 @@
                 if(podaci){
                     var poruka='<div>' +
                                 '<p><b>Od:</b> '+podaci.od_email+'</p>' +
-                                '<p><b>Naslov:</b> <h2>'+podaci.naslov+'</h2></p>' +
+                                '<p><b>Naslov: '+podaci.naslov+'</b></p>' +
                                 '<p><b>Datum:</b> '+podaci.created_at+'</p>' +
                                 '<p><b>Poruka:</b> <br>'+podaci.poruka+'</p>' +
                             '</div>';
@@ -60,6 +66,7 @@
             });
         }
         function kreirajNovu(){
+            setActive('nova');
             $('#show').hide();
             $('#wait').show();
             $('#show').html(
@@ -80,6 +87,24 @@
             '</div>');
             $('#wait').hide();
             $('#show').fadeIn();
+        }
+        function getPoslate(){
+            setActive('poslate');
+            $('#show').hide();
+            $('#wait').show();
+            $.post('/{{$podaci['prava']}}/mailbox/poslate',{
+                _token:'{{csrf_token()}}'
+            },function(data){
+                var podaci=JSON.parse(data);
+                if(podaci.length){
+                    var inbox='<table class="table table-striped table-hover"><thead><tr><td>Primalac</td><td>Naslov</td><td>Vreme prijema</td></tr></thead><tbody>';
+                    for(var i=0;i<podaci.length;i++)
+                        inbox += '<tr onclick="getPoruka(\'' + podaci[i].id + '\')" class="citajPoruku"><td>' + podaci[i].username + '</td><td>' + podaci[i].naslov + '</td><td>' + podaci[i].created_at + '</td></tr>';
+                    $('#show').html(inbox+'</tbody></table>');
+                }else $('#show').html('<p>Nemate poruka u prijemnom sandučetu.</p>');
+                $('#wait').hide();
+                $('#show').fadeIn();
+            });
         }
     </script>
     <style>.citajPoruku{cursor: pointer}</style>
