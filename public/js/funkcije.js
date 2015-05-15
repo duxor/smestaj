@@ -124,7 +124,7 @@ var SubmitForm = {
  ###            {!!Form::hidden('_token',csrf_token())!!}
  ###            {!!Form::text('prezime',null,['class'=>'form-control'])!!}
  ###            {!!Form::text('ime',null,['class'=>'form-control'])!!}
- ###            {!!Form::button('<span class="glyphicon glyphicon-save"></span> Sačuvaj',['class'=>'btn btn-lg btn-primary','onclick'=>'Komunikacija.posalji("/url","hide","poruka","wait","hide")'])!!}
+ ###            {!!Form::button('<span class="glyphicon glyphicon-save"></span> Sačuvaj',['class'=>'btn btn-lg btn-primary','onclick'=>'Komunikacija.posalji("/url","podaciID","poruka","wait","hide")'])!!}
  ###        </div>
  ###
  ### LARAVEL metoda:
@@ -158,7 +158,7 @@ var Komunikacija = {
                 window.setTimeout(function(){
                     $('#'+poruka).fadeToggle('slow');
                     $('#'+hide).fadeToggle('slow')
-                },4000);
+                },5000);
             }
         );
     },

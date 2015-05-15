@@ -2,7 +2,7 @@
 @section('body')
 <div class="container">
     <div class="row">
-        <div class="col-md-8  toppad" >
+        <div class="col-md-8 toppad">
             <div class="panel-body">
                 <div class="media col-md-5">
                 <figure class="pull-left">
@@ -66,7 +66,7 @@
                   events: {
                     "2015-05-30": {"number": 5, "url": "http://w3widgets.com/responsive-slider"},
                     "2015-05-26": {"number": 1, "url": "http://w3widgets.com"}, 
-                    "2015-05-03":{"number": 1}, 
+                    "2015-05-03":{"number": 1},
                     "2015-05-12": {}}
                 });
               });
@@ -140,34 +140,37 @@
     <div class="col-md-12">
      <!--Komentari - START -->
         <div class="container">
-
             <div class="row">
                 <div class="panel panel-default widget">
-                    <div class="panel-heading">
-                        <span class="glyphicon glyphicon-comment"></span>
-                        <h3 class="panel-title" style=" display:inline">
-                             Ocena smeštaja:  </h3>
-                        <span class="label label-info" >
-                            {!! round($prosecna_ocena,1)!!} </span>
-                              {!!Form::open(['url'=>'/aplikacija/posalji-komentar','class'=>'form-horizontal'])!!}
-                                 {!!Form::hidden('id_smestaja',$podaci['smestaj']['id'])!!}
-                           <span><div class="row"> <a class="btn btn-success btn-green pull-right" href="#reviews-anchor" id="open-review-box"><span class="glyphicon glyphicon-bullhorn"> </span>  Ostavite komentar</a></div></span>
-                            <div class="row" id="post-review-box" style="display:none; margin-top:15px;">
-                            <div class="col-md-12">
-                                <form accept-charset="UTF-8" action="" method="post">
-                                    <input id="ratings-hidden" name="rating" type="hidden"> 
-                                    <textarea class="form-control animated" cols="50" id="new-review" name="komentar" placeholder="Unesite komentar..." rows="5"></textarea>
-                    
+                    <div class="panel-heading" style="padding: 10px">
+                        <div class="col-sm-6">
+                            <span class="glyphicon glyphicon-comment"></span>
+                            <h3 class="panel-title" style=" display:inline">Ocena smeštaja: </h3><span class="label label-info" >{!!round($prosecna_ocena,1)!!}</span>
+                        </div>
+                        <div class="panel-body"><a class="btn btn-success btn-green pull-right" @if(\App\Security::autentifikacijaTest()) id="komentarisi" @else id="prijaviSe" @endif><span class="glyphicon glyphicon-bullhorn"> </span>  Ostavite komentar</a>
+                            @if(!\App\Security::autentifikacijaTest())
+                                <script>$('#prijaviSe').click(function(){document.location='/log/login';});</script>
+                            @else
+                                <div id="poruka" style="display: none;margin-top: 25px"></div>
+                                <i class='icon-spin6 animate-spin' style="color: rgba(0,0,0,0)"></i>
+                                <div id="wait" style="display:none"><center><i class='icon-spin6 animate-spin' style="font-size: 350%"></i></center></div>
+                                <div id="hide" style="display:none">
+                                    {!!Form::hidden('_token',csrf_token())!!}
+                                    {!!Form::hidden('id_smestaja',$podaci['smestaj']['id'])!!}
+                                    <input id="ratings-hidden" name="rating" value="3" type="hidden">
+                                    <textarea class="form-control" id="new-review" name="komentar" placeholder="Unesite komentar..."></textarea>
                                     <div class="text-right">
                                         <div class="stars starrr" style="color:green;" data-rating="3"></div>
-                                        <a class="btn btn-danger btn-sm" href="#" id="close-review-box" style="display:none; margin-right: 10px;">
-                                        <span class="glyphicon glyphicon-remove"></span>Otkaži</a>
-                                        <button class="btn btn-success btn-lg" type="submit">Pošalji komentar</button>
+                                        <button id="otkazi" class="btn btn-danger btn-sm" style="margin-right: 10px;"><span class="glyphicon glyphicon-remove"></span>Otkaži</button>
+                                        {!!Form::button('<i class="glyphicon glyphicon-check"></i> Pošalji komentar',['class'=>'btn btn-success btn-lg','onclick'=>'Komunikacija.posalji("/aplikacija/posalji-komentar","hide","poruka","wait","hide")'])!!}
                                     </div>
-                                </form>
-                            </div>
-                        </div> 
-                         {!!Form::close()!!}
+                                </div>
+                                <script>
+                                    $('#komentarisi').click(function(){$(this).fadeOut();$('#hide').slideDown();});
+                                    $('#otkazi').click(function(){$('#hide').slideUp();$('#komentarisi').fadeIn();$('textarea[name=komentar]').val('')});
+                                </script>
+                            @endif
+                        </div>
                     </div>
                     <div class="panel-body" style=" padding:0px;">
                 @if($komentari)

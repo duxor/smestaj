@@ -23,7 +23,7 @@ Route::controller('/rezervacija','Moderacija\Rezervacija');
 
 
 Route::get('/{slug?}','Aplikacija@getIndex');
-Route::any('/{slugApp}/pretraga','Pretraga@postAplikacija');
+Route::any('/{slugApp}/pretraga','Pretraga@anyIndex');
 Route::get('/{slugApp}/{slugSmestaj}','Aplikacija@getSmestaj');
 
 //Route::controller('/','Glavni');

@@ -68,7 +68,7 @@ class Security {
         $this->setToken(hash('haval256,5', $this->salt.uniqid().openssl_random_pseudo_bytes(50), false));
         return $this->token;
     }
-    public static function registracija($username,$email,$password,$password_potvrda,$prezime=null,$ime=null){
+    public static function registracija($username,$email,$password,$password_potvrda,$prezime=null,$ime=null,$return_to_url=null){
         $validator=Validator::make([
             'username'=>$username,
             'email'=>$email,
@@ -96,7 +96,8 @@ class Security {
             'password_confirmation.required'=>'Obavezan unos password-a.',
             'password_confirmation.min'=>'Minimalna duzina password-a je :min.'
         ]);
-        if($validator->fails()) return redirect()->back()->withGreska($validator->errors()->toArray())->withInput();
+        if($validator->fails())if($return_to_url)  return redirect()->back()->withGreska($validator->errors()->toArray())->with(['return_to_url'=>$return_to_url]);
+                                else return redirect()->back()->withGreska($validator->errors()->toArray())->withInput();
 
         $korisnik=new Korisnici();
             $korisnik->username=$username;
@@ -107,7 +108,10 @@ class Security {
             $korisnik->pravapristupa_id=2;
             $korisnik->aktivan=1;
         $korisnik->save();
-        return Redirect::to('/login')->withPotvrda('Uspešno ste izvršili registraciju. Možete da se prijavite na platformu.');
+        return Redirect::to('/login')->withPotvrda('Uspešno ste izvršili registraciju. Možete da se prijavite na platformu.')->with(['return_to_url'=>$return_to_url]);
+    }
+    public static function comeFromUrl(){
+        return parse_url($_SERVER['HTTP_REFERER'])['path'];
     }
 //FUNKCIONALNOSTI
 
@@ -120,7 +124,7 @@ class Security {
     private function inputTest($in){
         return strlen($in)>$this->minLenPass;
     }
-    public static function login($username, $password){
+    public static function login($username, $password, $return_to_url=null){
         $sec = new Security();
 
         if($sec->inputTest($username) and $sec->inputTest($password)){
@@ -140,6 +144,7 @@ class Security {
                 Log::insert(['korisnici_id'=>$korisnik->id]);
             }else Korisnici::where('id', $sec->id)->update(['token' => null]);
         }
+        if($return_to_url) return redirect($return_to_url);
         return Security::rediectToLogin();
     }
 //#REDIRECTORI[autentifikacija, logout, redirect, redirectToLogin]
@@ -153,6 +158,8 @@ class Security {
             $korisnik->save();
         }
         Session::flush();
+        $url_to_redirect=Security::comeFromUrl();
+        if($url_to_redirect) return redirect($url_to_redirect);
         return redirect('/');
     }
     public function redirect(){

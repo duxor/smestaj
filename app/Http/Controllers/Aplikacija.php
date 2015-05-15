@@ -72,17 +72,18 @@ class Aplikacija extends Controller {
 		}else return ListaZelja::where('korisnici_id',Session::get('id'))->where('id',Input::get('zelja'))->update(['aktivan'=>0]);
 	}
 	public function postPosaljiKomentar(){
-		$id_smestaja=Input::get('id_smestaja');
-		$id_korisnika=Session::get('id');
-		$komentar=Input::get('komentar');
-		$ocena=Input::get('rating');
+		$podaci=json_decode(Input::get('podaci'));
+		$test=1;
+		if(!isset($podaci->komentar)||!isset($podaci->id_smestaja)||!isset($podaci->rating))$test=0;
+			if(strlen($podaci->komentar)<3||$podaci->id_smestaja<1||$podaci->rating<1)$test=0;
+		if($test==0)return json_encode(['msg'=>'Desila se greška. Proverite podatke i pokušajte ponovo.','check'=>0]);
 		$kom=new Komentari();
-		$kom->komentar=$komentar;
-		$kom->korisnici_id=$id_korisnika;
-		$kom->smestaj_id=$id_smestaja;
-		$kom->ocena=$ocena;
+		$kom->komentar=$podaci->komentar;
+		$kom->korisnici_id=Session::get('id');
+		$kom->smestaj_id=$podaci->id_smestaja;
+		$kom->ocena=$podaci->rating;
 		$kom->save();
-		return Redirect::back()->with('message','Uspešno ste ostavili komentar');
+		return json_encode(['msg'=>'Vaš komentar je uspešo poslat. Nakon odobrenja administratora biće vidljiv na stranici.','check'=>1]);
 	}
 	public function getListaZelja(){
 		$lista_zelja=ListaZelja::where('korisnici_id','=',Session::get('id'))

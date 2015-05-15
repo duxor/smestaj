@@ -15,7 +15,7 @@ class Pretraga extends Controller {
 	public function defaultPodaci($appID){
 		return Templejt::join('sadrzaji','sadrzaji.templejt_id','=','templejt.id')->where('nalog_id',$appID)->where('tema_id',Nalog::find($appID,['tema_id'])->tema_id)->orderBy('redoslijed')->get(['slug','naziv','vrsta_sadrzaja_id','icon'])->toArray();
 	}
-	public function anyIndex(){
+	public function anyIndeddx($slugApp=null){
 		$tacan_broj=Input::get('tacan_broj')?'':'>';
 		$podaci=$this->defaultPodaci(1);
 		$podaci['broj_osoba']=Input::get('broj_osoba')?Input::get('broj_osoba'):1;
@@ -91,32 +91,33 @@ class Pretraga extends Controller {
 	}
 
 	//################# APP
-	public function postAplikacija($slugApp){
-		if(Input::get('aplikacija')=='') return Redirect::to('/'.$slugApp);//nalog.id
+	public function anyIndex($slugApp=null){
+		if($slugApp&&Input::get('aplikacija')=='') return Redirect::to('/'.$slugApp);//nalog.id
 		$tacan_broj=Input::get('tacan_broj')?'':'>';
-		$podaci=$this->defaultPodaci(Input::get('aplikacija'));//templejt sa menijem bez podataka
+		$podaci=$this->defaultPodaci($slugApp?Input::get('aplikacija'):1);//templejt sa menijem bez podataka
 		$podaci['broj_osoba']=Input::get('broj_osoba')?Input::get('broj_osoba'):1;
 		$podaci['rezultat']=Objekat::
-		join('nalog','nalog.id','=','objekat.nalog_id')
-			->join('smestaj','smestaj.objekat_id','=','objekat.id')
-			->join('kapacitet','kapacitet.id','=','smestaj.kapacitet_id')
-			->join('vrsta_smestaja','vrsta_smestaja.id','=','smestaj.vrsta_smestaja_id')
+		join('smestaj','smestaj.objekat_id','=','objekat.id')
+			->leftjoin('nalog','nalog.id','=','objekat.nalog_id')
+			->leftjoin('kapacitet','kapacitet.id','=','smestaj.kapacitet_id')
+			->leftjoin('vrsta_smestaja','vrsta_smestaja.id','=','smestaj.vrsta_smestaja_id')
 			->leftjoin('lista_zelja',function($query){
 				$query->on('lista_zelja.smestaj_id','=','smestaj.id')->where('lista_zelja.aktivan','=',1)->where('lista_zelja.korisnici_id','=',Session::get('id'));
 			})
-			->where('objekat.nalog_id',Input::get('aplikacija'))
+			->groupby('id')
 			->where('grad_id',Input::get('grad_id'))->where('broj_osoba',$tacan_broj.'=',$podaci['broj_osoba'])
 			->where('objekat.aktivan',1)->where('smestaj.aktivan',1)
-			->get(['nalog.naziv as nazivApp','nalog.slug as slugApp','vrsta_smestaja.naziv as vrsta_smestaja','smestaj.id',
-				'smestaj.slug as slugSmestaj','smestaj.naziv','adresa','broj_osoba','lista_zelja.id as zelja','naslovna_foto','cena_osoba'])->toArray();
-		$podaci['gradovi']=Grad::join('objekat','objekat.grad_id','=','grad.id')->where('objekat.nalog_id',Input::get('aplikacija'))->orderBy('grad.id')->get(['grad.id','grad.naziv'])->lists('naziv','id');
+			->orderBy('smestaj.naziv')
+			->select('nalog.naziv as nazivApp','nalog.slug as slugApp','vrsta_smestaja.naziv as vrsta_smestaja','smestaj.id',
+				'smestaj.slug as slugSmestaj','smestaj.naziv','adresa','broj_osoba','lista_zelja.id as zelja','naslovna_foto','cena_osoba')->get()->toArray();
+		$podaci['gradovi']=$slugApp?Grad::join('objekat','objekat.grad_id','=','grad.id')->where('objekat.nalog_id',Input::get('aplikacija'))->orderBy('grad.id')->get(['grad.id','grad.naziv'])->lists('naziv','id'):Grad::lists('naziv','id');
 		$podaci['grad_id']=Input::get('grad_id');
 		$podaci['tacan_broj']=Input::get('tacan_broj');
 		$podaci['grad_koo']=Grad::find(Input::get('grad_id'),['x','y','z']);
-		$podaci['app']['id']=Input::get('aplikacija');//nalog_id
+		$podaci['app']['id']=$slugApp?Input::get('aplikacija'):null;//nalog_id
 		$podaci['app']['slug']=$slugApp;
-		$tema=Tema::find(Nalog::find(Input::get('aplikacija'),['tema_id'])->tema_id, ['slug'])->slug;
-		return view('aplikacija.teme.'.$tema.'.pretraga',compact('podaci'));
+		$tema=$slugApp?'.'.Tema::find(Nalog::find(Input::get('aplikacija'),['tema_id'])->tema_id, ['slug'])->slug:'-osnove.osnovna';
+		return view('aplikacija.teme'.$tema.'.pretraga',compact('podaci'));
 	}
 	//################# EndApp
 }

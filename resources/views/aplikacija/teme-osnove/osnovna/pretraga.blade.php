@@ -149,7 +149,7 @@
                     <tr><td>Vrsta objekta:</td><td>{{$smestaj['vrsta_smestaja']}}</td></tr>
                     <tr><td>Broj mesta:</td><td>{{$smestaj['broj_osoba']}}</td></tr>
                     <tr><td>Adresa:</td><td>{{$smestaj['adresa']}}</td></tr>
-                    <tr><td>Cena (po osobi):</td><td>{{$smestaj['cena_osoba']}}</td></tr>
+                    <tr><td>Cena (po osobi):</td><td>{{$smestaj['cena_osoba']}} din</td></tr>
                 </table>
             </div><br clear="all">
         @endforeach
@@ -227,6 +227,7 @@
                 $('#id_smestaja').val($(this).data('id'));
                 $('#foto').attr('src',$(this).data('img'));
                 $('#cena').html($(this).data('cena')+' din');
+                $('input[name=ukupna_cena]').val($(this).data('cena'));
                 $('input[name=cena]').val($(this).data('cena'));
                 var option = '';
                 for (i=1;i<=$(this).data('maxosoba');i++){

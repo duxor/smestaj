@@ -155,7 +155,7 @@
                 </a>
                 <p>
                     <a href="/{{$smestaj['slugApp']}}/{{$smestaj['slugSmestaj']}}" class="btn btn-lg btn-default"><i class="glyphicon glyphicon-zoom-in"></i> Pregled</a>
-                    <a  href="#" class="btn btn-lg btn-info"><i class="glyphicon glyphicon-check"></i> Rezervacija</a>
+                    <button class="btn btn-lg btn-info m" data-toggle="modal" data-target="#rezervacija" data-cena="{{$smestaj['cena_osoba']}}" data-id="{{$smestaj['id']}}" data-app="{{$smestaj['nazivApp']}}" data-naziv="{{$smestaj['naziv']}}" data-vrobjekta="{{$smestaj['vrsta_smestaja']}}" data-maxosoba="{{$smestaj['broj_osoba']}}" data-adresa="{{$smestaj['adresa']}}" data-img="/teme/osnovna-paralax/slike/15.jpg"><span class="glyphicon glyphicon-check"></span> Rezervacija</button>
                     @if(\App\Security::autentifikacijaTest())
                         <button id="zelja" class="btn btn-lg btn-default _tooltip" @if($smestaj['zelja']) data-zelja="{{$smestaj['zelja']}}" style="color:red" title="Izbaci iz liste zelja" @else data-zelja="false" title="Dodaj u listu želja" @endif data-id="{{$smestaj['id']}}" data-toggle="tooltip" data-placement="bottom"><i class="glyphicon glyphicon-heart"></i></button>
                     @else
@@ -170,13 +170,96 @@
                     <tr><td>Vrsta objekta:</td><td>{{$smestaj['vrsta_smestaja']}}</td></tr>
                     <tr><td>Broj mesta:</td><td>{{$smestaj['broj_osoba']}}</td></tr>
                     <tr><td>Adresa:</td><td>{{$smestaj['adresa']}}</td></tr>
+                    <tr><td>Cena (po osobi):</td><td>{{$smestaj['cena_osoba']}} din</td></tr>
                 </table>
             </div><br clear="all">
         @endforeach
-        {!!Form::open()!!}{!!Form::close()!!}
+        <div class="modal fade" id="rezervacija" tabindex="-1" role="dialog" >
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h2 style="text-align:center"><i class="glyphicon glyphicon-edit" style="font-size: 150%"></i> Rezerviši najbolji</h2>
+                    </div>
+                    <div class="modal-body">
+                        <div id="container-fluid">
+                            <div id="vrti" style="display:none"><center><i class='icon-spin6 animate-spin' style="font-size: 350%"></i></center></div>
+                            <div id="forma" class="form-horizontal">
+                                {!!Form::hidden('id_smestaja',null,['id'=>'id_smestaja'])!!}
+                                {!!Form::hidden('id_korisnika',Session::get('id'))!!}
+                                {!!Form::hidden('_token',csrf_token())!!}
+                                {!!Form::hidden('cena')!!}
+                                {!!Form::hidden('ukupna_cena')!!}
+                                <div class="form-group">
+                                    <div class="col-sm-4"><img id="foto" style="width:100%"></div>
+                                    <div class="col-sm-8">
+                                        <p id="app" style="text-align:center;text-decoration:underline;margin:0"></p>
+                                        <p id="objekat" style="text-align:center;margin:0"></p>
+                                        <p id="vrobjekta" style="text-align:center;margin:0"></p>
+                                        <p id="adresa" style="text-align:center;margin:0"></p>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="form-group" id="datarange" style="padding-left: 22px">
+                                    <div class="input-daterange input-group col-sm-7 col-sm-offset-4" id="datepicker">
+                                        {!! Form::text('datumOd', date("Y-m-d"), ['class'=>'input-sm form-control','placeholder'=>'od...','id'=>'datumod','style'=>'padding:20px']) !!}
+                                        <span class="input-group-addon">do</span>
+                                        {!! Form::text('datumDo', null, ['class'=>'input-sm form-control','placeholder'=>'do...','id'=>'datumdo','style'=>'padding:20px']) !!}
+                                    </div>
+                                </div>
+                                <script>$('#datarange .input-daterange').datepicker({orientation:"top auto",weekStart:1,startDate:"current",todayBtn:"linked",toggleActive:true,format:"yyyy-mm-dd"});</script>
+                                <div id="broj osoba" class="form-group has-feedback">
+                                    {!!Form::label('brojosoba','Broj osoba',['class'=>'control-label col-sm-4'])!!}
+                                    <div class="col-sm-4">
+                                        {!!Form::select('broj_osoba',[],null,['class'=>'form-control','id'=>'broj_osoba'])!!}
+                                    </div>
+                                </div>
+                                <div class="form-group has-feedback">
+                                    {!! Form::label('napomena','Napomena',['class'=>'control-label col-sm-4']) !!}
+                                    <div class="col-sm-8">
+                                        {!! Form::textarea('napomena',null,['class'=>'form-control','placeholder'=>'Upišite napomenu','id'=>'napomena']) !!}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    {!! Form::label('lcena','Cena',['class'=>'control-label col-sm-4']) !!}
+                                    <div class="col-sm-8">
+                                        {!! Form::label('lcena','Cena',['class'=>'control-label','id'=>'cena']) !!}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="poruka" style="display:none"></div>
+                    </div>
+                    <div class="modal-footer">
+                        {!! Form::button('<span class="glyphicon glyphicon-remove"></span> Otkaži',['class'=>'btn btn-lg btn-warning','data-dismiss'=>'modal']) !!}
+                        {!! Form::button('<span class="glyphicon glyphicon-ok"></span> Rezerviši',['class'=>'btn btn-lg btn-success','onclick'=>'Komunikacija.posalji("/rezervisi",\'forma\',\'poruka\',\'vrti\',\'forma\')' ]) !!}
+                    </div>
+                </div>
+            </div>
+        </div><i class='icon-spin6 animate-spin' style="color: rgba(0,0,0,0)"></i>
         <style>._tooltip:hover{color: red}</style>
         <script>
             $(document).ready(function(){$('button').tooltip();$('a').tooltip()});
+            $('button.m').click(function(){
+                $('#app').html($(this).data('app'));
+                $('#objekat').html($(this).data('naziv'));
+                $('#vrobjekta').html($(this).data('vrobjekta'));
+                $('#adresa').html($(this).data('adresa'));
+                $('#id_smestaja').val($(this).data('id'));
+                $('#foto').attr('src',$(this).data('img'));
+                $('#cena').html($(this).data('cena')+' din');
+                $('input[name=ukupna_cena]').val($(this).data('cena'));
+                $('input[name=cena]').val($(this).data('cena'));
+                var option = '';
+                for (i=1;i<=$(this).data('maxosoba');i++){
+                    option += '<option value="'+ i + '">' + i + '</option>';
+                }
+                $('#broj_osoba').html(option);
+            });
+            $('#broj_osoba').change(function(){
+                $('#cena').html($('input[name=cena]').val()*$(this).val()+' din');
+                $('input[name=ukupna_cena]').val($('input[name=cena]').val()*$(this).val());
+            });
             $("button#zelja").click(function(){
                 $(this).css("color","black");
                 $(this).html("<i class='icon-spin6 animate-spin'></i> U procesu...");
