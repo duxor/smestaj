@@ -9,7 +9,7 @@
                     <img src="/galerije/korisnik/osnovne/profilna.jpg" class="img img-circle" style="height:80px; width:80px;">
                   <br clear="all"><br clear="all">
                 <p>
-                    <a href="" class="btn btn-lg btn-default"><i class="glyphicon glyphicon-envelope"></i> Pošalji poruku</a>
+                    <a href="/moderacija/mailbox/kreiraj" class="btn btn-lg btn-default"><i class="glyphicon glyphicon-envelope"></i> Pošalji poruku</a>
                 </p>
             </div>
             <div class="col-sm-10">
