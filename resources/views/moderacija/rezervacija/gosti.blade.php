@@ -12,7 +12,7 @@
                     <a href="" class="btn btn-lg btn-default"><i class="glyphicon glyphicon-envelope"></i> Pošalji poruku</a>
                 </p>
             </div>
-            <div class="col-sm-8">
+            <div class="col-sm-10">
                 <h3></h3>
                 <table class="table">
                     <tr><td>Prezime:</td><td>{{$kor['pr']}}</td></tr>
