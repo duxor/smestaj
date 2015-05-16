@@ -242,7 +242,13 @@
                                             {!! Form::text('datumDo', null, ['class'=>'input-sm form-control','placeholder'=>'do...']) !!}
                                         </div>
                                     </div>
-                                    <script>$('#datarange .input-daterange').datepicker({orientation: "top auto",weekStart: 1,startDate: "current",todayBtn: "linked",toggleActive: true,format: "yyyy-mm-dd"});</script>
+                                    <script>
+                                        $('#datarange .input-daterange').datepicker({orientation: "top auto",weekStart: 1,startDate: "current",todayBtn: "linked",toggleActive: true,format: "yyyy-mm-dd"});
+                                        var d = new Date();
+                                        $('input[name=datumOd]').datepicker('setDate',d);
+                                        d.setDate(d.getDate()+1);
+                                        $('input[name=datumDo]').datepicker('setDate', d);
+                                    </script>
                                     <div class="form-group">
                                         {!!Form::label('lgrad','Broj osoba',['class'=>'control-label'])!!}
                                         {!!Form::select('broj_osoba',[1=>1,2=>2,3=>3,4=>4,5=>5,6=>6,7=>7,8=>8,9=>9,10=>10,11=>11,12=>12],2,['class'=>'form-control'])!!}

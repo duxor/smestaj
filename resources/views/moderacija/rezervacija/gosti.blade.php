@@ -35,5 +35,3 @@
     
 @else <h1 class="col-sm-12">Nema gostiju u evidenciji!</h1>
 @endif
-   
-@endsection
