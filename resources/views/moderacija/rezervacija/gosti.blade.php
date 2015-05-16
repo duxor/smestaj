@@ -29,5 +29,4 @@
 	
 @else <h1 class="col-sm-12">Arhiva je prazna!</h1>
 @endif
-   
 @endsection
