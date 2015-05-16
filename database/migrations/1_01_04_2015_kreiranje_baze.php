@@ -262,13 +262,13 @@ class KreiranjeBaze extends Migration{
         Schema::drop('pass_reset');
         Schema::drop('rezervacije');
         Schema::drop('lista_zelja');
+        Schema::drop('komentari');
         Schema::drop('smestaj');
         Schema::drop('vrsta_smestaja');
         Schema::drop('kapacitet');
         Schema::drop('objekat');
         Schema::drop('vrsta_objekta');
         Schema::drop('grad');
-        Schema::drop('komentari');
         Schema::drop('sadrzaji');
         Schema::drop('default_sadrzaji');
         Schema::drop('newsletter');

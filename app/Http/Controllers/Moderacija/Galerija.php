@@ -20,6 +20,24 @@ class Galerija extends Controller {
 			->where('nalog.aktivan',1)
 			->where('nalog.korisnici_id',Session::get('id'))
 			->whereBetween('templejt.vrsta_sadrzaja_id',[7,9])
+			->get(['sadrzaji.naziv','sadrzaji.id'])
+			->lists('naziv','id');
+			//->get(['nalog.naziv as app','sadrzaji.id','tema.slug as slugTema','sadrzaji.naziv','templejt.slug','sadrzaj','templejt.vrsta_sadrzaja_id'])->toArray();
+
+		$podaci['aplikacije']=OsnovneMetode::aplikacije();
+		$podaci['aplikacija']=$slugApp;dd($podaci);
+		return Security::autentifikacija('moderacija.galerije.index', compact('podaci'));
+	}
+	//Pregled svih galerija
+	public function getIndex_x($slugApp){
+		if(!Security::autentifikacijaTest(4)) return Security::rediectToLogin();
+		if(!Nalog::where('slug',$slugApp)->where('korisnici_id',Session::get('id'))->get(['id'])->first())return'Greska!';
+		$podaci['galerije']=Sadrzaji::join('nalog','nalog.id','=','sadrzaji.nalog_id')
+			->join('templejt','templejt.id','=','sadrzaji.templejt_id')
+			->join('tema','tema.id','=','nalog.tema_id')
+			->where('nalog.aktivan',1)
+			->where('nalog.korisnici_id',Session::get('id'))
+			->whereBetween('templejt.vrsta_sadrzaja_id',[7,9])
 			->get(['nalog.naziv as app','sadrzaji.id','tema.slug as slugTema','sadrzaji.naziv','templejt.slug','sadrzaj','templejt.vrsta_sadrzaja_id'])->toArray();
 		foreach($podaci['galerije'] as $k => $galerija)
 			$podaci['galerije'][$k]['slike'] = OsnovneMetode::listaFotografija(OsnovneMetode::folderGalerije($galerija['vrsta_sadrzaja_id'],$galerija['slug'],$slugApp,$galerija['slugTema']));

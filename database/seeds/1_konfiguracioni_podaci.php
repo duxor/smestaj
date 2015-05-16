@@ -225,19 +225,19 @@ class KonfiguracioniPodaci extends Seeder{
             ],
             [
                 'naziv'=>'Galerija osnovnih fotografija',
-                'sadrzaj'=>null,
+                'sadrzaj'=>null,//adresa do galerije
                 'icon'=>null,
                 'templejt_id'=>25
             ],
             [
                 'naziv'=>'Slajderi',
-                'sadrzaj'=>null,
+                'sadrzaj'=>'slajder-1',//adresa do galerije
                 'icon'=>null,
                 'templejt_id'=>26
             ],
             [
                 'naziv'=>'Pozadine',
-                'sadrzaj'=>null,
+                'sadrzaj'=>'pozadine-1',//adresa do galerije
                 'icon'=>null,
                 'templejt_id'=>27
             ]
