@@ -29,7 +29,7 @@ class Rezervacija extends Controller {
 					->join('rezervacije','rezervacije.smestaj_id','=','smestaj.id')
 					->join('kapacitet','kapacitet.id','=','smestaj.kapacitet_id')
 					->join('vrsta_smestaja','vrsta_smestaja.id','=','smestaj.vrsta_smestaja_id')
-					->get(['rezervacije.od','rezervacije.do','rezervacije.broj_osoba','rezervacije.napomena',
+					->get(['korisnici.username','rezervacije.od','rezervacije.do','rezervacije.broj_osoba','rezervacije.napomena',
 						'smestaj.naziv','kapacitet.naziv as naziv_kapaciteta','kapacitet.broj_osoba as br_osoba_kapaciteta',
 						'vrsta_smestaja.naziv as vrsta_smestaja_naziv','rezervacije.id'])->toArray();
 		
