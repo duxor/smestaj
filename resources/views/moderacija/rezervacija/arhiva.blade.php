@@ -34,7 +34,7 @@
 								<td>{{$rez['vrsta_smestaja_naziv']}}</td>
 								<td>{{$rez['broj_osoba']}}</td>
 								<td style="font-size:12px;">{{$rez['napomena']}}</td>
-								<th></th>
+								<th>{{$rez['username']}}</th>
 								<th>{{$rez['odjava']}}</th>
 							</tr>
 							@endforeach
