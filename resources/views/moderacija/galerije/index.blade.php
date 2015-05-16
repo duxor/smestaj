@@ -36,7 +36,7 @@
                 $('.prikaz').data('placement','left');
                 $('.prikaz').data('html','true');
                 $('.prikaz').attr('title','Opcije');
-                $('.prikaz').data('content','<button onclick="ukloniFoto(\''+objekat.src+'\',\''+objekat.id+'\',\''+$(objekat).data('slugapp')+''\)"class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></button>');
+                $('.prikaz').data('content','<button onclick="ukloniFoto(\''+objekat.src+'\',\''+objekat.id+'\',\''+$(objekat).data('slugapp')+'\')"class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></button>');
                 if(editMod)$('.prikaz').popover('show');
             }
             function ukloniFoto(url,id,slugApp){
