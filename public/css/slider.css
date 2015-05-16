@@ -15,7 +15,7 @@
   border-radius: 23px 23px 23px 23px;
   height: 40px;
   width : 40px;
-  margin-top: 30px
+  margin-top: 80px
 }
 /* Next button  */
 .media-carousel .carousel-control.right 
@@ -27,7 +27,7 @@
   border-radius: 23px 23px 23px 23px;
   height: 40px;
   width : 40px;
-  margin-top: 30px
+  margin-top: 80px
 }
 /* Changes the position of the indicators */
 .media-carousel .carousel-indicators 
@@ -48,6 +48,6 @@
 }
 .media-carousel img
 {
-  width: 250px;
-  height: 100px
+  width: 500px;
+  height: 200px
 }

@@ -26,6 +26,7 @@
     {!!HTML::script('js/funkcije.js')!!}
     {!!HTML::script('js/pregled_smestaja.js')!!}
     {!!HTML::script('tinymce/tinymce.min.js')!!}
+    {!!HTML::script('js/komentari.js')!!}
 
 </head>
 <body>
@@ -86,7 +87,7 @@
                             <li class="dropdown-header">Rezervacije</li>
                             <li class="divider"></li>
                             <li><a href="{!!url('/rezervacija/aktuelne')!!}"><i class="glyphicon glyphicon-check"></i> Aktuelne</a></li>
-                            <li><a href="{!!url('/moderacija/u-pripremi')!!}"><i class="glyphicon glyphicon-floppy-saved"></i> Arhiva</a></li>
+                            <li><a href="{!!url('/rezervacija/arhiva')!!}"><i class="glyphicon glyphicon-floppy-saved"></i> Arhiva</a></li>
                             <li><a href="{!!url('/moderacija/u-pripremi')!!}"><i class="glyphicon glyphicon-user"></i> Gosti</a></li>
                         </ul>
                     </li>

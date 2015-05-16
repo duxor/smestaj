@@ -52,7 +52,13 @@
 								                <div class="container-fluid">
 								                    {!!Form::open(['url'=>'/rezervacija/odjavi-korisnika','class'=>'form-horizontal'])!!}
 													{!!Form::hidden('id',$rez['id'])!!}
-
+													<div class="form-group has-feedback">
+														{!! Form::label('unesiteocenu','Unesite ocenu',['class'=>'control-label col-sm-4']) !!}
+														<input id="ratings-hidden" name="rating" value="3" type="hidden">
+														<div class="col-sm-8">
+															<div class="stars starrr" style="color:green;" data-rating="3"></div>
+														</div>
+													</div>
 								                    <div class="form-group has-feedback">
 								                        {!! Form::label('utisci','Utisci o korisniku',['class'=>'control-label col-sm-4']) !!}
 								                        <div class="col-sm-8">

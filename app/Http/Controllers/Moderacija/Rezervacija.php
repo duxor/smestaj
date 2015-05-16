@@ -35,8 +35,24 @@ class Rezervacija extends Controller {
 		
 			return Security::autentifikacija('moderacija.rezervacija.aktuelno', compact('rezervacije'),4);
 	}
+	public function getArhiva(){
+			$rezervacije=Korisnici::orderBy('odjava', 'desc')
+					->where('korisnici.id','=',Session::get('id'))
+					->where('rezervacije.aktivan','=',0)
+					->join('nalog','nalog.korisnici_id','=','korisnici.id')
+					->join('objekat','objekat.nalog_id','=','nalog.id')
+					->join('smestaj','smestaj.objekat_id','=','objekat.id')
+					->join('rezervacije','rezervacije.smestaj_id','=','smestaj.id')
+					->join('kapacitet','kapacitet.id','=','smestaj.kapacitet_id')
+					->join('vrsta_smestaja','vrsta_smestaja.id','=','smestaj.vrsta_smestaja_id')
+					->get(['rezervacije.od','rezervacije.do','rezervacije.broj_osoba','rezervacije.napomena',
+						'smestaj.naziv','kapacitet.naziv as naziv_kapaciteta','kapacitet.broj_osoba as br_osoba_kapaciteta',
+						'vrsta_smestaja.naziv as vrsta_smestaja_naziv','rezervacije.id','odjava'])->toArray();		
+			return Security::autentifikacija('moderacija.rezervacija.arhiva', compact('rezervacije'),4);
+	}
+
 	public function postOdjaviKorisnika(){
-		Rezervacije::where('rezervacije.id','=',Input::get('id'))->update(['aktivan'=>0,'odjava'=>date("Y-m-d"),'utisci'=>Input::get('utisci')]);
+		Rezervacije::where('rezervacije.id','=',Input::get('id'))->update(['aktivan'=>0,'odjava'=>date("Y-m-d"),'utisci'=>Input::get('utisci'),'ocena'=>Input::get('rating')]);
 				return Redirect::back();
 			
 	}

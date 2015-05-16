@@ -51,7 +51,6 @@ class Rezervacija extends Controller {
 		$id_smestaja=Input::get('smestaj_id');
 		$datum_od=Input::get('datumOd');
 		$datum_do=Input::get('datumDo');//zeljeni datum
-		$sadasnji=date("Y-m-d"); 
 		$broj_osoba=Input::get('broj_osoba');
 		$broj_osoba_kapaciteta=Rezervacije::where('rezervacije.korisnici_id','=',Session::get('id'))
 					->where('rezervacije.aktivan','=',1)

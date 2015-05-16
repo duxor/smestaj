@@ -54,10 +54,10 @@ class Aplikacija extends Controller {
 		$podaci['app']['id']=$tema->id;//=nalog.id=appID
 		
 		$id_smestaja=Smestaj::where('slug','=',$slugSmestaj)->get(['smestaj.id'])->first();
-		$komentari=Komentari::orderBy('created_at','desc')->where('smestaj_id','=',$id_smestaja->id)
+		$komentari=Komentari::orderBy('created_at','desc')->where('smestaj_id','=',$id_smestaja->id)->where('komentari.aktivan','=','1')
 				->join('korisnici','korisnici.id','=','komentari.korisnici_id')
 				->get(['komentar','ocena','komentari.created_at','korisnici.username'])->toArray();
-		$prosecna_ocena=Komentari::where('smestaj_id','=',$id_smestaja->id)
+		$prosecna_ocena=Komentari::where('smestaj_id','=',$id_smestaja->id)->where('aktivan','=','1')
 				->avg('ocena');
 		return view("aplikacija.teme.{$tema->slug}.smestaj",compact('podaci','komentari','prosecna_ocena'));
 	}
