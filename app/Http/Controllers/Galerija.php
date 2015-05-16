@@ -1,4 +1,4 @@
-<?php namespace App\Http\Controllers\Moderacija;
+<?php namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Sadrzaji;
@@ -11,9 +11,9 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 class Galerija extends Controller {
 	//Pregled svih galerija
-	public function getIndex($slugApp){
-		if(!Security::autentifikacijaTest(4)) return Security::rediectToLogin();
-		if(!Nalog::where('slug',$slugApp)->where('korisnici_id',Session::get('id'))->get(['id'])->first())return'Greska!';
+	public function getIndex($slugPrava){
+		if(!Security::autentifikacijaTest(2,'min')) return Security::rediectToLogin();
+		//if(!Nalog::where('slug',$slugApp)->where('korisnici_id',Session::get('id'))->get(['id'])->first())return'Greska!';
 		$podaci['galerije']=Sadrzaji::join('nalog','nalog.id','=','sadrzaji.nalog_id')
 			->join('templejt','templejt.id','=','sadrzaji.templejt_id')
 			->join('tema','tema.id','=','nalog.tema_id')
@@ -22,8 +22,8 @@ class Galerija extends Controller {
 			->where('sadrzaji.sadrzaj','!=','')
 			->whereBetween('templejt.vrsta_sadrzaja_id',[7,9])
 			->get(['sadrzaji.naziv','sadrzaji.sadrzaj','nalog.naziv as nazivApp','nalog.slug as slugApp','tema.slug as slugTeme','tema.naziv as nazivTeme'])->toArray();
-		$podaci['aplikacija']=$slugApp;
-		return Security::autentifikacija('moderacija.galerije.index', compact('podaci'));
+		//$podaci['aplikacija']=$slugApp;
+		return Security::autentifikacija('galerije.index', compact('podaci'));
 	}
 	public function postListaFotografija(){
 		if(!Security::autentifikacijaTest(4)) return Security::rediectToLogin();
@@ -32,7 +32,7 @@ class Galerija extends Controller {
 	public function postUkloniFoto($slugApp){
 		if(!Security::autentifikacijaTest(4))return Security::rediectToLogin();
 		if(!Nalog::where('slug',$slugApp)->where('korisnici_id',Session::get('id'))->get())return Security::rediectToLogin();
-		return json_encode(['mag'=>(unlink(Input::get('link')))?'OK':'GRESKA']);
+		return json_encode(['msg'=>(unlink(Input::get('link')))?'OK':'GRESKA']);
 	}
 
 

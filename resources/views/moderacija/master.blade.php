@@ -101,18 +101,7 @@
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="galerija" data-toggle="tooltip" data-placement="bottom" title="Galerija"><i class="glyphicon glyphicon-picture"></i></a>
-                        <ul class="dropdown-menu">
-                            <li class="dropdown-header">Galerija</li>
-                            <li class="divider"></li>
-                            @if(\App\OsnovneMetode::aplikacije())
-                            @foreach(\App\OsnovneMetode::aplikacije() as $aplikacije)
-                                <li><a href="/moderacija/{{$aplikacije['slug']}}/galerije">{{$aplikacije['naziv']}}</a></li>
-                            @endforeach
-                            @else
-                                <li>Ne postoji ni jedna aplikacija u evidenciji.</li>
-                            @endif
-                        </ul>
+                        <a href="/moderacija/galerije" id="galerija" data-toggle="tooltip" data-placement="bottom" title="Galerija"><i class="glyphicon glyphicon-picture"></i></a>
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="analitika" data-toggle="tooltip" data-placement="bottom" title="Analitika"><i class="glyphicon glyphicon-stats"></i></a>

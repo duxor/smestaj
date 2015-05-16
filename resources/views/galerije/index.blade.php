@@ -25,31 +25,33 @@
             <i class='icon-spin6 animate-spin' style="color: rgba(0,0,0,0)"></i>
         </div>
         <script>
-            var editMod=false, slugApp=false;
-            $('.editMod').click(function(){editMod=!editMod});
+            var editMod=false, slugApp=false, serverUrl='{{url('/')}}}';
+            $('.editMod').click(function(){editMod=!editMod;$('.prikaz').popover('hide')});
             function slikaOption(){if(editMod)$('.prikaz').popover('toggle')}
             function prikazSlike(objekat){
+                $('.prikaz').popover('destroy');
                 $('.prikaz').attr('src',objekat.src);
-                $('.prikaz').fadeIn();
                 $('.prikaz').data('toggle','popover');
                 $('.prikaz').data('trigger','focus');
                 $('.prikaz').data('placement','left');
                 $('.prikaz').data('html','true');
                 $('.prikaz').attr('title','Opcije');
-                $('.prikaz').data('content','<button onclick="ukloniFoto(\''+objekat.src+'\',\''+objekat.id+'\',\''+$(objekat).data('slugapp')+'\')"class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></button>');
+                $('.prikaz').data('content','<button onclick="ukloniFoto(\''+objekat.src+'\',\''+objekat.id+'\')"class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></button>');
+                $('.prikaz').fadeIn();
                 if(editMod)$('.prikaz').popover('show');
             }
-            function ukloniFoto(url,id,slugApp){
+            function ukloniFoto(url,id){
                 $('.prikaz').popover('hide');
                 $('#wait').fadeIn();
-                $.post('/moderacija/'+slugApp+'/galerije/ukloni-foto',{
+                $.post('/{{\App\OsnovneMetode::osnovniNav()}}/galerije/ukloni-foto',{
                     _token:'{{csrf_token()}}',
-                    link:url
+                    link:url.substr(serverUrl.length)
                 },function(data){
-
-                    $('#prikaz').fadeOut();
-                    $("img[src='"+url+"']").fadeOut();
-                    $('#'+id).fadeOut();
+                    if(JSON.parse(data).msg=='OK'){
+                        $('.prikaz').fadeOut();
+                        $('#'+id).fadeOut();
+                        $('#wait').hide();
+                    }
                 });
             }
             $('a.list-group-item').click(function(){
@@ -58,7 +60,7 @@
                 $('a.list-group-item').removeClass('active');
                 $(this).addClass('active');
                 var slugApp=$(this).data('slugapp');
-                $.post('/moderacija/'+slugApp+'/galerije/lista-fotografija',
+                $.post('/{{\App\OsnovneMetode::osnovniNav()}}/galerije/lista-fotografija',
                         {
                             _token:'{{csrf_token()}}',
                             folder:$(this).data('link')
