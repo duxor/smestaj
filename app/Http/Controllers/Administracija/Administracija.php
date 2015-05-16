@@ -7,11 +7,11 @@ use Illuminate\Support\Facades\Input;
 class Administracija extends Controller {
 
 	public function getIndex(){
-		return Security::autentifikacija('stranice.administracija.index',null,5);
+		return Security::autentifikacija('administracija.index',null,5,'min');
 	}
 	public function getLogin(){
-		if(Security::autentifikacijaTest(5)) return redirect('/administracija');
-		return view('stranice.administracija.login');
+		if(Security::autentifikacijaTest(5,'min')) return redirect('/administracija');
+		return view('log.login');
 	}
 	public function postLogin(){
 		return Security::login(Input::get('username'),Input::get('password'));
