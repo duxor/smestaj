@@ -87,7 +87,8 @@
             '<div id="zaSlanje" class="form-horizontal">'+
                 '{!!Form::hidden('_token',csrf_token())!!}'+
                 '<div class="form-group">'+
-                    '<input name="za" class="form-control" placeholder="Username primaoca">'+
+                    '<input name="za" class="form-control" onkeyup="pronadjiUsername(this.value)" placeholder="Username primaoca">'+
+                    '<span id="preporuke" class="list-group"></span>'+
                 '</div>'+
                 '<div class="form-group">'+
                     '<input name="naslov" class="form-control" placeholder="Naslov">'+
@@ -101,6 +102,27 @@
             '</div>');
             $('#wait').hide();
             $('#show').fadeIn();
+        }
+        function pronadjiUsername(tekst){
+            if(tekst.length==0){$('#preporuke').html('');return}
+            $.post('/{{\App\OsnovneMetode::osnovniNav()}}/mailbox/pronadji-username',{
+                _token:'{{csrf_token()}}',
+                tekst:tekst
+            },function(data){
+                var podaci=JSON.parse(data);
+                if(podaci.length){
+                    var useri='';
+                    for(var i=0;i<podaci.length;i++)
+                        useri+='<a href="#" class="list-group-item" onclick="izaberiUsername(\''+podaci[i].username+'\')">'+
+                                '<h4 class="list-group-item-heading">'+podaci[i].username+'</h4>'+
+                                '<p class="list-group-item-text">'+podaci[i].email+'</p>';
+                    $('#preporuke').html(useri);
+                }
+            });
+        }
+        function izaberiUsername(username){
+            $('input[name=za]').val(username);
+            $('#preporuke').html('');
         }
         function getPoslate(){
             setActive('poslate');
