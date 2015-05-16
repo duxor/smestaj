@@ -12,17 +12,22 @@
                     <a href="/moderacija/mailbox/kreiraj" class="btn btn-lg btn-default"><i class="glyphicon glyphicon-envelope"></i> Pošalji poruku</a>
                 </p>
             </div>
-            <div class="col-sm-10">
-                <h3></h3>
-                <table class="table">
-                    <tr><td>Prezime:</td><td>{{$kor['pr']}}</td></tr>
+            <div class="col-sm-7">       
+                <table style="border-top:4px solid #74ABFB;" class="table table-condensed">
+                    <tr ><td>Prezime:</td><td>{{$kor['pr']}}</td></tr>
                     <tr><td>Ime:</td><td> {{$kor['ime_korisnika']}}</td></tr>
                     <tr><td>Rezervisao smeštaj:</td><td> {{$kor['naziv_smestaja']}}</td></tr>
                     <tr><td>U periodu:</td><td>{{$kor['od']}} - {{$kor['do']}}</td></tr>
-                    <tr><td>Utisci:</td><td>{{$kor['utisci']}} </td></tr>
                     <tr><td>Ocena:</td><td>{{$kor['ocena']}} </td></tr>
                 </table>
-            </div><br clear="all">
+            </div>
+             <div class="col-sm-3">
+                <table class="table">
+                    <tr><td>Utisci:</td><td></td></tr>
+                    <tr><td>{{$kor['utisci']}}</td></tr>
+                </table>
+            </div>
+            <br clear="all">
 		</div></div>
 		@endforeach
 	</div>
