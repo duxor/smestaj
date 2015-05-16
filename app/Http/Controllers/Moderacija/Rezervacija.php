@@ -52,8 +52,7 @@ class Rezervacija extends Controller {
 	}
 	public function getGosti(){
 		$korisnici=Korisnici::where('rezervacije.korisnici_id',Session::get('id'))
-
-
+			->where('rezervacije.aktivan',1)
 			->join('nalog','nalog.korisnici_id','=','korisnici.id')
 			->join('objekat','objekat.nalog_id','=','nalog.id')
 			->join('smestaj','smestaj.objekat_id','=','objekat.id')
@@ -61,7 +60,6 @@ class Rezervacija extends Controller {
 			->get(['korisnici.prezime as pr','korisnici.ime as ime_korisnika','korisnici.email as email_korisnika',
 				'korisnici.fotografija as fotografija_korisnika','smestaj.naziv as naziv_smestaja',
 				'rezervacije.od','rezervacije.do','rezervacije.utisci','rezervacije.ocena'])->toArray();
-
 		return Security::autentifikacija('moderacija.rezervacija.gosti',compact('korisnici'),4);
 	}
 
