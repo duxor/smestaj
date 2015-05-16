@@ -92,11 +92,11 @@ class OsnovneMetode {
     }
     public static function osnovniNav(){
         switch(Session::get('prava_pristupa')){
-            case 5:return'administracija';
-            case 4:return'moderacija';
-            case 2:return'korisnik';
+            case 2:return'korisnik';break;
+            case 4:return'moderacija';break;
+            case 5:
+            case 6:return'administracija';break;
         }
-        return'korisnik';
     }
     public static function arrayGenertor($n,$i=1,$array=[]){
         $array[$i]=$i; $i++;
