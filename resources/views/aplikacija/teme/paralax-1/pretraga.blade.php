@@ -130,7 +130,7 @@
 @endsection
 @section('content')
     <h1>Pretraga</h1>
-    {!!Form::open(['url'=>'/pretraga/aplikacija','class'=>'form-inline col-sm-11'])!!}
+    {!!Form::open(['url'=>$podaci['app']['slug'].'/pretraga','class'=>'form-inline col-sm-11'])!!}
     {!!Form::hidden('aplikacija',$podaci['app']['id'])!!}
     <div class="form-group">
         <label>Broj mesta (Tačan  broj {!!Form::checkbox('tacan_broj',1,$podaci['tacan_broj'])!!})</label>
@@ -230,6 +230,7 @@
                             </div>
                         </div>
                         <div id="poruka" style="display:none"></div>
+                    </div>
                     <div class="modal-footer">
                         {!! Form::button('<span class="glyphicon glyphicon-remove"></span> Otkaži',['class'=>'btn btn-lg btn-warning','data-dismiss'=>'modal']) !!}
                         {!! Form::button('<span class="glyphicon glyphicon-ok"></span> Rezerviši',['class'=>'btn btn-lg btn-success','onclick'=>'Komunikacija.posalji("/rezervisi",\'forma\',\'poruka\',\'vrti\',\'forma\')' ]) !!}

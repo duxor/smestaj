@@ -209,7 +209,7 @@
     {{--Kontakt END::--}}
 
     <div id="skrollr-body">
-        <div class="content content-full" id="{{$podaci[0]['slug']}}"><div id="map" style="height:650px;margin-top:-80px;width:104%;margin-left: -3%;overflow:hidden"></div>
+        <div class="content content-full" id="{{$podaci[0]['slug']}}"><div id="map" style="height:650px;margin-top:-100px;width:104%;margin-left: -3%;overflow:hidden"></div>
             <div class="container" style="margin-top: -500px">
                 <div class="col-sm-5">
                     <div style="
