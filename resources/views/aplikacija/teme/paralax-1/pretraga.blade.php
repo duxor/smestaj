@@ -155,11 +155,12 @@
                 </a>
                 <p>
                     <a href="/{{$smestaj['slugApp']}}/{{$smestaj['slugSmestaj']}}" class="btn btn-lg btn-default"><i class="glyphicon glyphicon-zoom-in"></i> Pregled</a>
-                    <button class="btn btn-lg btn-info m" data-toggle="modal" data-target="#rezervacija" data-cena="{{$smestaj['cena_osoba']}}" data-id="{{$smestaj['id']}}" data-app="{{$smestaj['nazivApp']}}" data-naziv="{{$smestaj['naziv']}}" data-vrobjekta="{{$smestaj['vrsta_smestaja']}}" data-maxosoba="{{$smestaj['broj_osoba']}}" data-adresa="{{$smestaj['adresa']}}" data-img="/teme/osnovna-paralax/slike/15.jpg"><span class="glyphicon glyphicon-check"></span> Rezervacija</button>
                     @if(\App\Security::autentifikacijaTest())
+                        <button class="btn btn-lg btn-info m" data-toggle="modal" data-target="#rezervacija" data-cena="{{$smestaj['cena_osoba']}}" data-id="{{$smestaj['id']}}" data-app="{{$smestaj['nazivApp']}}" data-naziv="{{$smestaj['naziv']}}" data-vrobjekta="{{$smestaj['vrsta_smestaja']}}" data-maxosoba="{{$smestaj['broj_osoba']}}" data-adresa="{{$smestaj['adresa']}}" data-img="/teme/osnovna-paralax/slike/15.jpg"><span class="glyphicon glyphicon-check"></span> Rezervacija</button>
                         <button id="zelja" class="btn btn-lg btn-default _tooltip" @if($smestaj['zelja']) data-zelja="{{$smestaj['zelja']}}" style="color:red" title="Izbaci iz liste zelja" @else data-zelja="false" title="Dodaj u listu želja" @endif data-id="{{$smestaj['id']}}" data-toggle="tooltip" data-placement="bottom"><i class="glyphicon glyphicon-heart"></i></button>
                     @else
-                        <a href="/login" class="btn btn-lg btn-default _tooltip"  title="Dodaj u listu želja" data-toggle="tooltip" data-placement="bottom"><i class="glyphicon glyphicon-heart"></i></a>
+                        <a href="/log/login" class="btn btn-lg btn-info"><span class="glyphicon glyphicon-check"></span> Rezervacija</a>
+                        <a href="/log/login" class="btn btn-lg btn-default _tooltip"  title="Dodaj u listu želja" data-toggle="tooltip" data-placement="bottom"><i class="glyphicon glyphicon-heart"></i></a>
                     @endif
                 </p>
             </div>
@@ -202,9 +203,9 @@
                                 <hr>
                                 <div class="form-group" id="datarange" style="padding-left: 22px">
                                     <div class="input-daterange input-group col-sm-7 col-sm-offset-4" id="datepicker">
-                                        {!! Form::text('datumOd', date("Y-m-d"), ['class'=>'input-sm form-control','placeholder'=>'od...','id'=>'datumod','style'=>'padding:20px']) !!}
+                                        {!! Form::text('datumOd', date("Y-m-d"),['class'=>'input-sm form-control','placeholder'=>'od...','id'=>'datumod','style'=>'padding:20px']) !!}
                                         <span class="input-group-addon">do</span>
-                                        {!! Form::text('datumDo', null, ['class'=>'input-sm form-control','placeholder'=>'do...','id'=>'datumdo','style'=>'padding:20px']) !!}
+                                        {!! Form::text('datumDo',null,['class'=>'input-sm form-control','placeholder'=>'do...','id'=>'datumdo','style'=>'padding:20px'])!!}
                                     </div>
                                 </div>
                                 <script>$('#datarange .input-daterange').datepicker({orientation:"top auto",weekStart:1,startDate:"current",todayBtn:"linked",toggleActive:true,format:"yyyy-mm-dd"});</script>
@@ -229,7 +230,6 @@
                             </div>
                         </div>
                         <div id="poruka" style="display:none"></div>
-                    </div>
                     <div class="modal-footer">
                         {!! Form::button('<span class="glyphicon glyphicon-remove"></span> Otkaži',['class'=>'btn btn-lg btn-warning','data-dismiss'=>'modal']) !!}
                         {!! Form::button('<span class="glyphicon glyphicon-ok"></span> Rezerviši',['class'=>'btn btn-lg btn-success','onclick'=>'Komunikacija.posalji("/rezervisi",\'forma\',\'poruka\',\'vrti\',\'forma\')' ]) !!}

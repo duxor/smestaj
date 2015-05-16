@@ -57,7 +57,7 @@ class Rezervacija extends Controller {
 			->join('objekat','objekat.nalog_id','=','nalog.id')
 			->join('smestaj','smestaj.objekat_id','=','objekat.id')
 			->join('rezervacije','rezervacije.smestaj_id','=','smestaj.id')
-			->get(['korisnici.prezime as pr','korisnici.ime as ime_korisnika','korisnici.email as email_korisnika',
+			->get(['korisnici.prezime as pr','korisnici.ime as ime_korisnika','korisnici.username','korisnici.email as email_korisnika',
 				'korisnici.fotografija as fotografija_korisnika','smestaj.naziv as naziv_smestaja',
 				'rezervacije.od','rezervacije.do','rezervacije.utisci','rezervacije.ocena'])->toArray();
 		return Security::autentifikacija('moderacija.rezervacija.gosti',compact('korisnici'),4);

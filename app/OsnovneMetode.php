@@ -103,4 +103,12 @@ class OsnovneMetode {
         if($i>$n) return $array;
         return OsnovneMetode::arrayGenertor($n,$i,$array);
     }
+    public static function getBrojRezervacija(){
+        return Rezervacije::join('smestaj','smestaj.id','=','rezervacije.smestaj_id')
+            ->join('objekat','objekat.id','=','smestaj.objekat_id')
+            ->join('nalog','nalog.id','=','objekat.nalog_id')
+            ->where('nalog.korisnici_id',Session::get('id'))
+            ->whereNull('rezervacije.odjava')
+            ->count();
+    }
 }

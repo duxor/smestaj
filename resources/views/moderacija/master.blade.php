@@ -82,11 +82,11 @@
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="rezervacije" data-toggle="tooltip" data-placement="bottom" title="Rezervacije"><i class="glyphicon glyphicon-list-alt"></i></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="rezervacije" data-toggle="tooltip" data-placement="bottom" title="Rezervacije"><i class="glyphicon glyphicon-list-alt"></i>@if(\App\OsnovneMetode::getBrojRezervacija()>0)<i class="badge">{{\App\OsnovneMetode::getBrojRezervacija()}}</i>@endif</a>
                         <ul class="dropdown-menu">
                             <li class="dropdown-header">Rezervacije</li>
                             <li class="divider"></li>
-                            <li><a href="{!!url('/rezervacija/aktuelne')!!}"><i class="glyphicon glyphicon-check"></i> Aktuelne</a></li>
+                            <li><a href="{!!url('/rezervacija/aktuelne')!!}"><i class="glyphicon glyphicon-check"></i> Aktuelne @if(\App\OsnovneMetode::getBrojRezervacija()>0)<i class="badge">{{\App\OsnovneMetode::getBrojRezervacija()}}</i>@endif </a></li>
                             <li><a href="{!!url('/rezervacija/arhiva')!!}"><i class="glyphicon glyphicon-floppy-saved"></i> Arhiva</a></li>
                             <li><a href="{!!url('/rezervacija/gosti')!!}"><i class="glyphicon glyphicon-user"></i> Gosti</a></li>
                         </ul>
