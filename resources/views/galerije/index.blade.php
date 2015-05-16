@@ -2,9 +2,10 @@
 @section('body')
     @if($podaci['galerije'])
         <div class="list-group col-sm-4">
-            <p style="text-align: right"><button class="btn btn-info editMod" style="margin-right: 5px"><i class="glyphicon glyphicon-pencil"></i></button><button class="btn btn-success"><i class="glyphicon glyphicon-cloud-upload"></i></button></p>
+            <p style="text-align: right"><button class="btn btn-info editMod" style="margin-right: 5px"><i class="glyphicon glyphicon-pencil"></i></button></p>
             @foreach($podaci['galerije'] as $galerija)
-                <a href="#" class="list-group-item" data-slugapp="{{$galerija['slugApp']}}" data-link="galerije/{{Session::get('username')}}/aplikacije/{{$galerija['slugApp']}}/{{$galerija['slugTeme']}}/{{$galerija['sadrzaj']}}">
+                <a style="cursor: pointer" class="list-group-item" data-slugapp="{{$galerija['slugApp']}}" data-link="galerije/{{Session::get('username')}}/aplikacije/{{$galerija['slugApp']}}/{{$galerija['slugTeme']}}/{{$galerija['sadrzaj']}}">
+                    <button class="btn btn-success _upload" data-toggle="modal" data-target="#dodajFoto" style="position: absolute;right: 5px;top: 5px"><i class="glyphicon glyphicon-cloud-upload"></i></button>
                     <h2 style="text-align: center">{{$galerija['naziv']}}</h2>
                     <p class="list-group-item-text">
                         <dl class="dl-horizontal">
@@ -82,4 +83,35 @@
     @else
         <p>Ne postoji ni jedna galerija.</p>
     @endif
+    <div class="modal fade" id="dodajFoto">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" data-dismiss="modal">&times;</button>
+                    <h2>Dodaj nove fotografije</h2>
+                </div>
+                <div class="modal-body">
+                    <input id="input-700" name="images[]" type="file" multiple=true class="file-loading" >
+                    {!!Form::hidden('folder',null,['id'=>'folder'])!!}
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-ok"></span> Završeno dodavanje</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {!! HTML::style('/dragdrop/css/fileinput.css') !!}
+    {!! HTML::script('/dragdrop/js/fileinput.min.js') !!}
+    <script>
+        $('._upload').click(function(){
+            $('#folder').val($(this).closest('a').data('link')+'/');
+            $("#input-700").fileinput({
+                uploadExtraData: {folder: $('#folder').val(), _token:'{{csrf_token()}}'},
+                uploadUrl: '/{{\App\OsnovneMetode::osnovniNav()}}/galerije/upload',
+                uploadAsync: true,
+                maxFileCount: 10
+            });
+        });
+    </script>
 @endsection

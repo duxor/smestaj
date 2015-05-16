@@ -13,7 +13,6 @@ class Galerija extends Controller {
 	//Pregled svih galerija
 	public function getIndex($slugPrava){
 		if(!Security::autentifikacijaTest(2,'min')) return Security::rediectToLogin();
-		//if(!Nalog::where('slug',$slugApp)->where('korisnici_id',Session::get('id'))->get(['id'])->first())return'Greska!';
 		$podaci['galerije']=Sadrzaji::join('nalog','nalog.id','=','sadrzaji.nalog_id')
 			->join('templejt','templejt.id','=','sadrzaji.templejt_id')
 			->join('tema','tema.id','=','nalog.tema_id')
@@ -22,55 +21,20 @@ class Galerija extends Controller {
 			->where('sadrzaji.sadrzaj','!=','')
 			->whereBetween('templejt.vrsta_sadrzaja_id',[7,9])
 			->get(['sadrzaji.naziv','sadrzaji.sadrzaj','nalog.naziv as nazivApp','nalog.slug as slugApp','tema.slug as slugTeme','tema.naziv as nazivTeme'])->toArray();
-		//$podaci['aplikacija']=$slugApp;
 		return Security::autentifikacija('galerije.index', compact('podaci'));
 	}
 	public function postListaFotografija(){
-		if(!Security::autentifikacijaTest(4)) return Security::rediectToLogin();
+		if(!Security::autentifikacijaTest(2,'min')) return Security::rediectToLogin();
 		return json_encode(OsnovneMetode::listaFotografija(Input::get('folder')));
 	}
 	public function postUkloniFoto($slugApp){
-		if(!Security::autentifikacijaTest(4))return Security::rediectToLogin();
+		if(!Security::autentifikacijaTest(2,'min'))return Security::rediectToLogin();
 		if(!Nalog::where('slug',$slugApp)->where('korisnici_id',Session::get('id'))->get())return Security::rediectToLogin();
 		return json_encode(['msg'=>(unlink(Input::get('link')))?'OK':'GRESKA']);
 	}
-
-
-
-
-	//Pregled svih galerija
-	public function getIndex_x($slugApp){
-		if(!Security::autentifikacijaTest(4)) return Security::rediectToLogin();
-		if(!Nalog::where('slug',$slugApp)->where('korisnici_id',Session::get('id'))->get(['id'])->first())return'Greska!';
-		$podaci['galerije']=Sadrzaji::join('nalog','nalog.id','=','sadrzaji.nalog_id')
-			->join('templejt','templejt.id','=','sadrzaji.templejt_id')
-			->join('tema','tema.id','=','nalog.tema_id')
-			->where('nalog.aktivan',1)
-			->where('nalog.korisnici_id',Session::get('id'))
-			->whereBetween('templejt.vrsta_sadrzaja_id',[7,9])
-			->get(['nalog.naziv as app','sadrzaji.id','tema.slug as slugTema','sadrzaji.naziv','templejt.slug','sadrzaj','templejt.vrsta_sadrzaja_id'])->toArray();
-		foreach($podaci['galerije'] as $k => $galerija)
-			$podaci['galerije'][$k]['slike'] = OsnovneMetode::listaFotografija(OsnovneMetode::folderGalerije($galerija['vrsta_sadrzaja_id'],$galerija['slug'],$slugApp,$galerija['slugTema']));
-
-		$podaci['aplikacije']=OsnovneMetode::aplikacije();
-		$podaci['aplikacija']=$slugApp;
-		return Security::autentifikacija('moderacija.galerije.pregled', compact('podaci'));
-	}
-	//Pregled odredjene galerije
-	public function anyGalerija($slugApp,$sadrzajId,$slugGalerije=null){
-		if (!Security::autentifikacijaTest(4))return Security::rediectToLogin();
-		$podaci['aplikacije']=OsnovneMetode::aplikacije();
-		$podaci['galerija']=Sadrzaji::join('templejt','templejt.id','=','sadrzaji.templejt_id')
-			->join('tema','tema.id','=','templejt.tema_id')
-			->where('sadrzaji.id',$sadrzajId)->get(['templejt.slug','sadrzaji.id','sadrzaji.naziv','sadrzaj','vrsta_sadrzaja_id','tema.slug as slugTema'])->first()->toArray();
-		$podaci['folder']=OsnovneMetode::folderGalerije($podaci['galerija']['vrsta_sadrzaja_id'],$podaci['galerija']['slug'],$slugApp,$podaci['galerija']['slugTema']);
-		$podaci['slike'] =OsnovneMetode::listaFotografija($podaci['folder']);
-		$podaci['slugApp']=$slugApp;
-		return Security::autentifikacija('moderacija.galerije.galerija', compact('podaci'));
-	}
 	//Upload fotografija
 	public function postUpload(){
-		if(!Security::autentifikacijaTest(4)){
+		if(!Security::autentifikacijaTest(2,'min')){
 			echo json_encode(['error'=>'Niste prijavljeni na platformu.']);
 			return;
 		}
@@ -106,6 +70,40 @@ class Galerija extends Controller {
 		}
 		echo json_encode($output);
 		return;
+	}
+
+
+
+
+	//Pregled svih galerija
+	public function getIndex_x($slugApp){
+		if(!Security::autentifikacijaTest(4)) return Security::rediectToLogin();
+		if(!Nalog::where('slug',$slugApp)->where('korisnici_id',Session::get('id'))->get(['id'])->first())return'Greska!';
+		$podaci['galerije']=Sadrzaji::join('nalog','nalog.id','=','sadrzaji.nalog_id')
+			->join('templejt','templejt.id','=','sadrzaji.templejt_id')
+			->join('tema','tema.id','=','nalog.tema_id')
+			->where('nalog.aktivan',1)
+			->where('nalog.korisnici_id',Session::get('id'))
+			->whereBetween('templejt.vrsta_sadrzaja_id',[7,9])
+			->get(['nalog.naziv as app','sadrzaji.id','tema.slug as slugTema','sadrzaji.naziv','templejt.slug','sadrzaj','templejt.vrsta_sadrzaja_id'])->toArray();
+		foreach($podaci['galerije'] as $k => $galerija)
+			$podaci['galerije'][$k]['slike'] = OsnovneMetode::listaFotografija(OsnovneMetode::folderGalerije($galerija['vrsta_sadrzaja_id'],$galerija['slug'],$slugApp,$galerija['slugTema']));
+
+		$podaci['aplikacije']=OsnovneMetode::aplikacije();
+		$podaci['aplikacija']=$slugApp;
+		return Security::autentifikacija('moderacija.galerije.pregled', compact('podaci'));
+	}
+	//Pregled odredjene galerije
+	public function anyGalerija($slugApp,$sadrzajId,$slugGalerije=null){
+		if (!Security::autentifikacijaTest(4))return Security::rediectToLogin();
+		$podaci['aplikacije']=OsnovneMetode::aplikacije();
+		$podaci['galerija']=Sadrzaji::join('templejt','templejt.id','=','sadrzaji.templejt_id')
+			->join('tema','tema.id','=','templejt.tema_id')
+			->where('sadrzaji.id',$sadrzajId)->get(['templejt.slug','sadrzaji.id','sadrzaji.naziv','sadrzaj','vrsta_sadrzaja_id','tema.slug as slugTema'])->first()->toArray();
+		$podaci['folder']=OsnovneMetode::folderGalerije($podaci['galerija']['vrsta_sadrzaja_id'],$podaci['galerija']['slug'],$slugApp,$podaci['galerija']['slugTema']);
+		$podaci['slike'] =OsnovneMetode::listaFotografija($podaci['folder']);
+		$podaci['slugApp']=$slugApp;
+		return Security::autentifikacija('moderacija.galerije.galerija', compact('podaci'));
 	}
 	//Fizicko BRISANJE odredjene fotografije iz galerije
 	public function postUkloniFoto_OLD($slugApp){
