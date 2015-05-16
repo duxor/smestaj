@@ -12,7 +12,6 @@
  * * log - tabela [id,korisnici_id,created_at]
  */
 
-
 namespace App;
 
 use Illuminate\Support\Facades\Redirect;
@@ -20,7 +19,6 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use App\Korisnici;
 use Illuminate\Support\Facades\DB;
-
 class Security {
     private $id;
     private $username;
@@ -151,7 +149,8 @@ class Security {
         return Security::rediectToLogin();
     }
 //#REDIRECTORI[autentifikacija, logout, redirect, redirectToLogin]
-    public static function autentifikacija($target,$dodaci=null,$prava=2,$min=null){
+    public static function autentifikacija($target,$dodaci=null,$prava=null,$min=null){
+        if(!$prava) $prava=Session::has('prava_pristupa')?Session::get('prava_pristupa'):2;
         return Security::autentifikacijaTest($prava,$min) ? $dodaci ? view($target, $dodaci) : view($target) : Security::rediectToLogin();
     }
     public static function logout($end=null){

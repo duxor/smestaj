@@ -24,6 +24,10 @@ class MailboxC extends Controller {
 		Mailbox::insert(['korisnici_id'=>$primalac->id,'od_id'=>Session::get('id'),'od_email'=>Korisnici::find(Session::get('id'),['email'])->email,'naslov'=>$podaci->naslov,'poruka'=>$podaci->poruka]);
 		return json_encode(['msg'=>'Poruka je uspešno poslata.','check'=>1]);
 	}
+	public function postPronadjiUsername(){
+		if(!Security::autentifikacijaTest(2,'min'))Security::rediectToLogin();
+		return json_encode(Korisnici::where('username','Like','%'.Input::get('tekst').'%')->get(['username','email'])->toArray());
+	}
 //INBOX
 	public function anyIndex($pravaSlug){
 		$akcija=Session::has('akcija')?Session::get('akcija'):'inbox';

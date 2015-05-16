@@ -250,6 +250,7 @@ class KreiranjeBaze extends Migration{
             $table->tinyInteger('aktivan')->default(1);
             $table->date('odjava')->nullable();
             $table->text('utisci')->nullable();
+            $table->tinyInteger('ocena')->nullable();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->nullable();
         });
