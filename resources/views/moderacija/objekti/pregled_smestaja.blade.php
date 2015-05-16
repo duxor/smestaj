@@ -40,7 +40,7 @@
 								<td>{{$obj['naziv_smestaja']}}</td>
 								<td>{{$obj['naziv_kapaciteta']}}</td>
 								<td>{{$obj['broj_osoba']}}</td>
-								<td><p data-placement="top" data-toggle="tooltip" title="Ažuriraj"><a href="{!!url('/moderator/izmeni-smestaj/'.$obj['id']) !!}" class="btn btn-xs btn-primary" ><span class="glyphicon glyphicon-pencil"></span></a></p></td>
+								<td><p data-placement="top" data-toggle="tooltip" title="Ažuriraj"><a href="{!!url('/moderacija/izmeni-smestaj/'.$obj['id']) !!}" class="btn btn-xs btn-primary" ><span class="glyphicon glyphicon-pencil"></span></a></p></td>
 							</tr>
 							@endforeach
 

@@ -21,8 +21,8 @@ class Rezervacija extends Controller {
 	public function getIndex(){
 	}
 	public function getAktuelne(){
-			$rezervacije=Korisnici::where('korisnici.id','=',Session::get('id'))
-					->where('rezervacije.aktivan','=',1)
+			$rezervacije=Korisnici::where('korisnici.id',Session::get('id'))
+					->where('rezervacije.aktivan',1)
 					->join('nalog','nalog.korisnici_id','=','korisnici.id')
 					->join('objekat','objekat.nalog_id','=','nalog.id')
 					->join('smestaj','smestaj.objekat_id','=','objekat.id')
@@ -37,8 +37,8 @@ class Rezervacija extends Controller {
 	}
 	public function getArhiva(){
 			$rezervacije=Korisnici::orderBy('odjava', 'desc')
-					->where('korisnici.id','=',Session::get('id'))
-					->where('rezervacije.aktivan','=',0)
+					->where('korisnici.id',Session::get('id'))
+					->where('rezervacije.aktivan',0)
 					->join('nalog','nalog.korisnici_id','=','korisnici.id')
 					->join('objekat','objekat.nalog_id','=','nalog.id')
 					->join('smestaj','smestaj.objekat_id','=','objekat.id')
@@ -50,9 +50,23 @@ class Rezervacija extends Controller {
 						'vrsta_smestaja.naziv as vrsta_smestaja_naziv','rezervacije.id','odjava'])->toArray();		
 			return Security::autentifikacija('moderacija.rezervacija.arhiva', compact('rezervacije'),4);
 	}
+	public function getGosti(){
+		$korisnici=Korisnici::where('rezervacije.korisnici_id',Session::get('id'))
+
+
+			->join('nalog','nalog.korisnici_id','=','korisnici.id')
+			->join('objekat','objekat.nalog_id','=','nalog.id')
+			->join('smestaj','smestaj.objekat_id','=','objekat.id')
+			->join('rezervacije','rezervacije.smestaj_id','=','smestaj.id')
+			->get(['korisnici.prezime as pr','korisnici.ime as ime_korisnika','korisnici.email as email_korisnika',
+				'korisnici.fotografija as fotografija_korisnika','smestaj.naziv as naziv_smestaja',
+				'rezervacije.od','rezervacije.do','rezervacije.utisci','rezervacije.ocena'])->toArray();
+
+		return Security::autentifikacija('moderacija.rezervacija.gosti',compact('korisnici'),4);
+	}
 
 	public function postOdjaviKorisnika(){
-		Rezervacije::where('rezervacije.id','=',Input::get('id'))->update(['aktivan'=>0,'odjava'=>date("Y-m-d"),'utisci'=>Input::get('utisci'),'ocena'=>Input::get('rating')]);
+		Rezervacije::where('rezervacije.id',Input::get('id'))->update(['aktivan'=>0,'odjava'=>date("Y-m-d"),'utisci'=>Input::get('utisci'),'ocena'=>Input::get('rating')]);
 				return Redirect::back();
 			
 	}

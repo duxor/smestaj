@@ -37,6 +37,12 @@
 							{!!Form::select('kapacitet',$kapacitet, $objekti['id_kapaciteta'],['class'=>'form-control'])!!}
 						</div>
 					</div>
+					<div class="form-group">
+					        {!!Form::label('cena','Cena',['class'=>'control-label col-sm-2'])!!}
+					        <div class="col-sm-3">
+					            {!!Form::text('cena',$objekti['cena_osoba'],['class'=>'form-control','placeholder'=>'Unesite cenu u dinarima...'])!!}
+					        </div>
+					    </div>
 			        <div class="form-group">
 				        <div class="col-sm-2"></div>
 				        <div class="col-sm-10">

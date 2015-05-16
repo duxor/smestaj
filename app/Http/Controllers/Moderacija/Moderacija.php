@@ -189,7 +189,7 @@ class Moderacija extends Controller {
 		$vrstasmestaja=VrstaSmestaja::lists('naziv','id');
 		$objekti=Smestaj::where('smestaj.id','=', $id)->join('vrsta_smestaja','vrsta_smestaja.id','=','smestaj.vrsta_smestaja_id')
 		->join('kapacitet','kapacitet.id','=','smestaj.kapacitet_id')
-		->get(['smestaj.naziv','smestaj.id','vrsta_smestaja.id as id_smestaja','kapacitet.id as id_kapaciteta'])->first()->toArray();
+		->get(['smestaj.naziv','smestaj.id','vrsta_smestaja.id as id_smestaja','kapacitet.id as id_kapaciteta','smestaj.cena_osoba'])->first()->toArray();
 		return Security::autentifikacija('moderacija.objekti.edit_smestaja',
 				compact('kapacitet','vrstasmestaja','objekti'), 4);	
 	}
