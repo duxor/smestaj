@@ -117,6 +117,10 @@
                                             toggleActive: true,
                                             format: "yyyy-mm-dd"
                                         });
+                                        var d = new Date();
+                                        $('input[name=datumOd]').datepicker('setDate',d);
+                                        d.setDate(d.getDate()+1);
+                                        $('input[name=datumDo]').datepicker('setDate', d);
                                     </script>
                                     <div class="form-group">
                                         {!!Form::label('lgrad','Broj osoba',['class'=>'control-label'])!!}
