@@ -32,7 +32,7 @@ class Security {
     private static $kreatorID=6;
     public static $adminURL='/administracija';
     public static $userURL='/korisnik';
-    public static $modURL='/moderator';
+    public static $modURL='/moderacija';
     public static $logURL='/log/login';
     private $token;
     private $redirectURL;
@@ -108,7 +108,7 @@ class Security {
             $korisnik->pravapristupa_id=2;
             $korisnik->aktivan=1;
         $korisnik->save();
-        return Redirect::to('/login')->withPotvrda('Uspešno ste izvršili registraciju. Možete da se prijavite na platformu.')->with(['return_to_url'=>$return_to_url]);
+        return Redirect::to('/log/login')->withPotvrda('Uspešno ste izvršili registraciju. Možete da se prijavite na platformu.')->with(['return_to_url'=>$return_to_url]);
     }
     public static function comeFromUrl(){
         return isset($_SERVER['HTTP_REFERER'])?parse_url($_SERVER['HTTP_REFERER'])['path']:null;
@@ -147,7 +147,7 @@ class Security {
                 Log::insert(['korisnici_id'=>$korisnik->id]);
             }else Korisnici::where('id', $sec->id)->update(['token' => null]);
         }
-        if($return_to_url) return redirect($return_to_url);
+        if($return_to_url&&strcmp(substr($return_to_url,0,5),'/log/')!=0) return redirect($return_to_url);
         return Security::rediectToLogin();
     }
 //#REDIRECTORI[autentifikacija, logout, redirect, redirectToLogin]
@@ -170,7 +170,7 @@ class Security {
     }
     public static function rediectToLogin(){
         if(Session::has('prava_pristupa'))
-        if(Security::autentifikacijaTest(Session::has('prava_pristupa'))){
+        if(Security::autentifikacijaTest(Session::get('prava_pristupa'))){
             switch(Session::get('prava_pristupa')){
                 case Security::$userID:return redirect(Security::$userURL);break;
                 case Security::$modID:return redirect(Security::$modURL);break;
