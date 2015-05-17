@@ -236,13 +236,13 @@ class KonfiguracioniPodaci extends Seeder{
                 'templejt_id'=>26
             ],
             [
-                'naziv'=>'Pozadine',
+                'naziv'=>'Pozadine 1',
                 'sadrzaj'=>'pozadine-1',//adresa do galerije
                 'icon'=>null,
                 'templejt_id'=>27
             ],
             [
-                'naziv'=>'Pozadine',
+                'naziv'=>'Pozadine 2',
                 'sadrzaj'=>'pozadine-2',//adresa do galerije
                 'icon'=>null,
                 'templejt_id'=>28

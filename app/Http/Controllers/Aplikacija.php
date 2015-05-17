@@ -65,7 +65,6 @@ class Aplikacija extends Controller {
 
 		$podaci['slajder']=OsnovneMetode::listaFotografija("galerije/".Korisnici::join('nalog as n','n.korisnici_id','=','korisnici.id')->where('n.slug',$slugApp)->get(['username'])->first()->username."/aplikacije/{$slugApp}/smestaji/{$slugSmestaj}");
 		$podaci['kalendar']=OsnovneMetode::podaciZaKalendar($slugSmestaj);
-		//dd($podaci,json_decode($podaci['kalendar']));
 		return view("aplikacija.teme.{$tema->slug}.smestaj",compact('podaci','komentari','prosecna_ocena'));
 	}
 	public function postListaZeljaDodaj(){

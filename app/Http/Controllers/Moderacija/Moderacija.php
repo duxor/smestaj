@@ -237,8 +237,11 @@ class Moderacija extends Controller {
 					
 		return Security::autentifikacija('moderacija.objekti.novi_smestaj',compact('kapacitet','vrstasmestaja','objekti'),4);
 	}
-	public function postNoviSmestaj(){
-		if(Security::autentifikacijaTest(4)){
+	public function postNoviSmestaj(){dd(Input::all());
+		if(Security::autentifikacijaTest(4,'min')){
+			//prvo - kreirati folder
+			//OsnovneMetode::kreirjFolder("galerije/{$username}/aplikacije/{$slugApp}/smestaji/{$slugSmestaj}");
+			//drugo - dodati izabranu fotografiju u folder, i adresu zapisati u naslovna_foto
 			$naziv_objekta=Objekat::where('id','=',Input::get('nazivobjekta'))->get(['naziv'])->first()->toArray();
             $novi = Smestaj::firstOrNew(['id'=>Input::get('id')]);
             $novi->objekat_id = Input::get('nazivobjekta'); 
