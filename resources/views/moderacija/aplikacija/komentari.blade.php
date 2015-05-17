@@ -29,6 +29,7 @@
 								<tr>
 									<div id="forma" class="form-horizontal">
 									{!!Form::hidden('id_komentara',$kom['id'])!!}
+									{!!Form::hidden('_token',csrf_token())!!}
 										<th>{{$kom['username']}}</th>
 										<th>{{$kom['slug']}}</th>
 										<th>{{$kom['komentar']}}</th>
