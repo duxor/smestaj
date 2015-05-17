@@ -107,7 +107,6 @@ class Moderacija extends Controller {
 	}
 
 	public function getKomentari(){
-
 			$smestaj_id=Komentari::join('smestaj','smestaj.id','=','komentari.smestaj_id')
 				->join('objekat','objekat.id','=','smestaj.objekat_id')
 				->join('nalog','nalog.id','=','objekat.nalog_id')
@@ -118,13 +117,19 @@ class Moderacija extends Controller {
 			$komentari=Komentari::join('smestaj','smestaj.id','=','komentari.smestaj_id')
 				->join('korisnici','korisnici.id','=','komentari.korisnici_id')
 				->whereIn('komentari.smestaj_id',$smestaj_id)
-				->get(['komentari.id','komentari.komentar','korisnici.username','smestaj.slug'])->toArray();
+				->get(['komentari.id','komentari.komentar','komentari.aktivan','korisnici.username','smestaj.slug'])->toArray();
+		//dd($komentari);
 		return Security::autentifikacija('moderacija.aplikacija.komentari',compact('komentari'),4);
 	}
 	public function postZabrani(){
 		$podaci=json_decode(Input::get('podaci'));
 		Komentari::where('komentari.id',$podaci->id_komentara)->update(['aktivan'=>'0']);
-		return json_encode(['msg'=>'Uspešno ste zabranili komentar','check'=>1]);
+		return json_encode(['msg'=>'Uspešno ste zabranili komentar','check'=>0]);
+	}
+		public function postOdobri(){
+		$podaci=json_decode(Input::get('podaci'));
+		Komentari::where('komentari.id',$podaci->id_komentara)->update(['aktivan'=>'1']);
+		return json_encode(['msg'=>'Uspešno ste odobrili komentar','check'=>1]);
 	}
 
 	public function getUPripremi(){
