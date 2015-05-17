@@ -18,32 +18,6 @@ class Pretraga extends Controller {
 	public function defaultPodaci($appID){
 		return Templejt::join('sadrzaji','sadrzaji.templejt_id','=','templejt.id')->where('nalog_id',$appID)->where('tema_id',Nalog::find($appID,['tema_id'])->tema_id)->orderBy('redoslijed')->get(['slug','naziv','vrsta_sadrzaja_id','icon'])->toArray();
 	}
-	/*
-	public function anyIndeddx($slugApp=null){
-		$tacan_broj=Input::get('tacan_broj')?'':'>';
-		$podaci=$this->defaultPodaci(1);
-		$podaci['broj_osoba']=Input::get('broj_osoba')?Input::get('broj_osoba'):1;
-		$podaci['rezultat']=Objekat::
-			join('smestaj','smestaj.objekat_id','=','objekat.id')
-			->leftjoin('nalog','nalog.id','=','objekat.nalog_id')
-			->leftjoin('kapacitet','kapacitet.id','=','smestaj.kapacitet_id')
-			->leftjoin('vrsta_smestaja','vrsta_smestaja.id','=','smestaj.vrsta_smestaja_id')
-			->leftjoin('lista_zelja',function($query){
-				$query->on('lista_zelja.smestaj_id','=','smestaj.id')->where('lista_zelja.aktivan','=',1)->where('lista_zelja.korisnici_id','=',Session::get('id'));
-			})
-			->groupby('id')
-			->where('grad_id',Input::get('grad_id'))->where('broj_osoba',$tacan_broj.'=',$podaci['broj_osoba'])
-			->where('objekat.aktivan',1)->where('smestaj.aktivan',1)
-			->orderBy('smestaj.naziv')
-			->select('nalog.naziv as nazivApp','nalog.slug as slugApp','vrsta_smestaja.naziv as vrsta_smestaja','smestaj.id',
-				'smestaj.slug as slugSmestaj','smestaj.naziv','adresa','broj_osoba','lista_zelja.id as zelja','naslovna_foto','cena_osoba')->get()->toArray();
-		//dd($podaci);
-		$podaci['gradovi']=Grad::lists('naziv','id');
-		$podaci['grad_id']=Input::get('grad_id');
-		$podaci['tacan_broj']=Input::get('tacan_broj');
-		$podaci['grad_koo']=Grad::find(Input::get('grad_id'),['x','y','z']);
-		return view('aplikacija.teme-osnove.osnovna.pretraga',compact('podaci'));
-	}*/
 	public function postSmestaji(){
 		$smestaj=Objekat::where('naziv','Like','%'.Input::get('naziv').'%')->get()->toArray();
 		dd($smestaj);
@@ -69,7 +43,7 @@ class Pretraga extends Controller {
 		$niz.=']});';
 		return $niz;
 	}
-	public function getMarkeriGradovi(){
+	/*public function getMarkeriGradovi(){
 		$nalozi=Grad::whereNotNull('x')->get(['id','naziv','x','y']);
 		$niz = 'onLoadMarkers({"type": "FeatureCollection","features": [';
 		$i=0;
@@ -80,7 +54,7 @@ class Pretraga extends Controller {
 		}
 		$niz.=']});';
 		return $niz;
-	}
+	}*//*
 	public function getAplikacija($id=null){
 		if(!$id) return '';
 		$objekti=Objekat::where('nalog_id',$id)->where('aktivan',1)->get(['id','naziv','x','y']);
@@ -93,10 +67,8 @@ class Pretraga extends Controller {
 		}
 		$niz.=']});';
 		return $niz;
-	}
-
-	//################# APP
-	public function anyIndex($slugApp=null){//dd(Input::all());
+	}*/
+	public function anyIndex($slugApp=null){
 		if($slugApp&&Input::get('aplikacija')=='') return Redirect::to('/'.$slugApp);//nalog.id
 		$tacan_broj=Input::get('tacan_broj')?'':'>';
 		$podaci=$this->defaultPodaci($slugApp?Input::get('aplikacija'):1);//templejt sa menijem bez podataka
@@ -127,5 +99,4 @@ class Pretraga extends Controller {
 		$tema=$slugApp?'.'.Tema::find(Nalog::find(Input::get('aplikacija'),['tema_id'])->tema_id, ['slug'])->slug:'-osnove.osnovna';
 		return view('aplikacija.teme'.$tema.'.pretraga',compact('podaci'));
 	}
-	//################# EndApp
 }

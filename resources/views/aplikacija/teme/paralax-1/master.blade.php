@@ -98,7 +98,7 @@
 </nav>
 {{--navigacija END::--}}
 
-<div class="container odmak">
+<div class="container">
     @yield('content')
 </div>
 

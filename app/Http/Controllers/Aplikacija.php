@@ -37,11 +37,8 @@ class Aplikacija extends Controller {
 			$podaci['pocetna']=true;
 			$podaci['pozadine']=$this->pozadine($nalog);
 			$podaci['grad']=Grad::join('objekat','objekat.grad_id','=','grad.id')->where('objekat.nalog_id',$nalog['id'])->orderBy('grad.id')->get(['grad.id','grad.naziv'])->lists('naziv','id');
-			$podaci['app']['id']=$nalog['id'];
-			$podaci['app']['slug']=$slug;
 			$podaci['app']=Nalog::join('korisnici as k','k.id','=','nalog.korisnici_id')->join('tema as t','t.id','=','nalog.tema_id')
 				->where('nalog.slug',$slug)->get(['nalog.id','nalog.slug','k.username','t.slug as slugTema'])->first()->toArray();
-			//dd($podaci);
 			return view("aplikacija.teme.{$nalog['tema_slug']}.index",compact('podaci'));
 		}else return'Aplikacija nije aktivna!';
 	}
@@ -54,15 +51,13 @@ class Aplikacija extends Controller {
 			->where('slug',$slugSmestaj)
 			->get(['smestaj.id','smestaj.naziv','slug','kapacitet.naziv as naziv_kapaciteta','broj_osoba','vrsta_smestaja.naziv as vrsta_smestaja','naslovna_foto','cena_osoba','x','y','z'])->first()->toArray();
 		$tema=Nalog::join('tema','tema.id','=','nalog.tema_id')->where('nalog.slug',$slugApp)->get(['tema.slug','nalog.id'])->first();
-		$podaci['app']['slug']=$slugApp;
-		$podaci['app']['id']=$tema->id;//=nalog.id=appID
-		
+		$podaci['app']=Nalog::join('korisnici as k','k.id','=','nalog.korisnici_id')->join('tema as t','t.id','=','nalog.tema_id')
+			->where('nalog.slug',$slugApp)->get(['nalog.id','nalog.slug','k.username','t.slug as slugTema'])->first()->toArray();
 		$id_smestaja=Smestaj::where('slug','=',$slugSmestaj)->get(['smestaj.id'])->first();
 		$komentari=Komentari::orderBy('created_at','desc')->where('smestaj_id','=',$id_smestaja->id)->where('komentari.aktivan','=','1')
 				->join('korisnici','korisnici.id','=','komentari.korisnici_id')
 				->get(['komentar','ocena','komentari.created_at','korisnici.username'])->toArray();
 		$prosecna_ocena=Komentari::where('smestaj_id','=',$id_smestaja->id)->where('aktivan','=','1')->avg('ocena');
-
 		$podaci['slajder']=json_encode(OsnovneMetode::listaFotografija("galerije/".Korisnici::join('nalog as n','n.korisnici_id','=','korisnici.id')->where('n.slug',$slugApp)->get(['username'])->first()->username."/aplikacije/{$slugApp}/smestaji/{$slugSmestaj}"));
 		$podaci['kalendar']=OsnovneMetode::podaciZaKalendar($slugSmestaj);
 		return view("aplikacija.teme.{$tema->slug}.smestaj",compact('podaci','komentari','prosecna_ocena'));

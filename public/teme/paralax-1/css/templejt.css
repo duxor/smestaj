@@ -2,14 +2,13 @@
 *    Autor: Dusan Perisic
 *    Datum: 12.03.2015.
 *
-*    Dodatni stilovi
+*    Dodatni stilovi PARALAX 1
 *
 *******************************/
-.odmak{margin-top: 160px}
+.od80{margin-top: 80px}
 .nDn{text-align: right;padding-right: 10px}
 .container .pretraga{margin-top: 7%;z-index: 5}
 .smestajNaslov{margin-top: -4px}
-.skrollr-desktop{margin-top: -12%}
 h3{
     text-decoration: underline;
 }

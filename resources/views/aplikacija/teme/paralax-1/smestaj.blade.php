@@ -5,7 +5,7 @@
             <div class="panel-body">
                 <div class="media col-md-5">
                 <figure class="pull-left">
-                    <img class="media-object img-rounded img-responsive"  src="{!!$podaci['smestaj']['naslovna_foto']!!}" alt="Naslovna fotografija" >
+                    <img class="media-object img-rounded img-responsive"  src="/{{\App\OsnovneMetode::randomFoto('galerije/'.$podaci['app']['username'].'/aplikacije/'.$podaci['app']['slug'].'/smestaji/'.$podaci['smestaj']['slug'])}}" alt="Naslovna fotografija" >
                 </figure>   
                 </div>
                 <div class="col-md-6">
@@ -73,22 +73,22 @@
 <div class='row'>
         <div class='col-md-8'>
             <div class="row">
-                <div class="carousel slide media-carousel" id="media">
+                <div class="carousel slide media-carousel">
                     <div class="carousel-inner">
                         <div class="item active">
                             <div class="row">
                                 <div class="col-md-4">
-                                    <a class="thumbnail" href="#">
+                                    <a class="thumbnail">
                                         <img id="slika-1" class="slike-slajder" src="/galerije/default-galerije/osnovne/smestaj-default.jpg">
                                     </a>
                                 </div>
                                 <div class="col-md-4">
-                                    <a class="thumbnail slajder-p2" href="#">
+                                    <a class="thumbnail slajder-p2">
                                         <img id="slika-2" class="slike-slajder" src="/galerije/default-galerije/osnovne/smestaj-default.jpg">
                                     </a>
                                 </div>
                                 <div class="col-md-4">
-                                    <a class="thumbnail slajder-p2" href="#">
+                                    <a class="thumbnail slajder-p2">
                                         <img id="slika-3" class="slike-slajder" src="/galerije/default-galerije/osnovne/smestaj-default.jpg">
                                     </a>
                                 </div>
@@ -101,6 +101,7 @@
             </div>
         </div>
     <style>
+        .slike-slajder{cursor: pointer}
         @media(min-width: 990px){.slajder-p2{display: block}}
         @media(max-width: 991px){.slajder-p2{display: none}}
     </style>

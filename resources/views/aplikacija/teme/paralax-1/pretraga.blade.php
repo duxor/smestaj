@@ -87,7 +87,7 @@
     </style>
 @endsection
 @section('content')
-    <h1 class="pretraga">Pretraga</h1>
+    <h1 class="od80">Pretraga</h1>
     {!!Form::open(['url'=>$podaci['app']['slug'].'/pretraga','class'=>'form-inline col-sm-11'])!!}
     {!!Form::hidden('aplikacija',$podaci['app']['id'])!!}
     <div class="form-group">
