@@ -69,10 +69,11 @@
             
         </div><!-- KRAJ col-md-3-->
     </div><!-- KRAJ row -->
-    <br clear="all"><hr>
-    <div class='row'>
+<br clear="all"><hr>
+<div class='row'>
         <div class='col-md-8'>
             <div class="row">
+
                <div class="carousel slide media-carousel" id="media">
                   <div class="carousel-inner">
                       <div class="item active">
@@ -94,7 +95,12 @@
                               </div>
                           </div>
                       </div>
+                      <div class="col-md-4">
+                        <a class="thumbnail fancybox"  rel="ligthbox"href="#"><img alt="" src=""></a>
+                      </div>        
+                    </div>
                   </div>
+
                   <a data-strana="left" class="left carousel-control slajder-kontrola" style="cursor: pointer">‹</a>
                   <a data-strana="right" class="right carousel-control slajder-kontrola" style="cursor: pointer">›</a>
                </div>
@@ -151,7 +157,14 @@
             }
         };
     </script>
-
+                </div>
+                <a data-slide="prev" href="#media" class="left carousel-control">‹</a>
+                <a data-slide="next" href="#media" class="right carousel-control">›</a>
+              </div>
+            
+            </div><!-- KRAJ row --> 
+                         
+        </div><!-- KRAJ md-9 -->
         <div class="col-md-4"><!-- pocetak mapa-->
                 <div class="embed-responsive embed-responsive-4by3">
                     <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyANkR_6WBUEKhO58qGQo0thZmNpvSCqRZE&q={!!$podaci['smestaj']['y']!!},{!!$podaci['smestaj']['x']!!}&zoom=15&center={!!$podaci['smestaj']['y']!!},{!!$podaci['smestaj']['x']!!}"></iframe>
@@ -242,16 +255,6 @@
         </div><!--Container - KRAJ -->
     </div>
 </div>
-@endsection
+            
 
-@section('body')
-    <div class="modal fade" id="prikaziSliku">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <img style="width: 100%" id="shFoto">
-                </div>
-            </div>
-        </div>
-    </div>
 @endsection

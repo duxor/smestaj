@@ -19,6 +19,7 @@ use App\Grad;
 use App\Smestaj;
 use App\VrstaSmestaja;
 use App\Kapacitet;
+use App\Korisnici;
 
 class Moderacija extends Controller {
 	public function getRefresh(){
@@ -237,10 +238,20 @@ class Moderacija extends Controller {
 					
 		return Security::autentifikacija('moderacija.objekti.novi_smestaj',compact('kapacitet','vrstasmestaja','objekti'),4);
 	}
-	public function postNoviSmestaj(){dd(Input::all());
+	public function postNoviSmestaj(){//dd(Input::all());
 		if(Security::autentifikacijaTest(4,'min')){
+
+			$podaci=Korisnici::where('korisnici.id','=',Session::get('id'))
+			->where('objekat.id',Input::get('nazivobjekta'))
+			->join('nalog','nalog.korisnici_id','=','korisnici.id')
+			->join('objekat','objekat.nalog_id','=','nalog.id')
+			->join('smestaj','smestaj.objekat_id','=','objekat.id')
+			->get(['korisnici.username','nalog.slug','objekat.naziv'])->first()->toArray();
+			
+			dd($podaci['username']);
 			//prvo - kreirati folder
-			//OsnovneMetode::kreirjFolder("galerije/{$username}/aplikacije/{$slugApp}/smestaji/{$slugSmestaj}");
+			//$adresa=OsnovneMetode::kreirjFolder("/galerije/$podaci['username'].'/aplikacije/'.$podaci['slug'].'/smestaji/'.Input::get('slug').");
+			//dd($adresa);
 			//drugo - dodati izabranu fotografiju u folder, i adresu zapisati u naslovna_foto
 			$naziv_objekta=Objekat::where('id','=',Input::get('nazivobjekta'))->get(['naziv'])->first()->toArray();
             $novi = Smestaj::firstOrNew(['id'=>Input::get('id')]);
@@ -250,6 +261,7 @@ class Moderacija extends Controller {
             $novi->vrsta_smestaja_id = Input::get('vrstasmestaja');
             $novi->naziv= $naziv_objekta['naziv'];
             $novi->cena_osoba = Input::get('cena');
+            $novi->slug = Input::get('slug');
             $novi->save();
             return Redirect::back()->with('message','Uspešno ste dodali novi smeštaj!');
         }else return Security::rediectToLogin();

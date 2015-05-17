@@ -36,6 +36,12 @@
 							</div>
 						</div>
 						<div class="form-group">
+					        {!!Form::label('Slug','Slug',['class'=>'control-label col-sm-5'])!!}
+					        <div class="col-sm-7">
+					            {!!Form::text('slug',null,['class'=>'form-control','placeholder'=>'Unesite slug...'])!!}
+					        </div>
+					    </div>
+						<div class="form-group">
 					        {!!Form::label('cena','Cena',['class'=>'control-label col-sm-5'])!!}
 					        <div class="col-sm-7">
 					            {!!Form::text('cena',null,['class'=>'form-control','placeholder'=>'Unesite cenu u dinarima...'])!!}
