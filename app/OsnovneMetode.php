@@ -111,4 +111,13 @@ class OsnovneMetode {
             ->whereNull('rezervacije.odjava')
             ->count();
     }
+    public static function dostupnostZaRezervaciju($lokali,$od,$do,$ID='id'){
+        foreach($lokali as $k=>$rezultat) {
+            $rezervacija = Rezervacije::where('aktivan', 1)->where('smestaj_id', $rezultat[$ID])->get(['od', 'do'])->first();
+            if ($rezervacija)
+                if (strtotime($rezervacija->od) >= strtotime($do) || strtotime($rezervacija->do) <= strtotime($od));
+                else unset($lokali[$k]);
+        }
+        return $lokali;
+    }
 }

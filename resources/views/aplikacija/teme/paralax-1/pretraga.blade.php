@@ -20,7 +20,7 @@
         }
         function loadMarkers() {
             var script = document.createElement("script");
-            script.src = "/pretraga/markeri-izbor?broj_osoba={{$podaci['broj_osoba']}}&grad_id={{$podaci['grad_id']}}&tacan_broj={{$podaci['tacan_broj']}}";
+            script.src = "/pretraga/markeri-izbor?broj_osoba={{$podaci['broj_osoba']}}&grad_id={{$podaci['grad_id']}}&tacan_broj={{$podaci['tacan_broj']}}&datumOd{{$podaci['datumOd']}}&datumDo{{$podaci['datumDo']}}";
             document.getElementsByTagName("head")[0].appendChild(script);
         }
         function onLoadMarkers(collection) {
@@ -49,14 +49,12 @@
                 } else {
                     locationsByType[type] = [marker.location];
                 }
-                // listen for mouseover & mouseout events
                 MM.addEvent(marker, "mouseover", onMarkerOver);
                 MM.addEvent(marker, "mouseout", onMarkerOut);
             }
-            // tell the map to fit all of the locations in the available space
             map.setExtent(locations);
             //map.setCenterZoom(locations[0],6);
-            //map.setCenterZoom(new com.modestmaps.Location('{{$podaci['grad_koo']['y']}}','{{$podaci['grad_koo']['x']}}'),'{{$podaci['grad_koo']['z']}}');
+            //map.setCenterZoom(new com.modestmaps.Location('y','x'),'z');
         }
         function getMarker(target) {
             var marker = target;
@@ -135,20 +133,24 @@
     <div class="form-group">
         <label>Broj mesta (Tačan  broj {!!Form::checkbox('tacan_broj',1,$podaci['tacan_broj'])!!})</label>
         {!!Form::select('broj_osoba',[1=>1,2=>2,3=>3,4=>4,5=>5,6=>6,7=>7,8=>8,9=>9,10=>10,11=>11,12=>12],$podaci['broj_osoba'],['class'=>'form-control'])!!}
-        {!!Form::select('grad_id',$podaci['gradovi'],$podaci['grad_id'],['class'=>'form-control'])!!}
-        <div class="form-group" id="datarange">
+        {!!Form::select('grad_id',$podaci['gradovi'],$podaci['grad_id'],['class'=>'form-control'])!!}<div class="form-group" id="datarange">
             <div class="input-daterange input-group col-sm-12" id="datepicker">
-                {!! Form::text('datumOd', null, ['class'=>'input-sm form-control','placeholder'=>'od...']) !!}
+                {!! Form::text('datumOd',isset($podaci['datumOd'])?$podaci['datumOd']:null,['class'=>'input-sm form-control','placeholder'=>'od...']) !!}
                 <span class="input-group-addon">do</span>
-                {!! Form::text('datumDo', null, ['class'=>'input-sm form-control','placeholder'=>'do...']) !!}
+                {!! Form::text('datumDo',isset($podaci['datumDo'])?$podaci['datumDo']:null,['class'=>'input-sm form-control','placeholder'=>'do...']) !!}
             </div>
         </div>
         <script>
             $('#datarange .input-daterange').datepicker({orientation: "top auto",weekStart: 1,startDate: "current",todayBtn: "linked",toggleActive: true,format: "yyyy-mm-dd"});
+            @if(!isset($podaci['datumOd']))
             var d = new Date();
             $('input[name=datumOd]').datepicker('setDate',d);
+            @endif
+            @if(!isset($podaci['datumDo']))
+            var d = new Date();
             d.setDate(d.getDate()+1);
             $('input[name=datumDo]').datepicker('setDate', d);
+            @endif
         </script>
         {!!Form::button('<i class="glyphicon glyphicon-search"></i> Pronađi',['class'=>'btn btn-primary','type'=>'submit'])!!}
     </div>
