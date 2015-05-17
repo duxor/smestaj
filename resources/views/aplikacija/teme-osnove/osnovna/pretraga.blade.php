@@ -3,8 +3,8 @@
     <script type="text/javascript">
         var map, markers, spotlight, locationsByType = {};
         function initMap() {
-            var template = 'http://{S}tile.openstreetmap.org/{Z}/{X}/{Y}.png'//'http://{S}tile.openstreetmap.org/{Z}/{X}/{Y}.png';//'http://c.tiles.mapbox.com/v3/examples.map-szwdot65/{Z}/{X}/{Y}.png';//'http://ecn.t{S}.tiles.virtualearth.net/tiles/r{Q}?g=689&mkt=en-us&lbl=l0&stl=m';//'http://ecn.t{S}.tiles.virtualearth.net/tiles/r{Q}?g=689&mkt=en-us&lbl=l0&stl=m';//
-            var subdomains = [ '', 'a.', 'b.', 'c.' ];//[0,1,2,3,4,5,6,7];//
+            var template = 'http://{S}tile.openstreetmap.org/{Z}/{X}/{Y}.png';
+            var subdomains = [ '', 'a.', 'b.', 'c.' ];
             var provider = new com.modestmaps.TemplatedLayer(template, subdomains);
             map = new com.modestmaps.Map('map',
                     provider,
@@ -15,13 +15,12 @@
             spotlight = new SpotlightLayer();
             map.addLayer(spotlight);
             markers = new MM.MarkerLayer();
-            //map.setCenterZoom(new com.modestmaps.Location(45.311149,15.7401466), 6);
             map.addLayer(markers);
             loadMarkers();
         }
         function loadMarkers() {
             var script = document.createElement("script");
-            script.src = "/pretraga/markeri-izbor?broj_osoba={{$podaci['broj_osoba']}}&grad_id={{$podaci['grad_id']}}&tacan_broj={{$podaci['tacan_broj']}}";
+            script.src = "/pretraga/markeri-izbor?broj_osoba={{$podaci['broj_osoba']}}&grad_id={{$podaci['grad_id']}}&tacan_broj={{$podaci['tacan_broj']}}&datumOd{{$podaci['datumOd']}}&datumDo{{$podaci['datumDo']}}";
             document.getElementsByTagName("head")[0].appendChild(script);
         }
         function onLoadMarkers(collection) {
@@ -30,41 +29,23 @@
                     locations = [];
             for (var i = 0; i < len; i++) {
                 var feature = features[i],
-                        type = feature.properties.naslov,//crime_type,
+                        type = feature.properties.naslov,
                         marker = document.createElement("a");
                 marker.feature = feature;
                 marker.type = type;
-                // give it a title
-                marker.setAttribute("title", [
-                    type//, "on", feature.properties.date_time
-                ]);//.join(" "));
+                marker.setAttribute("title", [type]);
                 marker.setAttribute("class", "report");
-                // set the href to link to crimespotting's crime page
                 marker.setAttribute("href", feature.link);
-                   ////properties.date_time.substr(0, 10),
-                 /*type.replace(/ /g, "_"),
-                 feature.id
-                 ].join("/"));
-                 */
-                // create an image icon
                 var img = marker.appendChild(document.createElement("a"));
-                img.setAttribute("class","glyphicon glyphicon-screenshot");//glyphicon glyphicon-pushpin");//("src", "../geojson/icons/" + type.replace(/ /g, "_") + ".png");
+                img.setAttribute("class","glyphicon glyphicon-screenshot");
                 img.setAttribute("style","color:red");
                 markers.addMarker(marker, feature);
                 locations.push(marker.location);
-                if (type in locationsByType) {
-                    locationsByType[type].push(marker.location);
-                } else {
-                    locationsByType[type] = [marker.location];
-                }
-                // listen for mouseover & mouseout events
+                if (type in locationsByType)locationsByType[type].push(marker.location);else locationsByType[type] = [marker.location];
                 MM.addEvent(marker, "mouseover", onMarkerOver);
                 MM.addEvent(marker, "mouseout", onMarkerOut);
             }
-            // tell the map to fit all of the locations in the available space
             map.setExtent(locations);
-            //map.setCenterZoom(locations[0],6);
-            map.setCenterZoom(new com.modestmaps.Location('{{$podaci['grad_koo']['y']}}','{{$podaci['grad_koo']['x']}}'),'{{$podaci['grad_koo']['z']}}');
         }
         function getMarker(target) {
             var marker = target;
@@ -95,6 +76,7 @@
                 spotlight.parent.className = "inactive";
             }
         }
+        $(document).ready(function(){ initMap(); })
     </script>
     <style>
         .report {margin-left: -13px;margin-top: -13px;width: 26px;height: 26px;}
@@ -103,10 +85,6 @@
         #map canvas {transition-property: opacity;-webkit-transition-property: opacity;-moz-transition-property: opacity;-ms-transition-property: opacity;-o-transition-property: opacity;transition-duration: .6s;-webkit-transition-duration: .6s;-moz-transition-duration: .6s;-ms-transition-duration: .6s;-o-transition-duration: .6s;transition-delay: .1s;-webkit-transition-delay: .1s;-moz-transition-delay: .1s;-ms-transition-delay: .1s;-o-transition-delay: .1s;opacity: 0;}
         #map canvas.active {opacity: 1}
     </style>
-
-    <script>
-        $(document).ready(function(){ initMap(); })
-    </script>
 @endsection
 @section('content')
     <h1 style="margin-top: 70px">Pretraga</h1>
@@ -114,7 +92,25 @@
     <div class="form-group">
         <label>Broj mesta (Tačan  broj {!!Form::checkbox('tacan_broj',1,$podaci['tacan_broj'])!!})</label>
         {!!Form::select('broj_osoba',[1=>1,2=>2,3=>3,4=>4,5=>5,6=>6,7=>7,8=>8,9=>9,10=>10,11=>11,12=>12],$podaci['broj_osoba'],['class'=>'form-control'])!!}
-        {!!Form::select('grad_id',$podaci['gradovi'],$podaci['grad_id'],['class'=>'form-control'])!!}
+        {!!Form::select('grad_id',$podaci['gradovi'],$podaci['grad_id'],['class'=>'form-control'])!!}<div class="form-group" id="datarange">
+            <div class="input-daterange input-group col-sm-12" id="datepicker">
+                {!! Form::text('datumOd',isset($podaci['datumOd'])?$podaci['datumOd']:null,['class'=>'input-sm form-control','placeholder'=>'od...']) !!}
+                <span class="input-group-addon">do</span>
+                {!! Form::text('datumDo',isset($podaci['datumDo'])?$podaci['datumDo']:null,['class'=>'input-sm form-control','placeholder'=>'do...']) !!}
+            </div>
+        </div>
+        <script>
+            $('#datarange .input-daterange').datepicker({orientation: "top auto",weekStart: 1,startDate: "current",todayBtn: "linked",toggleActive: true,format: "yyyy-mm-dd"});
+            @if(!isset($podaci['datumOd']))
+                var d = new Date();
+                $('input[name=datumOd]').datepicker('setDate',d);
+            @endif
+            @if(!isset($podaci['datumDo']))
+                var d = new Date();
+                d.setDate(d.getDate()+1);
+                $('input[name=datumDo]').datepicker('setDate', d);
+            @endif
+        </script>
         {!!Form::button('<i class="glyphicon glyphicon-search"></i> Pronađi',['class'=>'btn btn-primary','type'=>'submit'])!!}
     </div>
     {!!Form::close()!!}
@@ -129,7 +125,7 @@
         @foreach($podaci['rezultat'] as $smestaj)
             <hr>
             <div class="col-sm-4">
-                <a href="#">
+                <a href="/{{$smestaj['slugApp']}}/{{$smestaj['slugSmestaj']}}">
                     <img style="height: 150px;" @if($smestaj['naslovna_foto'])src="{{$smestaj['naslovna_foto']}}" @else src="/teme/osnovna-paralax/slike/15.jpg" @endif>
                 </a>
                 <p>

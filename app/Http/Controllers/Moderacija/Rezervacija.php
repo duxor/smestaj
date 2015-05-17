@@ -63,6 +63,7 @@ class Rezervacija extends Controller {
 	}
 
 	public function postOdjaviKorisnika(){
+		if(!Security::autentifikacijaTest(4,'min'))return Security::rediectToLogin();
 		Rezervacije::where('rezervacije.id',Input::get('id'))->update(['aktivan'=>0,'odjava'=>date("Y-m-d"),'utisci'=>Input::get('utisci'),'ocena'=>Input::get('rating')]);
 				return Redirect::back();
 			

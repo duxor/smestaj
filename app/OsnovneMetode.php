@@ -39,6 +39,7 @@ class OsnovneMetode {
     public static function kreiranjeAplikacije($slugApp,$username,$appID,$tema_id){
         OsnovneMetode::kreirjFolder("galerije/{$username}/aplikacije/{$slugApp}");
         OsnovneMetode::kreirjFolder("galerije/{$username}/aplikacije/{$slugApp}/korisnicke-galerije");
+        OsnovneMetode::kreirjFolder("galerije/{$username}/aplikacije/{$slugApp}/smestaji");
         OsnovneMetode::primenaTeme($appID,$tema_id);
         $temaSlug=Tema::find($tema_id,['slug'])->slug;
         OsnovneMetode::kopirajFolder("galerije/default-galerije/teme/{$temaSlug}","galerije/{$username}/aplikacije/{$slugApp}/{$temaSlug}");
@@ -110,5 +111,14 @@ class OsnovneMetode {
             ->where('nalog.korisnici_id',Session::get('id'))
             ->whereNull('rezervacije.odjava')
             ->count();
+    }
+    public static function dostupnostZaRezervaciju($lokali,$od,$do,$ID='id'){
+        foreach($lokali as $k=>$rezultat) {
+            $rezervacija = Rezervacije::where('aktivan', 1)->where('smestaj_id', $rezultat[$ID])->get(['od', 'do'])->first();
+            if ($rezervacija)
+                if (strtotime($rezervacija->od) >= strtotime($do) || strtotime($rezervacija->do) <= strtotime($od));
+                else unset($lokali[$k]);
+        }
+        return $lokali;
     }
 }

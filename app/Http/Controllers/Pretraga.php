@@ -5,7 +5,10 @@ use App\Http\Requests;
 
 use App\Nalog;
 use App\Objekat;
+use App\OsnovneMetode;
+use App\Rezervacije;
 use App\Tema;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use App\Templejt;
 use Illuminate\Support\Facades\Redirect;
@@ -15,6 +18,7 @@ class Pretraga extends Controller {
 	public function defaultPodaci($appID){
 		return Templejt::join('sadrzaji','sadrzaji.templejt_id','=','templejt.id')->where('nalog_id',$appID)->where('tema_id',Nalog::find($appID,['tema_id'])->tema_id)->orderBy('redoslijed')->get(['slug','naziv','vrsta_sadrzaja_id','icon'])->toArray();
 	}
+	/*
 	public function anyIndeddx($slugApp=null){
 		$tacan_broj=Input::get('tacan_broj')?'':'>';
 		$podaci=$this->defaultPodaci(1);
@@ -39,7 +43,7 @@ class Pretraga extends Controller {
 		$podaci['tacan_broj']=Input::get('tacan_broj');
 		$podaci['grad_koo']=Grad::find(Input::get('grad_id'),['x','y','z']);
 		return view('aplikacija.teme-osnove.osnovna.pretraga',compact('podaci'));
-	}
+	}*/
 	public function postSmestaji(){
 		$smestaj=Objekat::where('naziv','Like','%'.Input::get('naziv').'%')->get()->toArray();
 		dd($smestaj);
@@ -53,7 +57,8 @@ class Pretraga extends Controller {
 			->join('kapacitet','kapacitet.id','=','smestaj.kapacitet_id')
 			->where('grad_id',Input::get('grad_id'))->where('broj_osoba',(Input::get('tacan_broj')?'':'>').'=',Input::get('broj_osoba'))
 			->where('objekat.aktivan',1)->where('smestaj.aktivan',1)
-			->get(['objekat.id','objekat.naziv','nalog.slug as slugApp','smestaj.slug as slugSmestaj','x','y','adresa'])->toArray();
+			->get(['objekat.id','objekat.naziv','nalog.slug as slugApp','smestaj.slug as slugSmestaj','smestaj.id as smestajID','x','y','adresa'])->toArray();
+		$nalozi=OsnovneMetode::dostupnostZaRezervaciju($nalozi,Input::get('datumOd'),Input::get('datumDo'),'smestajID');
 		$niz = 'onLoadMarkers({"type": "FeatureCollection","features": [';
 		$i=0;
 		foreach($nalozi as $nalog){
@@ -91,7 +96,7 @@ class Pretraga extends Controller {
 	}
 
 	//################# APP
-	public function anyIndex($slugApp=null){
+	public function anyIndex($slugApp=null){//dd(Input::all());
 		if($slugApp&&Input::get('aplikacija')=='') return Redirect::to('/'.$slugApp);//nalog.id
 		$tacan_broj=Input::get('tacan_broj')?'':'>';
 		$podaci=$this->defaultPodaci($slugApp?Input::get('aplikacija'):1);//templejt sa menijem bez podataka
@@ -105,17 +110,20 @@ class Pretraga extends Controller {
 				$query->on('lista_zelja.smestaj_id','=','smestaj.id')->where('lista_zelja.aktivan','=',1)->where('lista_zelja.korisnici_id','=',Session::get('id'));
 			})
 			->groupby('id')
-			->where('grad_id',Input::get('grad_id'))->where('broj_osoba',$tacan_broj.'=',$podaci['broj_osoba'])
+			->where('grad_id',Input::get('grad_id'))->where('kapacitet.broj_osoba',$tacan_broj.'=',$podaci['broj_osoba'])
 			->where('objekat.aktivan',1)->where('smestaj.aktivan',1)
 			->orderBy('smestaj.naziv')
 			->select('nalog.naziv as nazivApp','nalog.slug as slugApp','vrsta_smestaja.naziv as vrsta_smestaja','smestaj.id',
-				'smestaj.slug as slugSmestaj','smestaj.naziv','adresa','broj_osoba','lista_zelja.id as zelja','naslovna_foto','cena_osoba')->get()->toArray();
+				'smestaj.slug as slugSmestaj','smestaj.naziv','adresa','kapacitet.broj_osoba','lista_zelja.id as zelja','naslovna_foto','cena_osoba')->get()->toArray();
+		$podaci['rezultat']=OsnovneMetode::dostupnostZaRezervaciju($podaci['rezultat'],Input::get('datumOd'),Input::get('datumDo'));
 		$podaci['gradovi']=$slugApp?Grad::join('objekat','objekat.grad_id','=','grad.id')->where('objekat.nalog_id',Input::get('aplikacija'))->orderBy('grad.id')->get(['grad.id','grad.naziv'])->lists('naziv','id'):Grad::lists('naziv','id');
 		$podaci['grad_id']=Input::get('grad_id');
 		$podaci['tacan_broj']=Input::get('tacan_broj');
 		$podaci['grad_koo']=Grad::find(Input::get('grad_id'),['x','y','z']);
 		$podaci['app']['id']=$slugApp?Input::get('aplikacija'):null;//nalog_id
 		$podaci['app']['slug']=$slugApp;
+		$podaci['datumOd']=Input::get('datumOd');
+		$podaci['datumDo']=Input::get('datumDo');
 		$tema=$slugApp?'.'.Tema::find(Nalog::find(Input::get('aplikacija'),['tema_id'])->tema_id, ['slug'])->slug:'-osnove.osnovna';
 		return view('aplikacija.teme'.$tema.'.pretraga',compact('podaci'));
 	}
