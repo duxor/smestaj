@@ -5,6 +5,7 @@ use App\Korisnici;
 use App\ListaZelja;
 use App\Mailbox;
 use App\Nalog;
+use App\OsnovneMetode;
 use App\Sadrzaji;
 use App\Smestaj;
 use App\Templejt;
@@ -60,8 +61,9 @@ class Aplikacija extends Controller {
 		$komentari=Komentari::orderBy('created_at','desc')->where('smestaj_id','=',$id_smestaja->id)->where('komentari.aktivan','=','1')
 				->join('korisnici','korisnici.id','=','komentari.korisnici_id')
 				->get(['komentar','ocena','komentari.created_at','korisnici.username'])->toArray();
-		$prosecna_ocena=Komentari::where('smestaj_id','=',$id_smestaja->id)->where('aktivan','=','1')
-				->avg('ocena');
+		$prosecna_ocena=Komentari::where('smestaj_id','=',$id_smestaja->id)->where('aktivan','=','1')->avg('ocena');
+
+		$podaci['slajder']=OsnovneMetode::listaFotografija("galerije/".Korisnici::join('nalog as n','n.korisnici_id','=','korisnici.id')->where('n.slug',$slugApp)->get(['username'])->first()->username."/aplikacije/{$slugApp}/smestaji/{$slugSmestaj}");
 		return view("aplikacija.teme.{$tema->slug}.smestaj",compact('podaci','komentari','prosecna_ocena'));
 	}
 	public function postListaZeljaDodaj(){
