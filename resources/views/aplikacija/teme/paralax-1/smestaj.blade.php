@@ -74,56 +74,34 @@
         </div><!-- KRAJ col-md-3-->
     </div><!-- KRAJ row -->
 <br clear="all"><hr>
-    <div class='row'>
+<div class='row'>
         <div class='col-md-8'>
             <div class="row">
+            
               <div class="carousel slide media-carousel" id="media">
                 <div class="carousel-inner">
+
                   <div class="item  active">
                     <div class="row">
                       <div class="col-md-4">
-                        <a class="thumbnail fancybox" rel="ligthbox" href="#"><img alt="" src="http://placehold.it/150x150"></a>
+                        <a class="thumbnail fancybox" rel="ligthbox" href="#"><img alt="" src="/{{$val}}"></a>
                       </div>          
                       <div class="col-md-4">
-                        <a class="thumbnail fancybox"  rel="ligthbox" href="#"><img alt="" src="http://placehold.it/150x150"></a>
+                        <a class="thumbnail fancybox"  rel="ligthbox" href="#"><img alt="" src=""></a>
                       </div>
                       <div class="col-md-4">
-                        <a class="thumbnail fancybox"  rel="ligthbox"href="#"><img alt="" src="http://placehold.it/150x150"></a>
+                        <a class="thumbnail fancybox"  rel="ligthbox"href="#"><img alt="" src=""></a>
                       </div>        
                     </div>
                   </div>
-                  <div class="item">
-                    <div class="row">
-                      <div class="col-md-4">
-                        <a class="thumbnail fancybox" href="#"><img alt="" src="http://placehold.it/150x150"></a>
-                      </div>          
-                      <div class="col-md-4">
-                        <a class="thumbnail fancybox" href="#"><img alt="" src="http://placehold.it/150x150"></a>
-                      </div>
-                      <div class="col-md-4">
-                        <a class="thumbnail fancybox" href="#"><img alt="" src="http://placehold.it/150x150"></a>
-                      </div>        
-                    </div>
-                  </div>
-                  <div class="item">
-                    <div class="row">
-                      <div class="col-md-4">
-                        <a class="thumbnail" href="#"><img alt="" src="http://placehold.it/150x150"></a>
-                      </div>          
-                      <div class="col-md-4">
-                        <a class="thumbnail" href="#"><img alt="" src="http://placehold.it/150x150"></a>
-                      </div>
-                      <div class="col-md-4">
-                        <a class="thumbnail" href="#"><img alt="" src="http://placehold.it/150x150"></a>
-                      </div>      
-                    </div>
-                  </div>
+
                 </div>
                 <a data-slide="prev" href="#media" class="left carousel-control">‹</a>
                 <a data-slide="next" href="#media" class="right carousel-control">›</a>
               </div>
+            
             </div><!-- KRAJ row --> 
-                          
+                         
         </div><!-- KRAJ md-9 -->
         <div class="col-md-4"><!-- pocetak mapa-->
                 <div class="embed-responsive embed-responsive-4by3">
