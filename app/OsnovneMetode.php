@@ -134,15 +134,11 @@ class OsnovneMetode {
     public static function podaciZaKalendar($slugSmestaj){
         $rezervacije=Rezervacije::join('smestaj as s','s.id','=','rezervacije.smestaj_id')->where('s.slug',$slugSmestaj)->get(['od','do'])->toArray();
         $dogadjaji='{';
-        //$dogadjaji=[];
-        foreach($rezervacije as $rezervacija){
-            foreach(OsnovneMetode::nizDatum($rezervacija['od'],$rezervacija['do']) as $datum){
+        foreach($rezervacije as $rezervacija)
+            foreach(OsnovneMetode::nizDatum($rezervacija['od'],$rezervacija['do']) as $datum)
                 $dogadjaji.="\"{$datum}\":{},";
-                //$dogadjaji[$datum]=[];
-            }
-        }
         $dogadjaji.='}';
-        return $dogadjaji;// json_encode($dogadjaji);
+        return $dogadjaji;
     }
     static function nizDatum($strDateFrom,$strDateTo){
     //YYYY-MM-DD
