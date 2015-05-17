@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 class Log extends Controller {
 	public function getLogin(){
-		if(Security::autentifikacijaTest()) return Security::rediectToLogin();
+		if(Security::autentifikacijaTest(2,'min')) return Security::rediectToLogin();
 		return view('log.index')->with(['return_to_url'=>Input::has('return_to_url')?Input::get('return_to_url'):(session()->has('return_to_url')?Session::get('return_to_url'):Security::comeFromUrl())]);
 	}
 	public function postLogin(){

@@ -4,12 +4,23 @@ use App\Http\Controllers\Controller;
 use App\Sadrzaji;
 use App\Security;
 use App\Nalog;
+use App\Smestaj;
 use App\Templejt;
 use Illuminate\Support\Facades\Session;
 use App\OsnovneMetode;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 class Galerija extends Controller {
+	/*public function getOdradi(){
+		$smestaji=Smestaj::join('objekat as o','o.id','=','smestaj.objekat_id')
+			->join('nalog as n','n.id','=','o.nalog_id')
+			->where('n.korisnici_id',Session::get('id'))
+			->get(['smestaj.naziv','smestaj.slug','n.naziv as nazivApp','n.slug as slugApp']);
+		$username=Session::get('username');
+		foreach($smestaji as $smestaj){
+			OsnovneMetode::kreirjFolder("galerije/{$username}/aplikacije/{$smestaj['slugApp']}/smestaji/{$smestaj['slug']}");
+		}
+	}*/
 	//Pregled svih galerija
 	public function getIndex($slugPrava){
 		if(!Security::autentifikacijaTest(2,'min')) return Security::rediectToLogin();
@@ -21,6 +32,12 @@ class Galerija extends Controller {
 			->where('sadrzaji.sadrzaj','!=','')
 			->whereBetween('templejt.vrsta_sadrzaja_id',[7,9])
 			->get(['sadrzaji.naziv','sadrzaji.sadrzaj','nalog.naziv as nazivApp','nalog.slug as slugApp','tema.slug as slugTeme','tema.naziv as nazivTeme'])->toArray();
+		$podaci['galerije-smestaja']=Smestaj::join('objekat as o','o.id','=','smestaj.objekat_id')
+			->join('nalog as n','n.id','=','o.nalog_id')
+			->join('vrsta_smestaja as vr','vr.id','=','smestaj.vrsta_smestaja_id')
+			->where('n.aktivan',1)
+			->where('n.korisnici_id',Session::get('id'))
+			->get(['smestaj.naziv','smestaj.slug','n.naziv as nazivApp','n.slug as slugApp','vr.naziv as vrstaSmestaja'])->toArray();
 		return Security::autentifikacija('galerije.index', compact('podaci'));
 	}
 	public function postListaFotografija(){
@@ -74,7 +91,7 @@ class Galerija extends Controller {
 
 
 
-
+/*
 	//Pregled svih galerija
 	public function getIndex_x($slugApp){
 		if(!Security::autentifikacijaTest(4)) return Security::rediectToLogin();
@@ -111,7 +128,7 @@ class Galerija extends Controller {
 		if(!Nalog::where('slug',$slugApp)->where('korisnici_id',Session::get('id'))->get())return Security::rediectToLogin();
 		unlink(Input::get('slika'));
 		return Redirect::back();
-	}
+	}*/
 	//Popuna podataka o odredjenoj galeriji
 	public function postGalerijaUpdate(){
 		$podaci=json_decode(Input::get('podaci'));

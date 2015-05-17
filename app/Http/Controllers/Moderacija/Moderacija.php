@@ -20,7 +20,6 @@ use App\Smestaj;
 use App\VrstaSmestaja;
 use App\Kapacitet;
 
-
 class Moderacija extends Controller {
 	public function getRefresh(){
 		return Redirect::back();

@@ -1,34 +1,52 @@
 @extends('moderacija.master')
 @section('body')
     @if($podaci['galerije'])
-        <div class="list-group col-sm-4">
+        <div class="list-group col-sm-4" style="margin-top: -50px">
             <p style="text-align: right">
                 <button class="btn btn-default sakrijListu"><i class="glyphicon glyphicon-circle-arrow-left strelica"></i></button>
                 <button class="btn btn-info editMod" style="margin:0 5px"><i class="glyphicon glyphicon-pencil"></i></button>
             </p>
-            @foreach($podaci['galerije'] as $galerija)
-                <a style="cursor: pointer" class="list-group-item" data-slugapp="{{$galerija['slugApp']}}" data-link="galerije/{{Session::get('username')}}/aplikacije/{{$galerija['slugApp']}}/{{$galerija['slugTeme']}}/{{$galerija['sadrzaj']}}">
-                    <button class="btn btn-success _upload" data-toggle="modal" data-target="#dodajFoto" style="position: absolute;right: 5px;top: 5px"><i class="glyphicon glyphicon-cloud-upload"></i></button>
-                    <h2 style="text-align: center">{{$galerija['naziv']}}</h2>
-                    <p class="list-group-item-text">
-                    <table>
-                        <tr><td>Aplikacija </td><td><b>{{$galerija['nazivApp']}}</b></td></tr>
-                        <tr><td>Tema </td><td><b>{{$galerija['nazivApp']}}</b></td></tr>
-                    </table>
-                    </p>
-                </a>
-            @endforeach
+            <div id="galerije" style="overflow-y: scroll">
+                @foreach($podaci['galerije'] as $galerija)
+                    <a style="cursor: pointer" class="list-group-item" data-slugapp="{{$galerija['slugApp']}}" data-link="galerije/{{Session::get('username')}}/aplikacije/{{$galerija['slugApp']}}/{{$galerija['slugTeme']}}/{{$galerija['sadrzaj']}}">
+                        <button class="btn btn-success _upload" data-toggle="modal" data-target="#dodajFoto" style="position: absolute;right: 5px;top: 5px"><i class="glyphicon glyphicon-cloud-upload"></i></button>
+                        <h2 style="text-align: center">{{$galerija['naziv']}}</h2>
+                        <p class="list-group-item-text">
+                        <table>
+                            <tr><td class="nDn">Aplikacija </td><td><b>{{$galerija['nazivApp']}}</b></td></tr>
+                            <tr><td class="nDn">Tema </td><td><b>{{$galerija['nazivApp']}}</b></td></tr>
+                        </table>
+                        </p>
+                    </a>
+                @endforeach
+                @foreach($podaci['galerije-smestaja'] as $galerija)
+                    <a style="cursor: pointer" class="list-group-item" data-slugapp="{{$galerija['slugApp']}}" data-link="galerije/{{Session::get('username')}}/aplikacije/{{$galerija['slugApp']}}/smestaji/{{$galerija['slug']}}">
+                        <button class="btn btn-success _upload" data-toggle="modal" data-target="#dodajFoto" style="position: absolute;right: 5px;top: 5px"><i class="glyphicon glyphicon-cloud-upload"></i></button>
+                        <h2 style="text-align: center">{{$galerija['naziv']}}</h2>
+                        <p class="list-group-item-text">
+                        <table>
+                            <tr><td class="nDn">Aplikacija </td><td><b>{{$galerija['nazivApp']}}</b></td></tr>
+                            <tr><td class="nDn">Smeštaj </td><td><b>{{$galerija['naziv']}}</b></td></tr>
+                            <tr><td class="nDn">Vrsta </td><td><b>{{$galerija['vrstaSmestaja']}}</b></td></tr>
+                        </table>
+                        </p>
+                    </a>
+                @endforeach
+                <style>.nDn{text-align: right;padding-right: 10px}</style>
+            </div>
         </div>
         <div class="col-sm-8 work-area">
             <div id="poruka" style="display: none"></div>
             <div id="wait" style="display:none"><center><i class='icon-spin6 animate-spin' style="font-size: 350%"></i></center></div>
             <div id="foto"></div>
-            <style>.clFoto{width:100%;cursor: pointer}.prikaz{width: 100%}</style>
+            <style>.clFoto{width:100%;cursor: pointer}.prikaz{width: 100%}._upload{display: none}</style>
             <i class='icon-spin6 animate-spin' style="color: rgba(0,0,0,0)"></i>
         </div>
         <script>
+            $(document).ready(function(){$('#galerije').css('height',($(window).height()-150)+'px')});
             var sirina='50px';
-            $('.sakrijListu').click(function(){$('.work-area').hide();
+            $('.sakrijListu').click(function(){
+                $('.work-area').hide();
                 $('.list-group').animate({width:sirina},350);
                 $('.editMod').toggle();
                 $('.list-group-item').toggle();
@@ -72,6 +90,8 @@
                 $('#foto').hide();
                 $('#wait').fadeIn();
                 $('a.list-group-item').removeClass('active');
+                $('._upload').fadeOut();
+                $(this).find('._upload').fadeIn();
                 $(this).addClass('active');
                 var slugApp=$(this).data('slugapp');
                 $.post('/{{\App\OsnovneMetode::osnovniNav()}}/galerije/lista-fotografija',
@@ -118,8 +138,11 @@
     {!! HTML::script('/dragdrop/js/fileinput.min.js') !!}
     <script>
         $('._upload').click(function(){
+            $('#input-700').fileinput('clear');
+
+
             $('#folder').val($(this).closest('a').data('link')+'/');
-            $("#input-700").fileinput({
+            $("#input-700").fileinput('refresh',{
                 uploadExtraData: {folder: $('#folder').val(), _token:'{{csrf_token()}}'},
                 uploadUrl: '/{{\App\OsnovneMetode::osnovniNav()}}/galerije/upload',
                 uploadAsync: true,
