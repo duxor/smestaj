@@ -64,7 +64,7 @@
                             <li class="divider"></li>
                             <li><a href="{!!url('/moderacija/podesavanja')!!}"><i class="glyphicon glyphicon-wrench"></i> Podešavanja</a></li>
                             <li><a href="{!!url('/moderacija/sadrzaji')!!}"><i class="glyphicon glyphicon-pencil"></i> Sadržaji</a></li>
-                            <li><a href="{!!url('/moderacija/u-pripremi')!!}"><i class="glyphicon glyphicon-comment"></i> Komentari</a></li>
+                            <li><a href="{!!url('/moderacija/komentari')!!}"><i class="glyphicon glyphicon-comment"></i> Komentari</a></li>
                             <li><a href="{!!url('/moderacija/u-pripremi')!!}"><i class="glyphicon glyphicon-envelope"></i> Newsletter</a></li>
                         </ul>{{--/moderator/komentari--}}
                     </li>
@@ -77,8 +77,8 @@
                             <li><a href="{!!url('/moderacija/novi-objekat')!!}"><i class="icon-building"></i> Novi objekat</a></li>
                             <li><a href="{!!url('/moderacija/smestaj')!!}"><i class="icon-th-large-outline"></i> Pregled smeštaja</a></li>
                             <li><a href="{!!url('/moderacija/novi-smestaj')!!}"><i class="icon-hospital"></i> Novi smeštaj</a></li>
-                            <li><a href="{!!url('/moderacija/u-pripremi')!!}"><i class="icon-lodging"></i> Slobodni</a></li>
-                            <li><a href="{!!url('/moderacija/u-pripremi')!!}"><i class="icon-cancel-circled"></i> Zauzeti</a></li>
+                            <li><a href="{!!url('/moderacija/slobodni')!!}"><i class="icon-lodging"></i> Slobodni</a></li>
+                            <li><a href="{!!url('/moderacija/zauzeti')!!}"><i class="icon-cancel-circled"></i> Zauzeti</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">

@@ -108,12 +108,24 @@ class Moderacija extends Controller {
 	}
 
 	public function getKomentari(){
-		if(Security::autentifikacijaTest(4)){
-			$komentari=Komentari::join('sadrzaji','sadrzaji.id','=','komentari.sadrzaji_id')->join('nalog','nalog.id','=','sadrzaji.nalog_id')
-				->where('nalog.korisnici_id',Session::get('id'))->get(['komentar','nalog.id'])->toArray();
-			dd($komentari);
-		}
-		return Redirect::back();
+
+			$smestaj_id=Komentari::join('smestaj','smestaj.id','=','komentari.smestaj_id')
+				->join('objekat','objekat.id','=','smestaj.objekat_id')
+				->join('nalog','nalog.id','=','objekat.nalog_id')
+				->join('korisnici','korisnici.id','=','nalog.korisnici_id')
+				->where('korisnici.id','=',Session::get('id'))
+				->get(['komentari.smestaj_id'])->toArray();
+
+			$komentari=Komentari::join('smestaj','smestaj.id','=','komentari.smestaj_id')
+				->join('korisnici','korisnici.id','=','komentari.korisnici_id')
+				->whereIn('komentari.smestaj_id',$smestaj_id)
+				->get(['komentari.id','komentari.komentar','korisnici.username','smestaj.slug'])->toArray();
+		return Security::autentifikacija('moderacija.aplikacija.komentari',compact('komentari'),4);
+	}
+	public function postZabrani(){
+		$podaci=json_decode(Input::get('podaci'));
+		Komentari::where('komentari.id',$podaci->id_komentara)->update(['aktivan'=>'0']);
+		return json_encode(['msg'=>'Uspešno ste zabranili komentar','check'=>1]);
 	}
 
 	public function getUPripremi(){
@@ -225,5 +237,11 @@ class Moderacija extends Controller {
             return Redirect::back()->with('message','Uspešno ste dodali novi smeštaj!');
         }else return Security::rediectToLogin();
 		
+	}
+	public function getZauzeti(){
+
+	}
+	public function getSlobodni(){
+
 	}
 }

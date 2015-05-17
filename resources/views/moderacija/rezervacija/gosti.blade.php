@@ -13,9 +13,8 @@
                 </p>
             </div>
             <div class="col-sm-7">       
-                <table style="border-top:5px solid #74ABFB;" class="table table-condensed">
-                    <tr ><td>Prezime:</td><td>{{$kor['pr']}}</td></tr>
-                    <tr><td>Ime:</td><td> {{$kor['ime_korisnika']}}</td></tr>
+                <table style="border-left:5px solid #74ABFB;" class="table table-condensed">
+                    <tr ><td>Prezime i ime:</td><td>{{$kor['pr']}} {{$kor['ime_korisnika']}}</td></tr>
                     <tr><td>Username:</td><td> {{$kor['username']}}</td></tr>
                     <tr><td><a href="/{{$kor['slugApp']}}/{{$kor['slugSmestaj']}}">Rezervisao smeštaj:</a></td><td> {{$kor['naziv_smestaja']}}</td></tr>
                     <tr><td>U periodu:</td><td>{{$kor['od']}} - {{$kor['do']}}</td></tr>
@@ -32,6 +31,7 @@
         </div></div>
         @endforeach
     </div>
+
     
 @else <h1 class="col-sm-12">Nema gostiju u evidenciji!</h1>
 @endif
