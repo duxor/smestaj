@@ -16,15 +16,13 @@
                 <table style="border-left:5px solid #74ABFB;" class="table table-condensed">
                     <tr ><td>Prezime i ime:</td><td>{{$kor['pr']}} {{$kor['ime_korisnika']}}</td></tr>
                     <tr><td>Username:</td><td> {{$kor['username']}}</td></tr>
-                    <tr><td><a href="/{{$kor['slugApp']}}/{{$kor['slugSmestaj']}}">Rezervisao smeštaj:</a></td><td> {{$kor['naziv_smestaja']}}</td></tr>
-                    <tr><td>U periodu:</td><td>{{$kor['od']}} - {{$kor['do']}}</td></tr>
                     <tr><td>Ocena:</td><td>{{$kor['ocena']}} </td></tr>
                 </table>
             </div>
              <div class="col-sm-3">
                 <table class="table table-condensed">
                     <tr><td>Utisci:</td><td></td></tr>
-                    <tr><td>{{$kor['utisci']}}</td></tr>
+                    <tr><td>{!!$kor['utisci']!!}</td></tr>
                 </table>
             </div>
             <br clear="all">
