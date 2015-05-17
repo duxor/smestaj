@@ -32,7 +32,6 @@
                         </p>
                     </a>
                 @endforeach
-                <style>.nDn{text-align: right;padding-right: 10px}</style>
             </div>
         </div>
         <div class="col-sm-8 work-area">

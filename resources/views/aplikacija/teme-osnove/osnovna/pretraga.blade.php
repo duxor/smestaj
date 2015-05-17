@@ -132,7 +132,7 @@
                     <a href="/{{$smestaj['slugApp']}}/{{$smestaj['slugSmestaj']}}" class="btn btn-lg btn-default"><i class="glyphicon glyphicon-zoom-in"></i> Pregled</a>
                     @if(\App\Security::autentifikacijaTest(2,'min'))
                         <button class="btn btn-lg btn-info m" data-toggle="modal" data-target="#rezervacija" data-cena="{{$smestaj['cena_osoba']}}" data-id="{{$smestaj['id']}}" data-app="{{$smestaj['nazivApp']}}" data-naziv="{{$smestaj['naziv']}}" data-vrobjekta="{{$smestaj['vrsta_smestaja']}}" data-maxosoba="{{$smestaj['broj_osoba']}}" data-adresa="{{$smestaj['adresa']}}" data-img="/teme/osnovna-paralax/slike/15.jpg"><span class="glyphicon glyphicon-check"></span> Rezervacija</button>
-                        <button id="zelja" class="btn btn-lg btn-default _tooltip" @if($smestaj['zelja']) data-zelja="{{$smestaj['zelja']}}" style="color:red" title="Izbaci iz liste zelja" @else data-zelja="false" title="Dodaj u listu želja" @endif data-id="{{$smestaj['id']}}" data-toggle="tooltip" data-placement="bottom"><i class="glyphicon glyphicon-heart"></i></button>
+                        <button class="btn btn-lg btn-default _tooltip zelja" @if($smestaj['zelja']) data-zelja="{{$smestaj['zelja']}}" style="color:red" title="Izbaci iz liste zelja" @else data-zelja="false" title="Dodaj u listu želja" @endif data-zid="{{$smestaj['id']}}" data-toggle="tooltip" data-placement="bottom"><i class="glyphicon glyphicon-heart"></i></button>
                     @else
                         <a href="/log/login" class="btn btn-lg btn-info"><span class="glyphicon glyphicon-check"></span> Rezervacija</a>
                         <a href="/log/login" class="btn btn-lg btn-default _tooltip"  title="Dodaj u listu želja" data-toggle="tooltip" data-placement="bottom"><i class="glyphicon glyphicon-heart"></i></a>
@@ -142,11 +142,11 @@
             <div class="col-sm-8">
                 <h3 class="smestajNaslov">{{$smestaj['nazivApp']}}</h3>
                 <table class="moja-tabela">
-                    <tr><td>Naziv objekta:</td><td>{{$smestaj['naziv']}}</td></tr>
-                    <tr><td>Vrsta objekta:</td><td>{{$smestaj['vrsta_smestaja']}}</td></tr>
-                    <tr><td>Broj mesta:</td><td>{{$smestaj['broj_osoba']}}</td></tr>
-                    <tr><td>Adresa:</td><td>{{$smestaj['adresa']}}</td></tr>
-                    <tr><td>Cena (po osobi):</td><td>{{$smestaj['cena_osoba']}} din</td></tr>
+                    <tr><td class="nDn">Naziv objekta:</td><td>{{$smestaj['naziv']}}</td></tr>
+                    <tr><td class="nDn">Vrsta objekta:</td><td>{{$smestaj['vrsta_smestaja']}}</td></tr>
+                    <tr><td class="nDn">Broj mesta:</td><td>{{$smestaj['broj_osoba']}}</td></tr>
+                    <tr><td class="nDn">Adresa:</td><td>{{$smestaj['adresa']}}</td></tr>
+                    <tr><td class="nDn">Cena (po osobi):</td><td>{{$smestaj['cena_osoba']}} din</td></tr>
                 </table>
             </div><br clear="all">
         @endforeach
@@ -236,25 +236,25 @@
                 $('#cena').html($('input[name=cena]').val()*$(this).val()+' din');
                 $('input[name=ukupna_cena]').val($('input[name=cena]').val()*$(this).val());
             });
-            $("button#zelja").click(function(){
+            $("button.zelja").click(function(){
                 $(this).css("color","black");
-                $(this).html("<i class='icon-spin6 animate-spin'></i> U procesu...");
-                var id=$(this).data("id");
+                $(this).html("<i class='icon-spin6 animate-spin'></i>");
+                var id=$(this).data("zid");
                 $.post('/aplikacija/lista-zelja-dodaj',
                         {
                             _token: $('input[name="_token"]').val(),
-                            smestaj: $(this).data("id"),
+                            smestaj: $(this).data("zid"),
                             korisnik: "{{Session::get("id")}}",
                             zelja: $(this).data("zelja")
                         },
                         function(data){
-                            $('button#zelja[data-id="'+id+'"]').html("<i class='glyphicon glyphicon-heart'></i>");
-                            if($('button#zelja[data-id="'+id+'"]').data('zelja')!=false){
-                                $('button#zelja[data-id="'+id+'"]').data('zelja',false);
-                                $('button#zelja[data-id="'+id+'"]').css("color","black");
+                            $('button[data-zid="'+id+'"]').html("<i class='glyphicon glyphicon-heart'></i>");
+                            if($('button[data-zid="'+id+'"]').data('zelja')!=false){
+                                $('button[data-zid="'+id+'"]').data('zelja',false);
+                                $('button[data-zid="'+id+'"]').css("color","black");
                             } else{
-                                $('button#zelja[data-id="'+id+'"]').data('zelja',data);
-                                $('button#zelja[data-id="'+id+'"]').css("color","red");
+                                $('button[data-zid="'+id+'"]').data('zelja',data);
+                                $('button[data-zid="'+id+'"]').css("color","red");
                             }
                         }
                 );

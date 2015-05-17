@@ -79,6 +79,7 @@
             $('input[name=naslov]').val('Odgovor: '+naslov);
             $(':input[name=poruka]').val('\n--------------\n'+poruka);
         }
+        var username='{{isset($podaci['username'])?$podaci['username']:null}}';
         function kreirajNovu(){
             setActive('nova');
             $('#show').hide();
@@ -87,7 +88,7 @@
             '<div id="zaSlanje" class="form-horizontal">'+
                 '{!!Form::hidden('_token',csrf_token())!!}'+
                 '<div class="form-group">'+
-                    '<input name="za" class="form-control" onkeyup="pronadjiUsername(this.value)" placeholder="Username primaoca">'+
+                    '<input name="za" class="form-control" onkeyup="pronadjiUsername(this.value)" placeholder="Username primaoca" value="'+username+'">'+
                     '<span id="preporuke" class="list-group"></span>'+
                 '</div>'+
                 '<div class="form-group">'+
@@ -100,6 +101,7 @@
                     '<button class="btn btn-lg btn-primary" onclick="Komunikacija.posalji(\'/{{\App\OsnovneMetode::osnovniNav()}}/mailbox/posalji-poruku\',\'zaSlanje\',\'poruka\',\'wait\',\'show\')"><i class="glyphicon glyphicon-envelope"></i> Pošalji</div>'+
                 '</div>'+
             '</div>');
+            username='';
             $('#wait').hide();
             $('#show').fadeIn();
         }
