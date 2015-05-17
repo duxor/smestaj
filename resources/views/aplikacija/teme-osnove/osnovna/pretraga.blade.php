@@ -3,8 +3,8 @@
     <script type="text/javascript">
         var map, markers, spotlight, locationsByType = {};
         function initMap() {
-            var template = 'http://{S}tile.openstreetmap.org/{Z}/{X}/{Y}.png'//'http://{S}tile.openstreetmap.org/{Z}/{X}/{Y}.png';//'http://c.tiles.mapbox.com/v3/examples.map-szwdot65/{Z}/{X}/{Y}.png';//'http://ecn.t{S}.tiles.virtualearth.net/tiles/r{Q}?g=689&mkt=en-us&lbl=l0&stl=m';//'http://ecn.t{S}.tiles.virtualearth.net/tiles/r{Q}?g=689&mkt=en-us&lbl=l0&stl=m';//
-            var subdomains = [ '', 'a.', 'b.', 'c.' ];//[0,1,2,3,4,5,6,7];//
+            var template = 'http://{S}tile.openstreetmap.org/{Z}/{X}/{Y}.png';
+            var subdomains = [ '', 'a.', 'b.', 'c.' ];
             var provider = new com.modestmaps.TemplatedLayer(template, subdomains);
             map = new com.modestmaps.Map('map',
                     provider,
@@ -29,41 +29,23 @@
                     locations = [];
             for (var i = 0; i < len; i++) {
                 var feature = features[i],
-                        type = feature.properties.naslov,//crime_type,
+                        type = feature.properties.naslov,
                         marker = document.createElement("a");
                 marker.feature = feature;
                 marker.type = type;
-                // give it a title
-                marker.setAttribute("title", [
-                    type//, "on", feature.properties.date_time
-                ]);//.join(" "));
+                marker.setAttribute("title", [type]);
                 marker.setAttribute("class", "report");
-                // set the href to link to crimespotting's crime page
                 marker.setAttribute("href", feature.link);
-                   ////properties.date_time.substr(0, 10),
-                 /*type.replace(/ /g, "_"),
-                 feature.id
-                 ].join("/"));
-                 */
-                // create an image icon
                 var img = marker.appendChild(document.createElement("a"));
-                img.setAttribute("class","glyphicon glyphicon-screenshot");//glyphicon glyphicon-pushpin");//("src", "../geojson/icons/" + type.replace(/ /g, "_") + ".png");
+                img.setAttribute("class","glyphicon glyphicon-screenshot");
                 img.setAttribute("style","color:red");
                 markers.addMarker(marker, feature);
                 locations.push(marker.location);
-                if (type in locationsByType) {
-                    locationsByType[type].push(marker.location);
-                } else {
-                    locationsByType[type] = [marker.location];
-                }
-                // listen for mouseover & mouseout events
+                if (type in locationsByType)locationsByType[type].push(marker.location);else locationsByType[type] = [marker.location];
                 MM.addEvent(marker, "mouseover", onMarkerOver);
                 MM.addEvent(marker, "mouseout", onMarkerOut);
             }
-            // tell the map to fit all of the locations in the available space
             map.setExtent(locations);
-            //map.setCenterZoom(locations[0],6);
-            map.setCenterZoom(new com.modestmaps.Location('{{$podaci['grad_koo']['y']}}','{{$podaci['grad_koo']['x']}}'),'{{$podaci['grad_koo']['z']}}');
         }
         function getMarker(target) {
             var marker = target;
@@ -94,6 +76,7 @@
                 spotlight.parent.className = "inactive";
             }
         }
+        $(document).ready(function(){ initMap(); })
     </script>
     <style>
         .report {margin-left: -13px;margin-top: -13px;width: 26px;height: 26px;}
@@ -102,10 +85,6 @@
         #map canvas {transition-property: opacity;-webkit-transition-property: opacity;-moz-transition-property: opacity;-ms-transition-property: opacity;-o-transition-property: opacity;transition-duration: .6s;-webkit-transition-duration: .6s;-moz-transition-duration: .6s;-ms-transition-duration: .6s;-o-transition-duration: .6s;transition-delay: .1s;-webkit-transition-delay: .1s;-moz-transition-delay: .1s;-ms-transition-delay: .1s;-o-transition-delay: .1s;opacity: 0;}
         #map canvas.active {opacity: 1}
     </style>
-
-    <script>
-        $(document).ready(function(){ initMap(); })
-    </script>
 @endsection
 @section('content')
     <h1 style="margin-top: 70px">Pretraga</h1>
@@ -146,7 +125,7 @@
         @foreach($podaci['rezultat'] as $smestaj)
             <hr>
             <div class="col-sm-4">
-                <a href="#">
+                <a href="/{{$smestaj['slugApp']}}/{{$smestaj['slugSmestaj']}}">
                     <img style="height: 150px;" @if($smestaj['naslovna_foto'])src="{{$smestaj['naslovna_foto']}}" @else src="/teme/osnovna-paralax/slike/15.jpg" @endif>
                 </a>
                 <p>

@@ -3,8 +3,8 @@
     <script type="text/javascript">
         var map, markers, spotlight, locationsByType = {};
         function initMap() {
-            var template = 'http://{S}tile.openstreetmap.org/{Z}/{X}/{Y}.png'//'http://{S}tile.openstreetmap.org/{Z}/{X}/{Y}.png';//'http://c.tiles.mapbox.com/v3/examples.map-szwdot65/{Z}/{X}/{Y}.png';//'http://ecn.t{S}.tiles.virtualearth.net/tiles/r{Q}?g=689&mkt=en-us&lbl=l0&stl=m';//'http://ecn.t{S}.tiles.virtualearth.net/tiles/r{Q}?g=689&mkt=en-us&lbl=l0&stl=m';//
-            var subdomains = [ '', 'a.', 'b.', 'c.' ];//[0,1,2,3,4,5,6,7];//
+            var template = 'http://{S}tile.openstreetmap.org/{Z}/{X}/{Y}.png';
+            var subdomains = [ '', 'a.', 'b.', 'c.' ];
             var provider = new com.modestmaps.TemplatedLayer(template, subdomains);
             map = new com.modestmaps.Map('map',
                     provider,
@@ -33,28 +33,19 @@
                         marker = document.createElement("a");
                 marker.feature = feature;
                 marker.type = type;
-                // give it a title
                 marker.setAttribute("title", [type]);
                 marker.setAttribute("class", "report");
-                // set the href to link to crimespotting's crime page
                 marker.setAttribute("href", feature.link);
-                // create an image icon
                 var img = marker.appendChild(document.createElement("a"));
-                img.setAttribute("class","glyphicon glyphicon-screenshot");//glyphicon glyphicon-pushpin");//("src", "../geojson/icons/" + type.replace(/ /g, "_") + ".png");
+                img.setAttribute("class","glyphicon glyphicon-screenshot");
                 img.setAttribute("style","color:red");
                 markers.addMarker(marker, feature);
                 locations.push(marker.location);
-                if (type in locationsByType) {
-                    locationsByType[type].push(marker.location);
-                } else {
-                    locationsByType[type] = [marker.location];
-                }
+                if (type in locationsByType)locationsByType[type].push(marker.location);else locationsByType[type] = [marker.location];
                 MM.addEvent(marker, "mouseover", onMarkerOver);
                 MM.addEvent(marker, "mouseout", onMarkerOut);
             }
             map.setExtent(locations);
-            //map.setCenterZoom(locations[0],6);
-            //map.setCenterZoom(new com.modestmaps.Location('y','x'),'z');
         }
         function getMarker(target) {
             var marker = target;
@@ -85,46 +76,15 @@
                 spotlight.parent.className = "inactive";
             }
         }
-    </script>
-    <style>
-        .report {
-            margin-left: -13px;
-            margin-top: -13px;
-            width: 26px;
-            height: 26px;
-        }
-        .report img {
-            border: none !important;
-        }
-        .report:hover {
-            z-index: 1000;
-        }
-        #map canvas {
-            transition-property: opacity;
-            -webkit-transition-property: opacity;
-            -moz-transition-property: opacity;
-            -ms-transition-property: opacity;
-            -o-transition-property: opacity;
-            transition-duration: .6s;
-            -webkit-transition-duration: .6s;
-            -moz-transition-duration: .6s;
-            -ms-transition-duration: .6s;
-            -o-transition-duration: .6s;
-            transition-delay: .1s;
-            -webkit-transition-delay: .1s;
-            -moz-transition-delay: .1s;
-            -ms-transition-delay: .1s;
-            -o-transition-delay: .1s;
-            opacity: 0;
-        }
-        #map canvas.active {
-            opacity: 1;
-        }
-    </style>
-
-    <script>
         $(document).ready(function(){ initMap(); })
     </script>
+    <style>
+        .report {margin-left: -13px;margin-top: -13px;width: 26px;height: 26px;}
+        .report img {border: none !important;}
+        .report:hover {z-index: 1000}
+        #map canvas {transition-property: opacity;-webkit-transition-property: opacity;-moz-transition-property: opacity;-ms-transition-property: opacity;-o-transition-property: opacity;transition-duration: .6s;-webkit-transition-duration: .6s;-moz-transition-duration: .6s;-ms-transition-duration: .6s;-o-transition-duration: .6s;transition-delay: .1s;-webkit-transition-delay: .1s;-moz-transition-delay: .1s;-ms-transition-delay: .1s;-o-transition-delay: .1s;opacity: 0;}
+        #map canvas.active {opacity: 1}
+    </style>
 @endsection
 @section('content')
     <h1>Pretraga</h1>
@@ -164,9 +124,8 @@
         <div id="map" style="width: 100%;height: 400px"></div>
         <p id="rezultati"></p>
         @foreach($podaci['rezultat'] as $smestaj)
-            <hr>
             <div class="col-sm-4">
-                <a href="#">
+                <a class="aaa" href="/{{$smestaj['slugApp']}}/{{$smestaj['slugSmestaj']}}" style="background-color: #005fb3">
                     <img style="height: 150px;" @if($smestaj['naslovna_foto'])src="{{$smestaj['naslovna_foto']}}" @else src="/teme/osnovna-paralax/slike/15.jpg" @endif>
                 </a>
                 <p>
@@ -189,7 +148,8 @@
                     <tr><td>Adresa:</td><td>{{$smestaj['adresa']}}</td></tr>
                     <tr><td>Cena (po osobi):</td><td>{{$smestaj['cena_osoba']}} din</td></tr>
                 </table>
-            </div><br clear="all">
+            </div>
+            <br clear="all">
         @endforeach
         <div class="modal fade" id="rezervacija" tabindex="-1" role="dialog" >
             <div class="modal-dialog">

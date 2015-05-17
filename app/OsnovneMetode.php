@@ -39,6 +39,7 @@ class OsnovneMetode {
     public static function kreiranjeAplikacije($slugApp,$username,$appID,$tema_id){
         OsnovneMetode::kreirjFolder("galerije/{$username}/aplikacije/{$slugApp}");
         OsnovneMetode::kreirjFolder("galerije/{$username}/aplikacije/{$slugApp}/korisnicke-galerije");
+        OsnovneMetode::kreirjFolder("galerije/{$username}/aplikacije/{$slugApp}/smestaji");
         OsnovneMetode::primenaTeme($appID,$tema_id);
         $temaSlug=Tema::find($tema_id,['slug'])->slug;
         OsnovneMetode::kopirajFolder("galerije/default-galerije/teme/{$temaSlug}","galerije/{$username}/aplikacije/{$slugApp}/{$temaSlug}");
