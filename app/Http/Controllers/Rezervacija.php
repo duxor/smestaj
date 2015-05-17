@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\OsnovneMetode;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Input;
@@ -34,7 +35,9 @@ class Rezervacija extends Controller {
 		return Security::autentifikacija('korisnik.rezervacije-aktivne', compact('rezervacije','broj_osoba'),2);
 	}
 	public function postRezervisi(){
+		if(!Security::autentifikacijaTest(2,'min'))return json_encode(['msg'=>'Morate biti registrovan korisnik da bi ste izvršili registraciju.','check'=>0]);
 		$podaci=json_decode(Input::get('podaci'));
+		if(!OsnovneMetode::dostupnostZaRezervaciju([['id'=>$podaci->id_smestaja]],$podaci->datumOd,$podaci->datumDo))return json_encode(['msg'=>'Smeštaj je zauzet u navedenom terminu. Koristite pretragu sa navedenim datumom kako bi izbegli preklapanje termina.','check'=>0]);
 		$rez= new Rezervacije();
 		$rez->od=$podaci->datumOd;
 		$rez->do=$podaci->datumDo;

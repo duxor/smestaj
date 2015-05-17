@@ -5,6 +5,10 @@ class OsnovneMetode {
     public static function listaFotografija($folder){
         return glob($folder.'/*.{jpg,jpeg,png,gif}',GLOB_BRACE);
     }
+    public static function randomFoto($folder){
+        $lista=OsnovneMetode::listaFotografija($folder);
+        return $lista[rand(0,sizeof($lista)-1)];
+    }
     public static function folderGalerije($vrsta_sadrzaja,$slugGalerije,$slugApp=null,$slugTema=null){
         switch($vrsta_sadrzaja){
             case 7: return"galerije/".Session::get('username')."/{$slugGalerije}";

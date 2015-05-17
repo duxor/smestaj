@@ -51,14 +51,32 @@ class Rezervacija extends Controller {
 			return Security::autentifikacija('moderacija.rezervacija.arhiva', compact('rezervacije'),4);
 	}
 	public function getGosti(){
-		$korisnici=Korisnici::where('rezervacije.korisnici_id',Session::get('id'))
-			->join('nalog','nalog.korisnici_id','=','korisnici.id')
+		$korisnici=Korisnici::
+			join('nalog as n','n.korisnici_id','=','korisnici.id')
+			->join('rezervacije as r','r.korisnici_id','=','korisnici.id')
+			->whereNotNull('r.odjava')
+			->where('n.korisnici_id',Session::get('id'))
+			->distinct('korisnici.id')
+			->select('korisnici.id','korisnici.prezime as pr','korisnici.ime as ime_korisnika','korisnici.username','korisnici.email as email_korisnika',
+				'korisnici.fotografija as fotografija_korisnika',
+				DB::raw('avg(smestaj_r.ocena) AS ocena'),'n.slug as slugApp')->get()->toArray();
+		foreach($korisnici as $k=>$korisnik){
+			foreach(Rezervacije::join('nalog as n','n.korisnici_id','=','rezervacije.korisnici_id')
+						->where('n.korisnici_id',Session::get('id'))
+						->where('rezervacije.korisnici_id',$korisnik['id'])->get(['utisci'])->toArray() as $utisak)
+				if($utisak['utisci'])$korisnici[$k]['utisci']=isset($korisnici[$k]['utisci'])?$korisnici[$k]['utisci'].$utisak['utisci'].'<br>':$utisak['utisci'].'<br>';
+		}
+		//dd($korisnici);
+		/*$korisnici=Korisnici::
+			join('nalog','nalog.korisnici_id','=','korisnici.id')
 			->join('objekat','objekat.nalog_id','=','nalog.id')
 			->join('smestaj','smestaj.objekat_id','=','objekat.id')
 			->join('rezervacije','rezervacije.smestaj_id','=','smestaj.id')
+
+			->where('rezervacije.korisnici_id',Session::get('id'))
 			->get(['korisnici.prezime as pr','korisnici.ime as ime_korisnika','korisnici.username','korisnici.email as email_korisnika',
 				'korisnici.fotografija as fotografija_korisnika','smestaj.naziv as naziv_smestaja',
-				'rezervacije.od','rezervacije.do','rezervacije.utisci','rezervacije.ocena','smestaj.slug as slugSmestaj','nalog.slug as slugApp'])->toArray();
+				'rezervacije.od','rezervacije.do','rezervacije.utisci','rezervacije.ocena','smestaj.slug as slugSmestaj','nalog.slug as slugApp'])->toArray();*/
 		return Security::autentifikacija('moderacija.rezervacija.gosti',compact('korisnici'),4);
 	}
 
