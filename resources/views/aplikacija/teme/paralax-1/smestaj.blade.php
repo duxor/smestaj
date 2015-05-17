@@ -69,36 +69,88 @@
             
         </div><!-- KRAJ col-md-3-->
     </div><!-- KRAJ row -->
-<br clear="all"><hr>
-<div class='row'>
+    <br clear="all"><hr>
+    <div class='row'>
         <div class='col-md-8'>
             <div class="row">
-            
-              <div class="carousel slide media-carousel" id="media">
-                <div class="carousel-inner">
-
-                  <div class="item  active">
-                    <div class="row">
-                      <div class="col-md-4">
-                        <a class="thumbnail fancybox" rel="ligthbox" href="#"><img alt="" src="/{{$val}}"></a>
-                      </div>          
-                      <div class="col-md-4">
-                        <a class="thumbnail fancybox"  rel="ligthbox" href="#"><img alt="" src=""></a>
+               <div class="carousel slide media-carousel" id="media">
+                  <div class="carousel-inner">
+                      <div class="item active">
+                          <div class="row">
+                              <div class="col-md-4">
+                                  <a class="thumbnail" href="#">
+                                      <img id="slika-1" class="slike-slajder" src="/galerije/default-galerije/osnovne/smestaj-default.jpg">
+                                  </a>
+                              </div>
+                              <div class="col-md-4">
+                                  <a class="thumbnail slajder-p2" href="#">
+                                      <img id="slika-2" class="slike-slajder" src="/galerije/default-galerije/osnovne/smestaj-default.jpg">
+                                  </a>
+                              </div>
+                              <div class="col-md-4">
+                                  <a class="thumbnail slajder-p2" href="#">
+                                      <img id="slika-3" class="slike-slajder" src="/galerije/default-galerije/osnovne/smestaj-default.jpg">
+                                  </a>
+                              </div>
+                          </div>
                       </div>
-                      <div class="col-md-4">
-                        <a class="thumbnail fancybox"  rel="ligthbox"href="#"><img alt="" src=""></a>
-                      </div>        
-                    </div>
                   </div>
+                  <a data-strana="left" class="left carousel-control slajder-kontrola" style="cursor: pointer">‹</a>
+                  <a data-strana="right" class="right carousel-control slajder-kontrola" style="cursor: pointer">›</a>
+               </div>
+            </div>
+        </div>
+        <style>
+            @media(min-width: 990px){.slajder-p2{display: block}}
+            @media(max-width: 991px){.slajder-p2{display: none}}
+        </style>
+    <script>
+        $(document).ready(function(){slajder.podesavanja(JSON.parse('{!!$podaci['slajder']!!}'))});
+        var slajder={
+            slikaID1:'#slika-1',
+            slikaID2:'#slika-2',
+            slikaID3:'#slika-3',
+            slikeClass:'.slike-slajder',
+            slajderID:'#media',
+            velikaSlikaID:'#shFoto',
+            modalID:'#prikaziSliku',
+            dugmeKontrol:'.slajder-kontrola',
+            brojFoto:0,
+            foto:{},
+            pozicija:0,
+            podesavanja:function(foto){
+                this.foto=foto;
+                this.brojFoto=foto.length;
+                $(slajder.slikeClass).click(function(){slajder.prikaziModal($(this).attr('src'))});
+                $(this.dugmeKontrol).click(function(){slajder.promjena($(this).data('strana'))});
+                this.podesiFoto()
+            },
+            podesiFoto:function(){
+                if(this.brojFoto==0) $(this.slajderID).hide();
+                else{
+                    $(this.slikaID1).attr('src','/'+this.foto[this.pozicija]);
+                    if(this.brojFoto>=1){console.log(this.foto[this.sledecaPozicija(1,'left')]);
+                        $(this.slikaID2).attr('src','/'+this.foto[this.sledecaPozicija(1,'left')]);
+                        if(this.brojFoto>=2) {console.log(this.foto[this.sledecaPozicija(2,'left')]);
+                            $(this.slikaID3).attr('src','/'+this.foto[this.sledecaPozicija(2,'left')]);
+                        }
+                    }
+                }
+            },
+            promjena:function(strana){
+                this.pozicija=this.sledecaPozicija(1,strana);
+                this.podesiFoto()
+            },
+            sledecaPozicija:function(koliko,strana){
+                return strana=='right'?this.pozicija+koliko>=this.brojFoto?this.pozicija+koliko-this.brojFoto:this.pozicija+koliko:this.pozicija-koliko<0?this.brojFoto+this.pozicija-koliko:this.pozicija-koliko;
+            },
+            prikaziModal:function(foto){
+                $(this.velikaSlikaID).attr('src',foto);
+                $(this.modalID).modal('show')
+            }
+        };
+    </script>
 
-                </div>
-                <a data-slide="prev" href="#media" class="left carousel-control">‹</a>
-                <a data-slide="next" href="#media" class="right carousel-control">›</a>
-              </div>
-            
-            </div><!-- KRAJ row --> 
-                         
-        </div><!-- KRAJ md-9 -->
         <div class="col-md-4"><!-- pocetak mapa-->
                 <div class="embed-responsive embed-responsive-4by3">
                     <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyANkR_6WBUEKhO58qGQo0thZmNpvSCqRZE&q={!!$podaci['smestaj']['y']!!},{!!$podaci['smestaj']['x']!!}&zoom=15&center={!!$podaci['smestaj']['y']!!},{!!$podaci['smestaj']['x']!!}"></iframe>
@@ -189,6 +241,16 @@
         </div><!--Container - KRAJ -->
     </div>
 </div>
-            
+@endsection
 
+@section('body')
+    <div class="modal fade" id="prikaziSliku">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <img style="width: 100%" id="shFoto">
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
