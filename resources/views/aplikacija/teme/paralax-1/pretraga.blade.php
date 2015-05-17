@@ -124,8 +124,9 @@
         <div id="map" style="width: 100%;height: 400px"></div>
         <p id="rezultati"></p>
         @foreach($podaci['rezultat'] as $smestaj)
+            <hr>
             <div class="col-sm-4">
-                <a class="aaa" href="/{{$smestaj['slugApp']}}/{{$smestaj['slugSmestaj']}}" style="background-color: #005fb3">
+                <a href="/{{$smestaj['slugApp']}}/{{$smestaj['slugSmestaj']}}" style="background-color: #005fb3">
                     <img style="height: 150px;" @if($smestaj['naslovna_foto'])src="{{$smestaj['naslovna_foto']}}" @else src="/teme/osnovna-paralax/slike/15.jpg" @endif>
                 </a>
                 <p>
@@ -140,7 +141,7 @@
                 </p>
             </div>
             <div class="col-sm-8">
-                <h3>{{$smestaj['nazivApp']}}</h3>
+                <h3 class="smestajNaslov">{{$smestaj['nazivApp']}}</h3>
                 <table class="moja-tabela">
                     <tr><td>Naziv objekta:</td><td>{{$smestaj['naziv']}}</td></tr>
                     <tr><td>Vrsta objekta:</td><td>{{$smestaj['vrsta_smestaja']}}</td></tr>

@@ -140,7 +140,7 @@
                 </p>
             </div>
             <div class="col-sm-8">
-                <h3 style="margin-top: -4px">{{$smestaj['nazivApp']}}</h3>
+                <h3 class="smestajNaslov">{{$smestaj['nazivApp']}}</h3>
                 <table class="moja-tabela">
                     <tr><td>Naziv objekta:</td><td>{{$smestaj['naziv']}}</td></tr>
                     <tr><td>Vrsta objekta:</td><td>{{$smestaj['vrsta_smestaja']}}</td></tr>

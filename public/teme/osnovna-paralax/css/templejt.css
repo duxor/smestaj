@@ -6,6 +6,8 @@
 *
 *******************************/
 body{margin-top: 80px}
+.container .pretraga{margin-top: 10%}
+.smestajNaslov{margin-top: -4px}
 h3{
     text-decoration: underline;
 }

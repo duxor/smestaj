@@ -5,7 +5,9 @@
 *    Dodatni stilovi
 *
 *******************************/
-body{margin-top: 70px}
+.odmak{margin-top: 7%}
+.container .pretraga{margin-top: 10%}
+.smestajNaslov{margin-top: -4px}
 h3{
     text-decoration: underline;
 }

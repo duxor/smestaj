@@ -38,6 +38,9 @@ class Aplikacija extends Controller {
 			$podaci['grad']=Grad::join('objekat','objekat.grad_id','=','grad.id')->where('objekat.nalog_id',$nalog['id'])->orderBy('grad.id')->get(['grad.id','grad.naziv'])->lists('naziv','id');
 			$podaci['app']['id']=$nalog['id'];
 			$podaci['app']['slug']=$slug;
+			$podaci['app']=Nalog::join('korisnici as k','k.id','=','nalog.korisnici_id')->join('tema as t','t.id','=','nalog.tema_id')
+				->where('nalog.slug',$slug)->get(['nalog.id','nalog.slug','k.username','t.slug as slugTema'])->first()->toArray();
+			//dd($podaci);
 			return view("aplikacija.teme.{$nalog['tema_slug']}.index",compact('podaci'));
 		}else return'Aplikacija nije aktivna!';
 	}

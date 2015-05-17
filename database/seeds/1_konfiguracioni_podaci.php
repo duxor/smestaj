@@ -94,10 +94,10 @@ class KonfiguracioniPodaci extends Seeder{
             ['slug'=>'pozadina-2',  'vrsta_sadrzaja_id'=>6, 'tema_id'=>2,   'redoslijed'=>22],//22
             ['slug'=>'pozadina-3',  'vrsta_sadrzaja_id'=>6, 'tema_id'=>2,   'redoslijed'=>24],//23
             ['slug'=>'pozadina-4',  'vrsta_sadrzaja_id'=>6, 'tema_id'=>2,   'redoslijed'=>26],//24
-            ['slug'=>'osnovne',     'vrsta_sadrzaja_id'=>7, 'tema_id'=>2,   'redoslijed'=>40],//25
-            ['slug'=>'slajder-1',   'vrsta_sadrzaja_id'=>8, 'tema_id'=>2,   'redoslijed'=>42],//26
-            ['slug'=>'pozadine-1',  'vrsta_sadrzaja_id'=>8, 'tema_id'=>2,   'redoslijed'=>44],//27
-            ['slug'=>'prosirenje-1','vrsta_sadrzaja_id'=>7, 'tema_id'=>2,   'redoslijed'=>90],//28
+            ['slug'=>'osnovne',     'vrsta_sadrzaja_id'=>7, 'tema_id'=>2,   'redoslijed'=>40],//25 galerija
+            ['slug'=>'slajder-1',   'vrsta_sadrzaja_id'=>8, 'tema_id'=>2,   'redoslijed'=>42],//26 galerija
+            ['slug'=>'pozadine-1',  'vrsta_sadrzaja_id'=>8, 'tema_id'=>2,   'redoslijed'=>44],//27 galerija
+            ['slug'=>'pozadine-2','vrsta_sadrzaja_id'=>8, 'tema_id'=>2,   'redoslijed'=>90],//28
             ['slug'=>'prosirenje-2','vrsta_sadrzaja_id'=>7, 'tema_id'=>2,   'redoslijed'=>90],//29
             ['slug'=>'prosirenje-3','vrsta_sadrzaja_id'=>7, 'tema_id'=>2,   'redoslijed'=>90],//30
             ['slug'=>'prosirenje-4','vrsta_sadrzaja_id'=>7, 'tema_id'=>2,   'redoslijed'=>90],//31
@@ -240,6 +240,12 @@ class KonfiguracioniPodaci extends Seeder{
                 'sadrzaj'=>'pozadine-1',//adresa do galerije
                 'icon'=>null,
                 'templejt_id'=>27
+            ],
+            [
+                'naziv'=>'Pozadine',
+                'sadrzaj'=>'pozadine-2',//adresa do galerije
+                'icon'=>null,
+                'templejt_id'=>28
             ]
         ]);
         VrstaObjekta::insert([
