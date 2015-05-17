@@ -188,7 +188,7 @@ class KonfiguracioniPodaci extends Seeder{
                 'templejt_id'=>18
             ],
             [
-                'naziv'=>'Popusti',
+                'naziv'=>'Rezervacije',
                 'sadrzaj'=>'<p>Tekst je u pripremi (Rezervišite online i ostvarite bonus i popuste za naredni period).</p>',
                 'icon'=>'glyphicon glyphicon-calendar',
                 'templejt_id'=>19

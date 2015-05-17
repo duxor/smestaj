@@ -150,7 +150,6 @@
         </div>
         <div class="gap gap-100"></div>
 
-
         {{--Smestaj START::--}}
         <div class="content-full container" id="{{$podaci[1]['slug']}}">
                 <h1>{!!$podaci[1]['naziv']!!}</h1>
@@ -183,7 +182,6 @@
         <div class="content" id="done" style="height: 200px;">
             <div class="container">
                 <div class="col-sm-10">
-                    <p>Autor: Dušan Perišić</p>
                     <a href="http://dusanperisic.com" class="btn btn-lg btn-primary"><i>dusanperisic.com</i></a>
                 </div>
                 <div class="col-sm-2">

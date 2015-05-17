@@ -108,7 +108,6 @@
     <div class="footer">
         <div class="container">
             <div class="col-sm-10">
-                <p class="text-muted">Autor: Dušan Perišić</p>
                 <a href="http://dusanperisic.com" class="btn btn-lg btn-default"><span class="glyphicon glyphicon-hand-right"></span> <i>dusanperisic.com</i></a>
             </div>
             <div class="col-sm-2">

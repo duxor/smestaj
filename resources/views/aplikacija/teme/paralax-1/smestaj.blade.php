@@ -78,17 +78,17 @@
                       <div class="item active">
                           <div class="row">
                               <div class="col-md-4">
-                                  <a class="thumbnail" href="#">
+                                  <a class="thumbnail">
                                       <img id="slika-1" class="slike-slajder" src="/galerije/default-galerije/osnovne/smestaj-default.jpg">
                                   </a>
                               </div>
                               <div class="col-md-4">
-                                  <a class="thumbnail slajder-p2" href="#">
+                                  <a class="thumbnail slajder-p2">
                                       <img id="slika-2" class="slike-slajder" src="/galerije/default-galerije/osnovne/smestaj-default.jpg">
                                   </a>
                               </div>
                               <div class="col-md-4">
-                                  <a class="thumbnail slajder-p2" href="#">
+                                  <a class="thumbnail slajder-p2">
                                       <img id="slika-3" class="slike-slajder" src="/galerije/default-galerije/osnovne/smestaj-default.jpg">
                                   </a>
                               </div>
@@ -101,6 +101,7 @@
             </div>
         </div>
         <style>
+            .slike-slajder{cursor: pointer}
             @media(min-width: 990px){.slajder-p2{display: block}}
             @media(max-width: 991px){.slajder-p2{display: none}}
         </style>
@@ -232,7 +233,7 @@
                         </ul>
                     @endforeach
                     <a href="#" class="btn btn-primary btn-sm btn-block" style="border-top-left-radius:0px;border-top-right-radius:0px;;"role="button"><span class="glyphicon glyphicon-refresh"></span> More</a>
-                @else <h3 class="col-sm-12" >Nema komentara u bazi!</h3><br clear="all"><hr>
+                @else <h3 class="col-sm-12" >Nije ostavljen ni jedan komentar.</h3><br clear="all"><hr>
                 @endif
                         
                     </div>
