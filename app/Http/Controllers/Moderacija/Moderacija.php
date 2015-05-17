@@ -108,6 +108,7 @@ class Moderacija extends Controller {
 
 	public function getKomentari($svi=null){
 			/*$smestaj_id=Komentari::join('smestaj','smestaj.id','=','komentari.smestaj_id')
+
 				->join('objekat','objekat.id','=','smestaj.objekat_id')
 				->join('nalog','nalog.id','=','objekat.nalog_id')
 				->join('korisnici','korisnici.id','=','nalog.korisnici_id')
@@ -116,6 +117,7 @@ class Moderacija extends Controller {
 			$komentari=Komentari::join('smestaj','smestaj.id','=','komentari.smestaj_id')
 				->join('korisnici','korisnici.id','=','komentari.korisnici_id')
 				->whereIn('komentari.smestaj_id',$smestaj_id)
+
 				->where('komentari.aktivan',0)
 				->get(['komentari.id','komentari.komentar','korisnici.username','smestaj.slug'])->toArray();*/
 		$komentari=Komentari::join('smestaj as s','s.id','=','komentari.smestaj_id')
