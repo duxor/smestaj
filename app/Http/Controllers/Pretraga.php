@@ -5,7 +5,9 @@ use App\Http\Requests;
 
 use App\Nalog;
 use App\Objekat;
+use App\Rezervacije;
 use App\Tema;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use App\Templejt;
 use Illuminate\Support\Facades\Redirect;
@@ -91,7 +93,7 @@ class Pretraga extends Controller {
 	}
 
 	//################# APP
-	public function anyIndex($slugApp=null){
+	public function anyIndex($slugApp=null){//dd(Input::all());
 		if($slugApp&&Input::get('aplikacija')=='') return Redirect::to('/'.$slugApp);//nalog.id
 		$tacan_broj=Input::get('tacan_broj')?'':'>';
 		$podaci=$this->defaultPodaci($slugApp?Input::get('aplikacija'):1);//templejt sa menijem bez podataka
@@ -105,11 +107,20 @@ class Pretraga extends Controller {
 				$query->on('lista_zelja.smestaj_id','=','smestaj.id')->where('lista_zelja.aktivan','=',1)->where('lista_zelja.korisnici_id','=',Session::get('id'));
 			})
 			->groupby('id')
-			->where('grad_id',Input::get('grad_id'))->where('broj_osoba',$tacan_broj.'=',$podaci['broj_osoba'])
+			->where('grad_id',Input::get('grad_id'))->where('kapacitet.broj_osoba',$tacan_broj.'=',$podaci['broj_osoba'])
 			->where('objekat.aktivan',1)->where('smestaj.aktivan',1)
 			->orderBy('smestaj.naziv')
 			->select('nalog.naziv as nazivApp','nalog.slug as slugApp','vrsta_smestaja.naziv as vrsta_smestaja','smestaj.id',
-				'smestaj.slug as slugSmestaj','smestaj.naziv','adresa','broj_osoba','lista_zelja.id as zelja','naslovna_foto','cena_osoba')->get()->toArray();
+				'smestaj.slug as slugSmestaj','smestaj.naziv','adresa','kapacitet.broj_osoba','lista_zelja.id as zelja','naslovna_foto','cena_osoba')->get()->toArray();
+		$r='';
+		foreach($podaci['rezultat'] as $k=>$rezultat){
+			//if(DB::select(DB::raw('select id from smestaj_rezervacije where smestaj_id="'.$rezultat['id'].'" and aktivan=1 and ((DATE("'.Input::get('datumDo').'")<= od) or (DATE("'.Input::get('datumOd').'")>=do))' ) )) {
+			//	$d=DB::select(DB::raw('select id,od,do from smestaj_rezervacije where smestaj_id="'.$rezultat['id'].'" and aktivan=1 and ((DATE("'.Input::get('datumDo').'")<= od) or (DATE("'.Input::get('datumOd').'")>=do))' ) );
+			$rezervacija=Rezervacije::where('aktivan',1)->where('smestaj_id',$rezultat['id'])->get(['od','do'])->first();
+			if($rezervacija)
+				if(strtotime($rezervacija->od)>=strtotime(Input::get('datumDo'))||strtotime($rezervacija->do)<=strtotime(Input::get('datumOd')));
+				else unset($podaci['rezultat'][$k]);
+		}
 		$podaci['gradovi']=$slugApp?Grad::join('objekat','objekat.grad_id','=','grad.id')->where('objekat.nalog_id',Input::get('aplikacija'))->orderBy('grad.id')->get(['grad.id','grad.naziv'])->lists('naziv','id'):Grad::lists('naziv','id');
 		$podaci['grad_id']=Input::get('grad_id');
 		$podaci['tacan_broj']=Input::get('tacan_broj');
