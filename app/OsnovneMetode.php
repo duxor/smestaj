@@ -131,4 +131,27 @@ class OsnovneMetode {
             ->join('nalog as n','n.id','=','o.nalog_id')
             ->where('n.korisnici_id',Session::get('id'))->where('komentari.aktivan',0)->count();
     }
+    public static function podaciZaKalendar($slugSmestaj){
+        $rezervacije=Rezervacije::join('smestaj as s','s.id','=','rezervacije.smestaj_id')->where('s.slug',$slugSmestaj)->get(['od','do'])->toArray();
+        $dogadjaji='{';
+        foreach($rezervacije as $rezervacija)
+            foreach(OsnovneMetode::nizDatum($rezervacija['od'],$rezervacija['do']) as $datum)
+                $dogadjaji.="\"{$datum}\":{},";
+        $dogadjaji.='}';
+        return $dogadjaji;
+    }
+    static function nizDatum($strDateFrom,$strDateTo){
+    //YYYY-MM-DD
+        $aryRange=array();
+        $iDateFrom=mktime(1,0,0,substr($strDateFrom,5,2),substr($strDateFrom,8,2),substr($strDateFrom,0,4));
+        $iDateTo=mktime(1,0,0,substr($strDateTo,5,2),substr($strDateTo,8,2),substr($strDateTo,0,4));
+        if ($iDateTo>=$iDateFrom){
+            array_push($aryRange,date('Y-m-d',$iDateFrom));
+            while ($iDateFrom<$iDateTo){
+                $iDateFrom+=86400;
+                array_push($aryRange,date('Y-m-d',$iDateFrom));
+            }
+        }
+        return $aryRange;
+    }
 }

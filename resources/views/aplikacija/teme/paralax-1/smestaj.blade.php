@@ -62,12 +62,8 @@
               $(document).ready(function () {
                 $(".responsive-calendar").responsiveCalendar({
                   time: '2015-05',
-                  events: {
-                    "2015-05-30": {"number": 5, "url": "http://w3widgets.com/responsive-slider"},
-                    "2015-05-26": {"number": 1, "url": "http://w3widgets.com"}, 
-                    "2015-05-03":{"number": 1},
-                    "2015-05-12": {}}
-                });
+                  events: {!!$podaci['kalendar']!!}
+                })
               });
             </script><!-- Responsive calendar - END -->
             
