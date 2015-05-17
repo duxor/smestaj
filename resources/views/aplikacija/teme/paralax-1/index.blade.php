@@ -70,12 +70,12 @@
     {{--Kontakt END::--}}
 
     <div id="skrollr-body">
-        <div class="content content-full" id="{{$podaci[0]['slug']}}">{{--<div id="map" style="height:650px;margin-top:-100px;width:104%;margin-left: -3%;overflow:hidden"></div>--}}
+        <div class="content content-full" id="{{$podaci[0]['slug']}}">
             <div style="margin-left: -1em;position: absolute;width: 100%;height: 100%">
                 <img style="height: 100%;width: 100%" src="/{{\App\OsnovneMetode::randomFoto('galerije/'.$podaci['app']['username'].'/aplikacije/'.$podaci['app']['slug'].'/'.$podaci['app']['slugTema'].'/pozadine-2')}}">
             </div>
             <div class="container">
-                <div class="col-sm-5 pretraga" style="z-index: 5">
+                <div class="col-sm-5 pretraga">
                     <div style="
                         padding: 10px 30px;
                         background-color: rgba(38,38,38,0.7);

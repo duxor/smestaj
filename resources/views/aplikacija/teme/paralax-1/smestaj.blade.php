@@ -1,7 +1,6 @@
 @extends('aplikacija.teme.paralax-1.master')
-@section('body')
-<div class="container">
-    <div class="row">
+@section('content')
+    <div class="row pretraga">
         <div class="col-md-8 toppad">
             <div class="panel-body">
                 <div class="media col-md-5">
@@ -215,7 +214,6 @@
             </div>
         </div><!--Container - KRAJ -->
     </div>
-</div>
 </div>
             
 

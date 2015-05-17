@@ -58,13 +58,13 @@
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="osnovno" data-toggle="tooltip" data-placement="bottom" title="Osnovno"><i class="glyphicon glyphicon-cog"></i></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="osnovno" data-toggle="tooltip" data-placement="bottom" title="Osnovno"><i class="glyphicon glyphicon-cog"></i>@if(\App\OsnovneMetode::brojKomentara()>0)<i class="badge">{{\App\OsnovneMetode::brojKomentara()}}</i>@endif</a>
                         <ul class="dropdown-menu">
                             <li class="dropdown-header">Osnovno</li>
                             <li class="divider"></li>
                             <li><a href="{!!url('/moderacija/podesavanja')!!}"><i class="glyphicon glyphicon-wrench"></i> Podešavanja</a></li>
                             <li><a href="{!!url('/moderacija/sadrzaji')!!}"><i class="glyphicon glyphicon-pencil"></i> Sadržaji</a></li>
-                            <li><a href="{!!url('/moderacija/komentari')!!}"><i class="glyphicon glyphicon-comment"></i> Komentari</a></li>
+                            <li><a href="{!!url('/moderacija/komentari')!!}"><i class="glyphicon glyphicon-comment"></i> Komentari @if(\App\OsnovneMetode::brojKomentara()>0)<i class="badge">{{\App\OsnovneMetode::brojKomentara()}}</i>@endif</a></li>
                             <li><a href="{!!url('/moderacija/u-pripremi')!!}"><i class="glyphicon glyphicon-envelope"></i> Newsletter</a></li>
                         </ul>{{--/moderator/komentari--}}
                     </li>

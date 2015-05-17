@@ -106,25 +106,38 @@ class Moderacija extends Controller {
 		return Security::rediectToLogin();
 	}
 
-	public function getKomentari(){
-
-			$smestaj_id=Komentari::join('smestaj','smestaj.id','=','komentari.smestaj_id')
+	public function getKomentari($svi=null){
+			/*$smestaj_id=Komentari::join('smestaj','smestaj.id','=','komentari.smestaj_id')
 				->join('objekat','objekat.id','=','smestaj.objekat_id')
 				->join('nalog','nalog.id','=','objekat.nalog_id')
 				->join('korisnici','korisnici.id','=','nalog.korisnici_id')
 				->where('korisnici.id','=',Session::get('id'))
 				->get(['komentari.smestaj_id'])->toArray();
-
 			$komentari=Komentari::join('smestaj','smestaj.id','=','komentari.smestaj_id')
 				->join('korisnici','korisnici.id','=','komentari.korisnici_id')
 				->whereIn('komentari.smestaj_id',$smestaj_id)
-				->get(['komentari.id','komentari.komentar','korisnici.username','smestaj.slug'])->toArray();
-		return Security::autentifikacija('moderacija.aplikacija.komentari',compact('komentari'),4);
+				->where('komentari.aktivan',0)
+				->get(['komentari.id','komentari.komentar','korisnici.username','smestaj.slug'])->toArray();*/
+		$komentari=Komentari::join('smestaj as s','s.id','=','komentari.smestaj_id')
+			->join('objekat as o','o.id','=','s.objekat_id')
+			->join('nalog as n','n.id','=','o.nalog_id')
+			->join('korisnici as k','k.id','=','komentari.korisnici_id')
+			->where('n.korisnici_id',Session::get('id'))
+			->where('komentari.aktivan',($svi=='svi'?'>':null).'=',0)
+			->get(['komentari.aktivan','komentari.id','komentari.komentar','k.username','s.slug'])->toArray();
+		return Security::autentifikacija('moderacija.aplikacija.komentari',compact('komentari'),4,'min');
 	}
 	public function postZabrani(){
+		if(!Security::autentifikacijaTest(4,'min')) return json_encode(['msg'=>'Dogodila se greška. Proverite podatke i pokušajte ponovo.','check'=>0]);
 		$podaci=json_decode(Input::get('podaci'));
-		Komentari::where('komentari.id',$podaci->id_komentara)->update(['aktivan'=>'0']);
+		Komentari::destroy($podaci->id_komentara);
 		return json_encode(['msg'=>'Uspešno ste zabranili komentar','check'=>1]);
+	}
+	public function postOdobri(){
+		if(!Security::autentifikacijaTest(4,'min')) return json_encode(['msg'=>'Dogodila se greška. Proverite podatke i pokušajte ponovo.','check'=>0]);
+		$podaci=json_decode(Input::get('podaci'));
+		Komentari::find($podaci->id_komentara)->update(['aktivan'=>1]);
+		return json_encode(['msg'=>'Uspešno ste odobrili komentar','check'=>1]);
 	}
 
 	public function getUPripremi(){

@@ -5,10 +5,12 @@
 *    Dodatni stilovi
 *
 *******************************/
-body{margin-top: 80px}
+.odmak{margin-top: 7%}
 .nDn{text-align: right;padding-right: 10px}
-.container .pretraga{margin-top: 10%}
+.container .pretraga{margin-top: 7%;z-index: 5}
 .smestajNaslov{margin-top: -4px}
+.skrollr-desktop body{margin-top: -5%}
+
 h3{
     text-decoration: underline;
 }

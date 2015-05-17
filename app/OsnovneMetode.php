@@ -125,4 +125,10 @@ class OsnovneMetode {
         }
         return $lokali;
     }
+    public static function brojKomentara(){
+        return Komentari::join('smestaj as s','s.id','=','komentari.smestaj_id')
+            ->join('objekat as o','o.id','=','s.objekat_id')
+            ->join('nalog as n','n.id','=','o.nalog_id')
+            ->where('n.korisnici_id',Session::get('id'))->where('komentari.aktivan',0)->count();
+    }
 }

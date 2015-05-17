@@ -72,12 +72,11 @@
     <div id="skrollr-body">
         {{--pocetna START::--}}
         <div class="content content-full" id="{{$podaci[0]['slug']}}">
-            {{--<div id="map" style="height:650px;margin-top:-80px;width:104%;margin-left: -3%;overflow:hidden"></div>--}}
             <div style="margin-left: -1em;position: absolute;width: 100%;height: 100%">
                 <img style="height: 100%;width: 100%" src="/teme/osnovna-paralax/slike/pozadina/<?php echo rand(1,5)?>.jpg">
             </div>
-            <div class="container" style="margin-top:50px">
-                <div class="col-sm-5" style="z-index: 5">
+            <div class="container">
+                <div class="col-sm-5 pretraga">
                     <div style="
                         padding: 10px 30px;
                         background-color: #262626;
