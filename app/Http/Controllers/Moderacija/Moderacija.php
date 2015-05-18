@@ -248,11 +248,14 @@ class Moderacija extends Controller {
 			->join('smestaj','smestaj.objekat_id','=','objekat.id')
 			->get(['korisnici.username','nalog.slug','objekat.naziv'])->first()->toArray();
 			
-			dd($podaci['username']);
+			
 			//prvo - kreirati folder
-			//$adresa=OsnovneMetode::kreirjFolder("/galerije/$podaci['username'].'/aplikacije/'.$podaci['slug'].'/smestaji/'.Input::get('slug').");
-			//dd($adresa);
-			//drugo - dodati izabranu fotografiju u folder, i adresu zapisati u naslovna_foto
+			OsnovneMetode::kreirjFolder("galerije/".$podaci['username']."/aplikacije/".$podaci['slug']."/smestaji/".Input::get('slug')."");
+
+			$target_dir="galerije/".$podaci['username']."/aplikacije/".$podaci['slug']."/smestaji/".Input::get('slug')."/";
+			$target_file = $target_dir . basename($_FILES["naslovna_foto"]["name"]);
+			move_uploaded_file($_FILES["naslovna_foto"]["tmp_name"], $target_file);
+			
 			$naziv_objekta=Objekat::where('id','=',Input::get('nazivobjekta'))->get(['naziv'])->first()->toArray();
             $novi = Smestaj::firstOrNew(['id'=>Input::get('id')]);
             $novi->objekat_id = Input::get('nazivobjekta'); 
@@ -262,6 +265,7 @@ class Moderacija extends Controller {
             $novi->naziv= $naziv_objekta['naziv'];
             $novi->cena_osoba = Input::get('cena');
             $novi->slug = Input::get('slug');
+            $novi->naslovna_foto="galerije/".$podaci['username']."/aplikacije/".$podaci['slug']."/smestaji/".Input::get('slug')."";
             $novi->save();
             return Redirect::back()->with('message','Uspešno ste dodali novi smeštaj!');
         }else return Security::rediectToLogin();
