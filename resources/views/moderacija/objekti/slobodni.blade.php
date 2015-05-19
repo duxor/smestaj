@@ -17,6 +17,7 @@
 							<th>Naziv kapaciteta</th>
 							<th>Smeštaj</th>
 							<th>Cena po osobi</th>
+							<th>Slobodan od</th>
 
 						</tr>
 					</thead>
@@ -28,6 +29,7 @@
 							<td>{{$pod['kapacitet']}}</td>
 							<td>{{$pod['vrsta_smestaja']}}</td>
 							<td>{{$pod['cena_osoba']}}</td>
+							<td>{{$pod['od']}}</td>
 						</tr>
 						@endforeach
 					</tbody>
