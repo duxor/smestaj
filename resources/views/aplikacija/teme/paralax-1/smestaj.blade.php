@@ -22,7 +22,7 @@
                           <tr>
                             <td><i class="glyphicon glyphicon-user">&nbsp;</i>Broj osoba:</td>
                             <td>{!!$podaci['smestaj']['broj_osoba']!!}</td>
-                          </tr>                                    
+                          </tr>
                           <tr>
                             <td><i class="glyphicon glyphicon-th-large">&nbsp;</i>Vrsta smeštaja:</td>
                             <td>{!!$podaci['smestaj']['vrsta_smestaja']!!}</td>
@@ -54,10 +54,9 @@
                   <div class="day header">Sun</div>
                 </div>
                 <div class="days" data-group="days">
-                  
                 </div>
             </div>
-            
+
             <script type="text/javascript">
               $(document).ready(function () {
                   var datum=new Date();console.log(datum.getFullYear()+'-'+(datum.getMonth()+1));
@@ -66,10 +65,13 @@
                   events: {!!$podaci['kalendar']!!}
                 })
               });
-            </script><!-- Responsive calendar - END -->    
-            <button class="btn btn-lg btn-info m" data-toggle="modal" data-target="#rezervacija" data-cena="{{$podaci['smestaj']['cena_osoba']}}" data-id="{{$podaci['smestaj']['id']}}" data-app="{{$podaci['app']['slug']}}" 
-            data-naziv="{{$podaci['smestaj']['naziv']}}" data-maxosoba="{{$podaci['smestaj']['broj_osoba']}}" data-vrobjekta="{{$podaci['smestaj']['vrsta_smestaja']}}" data-img="/{{\App\OsnovneMetode::randomFoto('galerije/'.$podaci['app']['username'].'/aplikacije/'.$podaci['app']['slug'].'/smestaji/'.$podaci['smestaj']['slug'])}}" ><span class="glyphicon glyphicon-check"></span> Rezervacija</button>
-        <div class="modal fade" id="rezervacija" tabindex="-1" role="dialog" ><!-- POCETAK modal rezervacija-->   
+            </script><!-- Responsive calendar - END -->
+            @if(\App\Security::autentifikacijaTest(2,'min'))
+                <button class="btn btn-lg btn-info m" data-toggle="modal" data-target="#rezervacija"><span class="glyphicon glyphicon-check"></span> Rezervacija</button>
+            @else
+                <a href="/log/login" class="btn btn-lg btn-info"><span class="glyphicon glyphicon-check"></span> Rezervacija</a>
+            @endif
+        <div class="modal fade" id="rezervacija" tabindex="-1" role="dialog" ><!-- POCETAK modal rezervacija-->
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -80,26 +82,26 @@
                         <div id="container-fluid">
                             <div id="vrti" style="display:none"><center><i class='icon-spin6 animate-spin' style="font-size: 350%"></i></center></div>
                             <div id="forma" class="form-horizontal">
-                                {!!Form::hidden('id_smestaja',null,['id'=>'id_smestaja'])!!}
+                                {!!Form::hidden('id_smestaja',$podaci['smestaj']['id'],['id'=>'id_smestaja'])!!}
                                 {!!Form::hidden('id_korisnika',Session::get('id'))!!}
                                 {!!Form::hidden('_token',csrf_token())!!}
-                                {!!Form::hidden('cena')!!}
+                                {!!Form::hidden('cena',$podaci['smestaj']['cena_osoba'])!!}
                                 {!!Form::hidden('ukupna_cena')!!}
                                 <div class="form-group">
-                                    <div class="col-sm-4"><img id="foto" style="width:100%"></div>
+                                    <div class="col-sm-4"><img id="foto" style="width:100%" src="/{{\App\OsnovneMetode::randomFoto('galerije/'.$podaci['app']['username'].'/aplikacije/'.$podaci['app']['slug'].'/smestaji/'.$podaci['smestaj']['slug'])}}"></div>
                                     <div class="col-sm-8">
-                                        <p id="app" style="text-align:center;text-decoration:underline;margin:0"></p>
-                                        <p id="objekat" style="text-align:center;margin:0"></p>
-                                        <p id="vrobjekta" style="text-align:center;margin:0"></p>
-                                        <p id="adresa" style="text-align:center;margin:0"></p>
+                                        <p id="app" style="text-align:center;text-decoration:underline;margin:0">{{$podaci['app']['nazivApp']}}</p>
+                                        <p id="objekat" style="text-align:center;margin:0">{{$podaci['smestaj']['naziv']}}</p>
+                                        <p id="vrobjekta" style="text-align:center;margin:0">{{$podaci['smestaj']['vrsta_smestaja']}}</p>
+                                        <p id="adresa" style="text-align:center;margin:0">{{$podaci['smestaj']['adresa']}}</p>
                                     </div>
                                 </div>
                                 <hr>
                                 <div class="form-group" id="datarange" style="padding-left: 22px">
                                     <div class="input-daterange input-group col-sm-7 col-sm-offset-4" id="datepicker">
-                                        {!! Form::text('datumOd', date("Y-m-d"),['class'=>'input-sm form-control','placeholder'=>'od...','id'=>'datumod','style'=>'padding:20px']) !!}
+                                        {!! Form::text('datumOd', date("Y-m-d"),['class'=>'input-sm form-control datum','placeholder'=>'od...','id'=>'datumod','style'=>'padding:20px']) !!}
                                         <span class="input-group-addon">do</span>
-                                        {!! Form::text('datumDo',null,['class'=>'input-sm form-control','placeholder'=>'do...','id'=>'datumdo','style'=>'padding:20px'])!!}
+                                        {!! Form::text('datumDo',null,['class'=>'input-sm form-control datum','placeholder'=>'do...','id'=>'datumdo','style'=>'padding:20px'])!!}
                                     </div>
                                 </div>
                                 <script>$('#datarange .input-daterange').datepicker({orientation:"top auto",weekStart:1,startDate:"current",todayBtn:"linked",toggleActive:true,format:"yyyy-mm-dd"});</script>
@@ -118,14 +120,14 @@
                                 <div class="form-group">
                                     {!! Form::label('lcena','Cena',['class'=>'control-label col-sm-4']) !!}
                                     <div class="col-sm-8">
-                                        {!! Form::label('lcena','Cena',['class'=>'control-label','id'=>'cena']) !!}
+                                        {!! Form::label('lcena',null,['class'=>'control-label','id'=>'cena']) !!}
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div id="poruka" style="display:none"></div>
                     </div>
-                                        <div class="modal-footer">
+                    <div class="modal-footer">
                         {!! Form::button('<span class="glyphicon glyphicon-remove"></span> Otkaži',['class'=>'btn btn-lg btn-warning','data-dismiss'=>'modal']) !!}
                         {!! Form::button('<span class="glyphicon glyphicon-ok"></span> Rezerviši',['class'=>'btn btn-lg btn-success','onclick'=>'Komunikacija.posalji("/rezervisi",\'forma\',\'poruka\',\'vrti\',\'forma\')' ]) !!}
                     </div>
@@ -136,26 +138,22 @@
         <script>
             $(document).ready(function(){$('button').tooltip();$('a').tooltip()});
             $('button.m').click(function(){
-                $('#app').html($(this).data('app'));
-                $('#objekat').html($(this).data('naziv'));
-                $('#vrobjekta').html($(this).data('vrobjekta'));
-                $('#adresa').html($(this).data('adresa'));
-                $('#id_smestaja').val($(this).data('id'));
-                $('#foto').attr('src',$(this).data('img'));
-                $('#cena').html($(this).data('cena')+' din');
-                $('input[name=ukupna_cena]').val($(this).data('cena'));
-                $('input[name=cena]').val($(this).data('cena'));
+                $('input[name=ukupna_cena]').val($('input[name=cena]').val());
+                racunajCenu();
                 var option = '';
-                for (i=1;i<=$(this).data('maxosoba');i++){
+                for (i=1;i<={{$podaci['smestaj']['broj_osoba']}};i++){
                     option += '<option value="'+ i + '">' + i + '</option>';
                 }
                 $('#broj_osoba').html(option);
             });
-            $('#broj_osoba').change(function(){
-                $('#cena').html($('input[name=cena]').val()*$(this).val()+' din');
-                $('input[name=ukupna_cena]').val($('input[name=cena]').val()*$(this).val());
-            });
-        </script>  
+            $('#broj_osoba').change(function(){racunajCenu()});
+            $('input.datum').change(function(){racunajCenu()});
+            function racunajCenu(){
+                var cena=$('input[name=cena]').val()*$('#broj_osoba').val()*((new Date($('#datumdo').val())-new Date($('#datumod').val()))/86400000);
+                $('#cena').html($.isNumeric(cena)?cena+' din':'Izaberite period.');
+                $('input[name=ukupna_cena]').val(cena);
+            }
+        </script>
         </div><!-- KRAJ col-md-3-->
     </div><!-- KRAJ row -->
 <br clear="all"><hr>
@@ -218,7 +216,6 @@
             podesiFoto:function(){
                 if(this.brojFoto==0) $(this.slajderID).hide();
                 else{
-                    this.fadeAnimacija('out');
                     $(this.slikaID1).attr('src','/'+this.foto[this.pozicija]);
                     if(this.brojFoto>=1){
                         $(this.slikaID2).attr('src','/'+this.foto[this.sledecaPozicija(1,'left')]);
@@ -226,16 +223,7 @@
                             $(this.slikaID3).attr('src','/'+this.foto[this.sledecaPozicija(2,'left')]);
                         }
                     }
-                    this.fadeAnimacija('in');
                 }
-            },
-            fadeAnimacija:function(inOut){
-                if(inOut=='in') $(this.slikaID1).fadeIn();
-                else $(this.slikaID1).fadeOut();
-                if(inOut=='in') $(this.slikaID2).fadeIn();
-                else $(this.slikaID2).fadeOut();
-                if(inOut=='in') $(this.slikaID3).fadeIn();
-                else $(this.slikaID3).fadeOut();
             },
             promjena:function(strana){
                 this.pozicija=this.sledecaPozicija(1,strana);
@@ -333,7 +321,7 @@
                     <a href="#" class="btn btn-primary btn-sm btn-block" style="border-top-left-radius:0px;border-top-right-radius:0px;;"role="button"><span class="glyphicon glyphicon-refresh"></span> More</a>
                 @else <h3 class="col-sm-12" >Nije ostavljen ni jedan komentar.</h3><br clear="all"><hr>
                 @endif
-                        
+
                     </div>
                 </div>
             </div>

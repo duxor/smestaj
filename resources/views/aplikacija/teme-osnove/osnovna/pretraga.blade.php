@@ -237,7 +237,7 @@
             function racunajCenu(){
                 var cena=$('input[name=cena]').val()*$('#broj_osoba').val()*((new Date($('#datumdo').val())-new Date($('#datumod').val()))/86400000);
                 $('#cena').html($.isNumeric(cena)?cena+' din':'Izaberite period.');
-                $('input[name=ukupna_cena]').val($('input[name=cena]').val()*$('#broj_osoba').val()*brojDana);
+                $('input[name=ukupna_cena]').val(cena);
             }
             $("button.zelja").click(function(){
                 $(this).css("color","black");
