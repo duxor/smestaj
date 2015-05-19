@@ -264,11 +264,14 @@ class Moderacija extends Controller {
 			->join('smestaj as s','s.objekat_id','=','o.id')
 			->join('kapacitet as k','k.id','=','s.kapacitet_id')
 			->join('vrsta_smestaja as v','v.id','=','s.vrsta_smestaja_id')
+			->join('rezervacije as r','r.smestaj_id','=','s.id')
 			->where('nalog.korisnici_id',Session::get('id'))
 			->whereIn('s.id',function($query){
 				$query->select('r.smestaj_id')->from('rezervacije as r')->where('r.od','<=',date('Y-m-d'))->where('r.do','>',date('Y-m-d'));
 			})
-			->get(['s.id','s.naziv','s.slug','k.naziv as kapacitet','v.naziv as vrsta_smestaja','o.naziv as objekat','cena_osoba'])->toArray();
+			->orderBy('r.do')
+			->groupBy('r.smestaj_id')
+			->get(['s.id','s.naziv','s.slug','k.naziv as kapacitet','v.naziv as vrsta_smestaja','o.naziv as objekat','cena_osoba','r.do as zauzetDo','r.korisnici_id as korisnik'])->toArray();
 		return Security::autentifikacija('moderacija.objekti.zauzeti',compact('podaci'),4,'min');
 	}
 	public function getSlobodni(){
@@ -277,11 +280,15 @@ class Moderacija extends Controller {
 			->join('smestaj as s','s.objekat_id','=','o.id')
 			->join('kapacitet as k','k.id','=','s.kapacitet_id')
 			->join('vrsta_smestaja as v','v.id','=','s.vrsta_smestaja_id')
+			->leftjoin('rezervacije as r',function($join){
+				$join->on('r.smestaj_id','=','s.id')->where('r.od','>',date('Y-m-d'));})
 			->where('nalog.korisnici_id',Session::get('id'))
 			->whereNotIn('s.id',function($query){
 				$query->select('r.smestaj_id')->from('rezervacije as r')->where('r.od','<=',date('Y-m-d'))->where('r.do','>',date('Y-m-d'));
 			})
-			->get(['s.id','s.naziv','s.slug','k.naziv as kapacitet','v.naziv as vrsta_smestaja','o.naziv as objekat','cena_osoba'])->toArray();
+			->orderBy('r.od')
+			->groupBy('s.id')
+			->select('s.id','s.naziv','s.slug','k.naziv as kapacitet','v.naziv as vrsta_smestaja','o.naziv as objekat','cena_osoba',DB::Raw('min(smestaj_r.od)'))->get()->toArray();
 		return Security::autentifikacija('moderacija.objekti.slobodni',compact('podaci'),4,'min');
 	}
 }

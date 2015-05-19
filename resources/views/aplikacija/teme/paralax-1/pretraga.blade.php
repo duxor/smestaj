@@ -143,7 +143,7 @@
             <div class="col-sm-8">
                 <h3 class="smestajNaslov">{{$smestaj['nazivApp']}}</h3>
                 <table class="moja-tabela">
-                    <tr><td class="nDn">Naziv objekta:</td><td>{{$smestaj['nazivApp']}}</td></tr>
+                    <tr><td class="nDn">Naziv objekta:</td><td>{{$smestaj['naziv']}}</td></tr>
                     <tr><td class="nDn">Vrsta objekta:</td><td>{{$smestaj['vrsta_smestaja']}}</td></tr>
                     <tr><td class="nDn">Broj mesta:</td><td>{{$smestaj['broj_osoba']}}</td></tr>
                     <tr><td class="nDn">Adresa:</td><td>{{$smestaj['adresa']}}</td></tr>
