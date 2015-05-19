@@ -273,7 +273,7 @@ class Moderacija extends Controller {
 			->orderBy('r.do')
 			->groupBy('r.smestaj_id')
 			->get(['s.id','s.naziv','s.slug','k.naziv as kapacitet','v.naziv as vrsta_smestaja','o.naziv as objekat','cena_osoba','r.do as zauzetDo','kk.username as korisnik'])->toArray();
-		dd($podaci);return Security::autentifikacija('moderacija.objekti.zauzeti',compact('podaci'),4,'min');
+		return Security::autentifikacija('moderacija.objekti.zauzeti',compact('podaci'),4,'min');
 	}
 	public function getSlobodni(){
 		if(!Security::autentifikacijaTest(4,'min'))Security::rediectToLogin();
