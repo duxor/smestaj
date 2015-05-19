@@ -60,8 +60,9 @@
             
             <script type="text/javascript">
               $(document).ready(function () {
+                  var datum=new Date();console.log(datum.getFullYear()+'-'+(datum.getMonth()+1));
                 $(".responsive-calendar").responsiveCalendar({
-                  time: '2015-05',
+                  time: datum.getFullYear()+'-'+(datum.getMonth()+1),
                   events: {!!$podaci['kalendar']!!}
                 })
               });
