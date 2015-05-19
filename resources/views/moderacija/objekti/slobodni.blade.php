@@ -30,6 +30,7 @@
 							<td>{{$pod['vrsta_smestaja']}}</td>
 							<td>{{$pod['cena_osoba']}}</td>
 							<td>{{$pod['od']}}</td>
+							
 						</tr>
 						@endforeach
 					</tbody>
