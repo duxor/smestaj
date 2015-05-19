@@ -52,7 +52,7 @@
                 $('.strelica').toggleClass('glyphicon-circle-arrow-left');
                 $('.strelica').toggleClass('glyphicon-circle-arrow-right');
                 $(this).show();
-                $('.work-area').animate({width:sirina=='50px'?'100%':'70%'},350);
+                $('.work-area').animate({width:sirina=='50px'?'95%':'70%'},350);
                 $('.work-area').fadeIn();
                 sirina=sirina=='50px'?'30%':'50px';
             });

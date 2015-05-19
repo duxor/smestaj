@@ -188,14 +188,13 @@
                 <div id="kontaktForma" class="col-sm-5 form-horizontal">
                     <div id="_poruka" style="display: none"></div>
                     {!!Form::open(['id'=>'frm_id'])!!}
-                    {!!Form::hidden('_token',csrf_token())!!}
-                    {!!Form::hidden('user',Session::get('username'))!!}
+                    {!!Form::hidden('user',Session::has('username')?Session::get('username'):'Neregistrovan korisnik.')!!}
                     <div id="dprezime" class="form-group has-feedback">{!!Form::text('prezime',null,['placeholder'=>'Prezime','class'=>'form-control','id'=>'prezime'])!!}<span id="sprezime" class="glyphicon form-control-feedback"></span></div>
                     <div id="dime" class="form-group has-feedback">{!!Form::text('ime',null,['placeholder'=>'Ime','class'=>'form-control','id'=>'ime'])!!}<span id="sime" class="glyphicon form-control-feedback"></span></div>
                     <div id="demail" class="form-group has-feedback">{!!Form::email('email',null,['placeholder'=>'Email','class'=>'form-control','id'=>'email'])!!}<span id="semail" class="glyphicon form-control-feedback"></span></div>
-                    <div class="form-group">{!!Form::select('kome',['tehno'=>'Tehnička podrška','info'=>'Informacije','sugestije'=>'Sugestije'],null,['placeholder'=>'Prezime','class'=>'form-control','id'=>'prezime'])!!}</div>
+                    <div class="form-group">{!!Form::select('kome',['tehno'=>'Tehnička podrška','info'=>'Informacije','sugestije'=>'Sugestije'],1,['class'=>'form-control','id'=>'komeSaljes'])!!}</div>
                     <div id="dporuka" class="form-group has-feedback">{!!Form::textarea('poruka',null,['placeholder'=>'Poruka','class'=>'form-control','id'=>'poruka'])!!}<span id="sporuka" class="glyphicon form-control-feedback"></span></div>
-                    <div class="form-group">{!!Form::button('<i class="glyphicon glyphicon-envelope"></i> Pošalji',['class'=>'btn btn-lg btn-default','id'=>'kontakt_btn'])!!}</div>
+                    <div class="form-group">{!!Form::button('<i class="glyphicon glyphicon-envelope"></i> Pošalji',['class'=>'btn btn-lg btn-default','id'=>'kontakt_btn','value'=>'Posalji'])!!}</div>
                     <script>
                         $('#kontakt_btn').click(function(){
                             if(!SubmitForm.check('frm_id')){ alert('Popunite sve podatke i pokušajte ponovo.'); return; }

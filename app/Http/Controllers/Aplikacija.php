@@ -132,7 +132,7 @@ class Aplikacija extends Controller {
 			return json_encode(['msg'=>$msg,'check'=>0]);
 		}
 		$mail=new Mailbox();
-		if($podaci->user){ $userId=Korisnici::where('username',$podaci->user)->get(['id'])->id; if($userId) $mail->od_id=$userId; }
+		if($podaci->user){ $userId=is_int($podaci->user)?Korisnici::where('username',$podaci->user)->get(['id'])->id:null; if($userId) $mail->od_id=$userId; }
 		$mail->od_email=$podaci->email;
 		$mail->naslov='SA SAJTA '.(isset($podaci->kome)?'('.$podaci->kome.')':null);
 		$mail->poruka=$podaci->poruka;
