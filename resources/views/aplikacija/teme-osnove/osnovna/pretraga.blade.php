@@ -126,7 +126,7 @@
             <hr>
             <div class="col-sm-4">
                 <a href="/{{$smestaj['slugApp']}}/{{$smestaj['slugSmestaj']}}">
-                    <img style="height: 150px;" @if($smestaj['naslovna_foto'])src="{{$smestaj['naslovna_foto']}}" @else src="/teme/osnovna-paralax/slike/15.jpg" @endif>
+                    <img style="height: 150px;" @if($smestaj['naslovna_foto'])src="{{$smestaj['naslovna_foto']}}" @else src="/{{\App\OsnovneMetode::randomFoto('galerije/'.$smestaj['username'].'/aplikacije/'.$smestaj['slugApp'].'/smestaji/'.$smestaj['slugSmestaj'])}}" @endif>
                 </a>
                 <p>
                     <a href="/{{$smestaj['slugApp']}}/{{$smestaj['slugSmestaj']}}" class="btn btn-lg btn-default"><i class="glyphicon glyphicon-zoom-in"></i> Pregled</a>
