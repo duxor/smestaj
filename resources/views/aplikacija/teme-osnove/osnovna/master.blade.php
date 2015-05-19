@@ -119,6 +119,6 @@
 
 {!! HTML::script('js/bootstrap.min.js') !!}
 {!! HTML::script('js/funkcije.js') !!}
-
+@include('aplikacija.dodaci.piwik')
 </body>
 </html>

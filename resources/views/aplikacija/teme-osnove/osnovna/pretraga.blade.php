@@ -178,9 +178,9 @@
                                 <hr>
                                 <div class="form-group" id="datarange" style="padding-left: 22px">
                                     <div class="input-daterange input-group col-sm-7 col-sm-offset-4" id="datepicker">
-                                        {!! Form::text('datumOd', date("Y-m-d"), ['class'=>'input-sm form-control','placeholder'=>'od...','id'=>'datumod','style'=>'padding:20px']) !!}
+                                        {!! Form::text('datumOd', date("Y-m-d"), ['class'=>'input-sm form-control datum','placeholder'=>'od...','id'=>'datumod','style'=>'padding:20px']) !!}
                                         <span class="input-group-addon">do</span>
-                                        {!! Form::text('datumDo', null, ['class'=>'input-sm form-control','placeholder'=>'do...','id'=>'datumdo','style'=>'padding:20px']) !!}
+                                        {!! Form::text('datumDo', null, ['class'=>'input-sm form-control datum','placeholder'=>'do...','id'=>'datumdo','style'=>'padding:20px']) !!}
                                     </div>
                                 </div>
                                 <script>$('#datarange .input-daterange').datepicker({orientation:"top auto",weekStart:1,startDate:"current",todayBtn:"linked",toggleActive:true,format:"yyyy-mm-dd"});</script>
@@ -232,10 +232,13 @@
                 }
                 $('#broj_osoba').html(option);
             });
-            $('#broj_osoba').change(function(){
-                $('#cena').html($('input[name=cena]').val()*$(this).val()+' din');
-                $('input[name=ukupna_cena]').val($('input[name=cena]').val()*$(this).val());
-            });
+            $('#broj_osoba').change(function(){racunajCenu()});
+            $('input.datum').change(function(){racunajCenu()});
+            function racunajCenu(){
+                var cena=$('input[name=cena]').val()*$('#broj_osoba').val()*((new Date($('#datumdo').val())-new Date($('#datumod').val()))/86400000);
+                $('#cena').html($.isNumeric(cena)?cena+' din':'Izaberite period.');
+                $('input[name=ukupna_cena]').val($('input[name=cena]').val()*$('#broj_osoba').val()*brojDana);
+            }
             $("button.zelja").click(function(){
                 $(this).css("color","black");
                 $(this).html("<i class='icon-spin6 animate-spin'></i>");
