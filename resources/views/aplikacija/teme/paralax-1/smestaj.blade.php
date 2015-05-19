@@ -65,8 +65,96 @@
                   events: {!!$podaci['kalendar']!!}
                 })
               });
-            </script><!-- Responsive calendar - END -->
-            
+            </script><!-- Responsive calendar - END -->    
+            <button class="btn btn-lg btn-info m" data-toggle="modal" data-target="#rezervacija" data-cena="{{$podaci['smestaj']['cena_osoba']}}" data-id="{{$podaci['smestaj']['id']}}" data-app="{{$podaci['app']['slug']}}" 
+            data-naziv="{{$podaci['smestaj']['naziv']}}" data-maxosoba="{{$podaci['smestaj']['broj_osoba']}}" data-vrobjekta="{{$podaci['smestaj']['vrsta_smestaja']}}" data-img="/{{\App\OsnovneMetode::randomFoto('galerije/'.$podaci['app']['username'].'/aplikacije/'.$podaci['app']['slug'].'/smestaji/'.$podaci['smestaj']['slug'])}}" ><span class="glyphicon glyphicon-check"></span> Rezervacija</button>
+        <div class="modal fade" id="rezervacija" tabindex="-1" role="dialog" ><!-- POCETAK modal rezervacija-->   
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h2 style="text-align:center"><i class="glyphicon glyphicon-edit" style="font-size: 150%"></i> Rezerviši najbolji</h2>
+                    </div>
+                    <div class="modal-body">
+                        <div id="container-fluid">
+                            <div id="vrti" style="display:none"><center><i class='icon-spin6 animate-spin' style="font-size: 350%"></i></center></div>
+                            <div id="forma" class="form-horizontal">
+                                {!!Form::hidden('id_smestaja',null,['id'=>'id_smestaja'])!!}
+                                {!!Form::hidden('id_korisnika',Session::get('id'))!!}
+                                {!!Form::hidden('_token',csrf_token())!!}
+                                {!!Form::hidden('cena')!!}
+                                {!!Form::hidden('ukupna_cena')!!}
+                                <div class="form-group">
+                                    <div class="col-sm-4"><img id="foto" style="width:100%"></div>
+                                    <div class="col-sm-8">
+                                        <p id="app" style="text-align:center;text-decoration:underline;margin:0"></p>
+                                        <p id="objekat" style="text-align:center;margin:0"></p>
+                                        <p id="vrobjekta" style="text-align:center;margin:0"></p>
+                                        <p id="adresa" style="text-align:center;margin:0"></p>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="form-group" id="datarange" style="padding-left: 22px">
+                                    <div class="input-daterange input-group col-sm-7 col-sm-offset-4" id="datepicker">
+                                        {!! Form::text('datumOd', date("Y-m-d"),['class'=>'input-sm form-control','placeholder'=>'od...','id'=>'datumod','style'=>'padding:20px']) !!}
+                                        <span class="input-group-addon">do</span>
+                                        {!! Form::text('datumDo',null,['class'=>'input-sm form-control','placeholder'=>'do...','id'=>'datumdo','style'=>'padding:20px'])!!}
+                                    </div>
+                                </div>
+                                <script>$('#datarange .input-daterange').datepicker({orientation:"top auto",weekStart:1,startDate:"current",todayBtn:"linked",toggleActive:true,format:"yyyy-mm-dd"});</script>
+                                <div id="broj osoba" class="form-group has-feedback">
+                                    {!!Form::label('brojosoba','Broj osoba',['class'=>'control-label col-sm-4'])!!}
+                                    <div class="col-sm-4">
+                                        {!!Form::select('broj_osoba',[],null,['class'=>'form-control','id'=>'broj_osoba'])!!}
+                                    </div>
+                                </div>
+                                <div class="form-group has-feedback">
+                                    {!! Form::label('napomena','Napomena',['class'=>'control-label col-sm-4']) !!}
+                                    <div class="col-sm-8">
+                                        {!! Form::textarea('napomena',null,['class'=>'form-control','placeholder'=>'Upišite napomenu','id'=>'napomena']) !!}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    {!! Form::label('lcena','Cena',['class'=>'control-label col-sm-4']) !!}
+                                    <div class="col-sm-8">
+                                        {!! Form::label('lcena','Cena',['class'=>'control-label','id'=>'cena']) !!}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="poruka" style="display:none"></div>
+                    </div>
+                                        <div class="modal-footer">
+                        {!! Form::button('<span class="glyphicon glyphicon-remove"></span> Otkaži',['class'=>'btn btn-lg btn-warning','data-dismiss'=>'modal']) !!}
+                        {!! Form::button('<span class="glyphicon glyphicon-ok"></span> Rezerviši',['class'=>'btn btn-lg btn-success','onclick'=>'Komunikacija.posalji("/rezervisi",\'forma\',\'poruka\',\'vrti\',\'forma\')' ]) !!}
+                    </div>
+                </div>
+            </div>
+        </div><i class='icon-spin6 animate-spin' style="color: rgba(0,0,0,0)"></i>
+        <style>._tooltip:hover{color: red}</style>
+        <script>
+            $(document).ready(function(){$('button').tooltip();$('a').tooltip()});
+            $('button.m').click(function(){
+                $('#app').html($(this).data('app'));
+                $('#objekat').html($(this).data('naziv'));
+                $('#vrobjekta').html($(this).data('vrobjekta'));
+                $('#adresa').html($(this).data('adresa'));
+                $('#id_smestaja').val($(this).data('id'));
+                $('#foto').attr('src',$(this).data('img'));
+                $('#cena').html($(this).data('cena')+' din');
+                $('input[name=ukupna_cena]').val($(this).data('cena'));
+                $('input[name=cena]').val($(this).data('cena'));
+                var option = '';
+                for (i=1;i<=$(this).data('maxosoba');i++){
+                    option += '<option value="'+ i + '">' + i + '</option>';
+                }
+                $('#broj_osoba').html(option);
+            });
+            $('#broj_osoba').change(function(){
+                $('#cena').html($('input[name=cena]').val()*$(this).val()+' din');
+                $('input[name=ukupna_cena]').val($('input[name=cena]').val()*$(this).val());
+            });
+        </script>  
         </div><!-- KRAJ col-md-3-->
     </div><!-- KRAJ row -->
 <br clear="all"><hr>
