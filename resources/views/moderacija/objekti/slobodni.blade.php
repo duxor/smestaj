@@ -13,24 +13,21 @@
 					<thead>
 						<tr>
 							<th>Objekat</th>
-							<th>Smeštaj</th>
+							<th>Slug</th>
 							<th>Naziv kapaciteta</th>
-							<th>Slobodan do</th>
+							<th>Smeštaj</th>
+							<th>Cena po osobi</th>
 
-							<th></th>
-							<th></th>
 						</tr>
 					</thead>
 					<tbody>
 					@foreach($podaci as $pod)
 						<tr>
-							<td>{{$pod['od']}}</td>
-							<td>{{$pod['do']}}</td>
 							<td>{{$pod['naziv']}}</td>
-							<td>{{$pod['naziv_kapaciteta']}}</td>
-							<td>{{$pod['vrsta_smestaja_naziv']}}</td>
-							<td>{{$rez['broj_osoba']}}</td>
-							<td style="font-size:12px;">{{$rez['napomena']}}</td>
+							<td>{{$pod['slug']}}</td>
+							<td>{{$pod['kapacitet']}}</td>
+							<td>{{$pod['vrsta_smestaja']}}</td>
+							<td>{{$pod['cena_osoba']}}</td>
 						</tr>
 						@endforeach
 					</tbody>
