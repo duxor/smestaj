@@ -11,26 +11,38 @@
                 <div class="col-md-6">
                     <table class="table table-user-information">
                         <tbody>
-                          <tr>
-                            <td><i class="glyphicon glyphicon-home">&nbsp;</i>Naziv objekta:</td>
-                            <td>{!!$podaci['smestaj']['naziv']!!}</td>
-                          </tr>
-                          <tr>
-                            <td><i class="glyphicon glyphicon-dashboard">&nbsp;</i>Kapacitet:</td>
-                            <td>{!!$podaci['smestaj']['naziv_kapaciteta']!!}</td>
-                          </tr>
-                          <tr>
-                            <td><i class="glyphicon glyphicon-user">&nbsp;</i>Broj osoba:</td>
-                            <td>{!!$podaci['smestaj']['broj_osoba']!!}</td>
-                          </tr>
-                          <tr>
-                            <td><i class="glyphicon glyphicon-th-large">&nbsp;</i>Vrsta smeštaja:</td>
-                            <td>{!!$podaci['smestaj']['vrsta_smestaja']!!}</td>
-                          </tr>
-                          <tr>
-                            <td><i class="glyphicon glyphicon-euro">&nbsp;</i>Cena po osobi:</td>
-                            <td>{!!$podaci['smestaj']['cena_osoba']!!} din.</td>
-                          </tr>
+                            <tr>
+                                <td><i class="glyphicon glyphicon-home"></i> Naziv objekta</td>
+                                <td>{!!$podaci['smestaj']['naziv']!!}</td>
+                            </tr>
+                            <tr>
+                                <td><i class="glyphicon glyphicon-dashboard"></i> Kapacitet</td>
+                                <td>{!!$podaci['smestaj']['naziv_kapaciteta']!!}</td>
+                            </tr>
+                            <tr>
+                                <td><i class="glyphicon glyphicon-user"></i> Broj osoba</td>
+                                <td>{!!$podaci['smestaj']['broj_osoba']!!}</td>
+                            </tr>
+                            <tr>
+                                <td><i class="glyphicon glyphicon-th-large"></i> Vrsta smeštaja</td>
+                                <td>{!!$podaci['smestaj']['vrsta_smestaja']!!}</td>
+                            </tr>
+                            @if($podaci['smestaj']['adresa'])
+                                <tr>
+                                    <td><i class="glyphicon glyphicon-map-marker"></i> Adresa</td>
+                                    <td>{!!$podaci['smestaj']['adresa']!!}</td>
+                                </tr>
+                            @endif
+                            @if($podaci['smestaj']['grad'])
+                                <tr>
+                                    <td><i class="glyphicon glyphicon-map-marker"></i> Grad</td>
+                                    <td>{!!$podaci['smestaj']['grad']!!}</td>
+                                </tr>
+                            @endif
+                            <tr>
+                                <td><i class="glyphicon glyphicon-euro"></i> Cena po osobi</td>
+                                <td>{!!$podaci['smestaj']['cena_osoba']!!} din.</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>

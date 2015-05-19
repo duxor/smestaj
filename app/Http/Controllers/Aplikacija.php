@@ -48,11 +48,10 @@ class Aplikacija extends Controller {
 		$podaci['smestaj']=Smestaj::join('kapacitet','kapacitet.id','=','smestaj.kapacitet_id')
 			->join('vrsta_smestaja','vrsta_smestaja.id','=','smestaj.vrsta_smestaja_id')
 			->join('objekat','objekat.id','=','smestaj.objekat_id')
+			->leftjoin('grad as g','g.id','=','objekat.grad_id')
 			->where('slug',$slugSmestaj)
-			->get(['smestaj.id','smestaj.naziv','slug','kapacitet.naziv as naziv_kapaciteta','broj_osoba','vrsta_smestaja.naziv as vrsta_smestaja','naslovna_foto','cena_osoba','x','y','z','adresa'])->first()->toArray();
-		//$tema=Nalog::join('tema','tema.id','=','nalog.tema_id')->where('nalog.slug',$slugApp)->get(['tema.slug','nalog.id'])->first();
+			->get(['g.naziv as grad','smestaj.id','smestaj.naziv','slug','kapacitet.naziv as naziv_kapaciteta','broj_osoba','vrsta_smestaja.naziv as vrsta_smestaja','naslovna_foto','cena_osoba','objekat.x','objekat.y','objekat.z','adresa'])->first()->toArray();
 		$podaci['app']=Nalog::join('korisnici as k','k.id','=','nalog.korisnici_id')->join('tema as t','t.id','=','nalog.tema_id')->where('nalog.slug',$slugApp)->get(['nalog.id','nalog.slug','k.username','t.slug as slugTema','nalog.naziv as nazivApp'])->first()->toArray();
-		//$id_smestaja=Smestaj::where('slug','=',$slugSmestaj)->get(['smestaj.id'])->first();
 		$komentari=Komentari::orderBy('created_at','desc')->where('smestaj_id',$podaci['smestaj']['id'])->where('komentari.aktivan',1)
 				->join('korisnici','korisnici.id','=','komentari.korisnici_id')
 				->get(['komentar','ocena','komentari.created_at','korisnici.username'])->toArray();

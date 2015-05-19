@@ -4,6 +4,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Komentari;
 use App\OsnovneMetode;
+use App\Rezervacije;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Input;
@@ -108,19 +109,6 @@ class Moderacija extends Controller {
 	}
 
 	public function getKomentari($svi=null){
-			/*$smestaj_id=Komentari::join('smestaj','smestaj.id','=','komentari.smestaj_id')
-
-				->join('objekat','objekat.id','=','smestaj.objekat_id')
-				->join('nalog','nalog.id','=','objekat.nalog_id')
-				->join('korisnici','korisnici.id','=','nalog.korisnici_id')
-				->where('korisnici.id','=',Session::get('id'))
-				->get(['komentari.smestaj_id'])->toArray();
-			$komentari=Komentari::join('smestaj','smestaj.id','=','komentari.smestaj_id')
-				->join('korisnici','korisnici.id','=','komentari.korisnici_id')
-				->whereIn('komentari.smestaj_id',$smestaj_id)
-
-				->where('komentari.aktivan',0)
-				->get(['komentari.id','komentari.komentar','korisnici.username','smestaj.slug'])->toArray();*/
 		$komentari=Komentari::join('smestaj as s','s.id','=','komentari.smestaj_id')
 			->join('objekat as o','o.id','=','s.objekat_id')
 			->join('nalog as n','n.id','=','o.nalog_id')
@@ -272,9 +260,28 @@ class Moderacija extends Controller {
 		
 	}
 	public function getZauzeti(){
-
+		$podaci=Nalog::join('objekat as o','o.nalog_id','=','nalog.id')
+			->join('smestaj as s','s.objekat_id','=','o.id')
+			->join('kapacitet as k','k.id','=','s.kapacitet_id')
+			->join('vrsta_smestaja as v','v.id','=','s.vrsta_smestaja_id')
+			->where('nalog.korisnici_id',Session::get('id'))
+			->whereIn('s.id',function($query){
+				$query->select('r.smestaj_id')->from('rezervacije as r')->where('r.od','<=',date('Y-m-d'))->where('r.do','>',date('Y-m-d'));
+			})
+			->get(['s.id','s.naziv','s.slug','k.naziv as kapacitet','v.naziv as vrsta_smestaja','o.naziv as objekat','cena_osoba'])->toArray();
+		return Security::autentifikacija('moderacija.objekti.zauzeti',compact('podaci'),4,'min');
 	}
 	public function getSlobodni(){
-
+		if(!Security::autentifikacijaTest(4,'min'))Security::rediectToLogin();
+		$podaci=Nalog::join('objekat as o','o.nalog_id','=','nalog.id')
+			->join('smestaj as s','s.objekat_id','=','o.id')
+			->join('kapacitet as k','k.id','=','s.kapacitet_id')
+			->join('vrsta_smestaja as v','v.id','=','s.vrsta_smestaja_id')
+			->where('nalog.korisnici_id',Session::get('id'))
+			->whereNotIn('s.id',function($query){
+				$query->select('r.smestaj_id')->from('rezervacije as r')->where('r.od','<=',date('Y-m-d'))->where('r.do','>',date('Y-m-d'));
+			})
+			->get(['s.id','s.naziv','s.slug','k.naziv as kapacitet','v.naziv as vrsta_smestaja','o.naziv as objekat','cena_osoba'])->toArray();
+		return Security::autentifikacija('moderacija.objekti.slobodni',compact('podaci'),4,'min');
 	}
 }
