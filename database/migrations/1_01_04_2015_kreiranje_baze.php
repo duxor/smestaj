@@ -169,6 +169,25 @@ class KreiranjeBaze extends Migration{
             $table->string('naslovna_foto', 255)->nullable();
             $table->float('cena_osoba')->nullable();
         });
+        Schema::create('dodatna_oprema', function(Blueprint $table)
+        {
+            $table->bigIncrements('id');
+            $table->string('naziv', 45);
+            $table->text('opis')->nullable();
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->nullable();
+        });
+        Schema::create('dodatno', function(Blueprint $table)
+        {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('smestaj_id');
+            $table->foreign('smestaj_id')->references('id')->on('smestaj');
+            $table->unsignedBigInteger('dodatna_oprema_id');
+            $table->foreign('dodatna_oprema_id')->references('id')->on('dodatna_oprema');
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->nullable();
+        });
+
         Schema::create('sadrzaji', function(Blueprint $table)
         {
             $table->bigIncrements('id');
@@ -264,6 +283,8 @@ class KreiranjeBaze extends Migration{
         Schema::drop('rezervacije');
         Schema::drop('lista_zelja');
         Schema::drop('komentari');
+        Schema::drop('dodatno');
+        Schema::drop('dodatna_oprema');
         Schema::drop('smestaj');
         Schema::drop('vrsta_smestaja');
         Schema::drop('kapacitet');

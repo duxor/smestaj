@@ -265,14 +265,15 @@ class Moderacija extends Controller {
 			->join('kapacitet as k','k.id','=','s.kapacitet_id')
 			->join('vrsta_smestaja as v','v.id','=','s.vrsta_smestaja_id')
 			->join('rezervacije as r','r.smestaj_id','=','s.id')
+			->join('korisnici as kk','kk.id','=','r.korisnici_id')
 			->where('nalog.korisnici_id',Session::get('id'))
 			->whereIn('s.id',function($query){
 				$query->select('r.smestaj_id')->from('rezervacije as r')->where('r.od','<=',date('Y-m-d'))->where('r.do','>',date('Y-m-d'));
 			})
 			->orderBy('r.do')
 			->groupBy('r.smestaj_id')
-			->get(['s.id','s.naziv','s.slug','k.naziv as kapacitet','v.naziv as vrsta_smestaja','o.naziv as objekat','cena_osoba','r.do as zauzetDo','r.korisnici_id as korisnik'])->toArray();
-		return Security::autentifikacija('moderacija.objekti.zauzeti',compact('podaci'),4,'min');
+			->get(['s.id','s.naziv','s.slug','k.naziv as kapacitet','v.naziv as vrsta_smestaja','o.naziv as objekat','cena_osoba','r.do as zauzetDo','kk.username as korisnik'])->toArray();
+		dd($podaci);return Security::autentifikacija('moderacija.objekti.zauzeti',compact('podaci'),4,'min');
 	}
 	public function getSlobodni(){
 		if(!Security::autentifikacijaTest(4,'min'))Security::rediectToLogin();

@@ -12,6 +12,7 @@ use App\Kapacitet;
 use App\VrstaObjekta;
 use App\VrstaSmestaja;
 use App\DefaultSadrzaji;
+use App\DodatnaOprema;
 class KonfiguracioniPodaci extends Seeder{
     public function run(){
         PravaPristupa::insert([
@@ -273,6 +274,31 @@ class KonfiguracioniPodaci extends Seeder{
             ['naziv'=>'','broj_osoba'=>11],
             ['naziv'=>'','broj_osoba'=>12],
             ['naziv'=>'','broj_osoba'=>13]
+        ]);
+        DodatnaOprema::insert([
+            ['naziv'=>'Bežični internet (WiFi)'],
+            ['naziv'=>'Parking'],
+            ['naziv'=>'TV'],
+            ['naziv'=>'Hidromasažna kada'],
+            ['naziv'=>'Kada'],
+            ['naziv'=>'Klima uređaj'],
+            ['naziv'=>'Kuhinja'],
+            ['naziv'=>'Popločano dvorište'],
+            ['naziv'=>'Terasa'],
+            ['naziv'=>'Veš mašina'],
+            ['naziv'=>'Zvučna izolacija'],
+            ['naziv'=>'Čajna kuhinja'],
+            ['naziv'=>'lift'],
+            ['naziv'=>'Grejanje'],
+            ['naziv'=>'Zabranjeno pušenje u celom objektu'],
+            ['naziv'=>'Fitnes centar'],
+            ['naziv'=>'Sobe za nepušače'],
+            ['naziv'=>'Zatvoreni bazen'],
+            ['naziv'=>'Spa i velnes centar'],
+            ['naziv'=>'Otvoreni bazen'],
+            ['naziv'=>'Dozvoljeni kućni ljubimci'],
+            ['naziv'=>'Prilagođeno osobama sa invaliditetom'],
+            ['naziv'=>'Restoran']
         ]);
     }
 }
