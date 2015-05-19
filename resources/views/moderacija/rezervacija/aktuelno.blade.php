@@ -34,12 +34,12 @@
 								<td>{{$rez['vrsta_smestaja_naziv']}}</td>
 								<td>{{$rez['broj_osoba']}}</td>
 								<td style="font-size:12px;">{{$rez['napomena']}}</td>
-								<th>{{$rez['username']}}</th>
+								<td>{{$rez['username']}}</td>
 									
 								
-								<th>
+								<td>
 									<p data-placement="top" data-toggle="tooltip" title="Odjavi korisnika"><button  class="btn btn-xs btn-danger" data-toggle="modal" data-target="#odjavakorisnika{{$rez['id']}}"><span class="glyphicon glyphicon-remove"></span></button></p>
-								</th>
+								</td>
 							</tr>
 								<div class="modal fade" id="odjavakorisnika{{$rez['id']}}" tabindex="-1" role="dialog">
 							        <div class="modal-dialog">

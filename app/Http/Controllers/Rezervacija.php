@@ -61,14 +61,7 @@ class Rezervacija extends Controller {
 					->join('kapacitet','kapacitet.id','=','smestaj.kapacitet_id')
 					->get(['kapacitet.id as id_kapaciteta','kapacitet.naziv as naziv_kapaciteta','kapacitet.broj_osoba as br_osoba_kapaciteta'
 					])->first();
-		
-		if($broj_osoba > $broj_osoba_kapaciteta->br_osoba_kapaciteta)		
-		{
-			$message[]='Izabrani broj osoba je veći od kapaciteta datog smeštaja';
-			$message[]='Maksimalan broj osoba u kapacitetu '.$broj_osoba_kapaciteta->naziv_kapaciteta.' je: '.$broj_osoba_kapaciteta->br_osoba_kapaciteta;
-			$message[]='Izaberite drugi smeštaj ili smanjite broj osoba!';
-			
-		}
+
 		$datumi=Rezervacije::orderBy('od')->where('smestaj_id','=',$id_smestaja)//datumi svih rezervacija za dati smestaj ostalih korisnika
 			->where('korisnici_id','!=',Session::get('id'))
 			->get(['od','do'])->toArray();//datumi iz baze

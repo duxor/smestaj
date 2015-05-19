@@ -47,6 +47,47 @@
                     </table>
                 </div>
             </div>
+            <div class="pannel-body">
+                <div class="col-md-4">
+                    <div class="form-group"> 
+                        <div class="col-sm-4">
+                           {!! Form::checkbox('friz',null,true,array('id'=>'friz','disabled'=>'true')) !!} 
+                        </div>
+                        {!! Form::label('friz','Frižider',['class'=>'control-label col-sm-8']) !!}
+                    </div> 
+                    <div class="form-group"> 
+                        <div class="col-sm-4">
+                           {!! Form::checkbox('klima',null,true,array('id'=>'friz','disabled'=>'true')) !!}    
+                        </div>
+                        {!! Form::label('klima','Klima',['class'=>'control-label col-sm-8']) !!}
+                    </div>
+                    <div class="form-group"> 
+                        <div class="col-sm-4">
+                           {!! Form::checkbox('klima',null,true,array('id'=>'friz','disabled'=>'true')) !!}      
+                        </div>
+                        {!! Form::label('klima','Klima',['class'=>'control-label col-sm-8']) !!}
+                    </div>
+                    <div class="form-group"> 
+                        <div class="col-sm-4">
+                           {!! Form::checkbox('kablovska',null,true,array('id'=>'kablovksa','disabled'=>'true')) !!}    
+                        </div>
+                        {!! Form::label('kablovska','kablovska',['class'=>'control-label col-sm-8']) !!}
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group"> 
+                        <div class="col-sm-4">
+                           {!! Form::checkbox('balkon',null,null, array('id'=>'balkon','disabled'=>'true')) !!}     
+                        </div>
+                        {!! Form::label('balkon','balkon',['class'=>'control-label col-sm-8']) !!}
+                    </div>
+                    
+                </div>
+                <div class="col-md-4">
+                    
+                </div>
+                
+            </div>
         </div><!-- KRAJ md-9 -->
         <div class="col-md-4">
         <!-- Responsive calendar - START -->
