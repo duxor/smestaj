@@ -218,14 +218,24 @@
             podesiFoto:function(){
                 if(this.brojFoto==0) $(this.slajderID).hide();
                 else{
+                    this.fadeAnimacija('out');
                     $(this.slikaID1).attr('src','/'+this.foto[this.pozicija]);
-                    if(this.brojFoto>=1){console.log(this.foto[this.sledecaPozicija(1,'left')]);
+                    if(this.brojFoto>=1){
                         $(this.slikaID2).attr('src','/'+this.foto[this.sledecaPozicija(1,'left')]);
-                        if(this.brojFoto>=2) {console.log(this.foto[this.sledecaPozicija(2,'left')]);
+                        if(this.brojFoto>=2) {
                             $(this.slikaID3).attr('src','/'+this.foto[this.sledecaPozicija(2,'left')]);
                         }
                     }
+                    this.fadeAnimacija('in');
                 }
+            },
+            fadeAnimacija:function(inOut){
+                if(inOut=='in') $(this.slikaID1).fadeIn();
+                else $(this.slikaID1).fadeOut();
+                if(inOut=='in') $(this.slikaID2).fadeIn();
+                else $(this.slikaID2).fadeOut();
+                if(inOut=='in') $(this.slikaID3).fadeIn();
+                else $(this.slikaID3).fadeOut();
             },
             promjena:function(strana){
                 this.pozicija=this.sledecaPozicija(1,strana);
