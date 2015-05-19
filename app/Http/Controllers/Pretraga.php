@@ -76,6 +76,7 @@ class Pretraga extends Controller {
 		$podaci['rezultat']=Objekat::
 		join('smestaj','smestaj.objekat_id','=','objekat.id')
 			->leftjoin('nalog','nalog.id','=','objekat.nalog_id')
+			->leftjoin('korisnici as k','k.id','=','nalog.korisnici_id')
 			->leftjoin('kapacitet','kapacitet.id','=','smestaj.kapacitet_id')
 			->leftjoin('vrsta_smestaja','vrsta_smestaja.id','=','smestaj.vrsta_smestaja_id')
 			->leftjoin('lista_zelja',function($query){
@@ -86,7 +87,7 @@ class Pretraga extends Controller {
 			->where('objekat.aktivan',1)->where('smestaj.aktivan',1)
 			->orderBy('smestaj.naziv')
 			->select('nalog.naziv as nazivApp','nalog.slug as slugApp','vrsta_smestaja.naziv as vrsta_smestaja','smestaj.id',
-				'smestaj.slug as slugSmestaj','smestaj.naziv','adresa','kapacitet.broj_osoba','lista_zelja.id as zelja','naslovna_foto','cena_osoba')->get()->toArray();
+				'smestaj.slug as slugSmestaj','smestaj.naziv','objekat.adresa','kapacitet.broj_osoba','lista_zelja.id as zelja','naslovna_foto','cena_osoba','k.username')->get()->toArray();
 		$podaci['rezultat']=OsnovneMetode::dostupnostZaRezervaciju($podaci['rezultat'],Input::get('datumOd'),Input::get('datumDo'));
 		$podaci['gradovi']=$slugApp?Grad::join('objekat','objekat.grad_id','=','grad.id')->where('objekat.nalog_id',Input::get('aplikacija'))->orderBy('grad.id')->get(['grad.id','grad.naziv'])->lists('naziv','id'):Grad::lists('naziv','id');
 		$podaci['grad_id']=Input::get('grad_id');
