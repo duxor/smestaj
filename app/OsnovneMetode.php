@@ -132,7 +132,7 @@ class OsnovneMetode {
             ->where('n.korisnici_id',Session::get('id'))->where('komentari.aktivan',0)->count();
     }
     public static function podaciZaKalendar($slugSmestaj){
-        $rezervacije=Rezervacije::join('smestaj as s','s.id','=','rezervacije.smestaj_id')->where('s.slug',$slugSmestaj)->get(['od','do'])->toArray();
+        $rezervacije=Rezervacije::join('smestaj as s','s.id','=','rezervacije.smestaj_id')->where('aktivan',1)->where('s.slug',$slugSmestaj)->get(['od','do'])->toArray();
         $dogadjaji='{';
         foreach($rezervacije as $rezervacija)
             foreach(OsnovneMetode::nizDatum($rezervacija['od'],$rezervacija['do']) as $datum)
