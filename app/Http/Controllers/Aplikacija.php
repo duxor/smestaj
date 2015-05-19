@@ -50,7 +50,7 @@ class Aplikacija extends Controller {
 			->join('objekat','objekat.id','=','smestaj.objekat_id')
 			->leftjoin('grad as g','g.id','=','objekat.grad_id')
 			->where('slug',$slugSmestaj)
-			->get(['g.naziv as grad','smestaj.id','smestaj.naziv','slug','kapacitet.naziv as naziv_kapaciteta','broj_osoba','vrsta_smestaja.naziv as vrsta_smestaja','naslovna_foto','cena_osoba','objekat.x','objekat.y','objekat.z','adresa'])->first()->toArray();
+			->get(['g.naziv as grad','smestaj.id','smestaj.naziv','slug','kapacitet.naziv as naziv_kapaciteta','broj_osoba','vrsta_smestaja.naziv as vrsta_smestaja','naslovna_foto','cena_osoba','objekat.x','objekat.y','objekat.z','adresa','objekat.opis'])->first()->toArray();
 		$podaci['app']=Nalog::join('korisnici as k','k.id','=','nalog.korisnici_id')->join('tema as t','t.id','=','nalog.tema_id')->where('nalog.slug',$slugApp)->get(['nalog.id','nalog.slug','k.username','t.slug as slugTema','nalog.naziv as nazivApp'])->first()->toArray();
 		$komentari=Komentari::orderBy('created_at','desc')->where('smestaj_id',$podaci['smestaj']['id'])->where('komentari.aktivan',1)
 				->join('korisnici','korisnici.id','=','komentari.korisnici_id')

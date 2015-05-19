@@ -48,6 +48,13 @@
                 </div>
             </div>
             <div class="pannel-body">
+            <hr>
+                <div class="row">
+                    <div class="col-md-12">
+                    Opis: {!!$podaci['smestaj']['opis']!!}
+                    </div><br clear="all"><hr>
+                    
+                </div>
                 <div class="col-md-4">
                     <div class="form-group"> 
                         <div class="col-sm-4">
