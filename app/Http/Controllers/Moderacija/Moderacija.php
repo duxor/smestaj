@@ -288,7 +288,7 @@ class Moderacija extends Controller {
 			})
 			->orderBy('r.od')
 			->groupBy('s.id')
-			->select('s.id','s.naziv','s.slug','k.naziv as kapacitet','v.naziv as vrsta_smestaja','o.naziv as objekat','cena_osoba',DB::Raw('min(smestaj_r.od)'))->get()->toArray();
+			->select('s.id','s.naziv','s.slug','k.naziv as kapacitet','v.naziv as vrsta_smestaja','o.naziv as objekat','cena_osoba',DB::Raw('min(smestaj_r.od) as od'))->get()->toArray();
 		return Security::autentifikacija('moderacija.objekti.slobodni',compact('podaci'),4,'min');
 	}
 }
