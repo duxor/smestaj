@@ -7,30 +7,31 @@
 		<div class="col-md-12">
 			<div class="panel panel-info">
 				<div class="panel-heading">
-					<h3 class="panel-title">Pregled zauzetih kapaciteta</h3>
+					<h3 class="panel-title">Pregled slobodnih kapaciteta</h3>
 				</div>
 				<table class="table table-hover">
 					<thead>
 						<tr>
 							<th>Objekat</th>
-							<th>Smeštaj</th>
+							<th>Slug</th>
 							<th>Naziv kapaciteta</th>
-							<th>Slobodan do</th>
+							<th>Smeštaj</th>
+							<th>Cena po osobi</th>
+							<th>Zauzeto do</th>
+							<th>Rezervisao</th>
 
-							<th></th>
-							<th></th>
 						</tr>
 					</thead>
 					<tbody>
 					@foreach($podaci as $pod)
 						<tr>
-							<td>{{$pod['od']}}</td>
-							<td>{{$pod['do']}}</td>
 							<td>{{$pod['naziv']}}</td>
-							<td>{{$pod['naziv_kapaciteta']}}</td>
-							<td>{{$pod['vrsta_smestaja_naziv']}}</td>
-							<td>{{$rez['broj_osoba']}}</td>
-							<td style="font-size:12px;">{{$rez['napomena']}}</td>
+							<td>{{$pod['slug']}}</td>
+							<td>{{$pod['kapacitet']}}</td>
+							<td>{{$pod['vrsta_smestaja']}}</td>
+							<td>{{$pod['cena_osoba']}}</td>
+							<td>{{$pod['zauzetDo']}}</td>
+							<td>{{$pod['korisnik']}}</td>
 						</tr>
 						@endforeach
 					</tbody>
@@ -39,9 +40,7 @@
 		</div>
 	</div>
 </div>
-
-
-@else <h1 class="col-sm-12">Nema slobodnih kapaciteta!</h1>
+@else <h1 class="col-sm-12">Svi kapaciteti su slobodni!</h1>
 @endif
    
 @endsection
