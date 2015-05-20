@@ -20,12 +20,12 @@
 		                    		<img  style="height: 150px;" src="/teme/osnovna-paralax/slike/15.jpg" alt="" class="img-rounded img-responsive" />
 					    		</div>										
 								<div  class="col-md-4">
-									<h5  style="margin-top:0px; margin-bottom:5px;" ><a href="" >{{$obj['naziv']}}</a></h5>
+									<h3  style="margin-top:0px; margin-bottom:5px;" >{{$obj['naziv']}}</h3>
 									<i class="glyphicon glyphicon-map-marker"></i>  {{$obj['grad']}}
 									<br/>
 									<i class="glyphicon glyphicon-map-marker"></i>  {{$obj['adresa']}}
 									<br/>
-								 	<i class="icon-building"></i> {{$obj['vrsta']}}
+								 	<i class="glyphicon glyphicon-bed"></i>  {{$obj['vrsta']}}
 									<br/>
 									<i class="glyphicon glyphicon-user"></i> {{$obj['nalog']}}
 								</div>

@@ -27,6 +27,7 @@
 						<thead>
 							<tr>
 								<th>Naziv objekta</th>
+								<th>Naziv smestaja</th>
 								<th> Vrsta smeštaja</th>
 								<th>Naziv kapaciteta</th>
 								<th>Broj osoba</th>
@@ -37,6 +38,7 @@
 						@foreach($objekti as $obj)
 							<tr>
 								<td>{{$obj['naziv_objekta']}}</td>
+								<td><a href="/{{$obj['app']}}/{{$obj['slug']}}">{{$obj['slug']}}</a></td>
 								<td>{{$obj['naziv_smestaja']}}</td>
 								<td>{{$obj['naziv_kapaciteta']}}</td>
 								<td>{{$obj['broj_osoba']}}</td>

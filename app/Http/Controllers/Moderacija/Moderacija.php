@@ -194,10 +194,12 @@ class Moderacija extends Controller {
 	public function postPregledSmestaja(){
 		$nal=Input::get('nalog');
 		$nalog=Nalog::where('korisnici_id','=',Session::get('id'))->where('aktivan','=','1')->lists('naziv','id');
-		$objekti=Smestaj::orderBy('naziv')->where('nalog_id','=',$nal)->join('objekat','objekat.id','=','smestaj.objekat_id')
+		$objekti=Smestaj::orderBy('naziv')->where('nalog_id','=',$nal)
+						->join('objekat','objekat.id','=','smestaj.objekat_id')
+						->join('nalog','nalog.id','=','objekat.nalog_id')
 						->join('vrsta_smestaja','vrsta_smestaja.id','=','smestaj.vrsta_smestaja_id')
 						->join('kapacitet','kapacitet.id','=','smestaj.kapacitet_id')
-							->get(['smestaj.id','smestaj.naziv','objekat.naziv as naziv_objekta','vrsta_smestaja.naziv as naziv_smestaja','kapacitet.naziv as naziv_kapaciteta','kapacitet.broj_osoba as broj_osoba'])->toArray();
+							->get(['smestaj.id','smestaj.naziv','nalog.slug as app','smestaj.slug','objekat.naziv as naziv_objekta','vrsta_smestaja.naziv as naziv_smestaja','kapacitet.naziv as naziv_kapaciteta','kapacitet.broj_osoba as broj_osoba'])->toArray();
 		return Security::autentifikacija('moderacija.objekti.pregled_smestaja',compact('objekti','nalog'),4);
 	}
 	public function getIzmeniSmestaj($id){
