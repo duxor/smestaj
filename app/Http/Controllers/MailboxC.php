@@ -23,6 +23,7 @@ class MailboxC extends Controller {
 		$primalac=Korisnici::where('username',$podaci->za)->get(['id'])->first();
 		if(!$primalac) return json_encode(['msg'=>'Došlo je do greške. <b>Ne postoji korisnik sa navedenim username-om.</b>','check'=>0]);
 		Mailbox::insert(['korisnici_id'=>$primalac->id,'od_id'=>Session::get('id'),'od_email'=>Korisnici::find(Session::get('id'),['email'])->email,'naslov'=>$podaci->naslov,'poruka'=>$podaci->poruka]);
+		Mailbox::insert(['korisnici_id'=>$primalac->id,'od_id'=>Session::get('id'),'od_email'=>Korisnici::find(Session::get('id'),['email'])->email,'naslov'=>$podaci->naslov,'poruka'=>$podaci->poruka,'copy'=>1]);
 		return json_encode(['msg'=>'Poruka je uspešno poslata.','check'=>1]);
 	}
 	public function postPronadjiUsername(){
@@ -42,6 +43,8 @@ class MailboxC extends Controller {
 		if(!Security::autentifikacijaTest(2,'min'))return Security::rediectToLogin();
 		return json_encode(Mailbox::leftjoin('korisnici','korisnici.id','=','mailbox.od_id')
 			->where('korisnici_id',Session::get('id'))
+			->where('mailbox.aktivan',1)
+			->where('mailbox.copy',0)
 			->orderby('mailbox.created_at','DESC')
 			->get(['mailbox.id','od_email','username','naslov','procitano','mailbox.created_at'])->toArray());
 	}
@@ -56,10 +59,18 @@ class MailboxC extends Controller {
 	}
 	public function postPoslate(){
 		if(!Security::autentifikacijaTest(2,'min'))return Security::rediectToLogin();
-		return json_encode(Mailbox::join('korisnici','korisnici.id','=','mailbox.korisnici_id')->where('od_id',Session::get('id'))->orderby('created_at','DESC')->get(['mailbox.id','korisnici.username','naslov','mailbox.created_at'])->toArray());
+		return json_encode(Mailbox::join('korisnici','korisnici.id','=','mailbox.korisnici_id')->where('od_id',Session::get('id'))->where('mailbox.copy',1)->where('mailbox.aktivan',1)->orderby('created_at','DESC')->get(['mailbox.id','korisnici.username','naslov','mailbox.created_at'])->toArray());
 	}
 	public function postUcitajPoslatu(){
 		if(!Security::autentifikacijaTest(2,'min'))return Security::rediectToLogin();
 		return json_encode(Mailbox::leftjoin('korisnici','korisnici.id','=','mailbox.korisnici_id')->where('od_id',Session::get('id'))->where('mailbox.id',Input::get('id'))->get(['od_email','username','naslov','poruka','procitano','mailbox.created_at'])->first());
+	}
+//UKLONI
+	public function postUkloniPoruku(){
+		if(!Security::autentifikacijaTest(2,'min'))return json_encode(['msg'=>'Greska pri autentifikaciji.','check'=>0]);
+		if(Mailbox::where(Input::get('inout')=='inbox'?'korisnici_id':'od_id',Session::get('id'))->where('id',Input::get('id'))->where('copy',Input::get('inout')=='inbox'?0:1)->update(['aktivan'=>0]))
+			return json_encode(['msg'=>'Uspešno ste uklonili poruku.','check'=>1]);
+		else
+			return json_encode(['msg'=>'Desila se greška. ','check'=>0]);
 	}
 }

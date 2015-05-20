@@ -93,7 +93,7 @@ class OsnovneMetode {
         return true;
     }
     public static function brojNeprocitanihPoruka(){
-        return Mailbox::where('korisnici_id',Session::get('id'))->where('procitano',0)->count();
+        return Mailbox::where('korisnici_id',Session::get('id'))->where('procitano',0)->where('copy',0)->count();
     }
     public static function osnovniNav(){
         switch(Session::get('prava_pristupa')){

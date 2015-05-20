@@ -62,6 +62,8 @@ class KreiranjeBaze extends Migration{
             $table->string('naslov', 45)->nullable();
             $table->text('poruka');
             $table->tinyInteger('procitano')->default(0);
+            $table->tinyInteger('aktivan')->default(1);
+            $table->tinyInteger('copy')->default(0);
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->nullable();
         });
