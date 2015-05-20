@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
 use App\Security;
 use App\Tema;
 use App\Nalog;
@@ -230,6 +231,22 @@ class Moderacija extends Controller {
 	}
 	public function postNoviSmestaj(){//dd(Input::all());
 		if(Security::autentifikacijaTest(4,'min')){
+
+			$validator=Validator::make([
+            'slug'=>Input::get('slug'),
+            'cena'=>Input::get('cena')
+        	],[
+            'slug'=>'required',
+            'cena'=>'required|numeric'
+
+        	],[
+            'slug.required'=>'Slug je obavezan.',
+            'cena.required'=>'cena je obavezna.',
+            'cena.numeric'=>'Cena mora biti broj.'
+        	]);
+			if($validator->fails())  
+     		return redirect()->back()->withGreska($validator->errors()->toArray())->withInput();
+
 
 			$podaci=Korisnici::where('korisnici.id','=',Session::get('id'))
 			->where('objekat.id',Input::get('nazivobjekta'))

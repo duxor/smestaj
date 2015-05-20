@@ -1,6 +1,26 @@
 @extends('moderacija.master')
 
 @section('content')
+@if(session()->has('greska'))
+        <div class="alert alert-danger" role="alert">
+            <p>Dogodila se greška: <br>
+            <ol>
+                @foreach(session('greska') as $greske)
+                    @foreach($greske as $greska)
+                        <li>{{$greska}}</li>
+                    @endforeach
+                @endforeach
+            </ol>
+            </p>
+        </div>
+    @endif
+    @if(session()->has('potvrda'))
+        <div class="alert alert-success" role="alert">
+            <p>
+                {{session('potvrda')}}
+            </p>
+        </div>
+    @endif
 <div class="panel panel-primary clearfix">
 	<div  class="panel-heading">Dodavanje novog smeštaja</div>
 	    <div class="panel-body">
@@ -52,7 +72,7 @@
 					<div class="form-group">
 				        <div class="col-sm-5"></div>
 				        <div class="col-sm-7">
-				            {!!Form::button('<span class="glyphicon glyphicon-floppy-disk"></span> Dodaj smeštaj', ['class'=>'btn btn-lg btn-primary','onClick'=>"SubmitForm.submit('forma')"])!!}
+				            {!!Form::button('<span class="glyphicon glyphicon-floppy-disk"></span> Dodaj smeštaj', ['class'=>'btn btn-lg btn-primary','type'=>'submit'])!!}
 				        </div>
 				    </div>
 					<input id="fileSlika" name="naslovna_foto" type="file" style="display: none">
