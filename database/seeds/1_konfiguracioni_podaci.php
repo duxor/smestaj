@@ -260,20 +260,20 @@ class KonfiguracioniPodaci extends Seeder{
             ['naziv'=>'Apartman']
         ]);
         Kapacitet::insert([
-            ['naziv'=>'','broj_osoba'=>1],
-            ['naziv'=>'','broj_osoba'=>2],
+            ['naziv'=>'Single','broj_osoba'=>1],
+            ['naziv'=>'Dupli ležaj','broj_osoba'=>2],
             ['naziv'=>'Bračni krevet','broj_osoba'=>2],
-            ['naziv'=>'','broj_osoba'=>3],
-            ['naziv'=>'','broj_osoba'=>4],
-            ['naziv'=>'','broj_osoba'=>5],
-            ['naziv'=>'','broj_osoba'=>6],
-            ['naziv'=>'','broj_osoba'=>7],
-            ['naziv'=>'','broj_osoba'=>8],
-            ['naziv'=>'','broj_osoba'=>9],
-            ['naziv'=>'','broj_osoba'=>10],
-            ['naziv'=>'','broj_osoba'=>11],
-            ['naziv'=>'','broj_osoba'=>12],
-            ['naziv'=>'','broj_osoba'=>13]
+            ['naziv'=>'Trokrevetni','broj_osoba'=>3],
+            ['naziv'=>'Četvorokrevetni','broj_osoba'=>4],
+            ['naziv'=>'Petokrevetni','broj_osoba'=>5],
+            ['naziv'=>'Šestokrevetni','broj_osoba'=>6],
+            ['naziv'=>'Sedmokrevetni','broj_osoba'=>7],
+            ['naziv'=>'Osmokrevetni','broj_osoba'=>8],
+            ['naziv'=>'Devetokrevetni','broj_osoba'=>9],
+            ['naziv'=>'Desetokrevetni','broj_osoba'=>10],
+            ['naziv'=>'Jedanestokrevetni','broj_osoba'=>11],
+            ['naziv'=>'Dvanaestokrevetni','broj_osoba'=>12],
+            ['naziv'=>'Trinaestokrevetni','broj_osoba'=>13]
         ]);
         DodatnaOprema::insert([
             ['naziv'=>'Bežični internet (WiFi)'],
@@ -288,7 +288,7 @@ class KonfiguracioniPodaci extends Seeder{
             ['naziv'=>'Veš mašina'],
             ['naziv'=>'Zvučna izolacija'],
             ['naziv'=>'Čajna kuhinja'],
-            ['naziv'=>'lift'],
+            ['naziv'=>'Lift'],
             ['naziv'=>'Grejanje'],
             ['naziv'=>'Zabranjeno pušenje u celom objektu'],
             ['naziv'=>'Fitnes centar'],

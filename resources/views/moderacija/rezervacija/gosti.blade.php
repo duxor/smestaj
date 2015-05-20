@@ -1,6 +1,8 @@
 @extends('moderacija.master')
 @section('content')
+
 @if($korisnici)
+    @if($korisnici[0]['id'])
     <div class="container">
     @foreach($korisnici as $kor)
         <div class="row">
@@ -21,8 +23,8 @@
             </div>
              <div class="col-sm-3">
                 <table class="moja-tabela">
-                    <tr><td class="nDn">Utisci:</td><td></td></tr>
-                    <tr><td class="nDn">{!!$kor['utisci']!!}</td></tr>
+                    <tr><td>Utisci:</td><td></td></tr>
+                    <tr><td>{!!isset($kor['utisci'])?$kor['utisci']:'Nema utisaka o korisniku.'!!}</td></tr>
                 </table>
             </div>
             <br clear="all">
@@ -31,5 +33,8 @@
     </div>
 
     
-@else <h1 class="col-sm-12">Nema gostiju u evidenciji!</h1>
+@else <h1>Nema gostiju u evidenciji!</h1>
+    @endif
+        @else <h1>Nema gostiju u evidenciji!</h1>
 @endif
+@endsection
