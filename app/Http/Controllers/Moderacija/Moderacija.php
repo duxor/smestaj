@@ -144,7 +144,7 @@ class Moderacija extends Controller {
 		$objekti=Objekat::where('nalog_id','=',$nal)->join('vrsta_objekta','vrsta_objekta.id','=','objekat.vrsta_objekta_id')
 							->join('grad','grad.id','=','objekat.grad_id')
 							->join('nalog','nalog.id','=','objekat.nalog_id')
-							->get(['objekat.id','objekat.naziv','objekat.opis','objekat.adresa','vrsta_objekta.naziv as vrsta','grad.naziv as grad','nalog.naziv as nalog'])->toArray();
+							->get(['objekat.id','objekat.aktivan','objekat.naziv','objekat.opis','objekat.adresa','vrsta_objekta.naziv as vrsta','grad.naziv as grad','nalog.naziv as nalog'])->toArray();
 		return Security::autentifikacija('moderacija.objekti.pregled_objekata', compact('objekti','nalog'),4);
 	}
 	public function getIzmeniObjekat($id){
@@ -291,5 +291,17 @@ class Moderacija extends Controller {
 			->groupBy('s.id')
 			->select('s.id','s.naziv','s.slug','k.naziv as kapacitet','v.naziv as vrsta_smestaja','o.naziv as objekat','cena_osoba',DB::Raw('min(smestaj_r.od) as od'))->get()->toArray();
 		return Security::autentifikacija('moderacija.objekti.slobodni',compact('podaci'),4,'min');
+	}
+	public function postObjekatAktivan(){
+		if(!Security::autentifikacijaTest(4,'min')) return json_encode(['msg'=>'Dogodila se greška. Proverite podatke i pokušajte ponovo.','check'=>0]);
+		$podaci=json_decode(Input::get('podaci'));
+		Objekat::where('objekat.id',$podaci->id_objekta)->update(['aktivan'=>'1']);
+		return json_encode(['msg'=>'Uspešno ste postavili status objekta na aktivan','check'=>1]);
+	}
+	public function postObjekatNeaktivan(){
+		if(!Security::autentifikacijaTest(4,'min')) return json_encode(['msg'=>'Dogodila se greška. Proverite podatke i pokušajte ponovo.','check'=>0]);
+		$podaci=json_decode(Input::get('podaci'));
+		Objekat::where('objekat.id',$podaci->id_objekta)->update(['aktivan'=>'0']);
+		return json_encode(['msg'=>'Uspešno ste postavili status objekta na aktivan','check'=>1]);
 	}
 }
