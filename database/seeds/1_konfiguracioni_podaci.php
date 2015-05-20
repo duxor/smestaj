@@ -288,7 +288,7 @@ class KonfiguracioniPodaci extends Seeder{
             ['naziv'=>'Veš mašina'],
             ['naziv'=>'Zvučna izolacija'],
             ['naziv'=>'Čajna kuhinja'],
-            ['naziv'=>'lift'],
+            ['naziv'=>'Lift'],
             ['naziv'=>'Grejanje'],
             ['naziv'=>'Zabranjeno pušenje u celom objektu'],
             ['naziv'=>'Fitnes centar'],

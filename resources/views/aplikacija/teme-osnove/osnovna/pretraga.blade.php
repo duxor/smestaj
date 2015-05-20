@@ -104,23 +104,7 @@
             @if(!isset($podaci['datumOd'])) var d = new Date(); $('input[name=datumOd]').datepicker('setDate',d); @endif
             @if(!isset($podaci['datumDo'])) var d = new Date(); d.setDate(d.getDate()+1); $('input[name=datumDo]').datepicker('setDate', d); @endif
         </script>
-        {!!Form::button('<i class="glyphicon glyphicon-chevron-down"></i> Napredno',['class'=>'btn btn-info','id'=>'btn_napredno'])!!}
-        <div class="napredno">
-            <hr>
-            @foreach($podaci['dodatna_oprema'] as $k=>$oprema)
-                    <input type="checkbox" class="my-checkbox" data-size="normal" data-on-text="Da" data-off-text="Ne" data-label-text="{{$oprema['naziv']}}">
-            @endforeach
-            <script>$(".my-checkbox").bootstrapSwitch();</script>
-            <hr>
-        </div>
         {!!Form::button('<i class="glyphicon glyphicon-search"></i> Pronađi',['class'=>'btn btn-primary pronadji_btn','type'=>'submit'])!!}
-        <script>
-            $('#btn_napredno').click(function(){
-                $(this).children('i').toggleClass('glyphicon-chevron-down').toggleClass('glyphicon-chevron-up');
-                if($('div.napredno').is(':visible'))$('div.napredno').slideUp();
-                if($('div.napredno').is(':hidden'))$('div.napredno').slideDown();
-            });
-        </script>
     </div>
     {!!Form::close()!!}
 
@@ -130,6 +114,22 @@
         </div><br clear="all">
         <hr>
         <div id="map" style="width: 100%;height: 400px"></div>
+        {!!Form::button('<i class="glyphicon glyphicon-chevron-down"></i> Napredno',['class'=>'btn btn-info','id'=>'btn_filter'])!!}
+        <div class="filter">
+            <hr>
+            @foreach($podaci['dodatna_oprema'] as $k=>$oprema)
+                <input type="checkbox" class="my-checkbox" data-size="normal" data-on-text="Da" data-off-text="Ne" data-label-text="{{$oprema['naziv']}}">
+            @endforeach
+            <script>$(".my-checkbox").bootstrapSwitch();</script>
+            <hr>
+        </div>
+        <script>
+            $('#btn_filter').click(function(){
+                $(this).children('i').toggleClass('glyphicon-chevron-down').toggleClass('glyphicon-chevron-up');
+                if($('div.napredno').is(':visible'))$('div.filter').slideUp();
+                if($('div.napredno').is(':hidden'))$('div.filter').slideDown();
+            });
+        </script>
         <p id="rezultati"></p>
         @foreach($podaci['rezultat'] as $smestaj)
             <hr>

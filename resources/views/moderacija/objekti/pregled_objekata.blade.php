@@ -27,11 +27,13 @@
 									<br/>
 									<i class="glyphicon glyphicon-user"></i> {{$obj['nalog']}}
 								</div>
+								@if($obj['opis'])
 								<div  class="col-xs-4">
 									<i class="icon-th-large-outline"></i> Opis: {{$obj['opis']}}
 									<br/><br/>
 									<a href="{!!url('/moderacija/izmeni-objekat/'.$obj['id']) !!}" class="btn btn-lg btn-primary" ><span class="glyphicon glyphicon-pencil"> </span>  Ažuriranje</a>
-								</div>  
+								</div>
+								@endif
 							</div>
 						</div>
 					@endforeach
