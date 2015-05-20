@@ -49,12 +49,13 @@
             </div>
             <div class="pannel-body">
             <hr>
+                @if($podaci['smestaj']['opis'])
                 <div class="row">
                     <div class="col-md-12">
                     Opis: {!!$podaci['smestaj']['opis']!!}
                     </div><br clear="all"><hr>
-                    
                 </div>
+                @endif
                 <div class="col-md-4">
                     <div class="form-group">
                         <div class="col-sm-4">
@@ -119,7 +120,7 @@
 
             <script type="text/javascript">
               $(document).ready(function () {
-                  var datum=new Date();console.log(datum.getFullYear()+'-'+(datum.getMonth()+1));
+                  var datum=new Date();
                 $(".responsive-calendar").responsiveCalendar({
                   time: datum.getFullYear()+'-'+(datum.getMonth()+1),
                   events: {!!$podaci['kalendar']!!}
@@ -201,7 +202,7 @@
                 $('input[name=ukupna_cena]').val($('input[name=cena]').val());
                 racunajCenu();
                 var option = '';
-                for (i=1;i<={{$podaci['smestaj']['broj_osoba']}};i++){
+                for(i=1;i<={{$podaci['smestaj']['broj_osoba']}};i++){
                     option += '<option value="'+ i + '">' + i + '</option>';
                 }
                 $('#broj_osoba').html(option);
@@ -323,7 +324,7 @@
                             @if(!\App\Security::autentifikacijaTest(2,'min'))
                                 <script>$('#prijaviSe').click(function(){document.location='/log/login';});</script>
                             @else
-                                <div id="poruka" style="display: none;margin-top: 25px"></div>
+                                <div id="poruka_k" style="display: none;margin-top: 25px"></div>
                                 <i class='icon-spin6 animate-spin' style="color: rgba(0,0,0,0)"></i>
                                 <div id="wait" style="display:none"><center><i class='icon-spin6 animate-spin' style="font-size: 350%"></i></center></div>
                                 <div id="hide" style="display:none">
@@ -334,7 +335,7 @@
                                     <div class="text-right">
                                         <div class="stars starrr" style="color:green;" data-rating="3"></div>
                                         <button id="otkazi" class="btn btn-danger btn-sm" style="margin-right: 10px;"><span class="glyphicon glyphicon-remove"></span>Otkaži</button>
-                                        {!!Form::button('<i class="glyphicon glyphicon-check"></i> Pošalji komentar',['class'=>'btn btn-success btn-lg','onclick'=>'Komunikacija.posalji("/aplikacija/posalji-komentar","hide","poruka","wait","hide")'])!!}
+                                        {!!Form::button('<i class="glyphicon glyphicon-check"></i> Pošalji komentar',['class'=>'btn btn-success btn-lg','onclick'=>'Komunikacija.posalji("/aplikacija/posalji-komentar","hide","poruka_k","wait","hide")'])!!}
                                     </div>
                                 </div>
                                 <script>
