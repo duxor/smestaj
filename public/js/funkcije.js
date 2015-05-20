@@ -161,5 +161,30 @@ var Komunikacija = {
         podaci[inputi[i].name]=inputi[i].value;
         if(i==0) return podaci;
         return this.podaci(i-1,inputi,null,podaci);
+    },
+    proslijedi:function(url,token,podaci){
+        $.post(url,{
+            _token:token,
+            podaci:JSON.stringify(podaci)
+        },function(data){
+            return true;
+        });
+    },
+    proslijediSaPrikzom:function(url,token,podaci,poruka,wait,hide){
+        $('#'+hide).css('display','none');
+        $('#'+wait).fadeToggle();
+        $.post(url,{
+            _token:token,
+            podaci:JSON.stringify(podaci)
+        },function(data){
+            data=JSON.parse(data);
+            $('#'+poruka).html('<div class="alert alert-'+ (data['check']?'success':'danger') +'" role="alert">'+data['msg']+'</div>');
+            $('#'+wait).fadeToggle();
+            $('#'+poruka).fadeToggle('slow');
+            window.setTimeout(function(){
+                $('#'+poruka).fadeToggle('slow');
+                $('#'+hide).fadeToggle('slow')
+            },5000);
+        });
     }
 }

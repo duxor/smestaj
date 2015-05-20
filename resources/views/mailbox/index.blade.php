@@ -26,6 +26,7 @@
             $('#'+ID).addClass('active');
         }
         function getInbox(){
+            inout='inbox';
             setActive('inbox');
             $('#show').hide();
             $('#wait').show();
@@ -59,7 +60,7 @@
                 var podaci=JSON.parse(data);
                 if(podaci){
                     var poruka='<div>' +
-                                '<p><b>'+str+':</b> '+(podaci.username?'<span id="username">'+podaci.username+'</span> <button onclick="odgovori()" class="btn btn-primary"><i class="glyphicon glyphicon-share-alt"></i></button>':podaci.od_email)+'</p>' +
+                                '<p><b>'+str+':</b> '+(podaci.username?'<span id="username">'+podaci.username+'</span> <button onclick="odgovori()" class="btn btn-primary"><i class="glyphicon glyphicon-share-alt"></i></button>':podaci.od_email)+'<button class="btn btn-danger" style="margin-left:5px" onclick="ukloniPoruku('+id+')"><i class="glyphicon glyphicon-trash"></i></button></p>' +
                                 '<p><b>Naslov: <span id="naslov">'+podaci.naslov+'</span></b></p>' +
                                 '<p><b>Datum:</b> '+podaci.created_at+'</p>' +
                                 '<p><b>Poruka:</b><hr> <br><span id="poruka">'+podaci.poruka+'</span></p>' +
@@ -68,6 +69,23 @@
                 }else $('#show').html('<p>Došlo je do greške u čitanju poruke.</p>');
                 $('#wait').hide();
                 $('#show').fadeIn();
+            });
+        }
+        var inout='inbox';
+        function ukloniPoruku(id){
+            $('#show').hide();
+            $('#wait').show();
+            $.post('/{{\App\OsnovneMetode::osnovniNav()}}/mailbox/ukloni-poruku',{
+                _token:'{{csrf_token()}}',
+                id:id,
+                inout:inout
+            },function(data){
+                var podaci=JSON.parse(data);
+                if(podaci){
+                    if(podaci['check']==0){$('#poruka').html('<div class="alert alert-danger" role="alert">'+podaci['msg']+'</div>'); $('#show').fadeIn() }
+                    else if(inout=='inbox') getInbox(); else getPoslate()
+                }else $('#show').html('<p>Došlo je do greške u čitanju poruke.</p>');
+                $('#wait').hide();
             });
         }
         function odgovori(){
@@ -127,6 +145,7 @@
             $('#preporuke').html('');
         }
         function getPoslate(){
+            inout='poslate';
             setActive('poslate');
             $('#show').hide();
             $('#wait').show();
