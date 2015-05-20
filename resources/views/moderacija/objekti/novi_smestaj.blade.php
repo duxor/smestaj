@@ -15,7 +15,7 @@
 					        {{ Session::get('message')}}
 					    </div>
 					@endif
-				    {!!Form::open(['url'=>'/moderacija/novi-smestaj','class'=>'form-horizontal','enctype' => 'multipart/form-data'])!!}
+				    {!!Form::open(['id'=>'forma','url'=>'/moderacija/novi-smestaj','class'=>'form-horizontal','enctype' => 'multipart/form-data'])!!}
 					   
 					    <div class="form-group">
 							{!! Form::label('nazivobjekta','Dodavanje smeštaja u objekat:',['class'=>'control-label col-sm-5']) !!}
@@ -35,10 +35,11 @@
 								{!!Form::select('vrstasmestaja',$vrstasmestaja,null, ['class'=>'form-control'])!!}
 							</div>
 						</div>
-						<div class="form-group">
-					        {!!Form::label('Slug','Slug',['class'=>'control-label col-sm-5'])!!}
+						<div id="dslug" class="form-group has-feedback">
+					        {!!Form::label('lslug','Slug',['class'=>'control-label col-sm-5'])!!}
 					        <div class="col-sm-7">
-					            {!!Form::text('slug',null,['class'=>'form-control','placeholder'=>'Unesite slug...'])!!}
+					            {!!Form::text('slug',null,['id'=>'slug','class'=>'form-control','placeholder'=>'Unesite slug...'])!!}
+					            <span id="sslug" class="glyphicon form-control-feedback"></span>
 					        </div>
 					    </div>
 						<div class="form-group">
@@ -51,7 +52,7 @@
 					<div class="form-group">
 				        <div class="col-sm-5"></div>
 				        <div class="col-sm-7">
-				            {!!Form::button('<span class="glyphicon glyphicon-floppy-disk"></span> Dodaj smeštaj', ['class'=>'btn btn-lg btn-primary','type'=>'submit'])!!}
+				            {!!Form::button('<span class="glyphicon glyphicon-floppy-disk"></span> Dodaj smeštaj', ['class'=>'btn btn-lg btn-primary','onClick'=>"SubmitForm.submit('forma')"])!!}
 				        </div>
 				    </div>
 					<input id="fileSlika" name="naslovna_foto" type="file" style="display: none">
