@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\DodatnaOprema;
 use App\Grad;
 use App\Http\Requests;
 
@@ -98,6 +99,7 @@ class Pretraga extends Controller {
 		$podaci['datumOd']=Input::get('datumOd');
 		$podaci['datumDo']=Input::get('datumDo');
 		$tema=$slugApp?'.'.Tema::find(Nalog::find(Input::get('aplikacija'),['tema_id'])->tema_id, ['slug'])->slug:'-osnove.osnovna';
+		$podaci['dodatna_oprema']=DodatnaOprema::get(['id','naziv']);
 		return view('aplikacija.teme'.$tema.'.pretraga',compact('podaci'));
 	}
 }

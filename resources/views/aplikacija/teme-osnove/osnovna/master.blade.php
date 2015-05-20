@@ -24,10 +24,11 @@
     {!! HTML::style('css/animation.css') !!}
     {!! HTML::style('teme/osnovna-paralax/css/parallax.css') !!}
     {!! HTML::style('css/datepicker.css') !!}
-
+    {!! HTML::style('css/bootstrap-switch.css') !!}
 
     {!! HTML::script('js/jquery-3.0.js') !!}
     {!! HTML::script('js/datepicker.js') !!}
+    {!!HTML::script('js/bootstrap-switch.js')!!}
     {!!HTML::script('js/map/modestmaps.js')!!}
     {!!HTML::script('js/map/modestmaps.markers.js')!!}
     {!!HTML::script('js/map/spotlight.js')!!}

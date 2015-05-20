@@ -38,7 +38,8 @@ h3{
     margin-bottom: 3%;
 }
 body {
-     padding-top: 60px;;
+     padding-top: 60px;
+    background: #e8ebee;
  }
 nav li a, p{
     font-size: 21px;
@@ -52,4 +53,8 @@ nav li a, p{
 }
 @media(min-width: 767px) and (max-width: 991px){
     .navbar-brand img{margin-top: 30px}
+}
+.napredno{
+    padding-top: 30px;
+    display: none
 }
