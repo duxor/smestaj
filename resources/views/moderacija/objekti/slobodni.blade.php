@@ -25,7 +25,7 @@
 					@foreach($podaci as $pod)
 						<tr>
 							<td>{{$pod['naziv']}}</td>
-							<td>{{$pod['slug']}}</td>
+							<td><a href="/{{$pod['app']}}/{{$pod['slug']}}">{{$pod['slug']}}</a></td>
 							<td>{{$pod['kapacitet']}}</td>
 							<td>{{$pod['vrsta_smestaja']}}</td>
 							<td>{{$pod['cena_osoba']}}</td>

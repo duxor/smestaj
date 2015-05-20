@@ -291,7 +291,7 @@ class Moderacija extends Controller {
 			})
 			->orderBy('r.do')
 			->groupBy('r.smestaj_id')
-			->get(['s.id','s.naziv','s.slug','k.naziv as kapacitet','v.naziv as vrsta_smestaja','o.naziv as objekat','cena_osoba','r.do as zauzetDo','kk.username as korisnik'])->toArray();
+			->get(['s.id','nalog.slug as app','s.naziv','s.slug','k.naziv as kapacitet','v.naziv as vrsta_smestaja','o.naziv as objekat','cena_osoba','r.do as zauzetDo','kk.username as korisnik'])->toArray();
 		return Security::autentifikacija('moderacija.objekti.zauzeti',compact('podaci'),4,'min');
 	}
 	public function getSlobodni(){
@@ -308,7 +308,7 @@ class Moderacija extends Controller {
 			})
 			->orderBy('r.od')
 			->groupBy('s.id')
-			->select('s.id','s.naziv','s.slug','k.naziv as kapacitet','v.naziv as vrsta_smestaja','o.naziv as objekat','cena_osoba',DB::Raw('min(smestaj_r.od) as od'))->get()->toArray();
+			->select('s.id','nalog.slug as app','s.naziv','s.slug','k.naziv as kapacitet','v.naziv as vrsta_smestaja','o.naziv as objekat','cena_osoba',DB::Raw('min(smestaj_r.od) as od'))->get()->toArray();
 		return Security::autentifikacija('moderacija.objekti.slobodni',compact('podaci'),4,'min');
 	}
 	public function postObjekatAktivan(){
