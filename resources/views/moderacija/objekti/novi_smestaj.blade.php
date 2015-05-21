@@ -15,11 +15,11 @@
         </div>
     @endif
     @if(session()->has('potvrda'))
-        <div class="alert alert-success" role="alert">
-            <p>
-                {{session('potvrda')}}
-            </p>
-        </div>
+	<div class="alert alert-success alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+         {{session('potvrda')}}
+    </div>
+
     @endif
 <div class="panel panel-primary clearfix">
 	<div  class="panel-heading">Dodavanje novog smeštaja</div>

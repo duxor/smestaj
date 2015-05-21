@@ -38,8 +38,33 @@
 												<td></td>
 												<td><p data-placement="top" data-toggle="tooltip" title="Ukloni komentar">{!! Form::button('<span class="glyphicon glyphicon-remove"></span>',['class'=>'btn btn-xs btn-danger zabrani','onclick'=>'Komunikacija.posalji("/moderacija/zabrani",\'forma-'.$kom['id'].'\',\'poruka\',\'vrti\',\'zabrani\')']) !!}</p></td>
 												<td><p data-placement="top" data-toggle="tooltip" title="Odobri komentar">{!! Form::button('<span class="glyphicon glyphicon-ok"></span>',['class'=>'btn btn-xs btn-success odobri','onclick'=>'Komunikacija.posalji("/moderacija/odobri",\'forma-'.$kom['id'].'\',\'poruka\',\'vrti\',\'zabrani\')']) !!}</p></td>
-												<td><a data-placement="top" data-toggle="tooltip" title="Odgovori na komentar" class="btn btn-xs btn-info"><span class="glyphicon glyphicon-envelope"></span></a></td>
+												<td><p data-placement="top" data-toggle="tooltip" title="Odgovori na komentar"><button  class="btn btn-xs btn-info" data-toggle="modal" data-target="#odgovor{{$kom['id']}}"><span class="glyphicon glyphicon-envelope"></span></button></p></td>
 										</tr>
+										<div class="modal fade" id="odgovor{{$kom['id']}}" tabindex="-1" role="dialog">
+									        <div class="modal-dialog">
+									            <div class="modal-content">
+									                <div class="modal-header">
+									                    <button type="button" class="close" data-komentar="{{$kom['komentar']}}" data-dismiss="modal" aria-hidden="true">&times;</button>
+									                    <h2>Odgovor na komentar</h2>
+									                </div>
+									                <div class="modal-body">
+										                <div class="container-fluid">
+										                    {!!Form::open(['url'=>'/moderacija/odgovor','class'=>'form-horizontal'])!!}
+															{!!Form::hidden('id',$kom['id'])!!}
+															{!!Form::hidden('smestaj_id',$kom['id_smestaja'])!!}
+
+										                    {!! Form::label('utisci',$kom['komentar'],['class'=>'control-label col-sm-4']) !!}
+										                    {!! Form::textarea('odgovor', null, ['class'=>'form-control', 'placeholder'=>'Odgovor...']) !!}      
+										                </div>
+									                </div>
+									                <div class="modal-footer">
+									                	{!! Form::button('<span class="glyphicon glyphicon-remove"></span> Otkaži', ['class'=>'btn btn-lg btn-primary',' data-dismiss'=>'modal']) !!}
+									                    {!! Form::button('<span class="glyphicon glyphicon-ok"></span> Odgovori', ['class'=>'btn btn-lg btn-primary','type'=>'submit']) !!}
+									                    {!! Form::close() !!}
+									                </div>
+									            </div>
+									        </div>
+									    </div>
 									@endforeach
 									<script>
 										$('.odobri,.zabrani').click(function(){$('#'+$(this).closest('tr').attr('id')).fadeOut()});

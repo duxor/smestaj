@@ -116,7 +116,7 @@ class Moderacija extends Controller {
 			->join('korisnici as k','k.id','=','komentari.korisnici_id')
 			->where('n.korisnici_id',Session::get('id'))
 			->where('komentari.aktivan',($svi=='svi'?'>':null).'=',0)
-			->get(['komentari.aktivan','komentari.id','komentari.komentar','k.username','s.slug'])->toArray();
+			->get(['komentari.aktivan','komentari.id','komentari.komentar','k.username','s.slug','s.id as id_smestaja'])->toArray();
 		return Security::autentifikacija('moderacija.aplikacija.komentari',compact('komentari'),4,'min');
 	}
 	public function postZabrani(){
@@ -322,5 +322,18 @@ class Moderacija extends Controller {
 		$podaci=json_decode(Input::get('podaci'));
 		Objekat::where('objekat.id',$podaci->id_objekta)->update(['aktivan'=>'0']);
 		return json_encode(['msg'=>'Uspešno ste postavili status objekta na aktivan','check'=>1]);
+	}
+	public function postOdgovor(){
+		if(Security::autentifikacijaTest(4,'min')){
+			$kom=new Komentari();
+			$kom->komentar=Input::get('odgovor');
+			$kom->korisnici_id=Session::get('id');
+			$kom->smestaj_id=Input::get('smestaj_id');
+			$kom->aktivan=1;
+			$kom->odgovor_za_id=Input::get('id');
+			$kom->save();
+			Komentari::where('id',Input::get('id'))->update(['aktivan'=>1]);
+			return Redirect::back()->with('message','Uspešno ste odgovorili!');
+		}else return Security::rediectToLogin();
 	}
 }
