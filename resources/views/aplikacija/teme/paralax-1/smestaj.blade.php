@@ -56,45 +56,13 @@
                     </div><br clear="all"><hr>
                 </div>
                 @endif
-                <div class="col-md-4">
-                    <div class="form-group">
+                @if($podaci['oprema'])
+                    @foreach($podaci['oprema'] as $opr)
                         <div class="col-sm-4">
-                           {!! Form::checkbox('friz',null,true,array('id'=>'friz','disabled'=>'true')) !!}
+                           <i><span class="glyphicon glyphicon-ok"></span>{!! Form::label('oprema', $opr['dodatna_oprema'] ,['class'=>'control-label col-sm-8']) !!}</i>
                         </div>
-                        {!! Form::label('friz','Frižider',['class'=>'control-label col-sm-8']) !!}
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-4">
-                           {!! Form::checkbox('klima',null,true,array('id'=>'friz','disabled'=>'true')) !!}
-                        </div>
-                        {!! Form::label('klima','Klima',['class'=>'control-label col-sm-8']) !!}
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-4">
-                           {!! Form::checkbox('klima',null,true,array('id'=>'friz','disabled'=>'true')) !!}
-                        </div>
-                        {!! Form::label('klima','Klima',['class'=>'control-label col-sm-8']) !!}
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-4">
-                           {!! Form::checkbox('kablovska',null,true,array('id'=>'kablovksa','disabled'=>'true')) !!}
-                        </div>
-                        {!! Form::label('kablovska','kablovska',['class'=>'control-label col-sm-8']) !!}
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <div class="col-sm-4">
-                           {!! Form::checkbox('balkon',null,null, array('id'=>'balkon','disabled'=>'true')) !!}
-                        </div>
-                        {!! Form::label('balkon','balkon',['class'=>'control-label col-sm-8']) !!}
-                    </div>
-
-                </div>
-                <div class="col-md-4">
-
-                </div>
-
+                    @endforeach
+                @endif
             </div>
         </div><!-- KRAJ md-9 -->
         <div class="col-md-4">
