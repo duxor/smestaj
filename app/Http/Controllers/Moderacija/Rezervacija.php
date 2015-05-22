@@ -53,16 +53,22 @@ class Rezervacija extends Controller {
 	public function getGosti(){
 		$korisnici=Rezervacije::
 		join('korisnici as k','k.id','=','rezervacije.korisnici_id')
-			->join('nalog as n','n.korisnici_id','=','k.id')
+			->join('smestaj as s','s.id','=','rezervacije.smestaj_id')
+			->join('objekat as o','o.id','=','s.objekat_id')
+			->join('nalog as n','n.id','=','o.nalog_id')
 			->whereNotNull('rezervacije.odjava')
 			->where('n.korisnici_id',Session::get('id'))
 			->distinct('k.id')
 			->select('k.id','k.prezime as pr','k.ime as ime_korisnika','k.username','k.email as email_korisnika',
 				'k.fotografija as fotografija_korisnika',
-				DB::raw('avg(smestaj_rezervacije.ocena) AS ocena'),'n.slug as slugApp')->get()->toArray();
+				DB::raw('round(avg(smestaj_rezervacije.ocena),1) AS ocena'),'n.slug as slugApp')->get()->toArray();
 		foreach($korisnici as $k=>$korisnik){
-			foreach(Rezervacije::join('nalog as n','n.korisnici_id','=','rezervacije.korisnici_id')
+			foreach(Rezervacije::join('korisnici as k','k.id','=','rezervacije.korisnici_id')
+						->join('smestaj as s','s.id','=','rezervacije.smestaj_id')
+						->join('objekat as o','o.id','=','s.objekat_id')
+						->join('nalog as n','n.id','=','o.nalog_id')
 						->where('n.korisnici_id',Session::get('id'))
+						->whereNotNull('rezervacije.utisci')
 						->where('rezervacije.korisnici_id',$korisnik['id'])->get(['utisci'])->toArray() as $utisak)
 				$korisnici[$k]['utisci']=$utisak['utisci']?isset($korisnici[$k]['utisci'])?$korisnici[$k]['utisci'].$utisak['utisci'].'<br>':$utisak['utisci'].'<br>':'Nema utisaka o korisniku.';
 		}
