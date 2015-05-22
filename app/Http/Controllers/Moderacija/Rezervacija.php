@@ -52,7 +52,7 @@ class Rezervacija extends Controller {
 	}
 	public function getGosti(){
 		$korisnici=Rezervacije::
-		join('korisnici as k','k.id','=','rezervacije.id')
+		join('korisnici as k','k.id','=','rezervacije.korisnici_id')
 			->join('nalog as n','n.korisnici_id','=','k.id')
 			->whereNotNull('rezervacije.odjava')
 			->where('n.korisnici_id',Session::get('id'))

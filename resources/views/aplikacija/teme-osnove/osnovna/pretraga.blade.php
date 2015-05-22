@@ -114,20 +114,22 @@
         </div><br clear="all">
         <hr>
         <div id="map" style="width: 100%;height: 400px"></div>
-        {!!Form::button('<i class="glyphicon glyphicon-chevron-down"></i> Napredno',['class'=>'btn btn-info','id'=>'btn_filter'])!!}
+
+        {!!Form::button('<i class="glyphicon glyphicon-chevron-down"></i> Filter',['class'=>'btn btn-info','id'=>'btn_filter'])!!}
         <div class="filter">
             <hr>
             @foreach($podaci['dodatna_oprema'] as $k=>$oprema)
                 <input type="checkbox" class="my-checkbox" data-size="normal" data-on-text="Da" data-off-text="Ne" data-label-text="{{$oprema['naziv']}}">
             @endforeach
             <script>$(".my-checkbox").bootstrapSwitch();</script>
-            <hr>
         </div>
         <script>
+            $('.filter').hide();
+            $('#btn_filter').css('margin-top','20px');
             $('#btn_filter').click(function(){
                 $(this).children('i').toggleClass('glyphicon-chevron-down').toggleClass('glyphicon-chevron-up');
-                if($('div.napredno').is(':visible'))$('div.filter').slideUp();
-                if($('div.napredno').is(':hidden'))$('div.filter').slideDown();
+                if($('div.filter').is(':visible'))$('div.filter').slideUp();
+                if($('div.filter').is(':hidden'))$('div.filter').slideDown();
             });
         </script>
         <p id="rezultati"></p>
