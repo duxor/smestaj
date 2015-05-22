@@ -232,6 +232,7 @@
             velikaSlikaID:'#shFoto',
             modalID:'#prikaziSliku',
             dugmeKontrol:'.slajder-kontrola',
+            dugmeModalSlide:'.modalSlide',
             brojFoto:0,
             foto:{},
             pozicija:0,
@@ -240,6 +241,7 @@
                 this.brojFoto=foto.length;
                 $(slajder.slikeClass).click(function(){slajder.prikaziModal($(this).attr('src'))});
                 $(this.dugmeKontrol).click(function(){slajder.promjena($(this).data('strana'))});
+                $(this.dugmeModalSlide).click(function(){slajder.setModalImg($(this).data('strana'))});
                 this.podesiFoto()
             },
             podesiFoto:function(){
@@ -264,6 +266,10 @@
             prikaziModal:function(foto){
                 $(this.velikaSlikaID).attr('src',foto);
                 $(this.modalID).modal('show')
+            },
+            setModalImg:function(strana){
+                this.pozicija=this.sledecaPozicija(1,strana);
+                $(this.velikaSlikaID).attr('src','/'+this.foto[this.pozicija]);
             }
         };
     </script>
@@ -331,17 +337,6 @@
                                         <h6 style=" color: #666666;font-size: 12px;"><strong>Komentar:</strong></h6>
                                             {{$kom['komentar']}}
                                         </div>
-                                        {{--<div class="action">--}}
-                                            {{--<button type="button" class="btn btn-primary btn-xs" title="Edit">--}}
-                                                {{--<span class="glyphicon glyphicon-pencil"></span>--}}
-                                            {{--</button>--}}
-                                            {{--<button type="button" class="btn btn-success btn-xs" title="Approved">--}}
-                                                {{--<span class="glyphicon glyphicon-ok"></span>--}}
-                                            {{--</button>--}}
-                                            {{--<button type="button" class="btn btn-danger btn-xs" title="Delete">--}}
-                                                {{--<span class="glyphicon glyphicon-trash"></span>--}}
-                                            {{--</button>--}}
-                                        {{--</div>--}}
                                     </div>
                                 </div>
                             </li>
@@ -387,6 +382,10 @@
             <div class="modal-content">
                 <div class="modal-body">
                     <img style="width: 100%" id="shFoto">
+                    <div style="text-align: right;margin-top:20px">
+                        <button class="btn btn-default modalSlide" data-strana="left"><i class="glyphicon glyphicon-chevron-left"></i></button>
+                        <button class="btn btn-default modalSlide" data-strana="right"><i class="glyphicon glyphicon-chevron-right"></i></button>
+                    </div>
                 </div>
             </div>
         </div>
