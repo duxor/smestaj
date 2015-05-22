@@ -350,11 +350,11 @@
                                               <div class="col-xs-10 col-md-11">
                                               <div>
                                                  <div class="mic-info" style=" color: #666666;font-size: 11px;">
-                                                     <strong>Ocenio:</strong> <a href="#">{{$odg['username']}}</a>,  {{$odg['created_at']}}, <strong>Ocena: </strong>{{$odg['ocena']}}
+                                                     <strong>Odgovorio:</strong> <a href="#">{{$odg['username']}}</a>,  {{$odg['created_at']}}
                                                  </div>
                                               </div>
                                               <div class="comment-text">
-                                                  <h6 style=" color: #666666;font-size: 12px;"><strong>Komentar:</strong></h6>
+                                                  <h6 style=" color: #666666;font-size: 12px;"><strong>Odgovor:</strong></h6>
                                                   {{$odg['odgovor']}}
                                               </div>
                                            </div>
