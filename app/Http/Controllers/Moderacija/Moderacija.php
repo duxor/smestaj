@@ -231,7 +231,6 @@ class Moderacija extends Controller {
 	}
 	public function postNoviSmestaj(){//dd(Input::all());
 		if(Security::autentifikacijaTest(4,'min')){
-
 			$validator=Validator::make([
             'slug'=>Input::get('slug'),
             'cena'=>Input::get('cena')
@@ -241,22 +240,17 @@ class Moderacija extends Controller {
 
         	],[
             'slug.required'=>'Slug je obavezan.',
-            'cena.required'=>'cena je obavezna.',
+            'cena.required'=>'Cena je obavezna.',
             'cena.numeric'=>'Cena mora biti broj.'
         	]);
 			if($validator->fails())  
      		return redirect()->back()->withGreska($validator->errors()->toArray())->withInput();
-
-
 			$podaci=Korisnici::where('korisnici.id','=',Session::get('id'))
 			->where('objekat.id',Input::get('nazivobjekta'))
 			->join('nalog','nalog.korisnici_id','=','korisnici.id')
 			->join('objekat','objekat.nalog_id','=','nalog.id')
 			->join('smestaj','smestaj.objekat_id','=','objekat.id')
 			->get(['korisnici.username','nalog.slug','objekat.naziv'])->first()->toArray();
-			
-			
-			//prvo - kreirati folder
 			OsnovneMetode::kreirjFolder("galerije/".$podaci['username']."/aplikacije/".$podaci['slug']."/smestaji/".Input::get('slug')."");
 
 			$target_dir="galerije/".$podaci['username']."/aplikacije/".$podaci['slug']."/smestaji/".Input::get('slug')."/";
@@ -311,17 +305,13 @@ class Moderacija extends Controller {
 			->select('s.id','nalog.slug as app','s.naziv','s.slug','k.naziv as kapacitet','v.naziv as vrsta_smestaja','o.naziv as objekat','cena_osoba',DB::Raw('min(smestaj_r.od) as od'))->get()->toArray();
 		return Security::autentifikacija('moderacija.objekti.slobodni',compact('podaci'),4,'min');
 	}
-	public function postObjekatAktivan(){
+	public function postObjekatStatus(){
 		if(!Security::autentifikacijaTest(4,'min')) return json_encode(['msg'=>'Dogodila se greška. Proverite podatke i pokušajte ponovo.','check'=>0]);
 		$podaci=json_decode(Input::get('podaci'));
-		Objekat::where('objekat.id',$podaci->id_objekta)->update(['aktivan'=>'1']);
-		return json_encode(['msg'=>'Uspešno ste postavili status objekta na aktivan','check'=>1]);
-	}
-	public function postObjekatNeaktivan(){
-		if(!Security::autentifikacijaTest(4,'min')) return json_encode(['msg'=>'Dogodila se greška. Proverite podatke i pokušajte ponovo.','check'=>0]);
-		$podaci=json_decode(Input::get('podaci'));
-		Objekat::where('objekat.id',$podaci->id_objekta)->update(['aktivan'=>'0']);
-		return json_encode(['msg'=>'Uspešno ste postavili status objekta na aktivan','check'=>1]);
+		$objekat=Objekat::join('nalog as n','objekat.nalog_id','=','n.id')->where('n.korisnici_id',Session::get('id'))->where('objekat.id',$podaci->id_objekta)->get(['objekat.id','objekat.aktivan'])->first();
+		$objekat->aktivan=$objekat->aktivan?0:1;
+		$objekat->save();
+		return json_encode(['msg'=>'Uspešno ste postavili status objekta na '.($objekat->aktivan?'aktivan':'neaktivan'),'check'=>1]);
 	}
 	public function postOdgovor(){
 		if(Security::autentifikacijaTest(4,'min')){

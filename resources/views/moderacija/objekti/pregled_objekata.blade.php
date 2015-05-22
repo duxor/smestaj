@@ -9,7 +9,7 @@
 </div>
 	</br>	</br>
 		<div id="forma" class="panel panel-primary clearfix">
-			<div  class="panel-heading">Pregled objekata</div>
+			<div  class="panel-heading">Pregled objekata</div><i class='icon-spin4 animate-spin' style="color: rgba(0,0,0,0)"></i>
 			<div id="vrti" style="display:none;"><center><i class='icon-spin4 animate-spin' style="font-size: 350%"></i></center></div>
 			<div id="poruka" style="display:none"></div>
 			    <div class="panel-body">
@@ -31,24 +31,25 @@
 								</div>
 								
 								<div  class="col-md-4">
-									
-										@if($obj['opis'])
-											<i class="icon-th-large-outline"></i> Opis: {{$obj['opis']}}
-											<br/><br/>
-										@endif
-										<div class="row">
-											<div class="col-md-8">
-												<a href="{!!url('/moderacija/izmeni-objekat/'.$obj['id']) !!}" class="btn btn-lg btn-primary" ><span class="glyphicon glyphicon-pencil"> </span>  Ažuriranje</a>
+									@if($obj['opis'])
+										<i class="icon-th-large-outline"></i> Opis: {{$obj['opis']}}
+										<br/><br/>
+									@endif
+										<div id="forma-{{$obj['id']}}" style="position: absolute;top: 10px;right:10px">
+											{!!Form::hidden('id_objekta',$obj['id'])!!}
+											{!!Form::hidden('_token',csrf_token())!!}
+											<div class="status-objekta btn btn-xs btn-primary" data-placement="top" data-toggle="tooltip" @if($obj['aktivan']==0) data-aktivan="false" title="Postavi objekat u stanje aktivan" @else data-aktivan="true" title="Postavi objekat u stanje neaktivan" @endif href="#" onclick='Komunikacija.posalji("/moderacija/objekat-status","forma-{{$obj['id']}}","poruka","vrti","zabrani")'>
+												<span @if($obj['aktivan']==0) class="glyphicon glyphicon-remove" @else class="glyphicon glyphicon-ok" @endif></span>
 											</div>
-											<div class="col-md-3">
-												<div id="forma-{{$obj['id']}}" class="form-horizontal">
-													{!!Form::hidden('id_objekta',$obj['id'])!!}
-													{!!Form::hidden('_token',csrf_token())!!}	
-													@if($obj['aktivan']==0)<div data-placement="top" data-toggle="tooltip" title="Postavi objekat u stanje aktivan">{!! Form::button('<span class="glyphicon glyphicon-ok"></span>',['class'=>'btn btn-xs btn-danger','onclick'=>'Komunikacija.posalji("/moderacija/objekat-aktivan",\'forma-'.$obj['id'].'\',\'poruka\',\'vrti\',\'zabrani\')']) !!}</div>
-													@else <div data-placement="top" data-toggle="tooltip" title="Postavi objekat u stanje neaktivan">{!! Form::button('<span class="glyphicon glyphicon-remove"></span>',['class'=>'btn btn-xs btn-success','onclick'=>'Komunikacija.posalji("/moderacija/objekat-neaktivan",\'forma-'.$obj['id'].'\',\'poruka\',\'vrti\',\'zabrani\')']) !!}</div>
-													@endif
-												</div>
-											</div>
+											<script>
+												$('.status-objekta').css('cursor','pointer');
+												$('.status-objekta').click(function(){
+													$(this).attr('title','Postavi objekat u stanje '+($(this).data('aktivan')?'aktivan':'neaktivan'));
+													$(this).children('span').toggleClass('glyphicon glyphicon-remove').toggleClass('glyphicon glyphicon-ok');
+													$(this).data('aktivan',$(this).data('aktivan')?'false':'true');
+												});
+											</script>
+											<a href="{!!url('/moderacija/izmeni-objekat/'.$obj['id']) !!}" style="margin-left: 10px" class="btn btn-xs btn-primary" ><span class="glyphicon glyphicon-pencil"> </span></a>
 										</div>
 								</div>
 							</div>

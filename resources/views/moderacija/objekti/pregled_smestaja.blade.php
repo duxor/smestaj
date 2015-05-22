@@ -38,7 +38,7 @@
 						@foreach($objekti as $obj)
 							<tr>
 								<td>{{$obj['naziv_objekta']}}</td>
-								<td><a href="/{{$obj['app']}}/{{$obj['slug']}}">{{$obj['slug']}}</a></td>
+								<td><a href="/{{$obj['app']}}/{{$obj['slug']}}">{{$obj['naziv']}}</a></td>
 								<td>{{$obj['naziv_smestaja']}}</td>
 								<td>{{$obj['naziv_kapaciteta']}}</td>
 								<td>{{$obj['broj_osoba']}}</td>

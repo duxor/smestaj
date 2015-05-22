@@ -28,5 +28,6 @@ Route::controller('/rezervacije','Rezervacija');
 Route::get('/{slug?}','Aplikacija@getIndex');
 Route::any('/{slugApp}/pretraga','Pretraga@anyIndex');
 Route::get('/{slugApp}/{slugSmestaj}','Aplikacija@getSmestaj');
+Route::post('/{slugApp}/{slugSmestaj}/smestaj-komentari','Aplikacija@postSmestajKomentari');
 
 //Route::controller('/','Glavni');

@@ -331,23 +331,45 @@
                                         <h6 style=" color: #666666;font-size: 12px;"><strong>Komentar:</strong></h6>
                                             {{$kom['komentar']}}
                                         </div>
-                                        <div class="action">
-                                            <button type="button" class="btn btn-primary btn-xs" title="Edit">
-                                                <span class="glyphicon glyphicon-pencil"></span>
-                                            </button>
-                                            <button type="button" class="btn btn-success btn-xs" title="Approved">
-                                                <span class="glyphicon glyphicon-ok"></span>
-                                            </button>
-                                            <button type="button" class="btn btn-danger btn-xs" title="Delete">
-                                                <span class="glyphicon glyphicon-trash"></span>
-                                            </button>
-                                        </div>
+                                        {{--<div class="action">--}}
+                                            {{--<button type="button" class="btn btn-primary btn-xs" title="Edit">--}}
+                                                {{--<span class="glyphicon glyphicon-pencil"></span>--}}
+                                            {{--</button>--}}
+                                            {{--<button type="button" class="btn btn-success btn-xs" title="Approved">--}}
+                                                {{--<span class="glyphicon glyphicon-ok"></span>--}}
+                                            {{--</button>--}}
+                                            {{--<button type="button" class="btn btn-danger btn-xs" title="Delete">--}}
+                                                {{--<span class="glyphicon glyphicon-trash"></span>--}}
+                                            {{--</button>--}}
+                                        {{--</div>--}}
                                     </div>
                                 </div>
                             </li>
                         </ul>
                     @endforeach
-                    <a href="#" class="btn btn-primary btn-sm btn-block" style="border-top-left-radius:0px;border-top-right-radius:0px;;"role="button"><span class="glyphicon glyphicon-refresh"></span> More</a>
+                    <div id="ostali-komenrari"></div>
+                    <button class="btn btn-primary btn-sm btn-block vise" data-stranica="2" style="border-top-left-radius:0px;border-top-right-radius:0px;;"role="button"><span class="glyphicon glyphicon-refresh"></span> Više</button>
+                    <script>
+                        $('.vise').click(function(){
+                            var button=$(this);
+                            $.post('/{{$podaci['app']['slug']}}/{{$podaci['smestaj']['slug']}}/smestaj-komentari',{
+                                _token:'{{csrf_token()}}',
+                                id:'{{$podaci['smestaj']['id']}}',
+                                stranica:$(button).data('stranica')
+                            },function(data){
+                                $(button).data('stranica',$(button).data('stranica')+1);
+                                var komentari=JSON.parse(data);
+                                for(var i=0;i<komentari.length;i++) {
+                                    $('#ostali-komenrari').append('<ul class="list-group koment-'+komentari[i].id+'" style="margin-bottom:0;"><li class="list-group-item" style="border-radius:0;border:0; border-top:1px  \
+                                    solid#ddd;"><div class="row"><div class="col-xs-2 col-md-1"><img src="http://placehold.it/80" class="img-circle img-responsive" alt=""/></div><div \
+                                     class="col-xs-10 col-md-11"><div><div class="mic-info" style="color:#666666; font-size:11px;"><strong>Ocenio: </strong><a href="#">'
+                                    + komentari[i].username + '</a>,' + komentari[i].created_at + ',<strong>Ocena: </strong>' + komentari[i].ocena + '</div></div><divclass="comment-text">' +
+                                    '<h6 style="color:#666666;font-size:12px;"><strong>Komentar:</strong></h6>' + komentari[i].komentar + '</div></div></div></li></ul>');
+                                    $('.koment-'+komentari[i].id).fadeIn();
+                                }
+                            });
+                        });
+                    </script>
                 @else <h3 class="col-sm-12" >Nije ostavljen ni jedan komentar.</h3><br clear="all"><hr>
                 @endif
 

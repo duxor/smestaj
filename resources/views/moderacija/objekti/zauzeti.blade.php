@@ -18,8 +18,7 @@
 							<th>Smeštaj</th>
 							<th>Cena po osobi</th>
 							<th>Zauzeto do</th>
-							<th>Rezervisao</th>
-
+							<th>Trenutno koristi</th>
 						</tr>
 					</thead>
 					<tbody>

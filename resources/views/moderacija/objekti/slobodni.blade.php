@@ -17,7 +17,7 @@
 							<th>Naziv kapaciteta</th>
 							<th>Smeštaj</th>
 							<th>Cena po osobi</th>
-							<th>Slobodan od</th>
+							<th>Zauzet od</th>
 
 						</tr>
 					</thead>

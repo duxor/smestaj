@@ -154,4 +154,14 @@ class OsnovneMetode {
         }
         return $aryRange;
     }
+    static function komentariStranicenje($idSmjestaja,$stranica=1,$poStranici=5){
+        $komentari=Komentari::join('korisnici','korisnici.id','=','komentari.korisnici_id')
+            ->where('smestaj_id',$idSmjestaja)
+            ->whereNull('odgovor_za_id')
+            ->orderBy('created_at','desc')
+            ->skip(($stranica-1)*$poStranici)->take($poStranici)
+            ->get(['komentari.id','komentar','ocena','komentari.created_at','korisnici.username'])
+            ->toArray();
+        return $komentari;
+    }
 }
