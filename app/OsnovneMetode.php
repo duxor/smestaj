@@ -162,6 +162,13 @@ class OsnovneMetode {
             ->skip(($stranica-1)*$poStranici)->take($poStranici)
             ->get(['komentari.id','komentar','ocena','komentari.created_at','korisnici.username'])
             ->toArray();
-        return $komentari;
+        $odgovori=[];
+        foreach($komentari as $k=>$koment){
+            $odgovori[$k]=Komentari::join('komentari as k','k.odgovor_za_id','=','komentari.id')
+                ->join('korisnici as ko','ko.id','=','k.korisnici_id')
+                ->where('komentari.id',$koment['id'])
+                ->get(['k.komentar as odgovor','k.created_at','k.ocena','username'])->toArray();
+        }
+        return ['komentari'=>$komentari,'odgovori'=>$odgovori];
     }
 }

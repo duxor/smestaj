@@ -57,11 +57,11 @@ class Aplikacija extends Controller {
 			->get(['dodatna_oprema.naziv as dodatna_oprema'])->toArray();
 
 		$podaci['app']=Nalog::join('korisnici as k','k.id','=','nalog.korisnici_id')->join('tema as t','t.id','=','nalog.tema_id')->where('nalog.slug',$slugApp)->get(['nalog.id','nalog.slug','k.username','t.slug as slugTema','nalog.naziv as nazivApp'])->first()->toArray();
-		$komentari=OsnovneMetode::komentariStranicenje($podaci['smestaj']['id']);
+		$podaci['komentari']=OsnovneMetode::komentariStranicenje($podaci['smestaj']['id']);
 		$prosecna_ocena=Komentari::where('smestaj_id',$podaci['smestaj']['id'])->where('aktivan',1)->avg('ocena');
 		$podaci['slajder']=json_encode(OsnovneMetode::listaFotografija("galerije/".Korisnici::join('nalog as n','n.korisnici_id','=','korisnici.id')->where('n.slug',$slugApp)->get(['username'])->first()->username."/aplikacije/{$slugApp}/smestaji/{$slugSmestaj}"));
 		$podaci['kalendar']=OsnovneMetode::podaciZaKalendar($slugSmestaj);
-		return view("aplikacija.teme.{$podaci['app']['slugTema']}.smestaj",compact('podaci','komentari','prosecna_ocena'));
+		return view("aplikacija.teme.{$podaci['app']['slugTema']}.smestaj",compact('podaci','prosecna_ocena'));
 	}
 	public function postSmestajKomentari(){
 		return json_encode(OsnovneMetode::komentariStranicenje(Input::get('id'),Input::get('stranica')));

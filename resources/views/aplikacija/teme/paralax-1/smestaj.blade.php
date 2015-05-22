@@ -320,8 +320,8 @@
                         </div>
                     </div>
                     <div class="panel-body" style=" padding:0px;">
-                @if($komentari)
-                    @foreach($komentari as $kom)
+                @if($podaci['komentari']['komentari'])
+                    @foreach($podaci['komentari']['komentari'] as $k => $kom)
                         <ul class="list-group"style=" margin-bottom: 0; ">
                             <li class="list-group-item" style="border-radius: 0;border: 0;border-top: 1px solid #ddd;">
                                 <div class="row">
@@ -341,6 +341,27 @@
                                 </div>
                             </li>
                         </ul>
+                        @foreach($podaci['komentari']['odgovori'][$k] as $odg)
+                             <ul class="list-group"style=" margin-bottom: 0;margin-left: 10%;width:90%; ">
+                                  <li class="list-group-item" style="border-radius: 0;border: 0;border-top: 1px solid #ddd;">
+                                      <div class="row">
+                                          <div class="col-xs-2 col-md-1">
+                                              <img src="http://placehold.it/80" class="img-circle img-responsive" alt="" /></div>
+                                              <div class="col-xs-10 col-md-11">
+                                              <div>
+                                                 <div class="mic-info" style=" color: #666666;font-size: 11px;">
+                                                     <strong>Ocenio:</strong> <a href="#">{{$odg['username']}}</a>,  {{$odg['created_at']}}, <strong>Ocena: </strong>{{$odg['ocena']}}
+                                                 </div>
+                                              </div>
+                                              <div class="comment-text">
+                                                  <h6 style=" color: #666666;font-size: 12px;"><strong>Komentar:</strong></h6>
+                                                  {{$odg['odgovor']}}
+                                              </div>
+                                           </div>
+                                      </div>
+                                  </li>
+                             </ul>
+                                @endforeach
                     @endforeach
                     <div id="ostali-komenrari"></div>
                     <button class="btn btn-primary btn-sm btn-block vise" data-stranica="2" style="border-top-left-radius:0px;border-top-right-radius:0px;;"role="button"><span class="glyphicon glyphicon-refresh"></span> Više</button>
@@ -353,14 +374,23 @@
                                 stranica:$(button).data('stranica')
                             },function(data){
                                 $(button).data('stranica',$(button).data('stranica')+1);
-                                var komentari=JSON.parse(data);
-                                for(var i=0;i<komentari.length;i++) {
-                                    $('#ostali-komenrari').append('<ul class="list-group koment-'+komentari[i].id+'" style="margin-bottom:0;"><li class="list-group-item" style="border-radius:0;border:0; border-top:1px  \
+                                var komentari=JSON.parse(data);console.log(komentari);
+                                if(komentari.komentari.length<1) $(button).html('<p>Nema više komentara u evidenciji.</p>');
+                                for(var i=0;i<komentari.komentari.length;i++) {
+                                    $('#ostali-komenrari').append('<ul class="list-group koment-'+komentari.komentari[i].id+'" style="margin-bottom:0;"><li class="list-group-item" style="border-radius:0;border:0; border-top:1px  \
                                     solid#ddd;"><div class="row"><div class="col-xs-2 col-md-1"><img src="http://placehold.it/80" class="img-circle img-responsive" alt=""/></div><div \
                                      class="col-xs-10 col-md-11"><div><div class="mic-info" style="color:#666666; font-size:11px;"><strong>Ocenio: </strong><a href="#">'
-                                    + komentari[i].username + '</a>,' + komentari[i].created_at + ',<strong>Ocena: </strong>' + komentari[i].ocena + '</div></div><divclass="comment-text">' +
-                                    '<h6 style="color:#666666;font-size:12px;"><strong>Komentar:</strong></h6>' + komentari[i].komentar + '</div></div></div></li></ul>');
-                                    $('.koment-'+komentari[i].id).fadeIn();
+                                    + komentari.komentari[i].username + '</a>,' + komentari.komentari[i].created_at + ',<strong>Ocena: </strong>' + komentari.komentari[i].ocena + '</div></div><divclass="comment-text">' +
+                                    '<h6 style="color:#666666;font-size:12px;"><strong>Komentar:</strong></h6>' + komentari.komentari[i].komentar + '</div></div></div></li></ul>');
+                                    $('.koment-'+komentari.komentari[i].id).fadeIn();
+                                    for(var j=0;j<komentari.odgovori[i].length;j++) {
+                                        $('#ostali-komenrari').append('<ul class="list-group koment-'+komentari.odgovori[i][j].id+'" style="margin-bottom:0;margin-left:10%;width:90%;"><li class="list-group-item" style="border-radius:0;border:0; border-top:1px  \
+                                    solid#ddd;"><div class="row"><div class="col-xs-2 col-md-1"><img src="http://placehold.it/80" class="img-circle img-responsive" alt=""/></div><div \
+                                     class="col-xs-10 col-md-11"><div><div class="mic-info" style="color:#666666; font-size:11px;"><strong>Ocenio: </strong><a href="#">'
+                                        + komentari.odgovori[i][j].username + '</a>,' + komentari.odgovori[i][j].created_at + ',<strong>Ocena: </strong>' + komentari.odgovori[i][j].ocena + '</div></div><divclass="comment-text">' +
+                                        '<h6 style="color:#666666;font-size:12px;"><strong>Komentar:</strong></h6>' + komentari.odgovori[i][j].komentar + '</div></div></div></li></ul>');
+                                        $('.koment-'+komentari.odgovori[i][j].id).fadeIn();
+                                    }
                                 }
                             });
                         });
