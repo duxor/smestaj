@@ -1,4 +1,4 @@
-var myCenter=new google.maps.LatLng(mx, my);
+var myCenter=new google.maps.LatLng(my, mx);
 var marker;
 
 function initialize()
@@ -18,17 +18,11 @@ function initialize()
     var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
 
     var marker=new google.maps.Marker({
-        position:myCenter
-        //,animation:google.maps.Animation.BOUNCE
+        position:myCenter,
+        animation:google.maps.Animation.BOUNCE
     });
 
     marker.setMap(map);
-
-    var infowindow = new google.maps.InfoWindow({
-        content:"<b><center>Hostel Jedro<center></b>" +
-                "<span><i>ul. Tošin Bunar 148 Novi Beograd</i></span>"
-    });
-
-    infowindow.open(map,marker);
 }
+
 google.maps.event.addDomListener(window, 'load', initialize);

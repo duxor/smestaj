@@ -41,7 +41,7 @@
                             @endif
                             <tr>
                                 <td><i class="glyphicon glyphicon-euro"></i> Cena po osobi</td>
-                                <td>{!!$podaci['smestaj']['cena_osoba']!!} din.</td>
+                                <td>{!!$podaci['smestaj']['cena_osoba']!!} din</td>
                             </tr>
                         </tbody>
                     </table>
@@ -274,10 +274,11 @@
         };
     </script>
         <div class="col-md-4"><!-- pocetak mapa-->
-                <div class="embed-responsive embed-responsive-4by3">
-                    <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyANkR_6WBUEKhO58qGQo0thZmNpvSCqRZE&q={!!$podaci['smestaj']['y']!!},{!!$podaci['smestaj']['x']!!}&zoom=15&center={!!$podaci['smestaj']['y']!!},{!!$podaci['smestaj']['x']!!}"></iframe>
-
-                </div>
+            {!! HTML::script('http://maps.googleapis.com/maps/api/js') !!}
+            <script>mx='{{$podaci['smestaj']['x']}}';my='{{$podaci['smestaj']['y']}}';</script>
+            {!!HTML::script('js/gmap1.js')!!}
+            <div id="googleMap" style="height:270px" title="Za pomeranje fokusa kliknite na mapu i koristite strelice na tastaturi." data-toggle="tooltip" data-placement="bottom"></div>
+            <script>$(document).ready(function(){$('#googleMap').tooltip()});</script>
         </div><!-- kraj mapa-->
     </div><!-- KRAJ row -->
 
