@@ -126,10 +126,10 @@ class KreiranjeBaze extends Migration{
         Schema::create('newsletter', function(Blueprint $table)
         {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('korisnici_id');
+            $table->text('email',45);
             $table->string('token', 250);
             $table->tinyInteger('aktivan')->default(1);
-            $table->unsignedBigInteger('korisnici_id');
-            $table->foreign('korisnici_id')->references('id')->on('korisnici');
             $table->unsignedBigInteger('nalog_id')->default(1);
             $table->foreign('nalog_id')->references('id')->on('nalog');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));

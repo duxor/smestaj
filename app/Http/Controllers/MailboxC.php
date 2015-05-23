@@ -3,6 +3,8 @@
 use App\Http\Requests;
 use App\Korisnici;
 use App\Mailbox;
+use App\Nalog;
+use App\Newsletter;
 use App\Security;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Input;
@@ -11,6 +13,10 @@ class MailboxC extends Controller {
 		$podaci['prava']=$slug;
 		$podaci['akcija']=$akcija;
 		$podaci['username']=$username;
+		if(Security::autentifikacijaTest(4,'min')){
+			$podaci['app']=Nalog::where('korisnici_id',Session::get('id'))->lists('naziv','id');
+			$podaci['newsKorisniciNum']=Newsletter::whereIn('nalog_id',Nalog::where('korisnici_id',Session::get('id'))->get(['id'])->toArray())->count();
+		}
 		return Security::autentifikacija('mailbox.index',compact('podaci'),2,'min');
 	}
 //POSALJI
@@ -24,6 +30,16 @@ class MailboxC extends Controller {
 		if(!$primalac) return json_encode(['msg'=>'Došlo je do greške. <b>Ne postoji korisnik sa navedenim username-om.</b>','check'=>0]);
 		Mailbox::insert(['korisnici_id'=>$primalac->id,'od_id'=>Session::get('id'),'od_email'=>Korisnici::find(Session::get('id'),['email'])->email,'naslov'=>$podaci->naslov,'poruka'=>$podaci->poruka]);
 		Mailbox::insert(['korisnici_id'=>$primalac->id,'od_id'=>Session::get('id'),'od_email'=>Korisnici::find(Session::get('id'),['email'])->email,'naslov'=>$podaci->naslov,'poruka'=>$podaci->poruka,'copy'=>1]);
+		return json_encode(['msg'=>'Poruka je uspešno poslata.','check'=>1]);
+	}
+	public function postPosaljiNewsletter(){
+		if(!Security::autentifikacijaTest(4,'min'))return Security::rediectToLogin();
+		$podaci=json_decode(Input::get('podaci'));
+		$od_email=Korisnici::find(Session::get('id'),['email'])->email;
+		foreach(Newsletter::where('nalog_id',$podaci->app)->get()->toArray() as $newsletter){
+			//mail($newsletter,$podaci->naslov,$podaci->poruka,'From: '.$od_email);
+		}
+		Mailbox::insert(['korisnici_id'=>Session::get('id'),'od_id'=>Session::get('id'),'od_email'=>$od_email,'naslov'=>$podaci->naslov,'poruka'=>$podaci->poruka,'copy'=>1]);
 		return json_encode(['msg'=>'Poruka je uspešno poslata.','check'=>1]);
 	}
 	public function postPronadjiUsername(){
@@ -72,5 +88,10 @@ class MailboxC extends Controller {
 			return json_encode(['msg'=>'Uspešno ste uklonili poruku.','check'=>1]);
 		else
 			return json_encode(['msg'=>'Desila se greška. ','check'=>0]);
+	}
+//Newsletter
+	public function getNewsletter($pravaSlug){
+		if(Security::autentifikacijaTest(4,'min')) return $this->mailbox($pravaSlug,'newsletter');
+		return $this->mailbox($pravaSlug,'inbox');
 	}
 }

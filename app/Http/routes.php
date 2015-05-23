@@ -10,7 +10,6 @@ Route::controller('/administracija/aplikacija','Administracija\Aplikacija');
 Route::controller('/administracija/nalog','Administracija\Nalozi');
 Route::controller('/administracija','Administracija\Administracija');
 
-//Route::controller('/moderacija/{slugApp}/galerije','Moderacija\Galerija');
 Route::controller('/moderacija','Moderacija\Moderacija');
 
 Route::controller('/korisnik','Korisnik\Korisnik');

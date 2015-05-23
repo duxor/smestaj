@@ -5,7 +5,6 @@ use App\Http\Controllers\Controller;
 
 class Aplikacija extends Controller {
 	public function getIndex(){
-		
 
 	}
 }
