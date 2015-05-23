@@ -74,13 +74,13 @@
                     <a class="pull-right" data-go="next"><div class="btn btn-primary"><i class="glyphicon glyphicon-chevron-right"></i></div></a>
                 </div><hr/>
                 <div class="day-headers">
-                  <div class="day header">Mon</div>
-                  <div class="day header">Tue</div>
-                  <div class="day header">Wed</div>
-                  <div class="day header">Thu</div>
-                  <div class="day header">Fri</div>
-                  <div class="day header">Sat</div>
-                  <div class="day header">Sun</div>
+                  <div class="day header">Pon</div>
+                  <div class="day header">Uto</div>
+                  <div class="day header">Sre</div>
+                  <div class="day header">Čet</div>
+                  <div class="day header">Pet</div>
+                  <div class="day header">Sub</div>
+                  <div class="day header">Ned</div>
                 </div>
                 <div class="days" data-group="days">
                 </div>
