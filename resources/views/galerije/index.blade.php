@@ -92,7 +92,7 @@
                 $('._upload').fadeOut();
                 $(this).find('._upload').fadeIn();
                 $(this).addClass('active');
-                var slugApp=$(this).data('slugapp');
+                var slugApp=$(this).data('slugapp');console.log($(this).data('link'));
                 $.post('/{{\App\OsnovneMetode::osnovniNav()}}/galerije/lista-fotografija',
                         {
                             _token:'{{csrf_token()}}',

@@ -53,6 +53,7 @@
                             <li class="dropdown-header">Poruke</li>
                             <li class="divider"></li>
                             <li><a href="/moderacija/mailbox/kreiraj"><i class="glyphicon glyphicon-edit"></i> Kreiraj poruku</a></li>
+                            <li><a href="/moderacija/mailbox/newsletter"><i class="glyphicon glyphicon-duplicate"></i> Newsletter @if(\App\OsnovneMetode::brojNewsletterKorisnika()>0)<i class="badge">{{\App\OsnovneMetode::brojNewsletterKorisnika()}}</i>@endif </a></li>
                             <li><a href="/moderacija/mailbox"><i class="glyphicon glyphicon-log-in"></i> Inbox @if(\App\OsnovneMetode::brojNeprocitanihPoruka()>0)<i class="badge">{{\App\OsnovneMetode::brojNeprocitanihPoruka()}}</i>@endif </a></li>
                             <li><a href="/moderacija/mailbox/poslate"><i class="glyphicon glyphicon-share"></i> Poslate</a></li>
                         </ul>
@@ -65,7 +66,6 @@
                             <li><a href="{!!url('/moderacija/podesavanja')!!}"><i class="glyphicon glyphicon-wrench"></i> Podešavanja</a></li>
                             <li><a href="{!!url('/moderacija/sadrzaji')!!}"><i class="glyphicon glyphicon-pencil"></i> Sadržaji</a></li>
                             <li><a href="{!!url('/moderacija/komentari')!!}"><i class="glyphicon glyphicon-comment"></i> Komentari @if(\App\OsnovneMetode::brojKomentara()>0)<i class="badge">{{\App\OsnovneMetode::brojKomentara()}}</i>@endif</a></li>
-                            <li><a href="{!!url('/moderacija/u-pripremi')!!}"><i class="glyphicon glyphicon-envelope"></i> Newsletter</a></li>
                         </ul>{{--/moderator/komentari--}}
                     </li>
                     <li class="dropdown">

@@ -5,6 +5,7 @@ use App\Korisnici;
 use App\Mailbox;
 use App\Nalog;
 use App\Newsletter;
+use App\OsnovneMetode;
 use App\Security;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Input;
@@ -15,7 +16,7 @@ class MailboxC extends Controller {
 		$podaci['username']=$username;
 		if(Security::autentifikacijaTest(4,'min')){
 			$podaci['app']=Nalog::where('korisnici_id',Session::get('id'))->lists('naziv','id');
-			$podaci['newsKorisniciNum']=Newsletter::whereIn('nalog_id',Nalog::where('korisnici_id',Session::get('id'))->get(['id'])->toArray())->count();
+			$podaci['newsKorisniciNum']=OsnovneMetode::brojNewsletterKorisnika();
 		}
 		return Security::autentifikacija('mailbox.index',compact('podaci'),2,'min');
 	}

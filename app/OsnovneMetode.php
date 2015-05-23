@@ -178,4 +178,7 @@ class OsnovneMetode {
         }
         return ['komentari'=>$komentari,'odgovori'=>$odgovori];
     }
+    public static function brojNewsletterKorisnika(){
+        return Newsletter::whereIn('nalog_id',Nalog::where('korisnici_id',Session::get('id'))->get(['id'])->toArray())->count();
+    }
 }
