@@ -35,6 +35,45 @@ class Moderacija extends Controller {
 			->where('korisnici.id',Session::get('id'))
 			->get(['nalog.id','nalog.naziv as naziv','nalog.slug','nalog.aktivan','tema.naziv as tema','korisnici.ime'])
 			->toArray();
+		$podaci['rezervacije']['aktivne']=Rezervacije::join('smestaj as s','s.id','=','rezervacije.smestaj_id')
+			->join('objekat as o','o.id','=','s.objekat_id')
+			->join('nalog as n','n.id','=','o.nalog_id')
+			->where('n.korisnici_id',Session::get('id'))
+			->where('rezervacije.aktivan',1)
+			->groupBy('rezervacije.smestaj_id')
+			->select(DB::Raw('count(smestaj_rezervacije.id) as brojRezervacija, sum(smestaj_rezervacije.broj_osoba) as ukupnoOsoba, sum(smestaj_rezervacije.cena_ukupna) as uupanPrihod'))
+			->first();
+		if($podaci['rezervacije']['aktivne'])$podaci['rezervacije']['aktivne']=$podaci['rezervacije']['aktivne']->toArray();
+		$podaci['rezervacije']['zakljucene']=Rezervacije::join('smestaj as s','s.id','=','rezervacije.smestaj_id')
+			->join('objekat as o','o.id','=','s.objekat_id')
+			->join('nalog as n','n.id','=','o.nalog_id')
+			->where('n.korisnici_id',Session::get('id'))
+			->where('rezervacije.aktivan',0)
+			->groupBy('rezervacije.smestaj_id')
+			->select(DB::Raw('count(smestaj_rezervacije.id) as brojRezervacija, sum(smestaj_rezervacije.broj_osoba) as ukupnoOsoba, sum(smestaj_rezervacije.cena_ukupna) as uupanPrihod'))
+			->first();
+		if($podaci['rezervacije']['zakljucene'])$podaci['rezervacije']['zakljucene']=$podaci['rezervacije']['zakljucene']->toArray();
+		$podaci['rezervacije']['ukupno']=Rezervacije::join('smestaj as s','s.id','=','rezervacije.smestaj_id')
+			->join('objekat as o','o.id','=','s.objekat_id')
+			->join('nalog as n','n.id','=','o.nalog_id')
+			->where('n.korisnici_id',Session::get('id'))
+			->groupBy('rezervacije.smestaj_id')
+			->select(DB::Raw('count(smestaj_rezervacije.id) as brojRezervacija, sum(smestaj_rezervacije.broj_osoba) as ukupnoOsoba, sum(smestaj_rezervacije.cena_ukupna) as uupanPrihod'))
+			->first();
+		if($podaci['rezervacije']['ukupno'])$podaci['rezervacije']['ukupno']=$podaci['rezervacije']['ukupno']->toArray();
+		$podaci['newsletter']=OsnovneMetode::brojNewsletterKorisnika();
+		$podaci['komentari']=Komentari::join('smestaj as s','s.id','=','komentari.smestaj_id')
+			->join('objekat as o','o.id','=','s.objekat_id')
+			->join('nalog as n','n.id','=','o.nalog_id')
+			->where('n.korisnici_id',Session::get('id'))
+			->count('komentari.id');
+		$podaci['kapaciteti']['smjestaj']=Smestaj::join('objekat as o','o.id','=','smestaj.objekat_id')
+			->join('nalog as n','n.id','=','o.nalog_id')
+			->where('n.korisnici_id',Session::get('id'))
+			->count('smestaj.id');
+		$podaci['kapaciteti']['objekat']=Objekat::join('nalog as n','n.id','=','objekat.nalog_id')
+			->where('n.korisnici_id',Session::get('id'))
+			->count('objekat.id');
 		return Security::autentifikacija('moderacija.aplikacija.index', compact('podaci'),4);
 	}
 	public function getPodesavanja($slug=null){

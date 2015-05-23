@@ -119,7 +119,7 @@ class Security {
 //#TESTERI[autentifikacija, input, login]
     public static function autentifikacijaTest($prava=2,$min=null){
         if (Session::has('id') and Session::has('token') and Session::has('prava_pristupa')) {
-            return Korisnici::where('id',Session::get('id'))->where('token', Session::get('token'))->where('pravapristupa_id',($min=='min'?'>':'').'=',$prava)->exists();// $korisnik ? true : false;
+            return Korisnici::where('id',Session::get('id'))->where('username',Session::get('username'))->where('token', Session::get('token'))->where('pravapristupa_id',($min=='min'?'>':'').'=',$prava)->exists();// $korisnik ? true : false;
         } else return false;
     }
     private function inputTest($in){

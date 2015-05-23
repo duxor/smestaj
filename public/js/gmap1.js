@@ -8,7 +8,7 @@ function initialize()
         navigationControl: false,
         mapTypeControl: false,
         scaleControl: false,
-        draggable: false,
+        draggable: true,
 
         center:myCenter,
         zoom:15,

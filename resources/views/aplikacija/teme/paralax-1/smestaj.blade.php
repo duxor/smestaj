@@ -96,7 +96,7 @@
               });
             </script><!-- Responsive calendar - END -->
             @if(\App\Security::autentifikacijaTest(2,'min'))
-                <button class="btn btn-lg btn-info m" data-toggle="modal" data-target="#rezervacija"><span class="glyphicon glyphicon-check"></span> Rezervacija</button>
+                <button class="btn btn-lg btn-info m" style="width: 100%" data-toggle="modal" data-target="#rezervacija"><span class="glyphicon glyphicon-check"></span> Rezervacija</button>
             @else
                 <a href="/log/login" class="btn btn-lg btn-info"><span class="glyphicon glyphicon-check"></span> Rezervacija</a>
             @endif

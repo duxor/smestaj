@@ -47,6 +47,7 @@
         <div id="dMenija" class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
                 @if(\App\Security::autentifikacijaTest(4))
+                    <li><a id="pocetna" href="/moderacija" data-toggle="tooltip" data-placement="bottom" title="Početna"><i class="glyphicon glyphicon-home"></i></a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-toggle="tooltip" data-placement="bottom" id="mailbox" title="Poruke"><i class="glyphicon glyphicon-envelope"></i>@if(\App\OsnovneMetode::brojNeprocitanihPoruka()>0)<i class="badge">{{\App\OsnovneMetode::brojNeprocitanihPoruka()}}</i>@endif</a>
                         <ul class="dropdown-menu">
@@ -100,7 +101,7 @@
                             <li><a href="{!!url('/moderacija/u-pripremi')!!}"><i class="glyphicon glyphicon-zoom-in"></i> Pretraga</a></li>
                         </ul>
                     </li>
-                    <li class="dropdown">
+                    <li>
                         <a href="/moderacija/galerije" id="galerija" data-toggle="tooltip" data-placement="bottom" title="Galerija"><i class="glyphicon glyphicon-picture"></i></a>
                     </li>
                     <li class="dropdown">
@@ -125,16 +126,7 @@
         </div>
     </div>
 </nav>
-<script>
-    $(function(){$('#osnovno').tooltip()})
-    $(function(){$('#objekti').tooltip()})
-    $(function(){$('#rezervacije').tooltip()})
-    $(function(){$('#saradnja').tooltip()})
-    $(function(){$('#galerija').tooltip()})
-    $(function(){$('#analitika').tooltip()})
-    $(function(){$('#profil').tooltip()})
-    $(function(){$('#mailbox').tooltip()})
-</script>
+<script>$(function(){$('a').tooltip()})</script>
 
 <div class="container">
     @yield('content')

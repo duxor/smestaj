@@ -10,10 +10,10 @@ use App\Security;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Input;
 class MailboxC extends Controller {
-	public function mailbox($slug,$akcija,$username=null){
+	public function mailbox($slug,$akcija,$uname=null){
 		$podaci['prava']=$slug;
 		$podaci['akcija']=$akcija;
-		$podaci['username']=$username;
+		$podaci['uname']=$uname;
 		if(Security::autentifikacijaTest(4,'min')){
 			$podaci['app']=Nalog::where('korisnici_id',Session::get('id'))->lists('naziv','id');
 			$podaci['newsKorisniciNum']=OsnovneMetode::brojNewsletterKorisnika();
@@ -21,8 +21,8 @@ class MailboxC extends Controller {
 		return Security::autentifikacija('mailbox.index',compact('podaci'),2,'min');
 	}
 //POSALJI
-	public function getKreiraj($pravaSlug,$username=null){
-		return redirect("/{$pravaSlug}/mailbox")->withAkcija('nova')->withUsername($username);
+	public function getKreiraj($pravaSlug,$uname=null){
+		return redirect("/{$pravaSlug}/mailbox")->withAkcija('nova')->withUname($uname);
 	}
 	public function postPosaljiPoruku(){
 		if(!Security::autentifikacijaTest(2,'min'))return Security::rediectToLogin();
@@ -50,7 +50,7 @@ class MailboxC extends Controller {
 //INBOX
 	public function anyIndex($pravaSlug){
 		$akcija=Session::has('akcija')?Session::get('akcija'):'inbox';
-		$username=Session::has('username')?Session::get('username'):'';
+		$username=Session::has('uname')?Session::get('uname'):'';
 		return $this->mailbox($pravaSlug,$akcija,$username);
 	}
 	public function getInbox($pravaSlug){
