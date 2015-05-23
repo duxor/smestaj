@@ -137,7 +137,7 @@
                     if($('div.filter').is(':hidden'))$('div.filter').slideDown();
                 });
                 $('input[name="oprema_filter"]').on('switchChange.bootstrapSwitch', function(event, state) {
-                    $(this).val(state?1:0);
+                    $(this).val(state?1:0);console.log(1);
                     filter.akcijaFiltriraj($(this).data('opremaid'),state?'dodaj':'ukloni');
                 });
                 var filter={
