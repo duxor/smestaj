@@ -125,6 +125,13 @@ class OsnovneMetode {
         }
         return $lokali;
     }
+    public static function dodatnaOprema($rezultati){
+        $filter=[];
+        foreach($rezultati as $k=>$rezultat){
+            $filter[$rezultat['id']]=Dodatno::where('smestaj_id',$rezultat['id'])->lists('dodatna_oprema_id');
+        }
+        return json_encode($filter);
+    }
     public static function brojKomentara(){
         return Komentari::join('smestaj as s','s.id','=','komentari.smestaj_id')
             ->join('objekat as o','o.id','=','s.objekat_id')

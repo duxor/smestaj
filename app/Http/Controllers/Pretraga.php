@@ -90,6 +90,7 @@ class Pretraga extends Controller {
 			->select('nalog.naziv as nazivApp','nalog.slug as slugApp','vrsta_smestaja.naziv as vrsta_smestaja','smestaj.id',
 				'smestaj.slug as slugSmestaj','smestaj.naziv','objekat.adresa','kapacitet.broj_osoba','lista_zelja.id as zelja','naslovna_foto','cena_osoba','k.username')->get()->toArray();
 		$podaci['rezultat']=OsnovneMetode::dostupnostZaRezervaciju($podaci['rezultat'],Input::get('datumOd'),Input::get('datumDo'));
+		$podaci['filter']=OsnovneMetode::dodatnaOprema($podaci['rezultat']);
 		$podaci['gradovi']=$slugApp?Grad::join('objekat','objekat.grad_id','=','grad.id')->where('objekat.nalog_id',Input::get('aplikacija'))->orderBy('grad.id')->get(['grad.id','grad.naziv'])->lists('naziv','id'):Grad::lists('naziv','id');
 		$podaci['grad_id']=Input::get('grad_id');
 		$podaci['tacan_broj']=Input::get('tacan_broj');
