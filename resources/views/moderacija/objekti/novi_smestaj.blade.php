@@ -24,7 +24,7 @@
 <div class="panel panel-primary clearfix">
 	<div  class="panel-heading">Dodavanje novog smeštaja</div>
 	    <div class="panel-body">
-	      	<div id="sort" class="col-sm-8">
+	      	<div id="sort" class="col-sm-5">
 			      	@if(!isset($objekti))
 				        {{$objekti=null}}
 				        <h1 class="col-sm-10">Greška</h1>
@@ -38,33 +38,33 @@
 				    {!!Form::open(['id'=>'forma','url'=>'/moderacija/novi-smestaj','class'=>'form-horizontal','enctype' => 'multipart/form-data'])!!}
 					   
 					    <div class="form-group">
-							{!! Form::label('nazivobjekta','Dodavanje smeštaja u objekat:',['class'=>'control-label col-sm-5']) !!}
-							<div class="col-sm-7">
+							{!! Form::label('nazivobjekta','Dodavanje smeštaja u objekat:',['class'=>'control-label col-sm-7']) !!}
+							<div class="col-sm-5">
 								{!!Form::select('nazivobjekta', $objekti, null, ['class'=>'form-control'])!!}
 							</div>
 						</div>
 						<div class="form-group">
-							{!! Form::label('kapacitet','Naziv Kapaciteta',['class'=>'control-label col-sm-5']) !!}
-							<div class="col-sm-7">
+							{!! Form::label('kapacitet','Naziv Kapaciteta',['class'=>'control-label col-sm-7']) !!}
+							<div class="col-sm-5">
 								{!!Form::select('kapacitet',$kapacitet,null, ['class'=>'form-control'])!!}
 							</div>
 						</div>
 						<div class="form-group">
-							{!! Form::label('vrstasmestaja','Vrsta Smeštaja',['class'=>'control-label col-sm-5']) !!}
-							<div class="col-sm-7">
+							{!! Form::label('vrstasmestaja','Vrsta Smeštaja',['class'=>'control-label col-sm-7']) !!}
+							<div class="col-sm-5">
 								{!!Form::select('vrstasmestaja',$vrstasmestaja,null, ['class'=>'form-control'])!!}
 							</div>
 						</div>
 						<div id="dslug" class="form-group has-feedback">
-					        {!!Form::label('lslug','Slug',['class'=>'control-label col-sm-5'])!!}
-					        <div class="col-sm-7">
+					        {!!Form::label('lslug','Slug',['class'=>'control-label col-sm-7'])!!}
+					        <div class="col-sm-5">
 					            {!!Form::text('slug',null,['id'=>'slug','class'=>'form-control','placeholder'=>'Unesite slug...'])!!}
 					            <span id="sslug" class="glyphicon form-control-feedback"></span>
 					        </div>
 					    </div>
 						<div class="form-group">
-					        {!!Form::label('cena','Cena',['class'=>'control-label col-sm-5'])!!}
-					        <div class="col-sm-7">
+					        {!!Form::label('cena','Cena',['class'=>'control-label col-sm-7'])!!}
+					        <div class="col-sm-5">
 					            {!!Form::text('cena',null,['class'=>'form-control','placeholder'=>'Unesite cenu u dinarima...'])!!}
 					        </div>
 					    </div>
@@ -76,10 +76,24 @@
 				        </div>
 				    </div>
 					<input id="fileSlika" name="naslovna_foto" type="file" style="display: none">
-				    {!!Form::close()!!}
-				     @endif
+				    
 			</div>
 			<div class="col-sm-4">
+				<div class="well" style="max-height: 300px;overflow: auto;">
+				<h4>Izaberite dodatnu opremu:</h4>
+				@foreach($dodatna_oprema as $dodatna)
+					<div class="form-group">
+	                    {!! Form::label('linter',$dodatna['naziv'],['class'=>'control-label col-sm-9']) !!}
+	                    <div class="col-sm-3">
+	                        {!! Form::checkbox('interner', $dodatna['id'], null, ['class' => 'field','name'=>'oprema[]']) !!}
+	                    </div>
+	                </div><br clear="all"><hr>
+	            @endforeach
+	            </div>
+	            
+			</div>{!!Form::close()!!}
+				     @endif			
+			<div class="col-sm-3">
 				<img id="slika" class="thumbnail" data-toggle="tooltip" data-placement="bottom" title="Izmenite fotografiju" style="width: 100%;cursor: pointer" src="/galerije/default-galerije/osnovne/smestaj-default.jpg">
 				<script>
 					$(function (){

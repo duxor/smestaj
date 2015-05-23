@@ -22,6 +22,8 @@ use App\Smestaj;
 use App\VrstaSmestaja;
 use App\Kapacitet;
 use App\Korisnici;
+use App\DodatnaOprema;
+use App\Dodatno;
 
 class Moderacija extends Controller {
 	public function getRefresh(){
@@ -226,8 +228,8 @@ class Moderacija extends Controller {
 		$objekti=Nalog::where('korisnici_id','=',Session::get('id'))->where('nalog.aktivan','=','1')
 						->join('objekat','objekat.nalog_id','=','nalog.id')
 						->get(['objekat.naziv as naziv_objekta','objekat.id'])->lists('naziv_objekta','id');
-					
-		return Security::autentifikacija('moderacija.objekti.novi_smestaj',compact('kapacitet','vrstasmestaja','objekti'),4);
+		$dodatna_oprema=DodatnaOprema::get()->toArray();	
+		return Security::autentifikacija('moderacija.objekti.novi_smestaj',compact('kapacitet','vrstasmestaja','objekti','dodatna_oprema'),4);
 	}
 	public function postNoviSmestaj(){//dd(Input::all());
 		if(Security::autentifikacijaTest(4,'min')){
@@ -268,6 +270,14 @@ class Moderacija extends Controller {
             $novi->slug = Input::get('slug');
             $novi->naslovna_foto="galerije/".$podaci['username']."/aplikacije/".$podaci['slug']."/smestaji/".Input::get('slug')."";
             $novi->save();
+            $id=$novi->id;
+            $dod_oprema=Input::get('oprema');
+            foreach ($dod_oprema as $opr) {
+            	$dod=new Dodatno();
+            	$dod->smestaj_id=$id;
+            	$dod->dodatna_oprema_id=$opr;
+            	$dod->save();
+            }
             return Redirect::back()->with('message','Uspešno ste dodali novi smeštaj!');
         }else return Security::rediectToLogin();
 		
