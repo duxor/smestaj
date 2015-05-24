@@ -282,7 +282,7 @@ class KonfiguracioniPodaci extends Seeder{
             ['naziv'=>'Hidromasažna kada'],
             ['naziv'=>'Kada'],
             ['naziv'=>'Klima uređaj'],
-            ['naziv'=>'Kuhinja'],
+            ['naziv'=>'kuhinja'],
             ['naziv'=>'Popločano dvorište'],
             ['naziv'=>'Terasa'],
             ['naziv'=>'Veš mašina'],

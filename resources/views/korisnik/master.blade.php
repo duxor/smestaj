@@ -28,7 +28,7 @@
     {!!HTML::script('js/datepicker.js')!!}
 
 </head>
-<body>
+<body style=" width:100%;  height:100%; background: url(/galerije/korisnik/teme/paralax-1/pozadine-1/contact_bg.jpg) no-repeat center center fixed;">
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
@@ -125,7 +125,9 @@
         $('#profil').tooltip();
         $('#galerija').tooltip();
         $('#analitika').tooltip();
-        $('#mailbox').tooltip()
+        $('#mailbox').tooltip();
+        $('#thedialog').dialog({ autoOpen: false });
+
     });
 </script>
 
@@ -136,5 +138,6 @@
 @yield('body')
 
 {!! HTML::script('js/bootstrap.min.js') !!}
+
 </body>
 </html>
