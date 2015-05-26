@@ -80,16 +80,17 @@
 			</div>
 			<div class="col-sm-4">
 				<div class="well" style="max-height: 300px;overflow: auto;">
-				<h4>Izaberite dodatnu opremu:</h4>
-				@foreach($dodatna_oprema as $dodatna)
-					<div class="form-group">
-	                    {!! Form::label('linter',$dodatna['naziv'],['class'=>'control-label col-sm-9']) !!}
-	                    <div class="col-sm-3">
-	                        {!! Form::checkbox('interner', $dodatna['id'], null, ['class' => 'field','name'=>'oprema[]']) !!}
-	                    </div>
-	                </div><br clear="all"><hr>
-	            @endforeach
-	            </div>
+					<h4>Izaberite dodatnu opremu:</h4>
+					@foreach($dodatna_oprema as $dodatna)
+					<div class="col-sm-12">
+						<input type="checkbox"  name="oprema_filter" value="0" class="my-checkbox" data-size="normal" data-on-text="Da" data-off-text="Ne" data-label-text="{{$dodatna['naziv']}}">
+		            </div>
+		            @endforeach
+		            <script>$(".my-checkbox").bootstrapSwitch();
+		            $('input[name="oprema_filter"]').on('switchChange.bootstrapSwitch', function(event, state) {
+					     $(this).val(state?1:0);
+					});</script>
+	        	</div>
 	            
 			</div>{!!Form::close()!!}
 				     @endif			

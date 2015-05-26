@@ -9,7 +9,7 @@
 					<div class="panel-heading">
 						<h3 class="panel-title">Pregled aktuelnih rezervacija</h3>
 					</div>
-					<table class="table table-hover">
+					<table id="tableID" class="table table-hover">
 						<thead>
 							<tr>
 								<th>Početak rezervacije</th>
@@ -79,7 +79,16 @@
 
 						</tbody>
 					</table>
-				</div>
+ 
+				
+				<button onclick="myFunction()">PDf</button>
+				
+				<script>
+					function myFunction() {
+					    $('#tableID').tableExport({type:'pdf',escape:'false'});
+					}
+				</script>
+</div>
 			</div>
 		</div>
 	</div>

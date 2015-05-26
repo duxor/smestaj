@@ -8,7 +8,7 @@
 	{!! Form::close() !!}
 </div>
 </br></br>
-<div class="container">
+<div id="dev-table1" class="container">
     	<div class="row">
 			<div class="col-md-12">
 				<div class="panel panel-primary">
@@ -48,6 +48,13 @@
 
 						</tbody>
 					</table>
+					<button onclick="myFunction()">PDf</button>
+				
+						<script>
+							function myFunction() {
+							    $('#dev-table').tableExport({htmlContent:'false',type:'pdf',escape:'false'});
+							}
+						</script>
 
 				</div>
 			</div>

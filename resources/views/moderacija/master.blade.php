@@ -28,6 +28,9 @@
     {!!HTML::script('tinymce/tinymce.min.js')!!}
     {!!HTML::script('js/komentari.js')!!}
 
+
+
+
 </head>
 <body>
 
@@ -135,5 +138,21 @@
 @yield('body')
 
 {!! HTML::script('js/bootstrap.min.js') !!}
+<script>
+ $('[rel=popover]').popover({
+    html:true,
+    placement:'right',
+    content:function(){
+        return $($(this).data('contentwrapper')).html();
+    }
+});
+</script>
+
+{!!HTML::script('js/jspdf/sprintf.js')!!}
+{!!HTML::script('js/jspdf/jspdf.js')!!}
+{!!HTML::script('js/jspdf/base64.js')!!}
+{!!HTML::script('js/jspdf/tableExport.js')!!}
+{!!HTML::script('js/jspdf/jquery.base64.js')!!}
+
 </body>
 </html>
