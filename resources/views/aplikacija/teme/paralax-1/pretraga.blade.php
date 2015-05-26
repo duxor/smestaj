@@ -154,12 +154,12 @@
                         }
                 },
                 prikaziSakrijSve:function(akcija){
-                    if(akcija=='sakrij') $('.smestaj').hide()
-                    else $('.smestaj').show()
+                    if(akcija=='sakrij') $('.smestaj').fadeOut()
+                    else $('.smestaj').fadeIn()
                 },
                 prikaziSakrij:function(index,akcija){
-                    if(akcija=='sakrij') $('.smestaj-'+index).hide();
-                    else $('.smestaj-'+index).show();
+                    if(akcija=='sakrij') $('.smestaj-'+index).fadeOut();
+                    else $('.smestaj-'+index).fadeIn();
                 },
                 filtriraj:function(){
                     if(this.filter.length>0) this.prikaziSakrijSve('sakrij');
