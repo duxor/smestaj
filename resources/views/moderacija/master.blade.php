@@ -132,20 +132,28 @@
 <script>$(function(){$('a').tooltip()})</script>
 
 <div class="container">
-    @yield('content')
+    @yield('content')    
 </div>
 
-@yield('body')
+@yield('body') 
 
 {!! HTML::script('js/bootstrap.min.js') !!}
 <script>
- $('[rel=popover]').popover({
+$(document).on('mouseenter', '.edit', function () {
+  $(this).find(":button").fadeIn('slow').click(function(){
+$('[rel=popover]').popover({
     html:true,
-    placement:'right',
+    placement:'left',
     content:function(){
         return $($(this).data('contentwrapper')).html();
     }
 });
+    
+        });
+
+}).on('mouseleave', '.edit', function () {
+    $(this).find(":button").fadeOut('slow');
+}) ;
 </script>
 
 {!!HTML::script('js/jspdf/sprintf.js')!!}

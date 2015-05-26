@@ -17,7 +17,7 @@
                         <td>Prezime:</td>
                         <td>{!!$korisnik['prezime']!!}</td>
                           <td>
-                          <a href="javascript: void(0)" id="member1" data-contentwrapper=".mycontent"  rel="popover"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
+                          <button style="display: none;" class="btn btn-success btn-xs" href="javascript: void(0)" id="member1" data-contentwrapper=".mycontent"  rel="popover"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
 
                               <div style="display:none;" class="mycontent">
                               
@@ -25,9 +25,9 @@
                               <div id='forma'>
                               {!!Form::hidden('id_korisnika',$korisnik['id'])!!}
                               {!!Form::hidden('_token',csrf_token())!!}      
-                               {!! Form::text('prezime',$korisnik['prezime'], ['class'=>'form-control', 'placeholder'=>'Prezime'])!!}<br>
-                                {!! Form::button('<span class="glyphicon glyphicon-ok-circle">  </span>  Potvrdi',['class'=>'btn btn-sm btn-success','onclick'=>"Komunikacija.posalji('/moderacija/zabrani',\'forma\',\'poruka\',\'vrti\',\'zabrani\')"]) !!}  
-                                {!!Form::button('<span class="glyphicon glyphicon-minus">  </span> Otkaži', ['class'=>'btn btn-şm btn-danger',' data-dismiss'=>'modal']) !!}
+                              {!! Form::text('prezime',$korisnik['prezime'], ['class'=>'form-control', 'placeholder'=>'Prezime'])!!}<br>
+                              {!! Form::button('<span class="glyphicon glyphicon-ok-circle">  </span>  Potvrdi',['class'=>'btn btn-sm btn-success','onclick'=>"Komunikacija.posalji('/moderacija/zabrani',\'forma\',\'poruka\',\'vrti\',\'zabrani\')"]) !!}  
+                              {!!Form::button('<span class="glyphicon glyphicon-minus">  </span> Otkaži', ['class'=>'btn btn-şm btn-danger',' data-dismiss'=>'modal']) !!}
                               
                               </div>
                           </td>
