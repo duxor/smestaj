@@ -21,6 +21,7 @@ class Profil extends Controller {
 		$korisnik=Korisnici::where('id', '=', $ids)->get(['id','ime','prezime','email','username','adresa','grad','telefon','fotografija'])->first()->toArray();
 		$counter = 0;
 		$procenat_popunjenosti=$this->proverapopunjenostiprofila();
+		//dd($korisnik);
 		return view('profil.index', compact('korisnik','procenat_popunjenosti'));
     }
     private function proverapopunjenostiprofila(){
@@ -42,6 +43,16 @@ class Profil extends Controller {
 		$korisnik=Korisnici::where('id', '=', $ids)->get(['id','ime','prezime','email','username','adresa','grad','telefon','fotografija'])->first()->toArray();
 		return view('profil.edit',compact('korisnik','procenat_popunjenosti','pravaSlug'));
 	}
+	public function postEditProfil(){
+		$podatak=Input::get('podatak');//nova vrednost
+		$data=Input::get('kljuc');//kolona
+		dd($podatak);
+		$korisnik= Korisnici::firstOrNew(['id'=>Input::get('id_korisnika')],[$data]);  
+		$korisnik->$data=Input::get('podatak');
+		$korisnik->save();
+		return Redirect::back();
+	}
+
 	public function postEditNalog(){
 		if(!Security::autentifikacijaTest(2,'min'))return Security::rediectToLogin();
 		//pocetak validacije

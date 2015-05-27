@@ -8,60 +8,49 @@
             <div class="panel-body">
 
               <div class="row">
-                <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" style="width:100px;" src="/galerije/{{Session::get('username')}}/osnovne/profilna.jpg" class="img-circle"> </div>
+                <div class="col-md-4 col-lg-4 " align="center"> <img alt="User Pic" style="width:140px;" src="/galerije/{{Session::get('username')}}/osnovne/profilna.jpg" class="img-thumbnail"> </div>
 
-                <div class=" col-md-9 col-lg-9 "> 
-                  <table style="border-left:5px solid #5AC4DC" class="table table-user-information">
+                <div class=" col-md-8 col-lg-8 "> 
+                  <table id="table_hover" style="border-left:5px solid #5AC4DC" class="table table-user-information">
                     <tbody>
-                      <tr class="edit">
-                        <td>Prezime:</td>
-                        <td>{!!$korisnik['prezime']!!}</td>
-                          <td>
-                          <button style="display: none;" class="btn btn-success btn-xs" href="javascript: void(0)" id="member1" data-contentwrapper=".mycontent"  rel="popover"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
-
-                              <div style="display:none;" class="mycontent">
-                              
-                              <div id='vrti' style='display:none;'><center><i class='icon-spin4 animate-spin' style='font-size: 100%'></i></center></div>
-                              <div id='forma'>
-                              {!!Form::hidden('id_korisnika',$korisnik['id'])!!}
-                              {!!Form::hidden('_token',csrf_token())!!}      
-                              {!! Form::text('prezime',$korisnik['prezime'], ['class'=>'form-control', 'placeholder'=>'Prezime'])!!}<br>
-                              {!! Form::button('<span class="glyphicon glyphicon-ok-circle">  </span>  Potvrdi',['class'=>'btn btn-sm btn-success','onclick'=>"Komunikacija.posalji('/moderacija/zabrani',\'forma\',\'poruka\',\'vrti\',\'zabrani\')"]) !!}  
+                    <style type="text/css"> 
+                    </style>
+                    @foreach($korisnik as $key=>$val)
+                      @if (in_array($key,array('prezime','ime','username','email'))) 
+                      <tr class="edit{{$key}}">
+                        <td>{{$key}} </td>
+                        <td ><span class="span_bg" >{{$val}}</span></td>  
+                        <td ><button id="member{{$key}}" style="display: none;" class="btn btn-success btn-xs " href="javascript: void(0)"  data-contentwrapper2=".mycontent{{$key}}"  rel="popover"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
+                          <div style="display:none;" class="mycontent{{$key}}">      
+                              {!!Form::open(['url'=>'/korisnik/profil/edit-profil/','class'=>'form-horizontal'])!!}
+                              {!!Form::hidden('kljuc',$key)!!}      
+                              {!! Form::text('podatak',$val, ['class'=>'form-control', 'placeholder'=>'{{$key}}'])!!}<br>
+                              {!! Form::button('<span class="glyphicon glyphicon-ok-circle">  </span>  Potvrdi',['class'=>'btn btn-sm btn-success','type'=>'submit']) !!}  
                               {!!Form::button('<span class="glyphicon glyphicon-minus">  </span> Otkaži', ['class'=>'btn btn-şm btn-danger',' data-dismiss'=>'modal']) !!}
-                              
-                              </div>
-                          </td>
+                             
+                          </div>
+                        </td>                        
                       </tr>
-                      <tr class="edit">
-                        <td>Ime:</td>
-                        <td>{!!$korisnik['ime']!!}</td>
-                        <td>
-                          <button data-toggle="popover" data-html="true"   data-content="<div>{{ Form::text('ime',$korisnik['ime'], ['class'=>'form-control', 'placeholder'=>'Ime'])}}<br>
-                              <button><span class='glyphicon glyphicon-ok-circle' aria-hidden='true'></span> Sačuvaj</button> 
-                              <button><span class='glyphicon glyphicon-minus' aria-hidden='true'></span> Otkaži</button></div>" data-placement="top"  type="button" id="show" style="display: none;" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> 
-                            </button>
-                        </td>
-                      </tr>
-                      <tr class="edit">
-                        <td>Username:</td>
-                        <td>{!!$korisnik['username']!!}</td>
-                        <td>
-                          <button data-toggle="popover" data-html="true"   data-content="<div>{{ Form::text('username',$korisnik['username'], ['class'=>'form-control', 'placeholder'=>'Username','id'=>'username'])}}<br>
-                              <button><span class='glyphicon glyphicon-ok-circle' aria-hidden='true'></span> Sačuvaj</button> 
-                              <button><span class='glyphicon glyphicon-minus' aria-hidden='true'></span> Otkaži</button></div>" data-placement="top"  type="button" id="show" style="display: none;" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> 
-                            </button>
-                        </td>
-                      </tr>
-                      <tr class="edit">
-                        <td>Email:</td>
-                        <td><a href="{!!$korisnik['email']!!}">{!!$korisnik['email']!!}</a> </td>
-                        <td>
-                          <button data-toggle="popover" data-html="true"   data-content="<div>{{ Form::text('prezime',$korisnik['email'], ['class'=>'form-control', 'placeholder'=>'Prezime'])}}<br>
-                              <button><span class='glyphicon glyphicon-ok-circle' aria-hidden='true'></span> Sačuvaj</button> 
-                              <button><span class='glyphicon glyphicon-minus' aria-hidden='true'></span> Otkaži</button></div>" data-placement="top"  type="button" id="show" style="display: none;" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> 
-                            </button>
-                        </td>
-                      </tr>
+                      <script>
+                      $(document).on('mouseenter', '.edit{{$key}}', function (){  
+                            $(this).find(":button").fadeIn('slow').click(function(){
+                            $(this).popover({
+                                html:true,
+                                placement:'left',
+                                content:function()
+                                {
+                                    return $($('#member{{$key}}').data('contentwrapper2')).html();
+                                }
+                            });
+                            });
+                            }).on('mouseleave', '.edit{{$key}}', function () {
+                                $(this).popover('destroy');
+                                $(this).find(":button").fadeOut('slow');
+                        });
+                        </script>
+                      @endif
+                    @endforeach
+                      
                       <tr class="edit">
                       @if($korisnik['adresa'])
                         <tr class="edit">
@@ -116,9 +105,9 @@
           fontColor: "#000000",//font color of progress text
           fontSize: "40px",//font size of progress text
           radius: 70,//radius of circle
-          progressBarBackground: "#7CC67C",//background colour of circular progress Bar
+          progressBarBackground: "#FF3333",//background colour of circular progress Bar
           progressBarColor: "#5AC4DC",//colour of circular progress bar
-          progressBarWidth: 25,//progress bar width
+          progressBarWidth: 10,//progress bar width
           progressPercent: "{!!$procenat_popunjenosti!!}%",//progress percentage out of 100
           progressValue:0,//diplay this value instead of percentage
           showText: true,//show progress text or not

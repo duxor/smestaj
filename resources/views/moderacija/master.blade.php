@@ -139,21 +139,33 @@
 
 {!! HTML::script('js/bootstrap.min.js') !!}
 <script>
-$(document).on('mouseenter', '.edit', function () {
-  $(this).find(":button").fadeIn('slow').click(function(){
-$('[rel=popover]').popover({
-    html:true,
-    placement:'left',
-    content:function(){
-        return $($(this).data('contentwrapper')).html();
-    }
-});
-    
-        });
+function editPrezime(id){
+                $('[rel=popover]').popover('hide');
+                $.post('/{{\App\OsnovneMetode::osnovniNav()}}/profil/edit-prezime/',{
+                    _token:'{{csrf_token()}}',
+                    prezime: id      
+                });
+            }
+$(document).on('mouseenter', '.edit', function () 
+{
 
-}).on('mouseleave', '.edit', function () {
-    $(this).find(":button").fadeOut('slow');
-}) ;
+    $(this).find(":button").fadeIn('slow').click(function()
+    {
+    $('[rel=popover]').popover({
+        html:true,
+        placement:'left',
+        content:function()
+        {
+            return $($(this).data('contentwrapper')).html();
+        }
+    });
+
+
+    });
+    }).on('mouseleave', '.edit', function () {
+        $('[rel=popover]').popover('destroy');
+        $(this).find(":button").fadeOut('slow');
+});
 </script>
 
 {!!HTML::script('js/jspdf/sprintf.js')!!}
