@@ -46,7 +46,7 @@ class Profil extends Controller {
 	public function postEditProfil(){
 		$podatak=Input::get('podatak');//nova vrednost
 		$data=Input::get('kljuc');//kolona
-		dd($podatak);
+		dd($data);
 		$korisnik= Korisnici::firstOrNew(['id'=>Input::get('id_korisnika')],[$data]);  
 		$korisnik->$data=Input::get('podatak');
 		$korisnik->save();

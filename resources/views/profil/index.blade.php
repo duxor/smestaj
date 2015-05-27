@@ -1,7 +1,16 @@
 @extends(\App\OsnovneMetode::osnovniNav().".master")
 
 @section('body')
-<div  class="container">
+<div   class="container" style=" position:absolute;top:15px; margin-top:0px; padding-top:0px; width:100%;  height:70%; border-bottom:2px solid #b5b1b1; background: url(/galerije/korisnik/teme/paralax-1/pozadine-1/contact_bg.jpg) no-repeat center center fixed;">
+     <div class="row">
+     <div style="margin-bottom:50px; margin-top:50px;" class="col-md-2 col-md-offset-5">
+     {!!Form::open(['id'=>'forma','url'=>'','class'=>'form-horizontal','enctype' => 'multipart/form-data'])!!}
+
+     {!!Form::button('<span class="glyphicon glyphicon-picture"></span> Izmeni pozadinu', ['class'=>'btn btn-lg btn-success','type'=>'submit'])!!}
+     
+     {!!Form::close()!!}
+     </div>
+     </div>
       <div class="row">
         <div  class="col-sm-7 col-md-offset-1 toppad">
           <div style="opacity: 0.8;" class="panel panel-info">
@@ -20,7 +29,7 @@
                       <tr class="edit{{$key}}">
                         <td>{{$key}} </td>
                         <td ><span class="span_bg" >{{$val}}</span></td>  
-                        <td ><button id="member{{$key}}" style="display: none;" class="btn btn-success btn-xs " href="javascript: void(0)"  data-contentwrapper2=".mycontent{{$key}}"  rel="popover"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
+                        <td ><button id="member{{$key}}" style="display: none;" class="btn btn-success btn-xs "  data-contentwrapper=".mycontent{{$key}}"  rel="popover"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
                           <div style="display:none;" class="mycontent{{$key}}">      
                               {!!Form::open(['url'=>'/korisnik/profil/edit-profil/','class'=>'form-horizontal'])!!}
                               {!!Form::hidden('kljuc',$key)!!}      
@@ -39,7 +48,7 @@
                                 placement:'left',
                                 content:function()
                                 {
-                                    return $($('#member{{$key}}').data('contentwrapper2')).html();
+                                    return $($('#member{{$key}}').data('contentwrapper')).html();
                                 }
                             });
                             });

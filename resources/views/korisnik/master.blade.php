@@ -30,7 +30,7 @@
 
 
 </head>
-<body style=" width:100%;  height:100%; background: url(/galerije/korisnik/teme/paralax-1/pozadine-1/contact_bg.jpg) no-repeat center center fixed;">
+<body>
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">

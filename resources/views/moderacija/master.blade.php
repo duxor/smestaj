@@ -27,10 +27,6 @@
     {!!HTML::script('js/pregled_smestaja.js')!!}
     {!!HTML::script('tinymce/tinymce.min.js')!!}
     {!!HTML::script('js/komentari.js')!!}
-
-
-
-
 </head>
 <body>
 
@@ -138,35 +134,8 @@
 @yield('body') 
 
 {!! HTML::script('js/bootstrap.min.js') !!}
-<script>
-function editPrezime(id){
-                $('[rel=popover]').popover('hide');
-                $.post('/{{\App\OsnovneMetode::osnovniNav()}}/profil/edit-prezime/',{
-                    _token:'{{csrf_token()}}',
-                    prezime: id      
-                });
-            }
-$(document).on('mouseenter', '.edit', function () 
-{
-
-    $(this).find(":button").fadeIn('slow').click(function()
-    {
-    $('[rel=popover]').popover({
-        html:true,
-        placement:'left',
-        content:function()
-        {
-            return $($(this).data('contentwrapper')).html();
-        }
-    });
 
 
-    });
-    }).on('mouseleave', '.edit', function () {
-        $('[rel=popover]').popover('destroy');
-        $(this).find(":button").fadeOut('slow');
-});
-</script>
 
 {!!HTML::script('js/jspdf/sprintf.js')!!}
 {!!HTML::script('js/jspdf/jspdf.js')!!}
