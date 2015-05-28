@@ -1,19 +1,29 @@
 @extends(\App\OsnovneMetode::osnovniNav().".master")
 
 @section('body')
-<div   class="container" style=" position:absolute;top:15px; margin-top:0px; padding-top:0px; width:100%;  height:70%; border-bottom:2px solid #b5b1b1; background: url(/galerije/korisnik/teme/paralax-1/pozadine-1/contact_bg.jpg) no-repeat center center fixed;">
+<div id="container_id"  class="container" style=" position:absolute;top:15px; margin-top:0px; padding-top:0px; width:100%;  height:70%; border-bottom:2px solid #b5b1b1; background: url(/galerije/korisnik/teme/paralax-1/pozadine-1/bg_user_2.jpg) no-repeat center center fixed;">
      <div class="row">
-     <div style="margin-bottom:50px; margin-top:50px;" class="col-md-2 col-md-offset-5">
-     {!!Form::open(['id'=>'forma','url'=>'','class'=>'form-horizontal','enctype' => 'multipart/form-data'])!!}
+       <div id="bg_btn" style="visibility: hidden; margin-bottom:50px; margin-top:50px;" class="col-md-2 col-md-offset-5">
+       {!!Form::open(['id'=>'forma','url'=>'','class'=>'form-horizontal','enctype' => 'multipart/form-data'])!!}
 
-     {!!Form::button('<span class="glyphicon glyphicon-picture"></span> Izmeni pozadinu', ['class'=>'btn btn-lg btn-success','type'=>'submit'])!!}
-     
-     {!!Form::close()!!}
+       {!!Form::button('<span class="glyphicon glyphicon-picture"></span> Izmeni pozadinu', ['class'=>'btn btn-lg btn-success','type'=>'submit'])!!}
+       
+       {!!Form::close()!!}
+         <script>
+         $(document).on('mouseenter','#container_id',function(){
+             $(this).find('#bg_btn').css('visibility','visible').fadeIn('slow');
+            }).on('mouseleave','#container_id',function(){
+              $(this).find('#bg_btn').css('visibility','hiden').fadeOut('slow');
+            });
+         
+         </script>
+       </div>
      </div>
-     </div>
-      <div class="row">
+</div>
+<div class="container" style=" position:absolute;top:200px; margin-top:0px; padding-top:0px;">
+      <div  class="row">
         <div  class="col-sm-7 col-md-offset-1 toppad">
-          <div style="opacity: 0.8;" class="panel panel-info">
+          <div style="opacity: 0.8; border:none; " class="panel panel-info">
             <div class="panel-body">
 
               <div class="row">
@@ -26,23 +36,24 @@
                     </style>
                     @foreach($korisnik as $key=>$val)
                       @if (in_array($key,array('prezime','ime','username','email'))) 
-                      <tr class="edit{{$key}}">
+                      <tr class="edit">
                         <td>{{$key}} </td>
                         <td ><span class="span_bg" >{{$val}}</span></td>  
                         <td ><button id="member{{$key}}" style="display: none;" class="btn btn-success btn-xs "  data-contentwrapper=".mycontent{{$key}}"  rel="popover"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
                           <div style="display:none;" class="mycontent{{$key}}">      
                               {!!Form::open(['url'=>'/korisnik/profil/edit-profil/','class'=>'form-horizontal'])!!}
-                              {!!Form::hidden('kljuc',$key)!!}      
-                              {!! Form::text('podatak',$val, ['class'=>'form-control', 'placeholder'=>'{{$key}}'])!!}<br>
+                              {!!Form::hidden('kljuc',$key)!!}   
+                              {!!Form::hidden('_token',csrf_token())!!}    
+                              {!! Form::text('podatak',$val, ['class'=>'form-control', 'placeholder'=>'{{$val}}'])!!}<br>
                               {!! Form::button('<span class="glyphicon glyphicon-ok-circle">  </span>  Potvrdi',['class'=>'btn btn-sm btn-success','type'=>'submit']) !!}  
                               {!!Form::button('<span class="glyphicon glyphicon-minus">  </span> Otkaži', ['class'=>'btn btn-şm btn-danger',' data-dismiss'=>'modal']) !!}
-                             
+                              {!!Form::close()!!}
                           </div>
                         </td>                        
                       </tr>
                       <script>
-                      $(document).on('mouseenter', '.edit{{$key}}', function (){  
-                            $(this).find(":button").fadeIn('slow').click(function(){
+                      $(document).on('mouseenter', '.edit', function (){  
+                            $(this).find("#member{{$key}}").fadeIn('slow').click(function(){
                             $(this).popover({
                                 html:true,
                                 placement:'left',
@@ -52,9 +63,9 @@
                                 }
                             });
                             });
-                            }).on('mouseleave', '.edit{{$key}}', function () {
+                            }).on('mouseleave', '.edit', function () {
                                 $(this).popover('destroy');
-                                $(this).find(":button").fadeOut('slow');
+                                $(this).find("#member{{$key}}").fadeOut('slow');
                         });
                         </script>
                       @endif
@@ -105,7 +116,7 @@
             </div>            
           </div>
         </div>
-        <div style="border:1px solid #E0F0F8" class="col-md-3">
+        <div style="border:none;" class="col-md-3">
         {!!HTML::script('js/CircularLoader.js')!!}
         <div style="opacity: 0.8;" id="divProgress"></div>
         <script>
@@ -116,7 +127,7 @@
           radius: 70,//radius of circle
           progressBarBackground: "#FF3333",//background colour of circular progress Bar
           progressBarColor: "#5AC4DC",//colour of circular progress bar
-          progressBarWidth: 10,//progress bar width
+          progressBarWidth: 4,//progress bar width
           progressPercent: "{!!$procenat_popunjenosti!!}%",//progress percentage out of 100
           progressValue:0,//diplay this value instead of percentage
           showText: true,//show progress text or not
