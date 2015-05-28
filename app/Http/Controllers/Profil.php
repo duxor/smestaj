@@ -21,20 +21,35 @@ class Profil extends Controller {
 		$korisnik=Korisnici::where('id', '=', $ids)->get(['id','ime','prezime','email','username','adresa','grad','telefon','fotografija'])->first()->toArray();
 		$counter = 0;
 		$procenat_popunjenosti=$this->proverapopunjenostiprofila();
+		$popunjene_kolone=$this->popunjenekolone();
 		//dd($korisnik);
-		return view('profil.index', compact('korisnik','procenat_popunjenosti'));
+
+		return view('profil.index', compact('korisnik','procenat_popunjenosti','popunjene_kolone'));
+    }
+    private function popunjenekolone(){
+			$korisnik=Korisnici::where('id',Session::get('id'))->get(['id','ime','prezime','email','username','adresa','grad','telefon','fotografija'])->first()->toArray();
+			foreach($korisnik as $key=>$value)
+			{
+			  if($value != null || $value!='' and $key !== 'id')
+				{
+					$popunjene_kolone[]=$key;
+				}
+			}
+			return $popunjene_kolone;
     }
     private function proverapopunjenostiprofila(){
 			$korisnik=Korisnici::where('id',Session::get('id'))->get(['id','ime','prezime','email','username','adresa','grad','telefon','fotografija'])->first()->toArray();
 			$counter = 0;
-			foreach($korisnik as $value)
+			foreach($korisnik as $key=>$value)
 			{
 			  if($value === null || $value==='')
 			    $counter++;
+				else{$popunjene_kolone[]=$key;}
 			}
 			$counter=8-$counter;
 			$procenat_popunjenosti=round($counter/8*100,0);
 			return $procenat_popunjenosti;
+			return $popunjene_kolone;
     }
 	public function getEditNalog($pravaSlug){
 		if(!Security::autentifikacijaTest(2,'min'))return Security::rediectToLogin();

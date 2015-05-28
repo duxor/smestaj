@@ -32,10 +32,9 @@
                 <div class=" col-md-8 col-lg-8 "> 
                   <table id="table_hover" style="border-left:5px solid #5AC4DC" class="table table-user-information">
                     <tbody>
-                    <style type="text/css"> 
-                    </style>
+
                     @foreach($korisnik as $key=>$val)
-                      @if (in_array($key,array('prezime','ime','username','email'))) 
+                      @if (in_array($key,$popunjene_kolone)) 
                       <tr class="edit">
                         <td>{{$key}} </td>
                         <td ><span class="span_bg" >{{$val}}</span></td>  
@@ -70,47 +69,33 @@
                         </script>
                       @endif
                     @endforeach
-                      
-                      <tr class="edit">
-                      @if($korisnik['adresa'])
-                        <tr class="edit">
-                          <td>Adresa:</td>
-                          <td>{!!$korisnik['adresa']!!}</td>
-                          <td>
-                            <button data-toggle="popover" data-html="true"   data-content="<div>{{ Form::text('prezime',$korisnik['adresa'], ['class'=>'form-control', 'placeholder'=>'Adresa'])}}<br>
-                                <button><span class='glyphicon glyphicon-ok-circle' aria-hidden='true'></span> Sačuvaj</button> 
-                                <button><span class='glyphicon glyphicon-minus' aria-hidden='true'></span> Otkaži</button></div>" data-placement="top"  type="button" id="show" style="display: none;" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> 
-                            </button>
-                        </td>
-                        </tr>
-                      @endif
-                      @if($korisnik['grad'])
-                          <tr class="edit">
-                            <td>Grad:</td>
-                            <td>{!!$korisnik['grad']!!}</td>
-                            <td>
-                              <button data-toggle="popover" data-html="true"   data-content="<div>{{ Form::text('prezime',$korisnik['grad'], ['class'=>'form-control', 'placeholder'=>'Grad'])}}<br>
-                                  <button><span class='glyphicon glyphicon-ok-circle' aria-hidden='true'></span> Sačuvaj</button> 
-                                  <button><span class='glyphicon glyphicon-minus' aria-hidden='true'></span> Otkaži</button></div>" data-placement="top"  type="button" id="show" style="display: none;" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> 
-                              </button>
-                        </td>
-                          </tr>
-                      @endif
-                      @if($korisnik['telefon'])
-                        <tr class="edit">
-                          <td>Telefon:</td>
-                          <td>{!!$korisnik['telefon']!!}</td>
-                          <td>
-                            <button data-toggle="popover" data-html="true"   data-content="<div>{{ Form::text('prezime',$korisnik['telefon'], ['class'=>'form-control', 'placeholder'=>'PTelefonrezime'])}}<br>
-                                <button><span class='glyphicon glyphicon-ok-circle' aria-hidden='true'></span> Sačuvaj</button> 
-                                <button><span class='glyphicon glyphicon-minus' aria-hidden='true'></span> Otkaži</button></div>" data-placement="top"  type="button" id="show" style="display: none;" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> 
-                            </button>
-                        </td>
-                        </tr>
-                      @endif
                     </tbody>
-                  </table>                  
-                 <a href="/{{\App\OsnovneMetode::osnovniNav()}}/profil/edit-nalog/" class="btn btn-lg btn-primary"><i class="glyphicon glyphicon-pencil"></i> Uredi profil</a>
+                  </table>     
+
+                 <!--<a href="/{{\App\OsnovneMetode::osnovniNav()}}/profil/edit-nalog/" class="btn btn-lg btn-primary"><i class="glyphicon glyphicon-pencil"></i> Uredi profil</a>-->
+                 <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                  Uredi profil
+                </button>
+                  <div class="collapse" id="collapseExample">
+                   <div class=" col-md-8 col-lg-8 "> 
+                    <table id="table_hover" style="border-left:5px solid #5AC4DC" class="table table-user-information">
+                      <tbody>
+                    @foreach($korisnik as $key=>$val)
+                      @if (in_array($val,array('null','',)))
+                        <tr class="edit">
+                        <td>{{$key}} </td>
+                        <td ><span class="span_bg" >{!!Form::text('{{$key}}','null',['class'=>'form-control','placeholder'=>'Unesite {{$key}}...'])!!}</span></td>  
+                        <td >{!! Form::button('<span class="glyphicon glyphicon-ok-circle">  </span>  Potvrdi',['class'=>'btn btn-sm btn-success','type'=>'submit']) !!}
+                        </td>                        
+                      </tr> 
+                      @endif
+                    @endforeach
+                    </tbody>
+                  </table>  
+                      
+                    </div>
+                  </div>
+
                 </div>
               </div>
             </div>            
