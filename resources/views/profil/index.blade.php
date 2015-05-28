@@ -3,7 +3,7 @@
 @section('body')
 <div id="container_id"  class="container" style=" position:absolute;top:15px; margin-top:0px; padding-top:0px; width:100%;  height:70%; border-bottom:2px solid #b5b1b1; background: url(/galerije/korisnik/teme/paralax-1/pozadine-1/bg_user_2.jpg) no-repeat center center fixed;">
      <div class="row">
-       <div id="bg_btn" style="visibility: hidden; margin-bottom:50px; margin-top:50px;" class="col-md-2 col-md-offset-5">
+       <div id="bg_btn" style="visibility: hidden; margin-bottom:50px; margin-top:7%;" class="col-md-2 col-md-offset-5">
        {!!Form::open(['id'=>'forma','url'=>'','class'=>'form-horizontal','enctype' => 'multipart/form-data'])!!}
 
        {!!Form::button('<span class="glyphicon glyphicon-picture"></span> Izmeni pozadinu', ['class'=>'btn btn-lg btn-success','type'=>'submit'])!!}
@@ -20,10 +20,10 @@
        </div>
      </div>
 </div>
-<div class="container" style=" position:absolute;top:200px; margin-top:0px; padding-top:0px;">
+<div class="container" style=" position:absolute;top:35%; margin-top:0px; padding-top:0px;">
       <div  class="row">
         <div  class="col-sm-7 col-md-offset-1 toppad">
-          <div style="opacity: 0.8; border:none; " class="panel panel-info">
+          <div style="opacity: 0.9; border:none; " class="panel panel-info">
             <div class="panel-body">
 
               <div class="row">
@@ -118,7 +118,7 @@
         </div>
         <div style="border:none;" class="col-md-3">
         {!!HTML::script('js/CircularLoader.js')!!}
-        <div style="opacity: 0.8;" id="divProgress"></div>
+        <div style="opacity: 0.9;" id="divProgress"></div>
         <script>
           $("#divProgress").circularloader({
           backgroundColor: "#ffffff",//background colour of inner circle
