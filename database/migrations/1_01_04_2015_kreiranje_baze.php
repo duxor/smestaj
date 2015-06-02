@@ -122,6 +122,7 @@ class KreiranjeBaze extends Migration{
             $table->tinyInteger('saradnja')->default(1);
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->nullable();
+            $table->text('opis')->nullable();
         });
         Schema::create('newsletter', function(Blueprint $table)
         {

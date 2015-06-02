@@ -20,19 +20,28 @@ class Pretraga extends Controller {
 		return Templejt::join('sadrzaji','sadrzaji.templejt_id','=','templejt.id')->where('nalog_id',$appID)->where('tema_id',Nalog::find($appID,['tema_id'])->tema_id)->orderBy('redoslijed')->get(['slug','naziv','vrsta_sadrzaja_id','icon'])->toArray();
 	}
 	public function postSmestaji(){
-		$smestaj=Objekat::where('naziv','Like','%'.Input::get('naziv').'%')->get()->toArray();
-		dd($smestaj);
+		$podaci['rezultat']=Nalog::where('naziv','Like','%'.Input::get('naziv').'%')->where('aktivan','=',1)->get(['naziv','slug','opis'])->toArray();
+		$podaci['pretragaApp']=Input::get('naziv');
+		return view('aplikacija.teme-osnove.osnovna.pretraga',compact('podaci'));
 	}
 	public function postOsnovna(){
 		return'postOsnovna';
 	}
 	public function getMarkeriIzbor(){
-		$nalozi=Objekat::join('nalog','nalog.id','=','objekat.nalog_id')
-			->join('smestaj','smestaj.objekat_id','=','objekat.id')
-			->join('kapacitet','kapacitet.id','=','smestaj.kapacitet_id')
-			->where('grad_id',Input::get('grad_id'))->where('broj_osoba',(Input::get('tacan_broj')?'':'>').'=',Input::get('broj_osoba'))
-			->where('objekat.aktivan',1)->where('smestaj.aktivan',1)
-			->get(['objekat.id','objekat.naziv','nalog.slug as slugApp','smestaj.slug as slugSmestaj','smestaj.id as smestajID','x','y','adresa'])->toArray();
+		if(Input::has('like'))
+			$nalozi=Objekat::join('nalog','nalog.id','=','objekat.nalog_id')
+				->join('smestaj','smestaj.objekat_id','=','objekat.id')
+				->join('kapacitet','kapacitet.id','=','smestaj.kapacitet_id')
+				->where('nalog.naziv','Like','%'.Input::get('like').'%')
+				->where('nalog.aktivan',1)->where('objekat.aktivan',1)->where('smestaj.aktivan',1)
+				->get(['objekat.id','objekat.naziv','nalog.slug as slugApp','smestaj.slug as slugSmestaj','smestaj.id as smestajID','x','y','adresa'])->toArray();
+		else
+			$nalozi=Objekat::join('nalog','nalog.id','=','objekat.nalog_id')
+				->join('smestaj','smestaj.objekat_id','=','objekat.id')
+				->join('kapacitet','kapacitet.id','=','smestaj.kapacitet_id')
+				->where('grad_id',Input::get('grad_id'))->where('broj_osoba',(Input::get('tacan_broj')?'':'>').'=',Input::get('broj_osoba'))
+				->where('objekat.aktivan',1)->where('smestaj.aktivan',1)
+				->get(['objekat.id','objekat.naziv','nalog.slug as slugApp','smestaj.slug as slugSmestaj','smestaj.id as smestajID','x','y','adresa'])->toArray();
 		$nalozi=OsnovneMetode::dostupnostZaRezervaciju($nalozi,Input::get('datumOd'),Input::get('datumDo'),'smestajID');
 		$niz = 'onLoadMarkers({"type": "FeatureCollection","features": [';
 		$i=0;
@@ -44,31 +53,6 @@ class Pretraga extends Controller {
 		$niz.=']});';
 		return $niz;
 	}
-	/*public function getMarkeriGradovi(){
-		$nalozi=Grad::whereNotNull('x')->get(['id','naziv','x','y']);
-		$niz = 'onLoadMarkers({"type": "FeatureCollection","features": [';
-		$i=0;
-		foreach($nalozi as $nalog){
-			if($i==0)$i=1;
-			else $niz.=',';
-			$niz.='{"id":"'.$nalog['id'].'","type":"Feature","geometry":{"type":"Point","coordinates":['.$nalog['x'].','.$nalog['y'].']},"properties":{"naslov":"'.$nalog['naziv'].'","description":null,"case_number":null,"address":null,"zip_code":null,"beat":null,"accuracy":"9"}}';
-		}
-		$niz.=']});';
-		return $niz;
-	}*//*
-	public function getAplikacija($id=null){
-		if(!$id) return '';
-		$objekti=Objekat::where('nalog_id',$id)->where('aktivan',1)->get(['id','naziv','x','y']);
-		$niz = 'onLoadMarkers({"type": "FeatureCollection","features": [';
-		$i=0;
-		foreach($objekti as $objekat){
-			if($i==0)$i=1;
-			else $niz.=',';
-			$niz.='{"id":"'.$objekat['id'].'","naziv":"'.$objekat['naziv'].'","type":"Feature","geometry":{"type":"Point","coordinates":['.$objekat['x'].','.$objekat['y'].']},"properties":{"naslov":"'.$objekat['naziv'].'","description":null,"case_number":null,"address":null,"zip_code":null,"beat":null,"accuracy":"9"}}';
-		}
-		$niz.=']});';
-		return $niz;
-	}*/
 	public function anyIndex($slugApp=null){
 		if($slugApp&&Input::get('aplikacija')=='') return Redirect::to('/'.$slugApp);//nalog.id
 		$tacan_broj=Input::get('tacan_broj')?'':'>';

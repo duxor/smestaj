@@ -7,7 +7,25 @@ class OsnovneMetode {
     }
     public static function randomFoto($folder){
         $lista=OsnovneMetode::listaFotografija($folder);
-        return $lista[rand(0,sizeof($lista)-1)];
+        return sizeof($lista)>0?$lista[rand(0,sizeof($lista)-1)]:null;
+    }
+    public static function randomFotoZaNalog($slug){
+        $lista=Nalog::join('korisnici as k','k.id','=','nalog.korisnici_id')
+                ->join('objekat as o','o.nalog_id','=','nalog.id')
+                ->join('smestaj as s','s.objekat_id','=','o.id')
+                ->where('nalog.aktivan',1)->where('o.aktivan',1)->where('s.aktivan',1)->where('nalog.slug','=',$slug)
+                ->get(['username','s.slug'])->toArray();
+        $foto=null;
+        $rand=rand(0,sizeof($lista)-1);
+        $current=$rand;
+        $active=$rand != sizeof($lista) - 1 ? $rand+1 : 0;
+        if($lista)
+            while($foto==null&&$active!=$current){
+                $foto=!$active?OsnovneMetode::randomFoto("galerije/{$lista[$rand]['username']}/aplikacije/{$slug}/smestaji/{$lista[$rand]['slug']}"):OsnovneMetode::randomFoto("galerije/{$lista[$active]['username']}/aplikacije/{$slug}/smestaji/{$lista[$active]['slug']}");
+                if($foto==null)
+                    $active = $active != sizeof($lista) - 1 ? $active+1 : 0;
+            }
+        return $foto;
     }
     public static function folderGalerije($vrsta_sadrzaja,$slugGalerije,$slugApp=null,$slugTema=null){
         switch($vrsta_sadrzaja){

@@ -22,7 +22,11 @@
         }
         function loadMarkers() {
             var script = document.createElement("script");
-            script.src = "/pretraga/markeri-izbor?broj_osoba={{$podaci['broj_osoba']}}&grad_id={{$podaci['grad_id']}}&tacan_broj={{$podaci['tacan_broj']}}&datumOd{{$podaci['datumOd']}}&datumDo{{$podaci['datumDo']}}";
+            @if(isset($podaci['pretragaApp']))
+                script.src = "/pretraga/markeri-izbor?like={{$podaci['pretragaApp']}}";
+            @else
+                script.src = "/pretraga/markeri-izbor?broj_osoba={{$podaci['broj_osoba']}}&grad_id={{$podaci['grad_id']}}&tacan_broj={{$podaci['tacan_broj']}}&datumOd{{$podaci['datumOd']}}&datumDo{{$podaci['datumDo']}}";
+            @endif
             document.getElementsByTagName("head")[0].appendChild(script);
         }
         function onLoadMarkers(collection) {
@@ -90,27 +94,37 @@
 @endsection
 @section('content')
     <h1 style="margin-top: 70px">Pretraga</h1>
-    {!!Form::open(['url'=>'/pretraga','class'=>'form-inline col-sm-11'])!!}
-    <div class="form-group">
-        <label>Broj mesta (Tačan  broj {!!Form::checkbox('tacan_broj',1,$podaci['tacan_broj'])!!})</label>
-        {!!Form::select('broj_osoba',[1=>1,2=>2,3=>3,4=>4,5=>5,6=>6,7=>7,8=>8,9=>9,10=>10,11=>11,12=>12],$podaci['broj_osoba'],['class'=>'form-control'])!!}
-        {!!Form::select('grad_id',$podaci['gradovi'],$podaci['grad_id'],['class'=>'form-control'])!!}<div class="form-group" id="datarange">
-            <div class="input-daterange input-group col-sm-12" id="datepicker">
-                {!! Form::text('datumOd',isset($podaci['datumOd'])?$podaci['datumOd']:null,['class'=>'input-sm form-control','placeholder'=>'od...']) !!}
-                <span class="input-group-addon">do</span>
-                {!! Form::text('datumDo',isset($podaci['datumDo'])?$podaci['datumDo']:null,['class'=>'input-sm form-control','placeholder'=>'do...']) !!}
-            </div>
+    @if(isset($podaci['pretragaApp']))
+        {!!Form::open(['url'=>'/pretraga/smestaji','class'=>'form-inline col-sm-11'])!!}
+        <div class="form-group col-sm-12">
+            {!!Form::label('lnaziv','Naziv',['class'=>'col-sm-3'])!!}
+            {!!Form::text('naziv',$podaci['pretragaApp'],['class'=>'form-control'])!!}
+            {!!Form::button('<i class="glyphicon glyphicon-search"></i> Pronađi',['class'=>'btn btn-primary pronadji_btn','type'=>'submit'])!!}
         </div>
-        <script>
-            $('#datarange .input-daterange').datepicker({orientation: "top auto",weekStart: 1,startDate: "current",todayBtn: "linked",toggleActive: true,format: "yyyy-mm-dd"});
-            @if(!isset($podaci['datumOd'])) var d = new Date(); $('input[name=datumOd]').datepicker('setDate',d); @endif
-            @if(!isset($podaci['datumDo'])) var d = new Date(); d.setDate(d.getDate()+1); $('input[name=datumDo]').datepicker('setDate', d); @endif
-        </script>
-        {!!Form::button('<i class="glyphicon glyphicon-search"></i> Pronađi',['class'=>'btn btn-primary pronadji_btn','type'=>'submit'])!!}
-    </div>
-    {!!Form::close()!!}
-
-    @if($podaci['rezultat'])
+        {!!Form::close()!!}
+    @else
+        {!!Form::open(['url'=>'/pretraga','class'=>'form-inline col-sm-11'])!!}
+        <div class="form-group">
+            <label>Broj mesta (Tačan broj {!!Form::checkbox('tacan_broj',1,$podaci['tacan_broj'])!!})</label>
+            {!!Form::select('broj_osoba',[1=>1,2=>2,3=>3,4=>4,5=>5,6=>6,7=>7,8=>8,9=>9,10=>10,11=>11,12=>12],$podaci['broj_osoba'],['class'=>'form-control'])!!}
+            {!!Form::select('grad_id',$podaci['gradovi'],$podaci['grad_id'],['class'=>'form-control'])!!}
+            <div class="form-group" id="datarange">
+                <div class="input-daterange input-group col-sm-12" id="datepicker">
+                    {!! Form::text('datumOd',isset($podaci['datumOd'])?$podaci['datumOd']:null,['class'=>'input-sm form-control','placeholder'=>'od...']) !!}
+                    <span class="input-group-addon">do</span>
+                    {!! Form::text('datumDo',isset($podaci['datumDo'])?$podaci['datumDo']:null,['class'=>'input-sm form-control','placeholder'=>'do...']) !!}
+                </div>
+            </div>
+            <script>
+                $('#datarange .input-daterange').datepicker({orientation: "top auto",weekStart: 1,startDate: "current",todayBtn: "linked",toggleActive: true,format: "yyyy-mm-dd"});
+                @if(!isset($podaci['datumOd'])) var d = new Date(); $('input[name=datumOd]').datepicker('setDate',d); @endif
+                @if(!isset($podaci['datumDo'])) var d = new Date(); d.setDate(d.getDate()+1); $('input[name=datumDo]').datepicker('setDate', d); @endif
+            </script>
+            {!!Form::button('<i class="glyphicon glyphicon-search"></i> Pronađi',['class'=>'btn btn-primary pronadji_btn','type'=>'submit'])!!}
+        </div>
+        {!!Form::close()!!}
+    @endif
+    @if(isset($podaci['rezultat']))
         <div class="col-sm-1">
             <a href="#" class="btn btn-success scroll-link" data-target="#rezultati" data-id="rezultati"><i class="glyphicon glyphicon-download"></i> Rezultati</a>
         </div><br clear="all">
@@ -119,7 +133,7 @@
             <button class="btn btn-xs btn-primary" onclick="zoomMap('+')" style="z-index:20;position: absolute;margin:10px 0 0 10px"><i class="glyphicon glyphicon-plus"></i></button>
             <button class="btn btn-xs btn-danger" onclick="zoomMap('-')" style="z-index:20;position: absolute;margin:50px 0 0 10px"><i class="glyphicon glyphicon-minus"></i></button>
         </div><script>function zoomMap(kako){map.zoomBy(kako=='+'?1:-1)}</script>
-
+        @if(!isset($podaci['pretragaApp']))
         {!!Form::button('<i class="glyphicon glyphicon-chevron-down"></i> Filter',['class'=>'btn btn-info','id'=>'btn_filter'])!!}
         <div class="filter">
             <hr>
@@ -182,33 +196,40 @@
                 };
             </script>
         </div>
+        @endif
         <p id="rezultati"></p>
         @foreach($podaci['rezultat'] as $smestaj)
-            <div class="smestaj smestaj-{{$smestaj['id']}}">
+            <div class="smestaj smestaj-{{isset($smestaj['id'])?$smestaj['id']:'app'}}">
                 <hr>
                 <div class="col-sm-4">
-                    <a href="/{{$smestaj['slugApp']}}/{{$smestaj['slugSmestaj']}}">
-                        <img style="height: 150px;" @if($smestaj['naslovna_foto'])src="{{$smestaj['naslovna_foto']}}" @else src="/{{\App\OsnovneMetode::randomFoto('galerije/'.$smestaj['username'].'/aplikacije/'.$smestaj['slugApp'].'/smestaji/'.$smestaj['slugSmestaj'])}}" @endif>
+                    <a @if(!isset($podaci['pretragaApp'])) href="/{{$smestaj['slugApp']}}/{{$smestaj['slugSmestaj']}}" @else href="/{{$smestaj['slug']}}" @endif >
+                        <img style="height: 150px;" alt="fotografija smeštajnog kapaciteta" @if(isset($podaci['pretragaApp'])) src="/{{\App\OsnovneMetode::randomFotoZaNalog($smestaj['slug'])}}" @elseif($smestaj['naslovna_foto'])src="/{{$smestaj['naslovna_foto']}}" @else src="/{{\App\OsnovneMetode::randomFoto('galerije/'.$smestaj['username'].'/aplikacije/'.$smestaj['slugApp'].'/smestaji/'.$smestaj['slugSmestaj'])}}" @endif>
                     </a>
                     <p>
-                        <a href="/{{$smestaj['slugApp']}}/{{$smestaj['slugSmestaj']}}" class="btn btn-lg btn-default"><i class="glyphicon glyphicon-zoom-in"></i> Pregled</a>
-                        @if(\App\Security::autentifikacijaTest(2,'min'))
-                            <button class="btn btn-lg btn-info m" data-toggle="modal" data-target="#rezervacija" data-cena="{{$smestaj['cena_osoba']}}" data-id="{{$smestaj['id']}}" data-app="{{$smestaj['nazivApp']}}" data-naziv="{{$smestaj['naziv']}}" data-vrobjekta="{{$smestaj['vrsta_smestaja']}}" data-maxosoba="{{$smestaj['broj_osoba']}}" data-adresa="{{$smestaj['adresa']}}" data-img="/teme/osnovna-paralax/slike/15.jpg"><span class="glyphicon glyphicon-check"></span> Rezervacija</button>
-                            <button class="btn btn-lg btn-default _tooltip zelja" @if($smestaj['zelja']) data-zelja="{{$smestaj['zelja']}}" style="color:red" title="Izbaci iz liste zelja" @else data-zelja="false" title="Dodaj u listu želja" @endif data-zid="{{$smestaj['id']}}" data-toggle="tooltip" data-placement="bottom"><i class="glyphicon glyphicon-heart"></i></button>
-                        @else
-                            <a href="/log/login" class="btn btn-lg btn-info"><span class="glyphicon glyphicon-check"></span> Rezervacija</a>
-                            <a href="/log/login" class="btn btn-lg btn-default _tooltip"  title="Dodaj u listu želja" data-toggle="tooltip" data-placement="bottom"><i class="glyphicon glyphicon-heart"></i></a>
+                        <a @if(!isset($podaci['pretragaApp'])) href="/{{$smestaj['slugApp']}}/{{$smestaj['slugSmestaj']}}" @@else href="/{{$smestaj['slug']}}" @endif  class="btn btn-lg btn-default"><i class="glyphicon glyphicon-zoom-in"></i> Pregled</a>
+                        @if(!isset($podaci['pretragaApp']))
+                            @if(\App\Security::autentifikacijaTest(2,'min'))
+                                <button class="btn btn-lg btn-info m" data-toggle="modal" data-target="#rezervacija" data-cena="{{$smestaj['cena_osoba']}}" data-id="{{$smestaj['id']}}" data-app="{{$smestaj['nazivApp']}}" data-naziv="{{$smestaj['naziv']}}" data-vrobjekta="{{$smestaj['vrsta_smestaja']}}" data-maxosoba="{{$smestaj['broj_osoba']}}" data-adresa="{{$smestaj['adresa']}}" data-img="/teme/osnovna-paralax/slike/15.jpg"><span class="glyphicon glyphicon-check"></span> Rezervacija</button>
+                                <button class="btn btn-lg btn-default _tooltip zelja" @if($smestaj['zelja']) data-zelja="{{$smestaj['zelja']}}" style="color:red" title="Izbaci iz liste zelja" @else data-zelja="false" title="Dodaj u listu želja" @endif data-zid="{{$smestaj['id']}}" data-toggle="tooltip" data-placement="bottom"><i class="glyphicon glyphicon-heart"></i></button>
+                            @else
+                                <a href="/log/login" class="btn btn-lg btn-info"><span class="glyphicon glyphicon-check"></span> Rezervacija</a>
+                                <a href="/log/login" class="btn btn-lg btn-default _tooltip"  title="Dodaj u listu želja" data-toggle="tooltip" data-placement="bottom"><i class="glyphicon glyphicon-heart"></i></a>
+                            @endif
                         @endif
                     </p>
                 </div>
                 <div class="col-sm-8">
-                    <h3 class="smestajNaslov">{{$smestaj['nazivApp']}}</h3>
+                    <h3 class="smestajNaslov">{{!isset($podaci['pretragaApp'])?$smestaj['nazivApp']:$smestaj['naziv']}}</h3>
                     <table class="moja-tabela">
-                        <tr><td class="nDn">Naziv objekta:</td><td>{{$smestaj['naziv']}}</td></tr>
-                        <tr><td class="nDn">Vrsta objekta:</td><td>{{$smestaj['vrsta_smestaja']}}</td></tr>
-                        <tr><td class="nDn">Broj mesta:</td><td>{{$smestaj['broj_osoba']}}</td></tr>
-                        <tr><td class="nDn">Adresa:</td><td>{{$smestaj['adresa']}}</td></tr>
-                        <tr><td class="nDn">Cena (po osobi):</td><td>{{$smestaj['cena_osoba']}} din</td></tr>
+                        @if(!isset($podaci['pretragaApp']))
+                            <tr><td class="nDn">Naziv objekta:</td><td>{{$smestaj['naziv']}}</td></tr>
+                            <tr><td class="nDn">Vrsta objekta:</td><td>{{$smestaj['vrsta_smestaja']}}</td></tr>
+                            <tr><td class="nDn">Broj mesta:</td><td>{{$smestaj['broj_osoba']}}</td></tr>
+                            <tr><td class="nDn">Adresa:</td><td>{{$smestaj['adresa']}}</td></tr>
+                            <tr><td class="nDn">Cena (po osobi):</td><td>{{$smestaj['cena_osoba']}} din</td></tr>
+                        @else
+                            <tr><td class="nDn">Opis:</td><td>{{$smestaj['opis']?$smestaj['opis']:'Opis nije dodat za ovaj brend.'}}</td></tr>
+                        @endif
                     </table>
                 </div>
             </div><br clear="all">

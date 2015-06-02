@@ -144,6 +144,11 @@ class Aplikacija extends Controller {
 		$mail->poruka=$podaci->poruka;
 		$mail->korisnici_id=2;
 		$mail->save();
+
+		//kome==info >> info@najsmestaj.com
+		//kome==sugestije >> sugestije@najsmestaj.com
+		//kome==tehno >> tehicka.podrska@najsmestaj.com
+
 		return json_encode(['msg'=>'Poruka uspešno poslata. Hvala.','check'=>1]);
 	}
 	public function postKontaktirajModeratora(){
