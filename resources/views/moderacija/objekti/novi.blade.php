@@ -5,7 +5,7 @@
 	<div  class="panel-heading">Unos novog objekta</div>
     <div class=" panel-body">
       	<div class=" row">
-      		<div class="  col-md-8">
+      		<div class="col-md-8">
       			@if (Session::get('message'))
 				    <div class="alert alert-success alert-dismissable">
 				        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>

@@ -18,7 +18,7 @@ class Profil extends Controller {
 	public function getIndex(){
 		if(!Security::autentifikacijaTest(2,'min'))return Security::rediectToLogin();
 		$ids=Session::get('id');
-		$korisnik=Korisnici::where('id', '=', $ids)->get(['id','ime','prezime','email','username','adresa','grad','telefon','fotografija'])->first()->toArray();
+		$korisnik=Korisnici::where('id', '=', $ids)->get(['id','ime','prezime','email','username','adresa','grad','telefon','fotografija','facebook','google','twitter','skype'])->first()->toArray();
 		$counter = 0;
 		$procenat_popunjenosti=$this->proverapopunjenostiprofila();
 		$popunjene_kolone=$this->popunjenekolone();

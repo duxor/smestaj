@@ -77,11 +77,12 @@
                   Popuni profil
                 </button>
                   <div class="collapse" id="collapseExample">
-                   <div class=" col-md-8 col-lg-8 "> 
+                 
                     <table id="table_hover" style="border-left:5px solid #5AC4DC" class="table table-user-information">
                       <tbody>
                     @foreach($korisnik as $key=>$val)
                       @if (in_array($val,array('null','',)))
+                   
                       <tr class="edit">
                         <td>{{$key}} </td>
                         <td >{!!Form::text('{{$key}}','null',['class'=>'form-control','placeholder'=>'Unesite {{$key}}...'])!!}</td>  
@@ -93,7 +94,7 @@
                     </tbody>
                   </table>  
                       
-                    </div>
+            
                   </div>
 
                 </div>
