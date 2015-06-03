@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Dušan
- * Date: 4/1/2015
- * Time: 11:51 PM
- */
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
@@ -35,6 +29,10 @@ class KreiranjeBaze extends Migration{
             $table->string('grad', 45)->nullable();
             $table->string('telefon', 45)->nullable();
             $table->string('fotografija', 255)->nullable();
+            $table->text('facebook')->nullable();
+            $table->text('google')->nullable();
+            $table->text('twitter')->nullable();
+            $table->string('skype',255)->nullable();
         });
         Schema::create('log', function(Blueprint $table)
         {
