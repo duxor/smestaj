@@ -121,6 +121,10 @@ class KreiranjeBaze extends Migration{
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->nullable();
             $table->text('opis')->nullable();
+            $table->text('facebook')->nullable();
+            $table->text('google')->nullable();
+            $table->text('twitter')->nullable();
+            $table->string('skype',255)->nullable();
         });
         Schema::create('newsletter', function(Blueprint $table)
         {
