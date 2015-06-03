@@ -77,18 +77,24 @@
                   Popuni profil
                 </button>
                   <div class="collapse" id="collapseExample">
-                 
+                  <div id="vrti" style="display:none;"><center><i class='icon-spin4 animate-spin' style="font-size: 350%"></i></center></div>
+                 <div id="poruka" style="display:none"></div>
                     <table id="table_hover" style="border-left:5px solid #5AC4DC" class="table table-user-information">
                       <tbody>
                     @foreach($korisnik as $key=>$val)
                       @if (in_array($val,array('null','',)))
-                   
-                      <tr class="edit">
-                        <td>{{$key}} </td>
-                        <td >{!!Form::text('{{$key}}','null',['class'=>'form-control','placeholder'=>'Unesite {{$key}}...'])!!}</td>  
-                        <td >{!! Form::button('<span class="glyphicon glyphicon-ok-circle">  </span>  Potvrdi',['class'=>'btn btn-sm btn-success','type'=>'submit']) !!}
-                        </td>                        
-                      </tr> 
+                      <dv >
+                            
+                          <tr id="forma-{{$key}}" class="edit">
+                          {!!Form::hidden('kljuc',$key)!!}
+                            {!!Form::hidden('_token',csrf_token())!!}
+                            <td>{{$key}}</td>
+                            <td >{!!Form::text('val',null,['class'=>'form-control','placeholder'=>'Unesite'])!!}</td>  
+                            <td >
+                              {!! Form::button('<span class="glyphicon glyphicon-ok"></span>',['class'=>'btn btn-sm btn-success','onclick'=>'Komunikacija.posalji("/korisnik/profil/popuni-profil",\'forma-'.$key.'\',\'poruka\',\'vrti\',\'zabrani\')']) !!}
+                            </td>                        
+                          </tr>
+                      
                       @endif
                     @endforeach
                     </tbody>

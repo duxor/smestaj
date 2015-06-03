@@ -46,8 +46,8 @@ class Profil extends Controller {
 			    $counter++;
 				else{$popunjene_kolone[]=$key;}
 			}
-			$counter=8-$counter;
-			$procenat_popunjenosti=round($counter/8*100,0);
+			$counter=12-$counter;
+			$procenat_popunjenosti=round($counter/12*100,0);
 			return $procenat_popunjenosti;
 			return $popunjene_kolone;
     }
@@ -140,5 +140,14 @@ class Profil extends Controller {
 		} else $output = ['error'=>'Fajlovi nisu procesuirani.'];
 		echo json_encode($output);
 		return;
+	}
+	public function postPopuniProfil(){
+		$podaci=json_decode(Input::get('podaci'));
+		Korisnici::where('id',Session::get('id'))->update([$podaci->kljuc=>$podaci->val]);
+		return json_encode(['msg'=>'Uspešno ste ažurirali podatak','check'=>1]);
+
+		 
+		
+		
 	}
 }
