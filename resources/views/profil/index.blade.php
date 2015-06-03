@@ -73,8 +73,8 @@
                   </table>     
 
                  <!--<a href="/{{\App\OsnovneMetode::osnovniNav()}}/profil/edit-nalog/" class="btn btn-lg btn-primary"><i class="glyphicon glyphicon-pencil"></i> Uredi profil</a>-->
-                 <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                  Uredi profil
+                 <button style="margin-bottom:10px;" class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                  Popuni profil
                 </button>
                   <div class="collapse" id="collapseExample">
                    <div class=" col-md-8 col-lg-8 "> 
@@ -82,9 +82,9 @@
                       <tbody>
                     @foreach($korisnik as $key=>$val)
                       @if (in_array($val,array('null','',)))
-                        <tr class="edit">
+                      <tr class="edit">
                         <td>{{$key}} </td>
-                        <td ><span class="span_bg" >{!!Form::text('{{$key}}','null',['class'=>'form-control','placeholder'=>'Unesite {{$key}}...'])!!}</span></td>  
+                        <td >{!!Form::text('{{$key}}','null',['class'=>'form-control','placeholder'=>'Unesite {{$key}}...'])!!}</td>  
                         <td >{!! Form::button('<span class="glyphicon glyphicon-ok-circle">  </span>  Potvrdi',['class'=>'btn btn-sm btn-success','type'=>'submit']) !!}
                         </td>                        
                       </tr> 

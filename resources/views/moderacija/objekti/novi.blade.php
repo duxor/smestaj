@@ -1,18 +1,19 @@
 @extends('moderacija.master')
 
 @section('content')
-<div class="panel panel-primary clearfix">
+<div class="  panel panel-primary clearfix">
 	<div  class="panel-heading">Unos novog objekta</div>
-    <div class="panel-body">
-      	<div id="sort" class="row">
+    <div class=" panel-body">
+      	<div class=" row">
+      		<div class="  col-md-8">
       			@if (Session::get('message'))
 				    <div class="alert alert-success alert-dismissable">
 				        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 				        {{ Session::get('message')}}
 				    </div>
 				@endif
-			    {!!Form::open(['url'=>'/moderator/novi-objekat','class'=>'form-horizontal'])!!}
-			    <div id="nazivobjekta" class="form-group has-feedback">
+			    {!!Form::open(['url'=>'/moderacija/novi-objekat','class'=>'form-horizontal'])!!}
+			    <div  class="form-group has-feedback">
 			        {!!Form::label('lnazivobjekta','Naziv objekta',['class'=>'control-label col-sm-2'])!!}
 			        <div class="col-sm-10">
 			            {!!Form::text('nazivobjekta','naziv objekta',['class'=>'form-control','placeholder'=>'Naziv objekta','id'=>'nazivobjekta'])!!}
@@ -32,20 +33,20 @@
 			            <span id="sopisobjekta" class="glyphicon form-control-feedback"></span>
 			        </div>
 			    </div>
-			    <div id="koordinate" class="form-group has-feedback">
+			    <div  class="form-group has-feedback ">
 			        {!!Form::label('koordinate','Koordinate',['class'=>'control-label col-sm-2'])!!}
 			        <div class="col-sm-3">
-			            {!!Form::text('x','x',['class'=>'form-control','placeholder'=>'x','id'=>'x'])!!}
+			            {!!Form::text('x','43.83452678223684',['class'=>'form-control gllpZoom','placeholder'=>'x','id'=>'x','disabled'=>'disabled'])!!}
 			            <span id="sx" class="glyphicon form-control-feedback"></span>
 			        </div>
 			        <div class="col-sm-3">
-			            {!!Form::text('y','y',['class'=>'form-control','placeholder'=>'y','id'=>'y'])!!}
+			            {!!Form::text('y','20.478515625',['class'=>'form-control gllpZoom','placeholder'=>'y','id'=>'y','disabled'=>'disabled'])!!}
 			            <span id="sy" class="glyphicon form-control-feedback"></span>
 			        </div>
 			        <div class="col-sm-3">
-			            {!!Form::text('z','z',['class'=>'form-control','placeholder'=>'z','id'=>'z'])!!}
+			           {!!Form::text('z','7',['class'=>'form-control gllpZoom','id'=>'y','disabled'=>'disabled'])!!}
 			            <span id="sz" class="glyphicon form-control-feedback"></span>
-			        </div>
+			        </div> 
 			    </div>
 			    <div id="adresa" class="form-group has-feedback">
 			        {!!Form::label('lopisobjekta','Grad',['class'=>'control-label col-sm-2'])!!}
@@ -71,7 +72,24 @@
 			            {!!Form::button('<span class="glyphicon glyphicon-floppy-disk"></span> Sačuvaj', ['class'=>'btn btn-lg btn-primary','type'=>'submit'])!!}
 			        </div>
 			    </div>
-			 {!!Form::close()!!}			
+				{!!Form::close()!!}	
+			</div>
+			<div class="gllpLatlonPicker col-md-4" id="mapPick">
+				<h4>Pomerite marker, ili kliknite na mapu.</h4>
+				<div class="row">
+					<div class="col-sm-8">
+					{!!Form::text('adresa',null,['class'=>'form-control gllpSearchField','placeholder'=>'Unesite adresu, mesto'])!!}
+					</div>
+					<div class="col-sm-4">
+					{!!Form::button('<span class="glyphicon glyphicon-zoom-in"></span> Pretraži', ['class'=>'btn btn-sm btn-success gllpSearchButton','value'=>'search','type'=>'submit'])!!}
+					</div>
+				</div><br/>
+				<div class="gllpMap">Google Maps</div>
+				<input id="lat"  type="hidden" class="gllpLatitude" value="43.83452678223684"/>
+				<input id="lon" type="hidden" class="gllpLongitude" value="20.478515625"/>
+				<input id="zoom" type="hidden" class="gllpZoom" value="7"/> 
+				<input id="a" class="gllpZoom"  value="7"/> 
+			</div> 
 		</div>
     </div>
 </div>
