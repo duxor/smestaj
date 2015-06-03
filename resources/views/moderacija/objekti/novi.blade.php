@@ -16,46 +16,46 @@
 			    <div  class="form-group has-feedback">
 			        {!!Form::label('lnazivobjekta','Naziv objekta',['class'=>'control-label col-sm-2'])!!}
 			        <div class="col-sm-10">
-			            {!!Form::text('nazivobjekta','naziv objekta',['class'=>'form-control','placeholder'=>'Naziv objekta','id'=>'nazivobjekta'])!!}
+			            {!!Form::text('nazivobjekta',null,['class'=>'form-control','placeholder'=>'Naziv objekta','id'=>'nazivobjekta'])!!}
 			            <span id="snazivobjekta" class="glyphicon form-control-feedback"></span>
 			        </div>
 			    </div>
 			    <div class="form-group">
 					{!! Form::label('vrstaobjekta','Vrsta objekta',['class'=>'control-label col-sm-2']) !!}
 					<div class="col-sm-10">
-						{!!Form::select('vrstaobjekta',$vrstaobjekta,['class'=>'form-control'])!!}
+						{!!Form::select('vrstaobjekta',$vrstaobjekta,null,['class'=>'form-control'])!!}
 					</div>
 				</div>
 			    <div id="opisobjekta" class="form-group has-feedback">
 			        {!!Form::label('lopisobjekta','Opis objekta',['class'=>'control-label col-sm-2'])!!}
 			        <div class="col-sm-10">
-			            {!!Form::textarea('opisobjekta','opis objekta',['class'=>'form-control','placeholder'=>'Opis objekta','id'=>'opisobjekta'])!!}
+			            {!!Form::textarea('opisobjekta',null,['class'=>'form-control','placeholder'=>'Opis objekta','id'=>'opisobjekta'])!!}
 			            <span id="sopisobjekta" class="glyphicon form-control-feedback"></span>
 			        </div>
 			    </div>
 			    <div  class="form-group has-feedback ">
 			        {!!Form::label('koordinate','Koordinate',['class'=>'control-label col-sm-2'])!!}
 			        <div class="col-sm-3">
-			            {!!Form::text('x','43.83452678223684',['class'=>'form-control','placeholder'=>'x','id'=>'x','disabled'=>'disabled'])!!}
+			            {!!Form::text('x',null,['class'=>'form-control','placeholder'=>'x','id'=>'x','disabled'=>'disabled'])!!}
 			            <span id="sx" class="glyphicon form-control-feedback"></span>
 			        </div>
 			        <div class="col-sm-3">
-			            {!!Form::text('y','20.478515625',['class'=>'form-control','placeholder'=>'y','id'=>'y','disabled'=>'disabled'])!!}
+			            {!!Form::text('y',null,['class'=>'form-control','placeholder'=>'y','id'=>'y','disabled'=>'disabled'])!!}
 			            <span id="sy" class="glyphicon form-control-feedback"></span>
 			        </div>
 			        <div class="col-sm-3">
-			           {!!Form::text('z','7',['class'=>'form-control','id'=>'y','disabled'=>'disabled'])!!}
+			           {!!Form::text('z',null,['class'=>'form-control','id'=>'y','disabled'=>'disabled'])!!}
 			            <span id="sz" class="glyphicon form-control-feedback"></span>
 			        </div> 
 			    </div>
 			    <div id="adresa" class="form-group has-feedback">
 			        {!!Form::label('lopisobjekta','Grad',['class'=>'control-label col-sm-2'])!!}
 			        <div class="col-sm-3">
-			            {!!Form::select('grad',$grad,['class'=>'form-control'])!!}
+			            {!!Form::select('grad',$grad,null,['class'=>'form-control'])!!}
 			        </div>
 			   			{!!Form::label('ladresa','Adresa',['class'=>'control-label col-sm-2'])!!}
 			        <div class="col-sm-3">
-			            {!!Form::text('adresa','Unesite adresu',['class'=>'form-control','placeholder'=>'Adresa','id'=>'adesa'])!!}
+			            {!!Form::text('adresa',null,['class'=>'form-control','placeholder'=>'Adresa','id'=>'adresa'])!!}
 			            <span id="sadesa" class="glyphicon form-control-feedback"></span>
 			        </div>
 			    </div>
@@ -63,7 +63,7 @@
 					{!! Form::label('nalog','Aplikacija',['class'=>'control-label col-sm-2']) !!}
 					<div class="col-sm-10">
 					@if ($nalog==null)<?php $nalog=['Nemate aktivnih aplikacija'] ?>  @endif
-						{!!Form::select('nalog',$nalog,['class'=>'form-control'])!!}
+						{!!Form::select('nalog',$nalog,null,['class'=>'form-control'])!!}
 					</div>
 				</div>
 		        <div class="form-group">
