@@ -44,7 +44,7 @@
 			            <span id="sy" class="glyphicon form-control-feedback"></span>
 			        </div>
 			        <div class="col-sm-3">
-			           {!!Form::text('z',null,['class'=>'form-control','id'=>'y','disabled'=>'disabled'])!!}
+			           {!!Form::text('z',null,['class'=>'form-control','id'=>'z','disabled'=>'disabled'])!!}
 			            <span id="sz" class="glyphicon form-control-feedback"></span>
 			        </div> 
 			    </div>

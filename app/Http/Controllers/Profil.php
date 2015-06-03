@@ -27,7 +27,7 @@ class Profil extends Controller {
 		return view('profil.index', compact('korisnik','procenat_popunjenosti','popunjene_kolone'));
     }
     private function popunjenekolone(){
-			$korisnik=Korisnici::where('id',Session::get('id'))->get(['id','ime','prezime','email','username','adresa','grad','telefon','fotografija'])->first()->toArray();
+			$korisnik=Korisnici::where('id',Session::get('id'))->get(['id','ime','prezime','email','username','adresa','grad','telefon','fotografija','facebook','google','twitter','skype'])->first()->toArray();
 			foreach($korisnik as $key=>$value)
 			{
 			  if($value != null || $value!='' and $key !== 'id')

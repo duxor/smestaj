@@ -4,6 +4,8 @@
 <div class="panel panel-primary clearfix">
 	<div  class="panel-heading">Izmena objekta</div>
 	    <div class="panel-body">
+	     {!!Form::open(['url'=>'/moderacija/izmeni-objekat','class'=>'form-horizontal'])!!}
+				    {!!Form::hidden('id',$objekti['id'])!!}
 			<div id="sort" class="row">
 				<div class="col-md-8">
 			      	@if(!isset($objekti))
@@ -16,8 +18,7 @@
 					        {{ Session::get('message')}}
 					    </div>
 					@endif
-				    {!!Form::open(['url'=>'/moderator/izmeni-objekat','class'=>'form-horizontal'])!!}
-				    {!!Form::hidden('id',$objekti['id'])!!}
+				   
 				   
 				    <div id="nazivobjekta" class="form-group has-feedback">
 				        {!!Form::label('lnazivobjekta','Naziv objekta',['class'=>'control-label col-sm-2'])!!}
@@ -44,15 +45,15 @@
 				    <div id="koordinate" class="form-group has-feedback">
 				        {!!Form::label('koordinate','Koordinate',['class'=>'control-label col-sm-2'])!!}
 				        <div class="col-sm-3">
-				            {!!Form::text('x',$objekti['x'],['class'=>'form-control','placeholder'=>'x','id'=>'x'])!!}
+				            {!!Form::text('x',$objekti['x'],['class'=>'form-control','disabled'=>'disabled','id'=>'x'])!!}
 				            <span id="sx" class="glyphicon form-control-feedback"></span>
 				        </div>
 				        <div class="col-sm-3">
-				            {!!Form::text('y',$objekti['y'],['class'=>'form-control','placeholder'=>'y','id'=>'y'])!!}
+				            {!!Form::text('y',$objekti['y'],['class'=>'form-control','disabled'=>'disabled','id'=>'y'])!!}
 				            <span id="sy" class="glyphicon form-control-feedback"></span>
 				        </div>
 				        <div class="col-sm-3">
-				            {!!Form::text('z',$objekti['z'],['class'=>'form-control','placeholder'=>'z','id'=>'z'])!!}
+				            {!!Form::text('z',$objekti['z'],['class'=>'form-control','id'=>'z'])!!}
 				            <span id="sz" class="glyphicon form-control-feedback"></span>
 				        </div>
 				    </div>
@@ -74,13 +75,7 @@
 						</div>
 					</div>
 
-			        <div class="form-group">
-				        <div class="col-sm-2"></div>
-				        <div class="col-sm-10">
-				            {!!Form::button('<span class="glyphicon glyphicon-floppy-disk"></span> Sačuvaj izmene', ['class'=>'btn btn-lg btn-primary','type'=>'submit'])!!}
-				        </div>
-				    </div>
-				    {!!Form::close()!!}
+			        
 				     @endif			
  				</div>
  				<div class="gllpLatlonPicker col-md-4" id="mapPick">
@@ -99,6 +94,15 @@
 				<input id="zoom" type="hidden" class="gllpZoom" value="7"/>
 			</div>
 			</div>
+		<div class="row">
+			<div class="form-group">
+		        <div class="col-sm-2"></div>
+		        <div class="col-sm-10">
+		            {!!Form::button('<span class="glyphicon glyphicon-floppy-disk"></span> Sačuvaj izmene', ['class'=>'btn btn-lg btn-primary','type'=>'submit'])!!}
+		        </div>
+		    </div>
+		    {!!Form::close()!!}
+		</div>
 
 	    </div>
 </div>

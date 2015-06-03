@@ -27,7 +27,14 @@
             <div class="panel-body">
 
               <div class="row">
-                <div class="col-md-4 col-lg-4 " align="center"> <img alt="User Pic" style="width:140px;" src="/galerije/{{Session::get('username')}}/osnovne/profilna.jpg" class="img-thumbnail"> </div>
+                <div class="col-md-4 col-lg-4 " align="center"> <img alt="User Pic" style="width:140px;" src="/galerije/{{Session::get('username')}}/osnovne/profilna.jpg" class="img-thumbnail"> 
+                  <div class="row">
+                    <div class="col-md-3">@if(in_array('facebook',$popunjene_kolone)) <a href="#"> <i class="glyphicon glyphicon-map-marker"></i></a>  @endif</div>
+                    <div class="col-md-3">@if(in_array('google',$popunjene_kolone)) <a href="#"><i class="glyphicon glyphicon-map-marker"></i> </a>  @endif</div>
+                    <div class="col-md-3">@if(in_array('skype',$popunjene_kolone)) <a href="#"><i class="glyphicon glyphicon-map-marker"></i></a>  @endif</div>
+                    <div class="col-md-3">@if(in_array('twitter',$popunjene_kolone)) <a href="#"><i class="glyphicon glyphicon-map-marker"></i></a>  @endif</div>
+                  </div>
+                </div>
 
                 <div class=" col-md-8 col-lg-8 "> 
                   <table id="table_hover" style="border-left:5px solid #5AC4DC" class="table table-user-information">
@@ -43,7 +50,7 @@
                               {!!Form::open(['url'=>'/korisnik/profil/edit-profil/','class'=>'form-horizontal'])!!}
                               {!!Form::hidden('kljuc',$key)!!}   
                               {!!Form::hidden('_token',csrf_token())!!}    
-                              {!! Form::text('podatak',$val, ['class'=>'form-control', 'placeholder'=>'{{$val}}'])!!}<br>
+                              {!! Form::text('podatak',$val, ['class'=>'form-control'])!!}<br>
                               {!! Form::button('<span class="glyphicon glyphicon-ok-circle">  </span>  Potvrdi',['class'=>'btn btn-sm btn-success','type'=>'submit']) !!}  
                               {!!Form::button('<span class="glyphicon glyphicon-minus">  </span> Otkaži', ['class'=>'btn btn-şm btn-danger',' data-dismiss'=>'modal']) !!}
                               {!!Form::close()!!}
