@@ -38,7 +38,7 @@ class Profil extends Controller {
 			return $popunjene_kolone;
     }
     private function proverapopunjenostiprofila(){
-			$korisnik=Korisnici::where('id',Session::get('id'))->get(['id','ime','prezime','email','username','adresa','grad','telefon','fotografija'])->first()->toArray();
+			$korisnik=Korisnici::where('id',Session::get('id'))->get(['id','ime','prezime','email','username','adresa','grad','telefon','fotografija','facebook','google','twitter','skype'])->first()->toArray();
 			$counter = 0;
 			foreach($korisnik as $key=>$value)
 			{
