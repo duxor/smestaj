@@ -36,15 +36,15 @@
 			    <div  class="form-group has-feedback ">
 			        {!!Form::label('koordinate','Koordinate',['class'=>'control-label col-sm-2'])!!}
 			        <div class="col-sm-3">
-			            {!!Form::text('x','43.83452678223684',['class'=>'form-control gllpZoom','placeholder'=>'x','id'=>'x','disabled'=>'disabled'])!!}
+			            {!!Form::text('x','43.83452678223684',['class'=>'form-control','placeholder'=>'x','id'=>'x','disabled'=>'disabled'])!!}
 			            <span id="sx" class="glyphicon form-control-feedback"></span>
 			        </div>
 			        <div class="col-sm-3">
-			            {!!Form::text('y','20.478515625',['class'=>'form-control gllpZoom','placeholder'=>'y','id'=>'y','disabled'=>'disabled'])!!}
+			            {!!Form::text('y','20.478515625',['class'=>'form-control','placeholder'=>'y','id'=>'y','disabled'=>'disabled'])!!}
 			            <span id="sy" class="glyphicon form-control-feedback"></span>
 			        </div>
 			        <div class="col-sm-3">
-			           {!!Form::text('z','7',['class'=>'form-control gllpZoom','id'=>'y','disabled'=>'disabled'])!!}
+			           {!!Form::text('z','7',['class'=>'form-control','id'=>'y','disabled'=>'disabled'])!!}
 			            <span id="sz" class="glyphicon form-control-feedback"></span>
 			        </div> 
 			    </div>
@@ -87,9 +87,8 @@
 				<div class="gllpMap">Google Maps</div>
 				<input id="lat"  type="hidden" class="gllpLatitude" value="43.83452678223684"/>
 				<input id="lon" type="hidden" class="gllpLongitude" value="20.478515625"/>
-				<input id="zoom" type="hidden" class="gllpZoom" value="7"/> 
-				<input id="a" class="gllpZoom"  value="7"/> 
-			</div> 
+				<input id="zoom" type="hidden" class="gllpZoom" value="7"/>
+			</div>
 		</div>
     </div>
 </div>
