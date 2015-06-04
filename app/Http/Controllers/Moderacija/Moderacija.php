@@ -198,7 +198,7 @@ class Moderacija extends Controller {
 				compact('vrstaobjekta','grad','nalog','objekti'), 4);	
 	}
 	public function postIzmeniObjekat(){
-		if(Security::autentifikacijaTest(4)){
+		if(Security::autentifikacijaTest(4,'min')){
 			Objekat::find(Input::get('id'))->update(['naziv'=>Input::get('nazivobjekta'),'opis'=>Input::get('opisobjekta'),
 									'x'=>Input::get('x'),'y'=>Input::get('y'),'z'=>Input::get('z'),'adresa'=>Input::get('adresa'),
 									'vrsta_objekta_id'=>Input::get('vrstaobjekta'),'grad_id'=>Input::get('grad'),'nalog_id'=>Input::get('nalog')]);

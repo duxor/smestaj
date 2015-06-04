@@ -28,12 +28,12 @@
 
               <div class="row">
                 <div class="col-md-4 col-lg-4 " align="center"> <img alt="User Pic" style="width:140px;" src="/galerije/{{Session::get('username')}}/osnovne/profilna.jpg" class="img-thumbnail"> 
-                  <div class="row">
+                 {{-- <div class="row">
                     <div class="col-md-3">@if(in_array('facebook',$popunjene_kolone)) <a href="#"> <i class="glyphicon glyphicon-map-marker"></i></a>  @endif</div>
                     <div class="col-md-3">@if(in_array('google',$popunjene_kolone)) <a href="#"><i class="glyphicon glyphicon-map-marker"></i> </a>  @endif</div>
                     <div class="col-md-3">@if(in_array('skype',$popunjene_kolone)) <a href="#"><i class="glyphicon glyphicon-map-marker"></i></a>  @endif</div>
                     <div class="col-md-3">@if(in_array('twitter',$popunjene_kolone)) <a href="#"><i class="glyphicon glyphicon-map-marker"></i></a>  @endif</div>
-                  </div>
+                  </div>--}}
                 </div>
 
                 <div class=" col-md-8 col-lg-8 "> 
@@ -43,7 +43,28 @@
                     @foreach($korisnik as $key=>$val)
                       @if (in_array($key,$popunjene_kolone)) 
                       <tr class="edit">
-                        <td>{{$key}} </td>
+                        <td>
+                          @if($key == 'facebook')   
+                            <a class="btn btn-social-icon btn-facebook">
+                                <i class="fa fa-facebook"></i>
+                            </a>
+                            @elseif($key == 'twitter')   
+                            <a class="btn btn-social-icon btn-twitter">
+                                <i class="fa fa-twitter"></i>
+                            </a>
+                          
+                          @elseif($key == 'google')   
+                            <a class="btn btn-social-icon btn-google">
+                                <i class="fa fa-google"></i>
+                            </a>
+                             @elseif($key == 'skype')   
+                            <a class="btn btn-social-icon btn-skype">
+                                <i class="fa fa-skype"></i>
+                            </a>
+                          
+                          @else {{$key}}
+                          @endif
+                        </td>
                         <td ><span class="span_bg" >{{$val}}</span></td>  
                         <td ><button id="member{{$key}}" style="display: none;" class="btn btn-success btn-xs "  data-contentwrapper=".mycontent{{$key}}"  rel="popover"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
                           <div style="display:none;" class="mycontent{{$key}}">      
@@ -59,7 +80,7 @@
                       </tr>
                       <script>
                       $(document).on('mouseenter', '.edit', function (){  
-                            $(this).find("#member{{$key}}").fadeIn('slow').click(function(){
+                            $(this).find("#member{{$key}}").fadeIn('fast').click(function(){
                             $(this).popover({
                                 html:true,
                                 placement:'left',
@@ -71,7 +92,7 @@
                             });
                             }).on('mouseleave', '.edit', function () {
                                 $(this).popover('destroy');
-                                $(this).find("#member{{$key}}").fadeOut('slow');
+                                $(this).find("#member{{$key}}").fadeOut('fast');
                         });
                         </script>
                       @endif

@@ -45,15 +45,15 @@
 				    <div id="koordinate" class="form-group has-feedback">
 				        {!!Form::label('koordinate','Koordinate',['class'=>'control-label col-sm-2'])!!}
 				        <div class="col-sm-3">
-				            {!!Form::text('x',$objekti['x'],['class'=>'form-control','disabled'=>'disabled','id'=>'x'])!!}
+				            {!!Form::text('x',$objekti['x'],['class'=>'form-control','placeholder'=>'x','id'=>'x','readonly'=>'readonly'])!!}
 				            <span id="sx" class="glyphicon form-control-feedback"></span>
 				        </div>
 				        <div class="col-sm-3">
-				            {!!Form::text('y',$objekti['y'],['class'=>'form-control','disabled'=>'disabled','id'=>'y'])!!}
+				            {!!Form::text('y',$objekti['y'],['class'=>'form-control','placeholder'=>'y','id'=>'y','readonly'=>'readonly'])!!}
 				            <span id="sy" class="glyphicon form-control-feedback"></span>
 				        </div>
-				        <div class="col-sm-3">
-				            {!!Form::text('z',$objekti['z'],['class'=>'form-control','id'=>'z'])!!}
+				         <div class="col-sm-3">
+				            {!!Form::text('z',$objekti['z'],['class'=>'form-control','placeholder'=>'z','id'=>'z','readonly'=>'readonly'])!!}
 				            <span id="sz" class="glyphicon form-control-feedback"></span>
 				        </div>
 				    </div>
