@@ -183,7 +183,10 @@
                 $('input[name=ukupna_cena]').val(cena);
             }
         </script>
-        </div><!-- KRAJ col-md-3-->
+        <div class="row"><!-- Social-->
+            
+        </div>
+        </div><!-- KRAJ col-md-4-->
     </div><!-- KRAJ row -->
 <br clear="all"><hr>
 <div class='row'>

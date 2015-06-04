@@ -34,7 +34,8 @@
     
     {!!HTML::script('js/gmaps-picker.js')!!}
 </head>
-<body>
+<body style=" width:100%;  height:100%; border-bottom:2px solid #b5b1b1; background: url(/galerije/korisnik/teme/paralax-1/pozadine-1/contact_bg.jpg) no-repeat center center fixed;">
+
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
