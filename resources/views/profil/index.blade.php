@@ -79,7 +79,7 @@
                       </tr>
                       <script>
                       $(document).on('mouseenter', '.edit', function (){  
-                            $(this).find("#member{{$key}}").fadeIn('fast').click(function(){
+                            $(this).find("#member{{$key}}").fadeIn('fast').on('mouseenter', function(){
                             $(this).popover({
                                 html:true,
                                 placement:'left',
