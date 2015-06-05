@@ -37,7 +37,7 @@
                 </div>
 
                 <div class=" col-md-8 col-lg-8 "> 
-                  <table id="table_hover" style="border-left:5px solid #5AC4DC" class="table table-user-information">
+                  <table id="table_hover1" style="border-left:5px solid #5AC4DC" class="table table-user-information">
                     <tbody>
 
                     @foreach($korisnik as $key=>$val)
@@ -73,7 +73,6 @@
                               {!!Form::hidden('_token',csrf_token())!!}    
                               {!! Form::text('podatak',$val, ['class'=>'form-control'])!!}<br>
                               {!! Form::button('<span class="glyphicon glyphicon-ok-circle">  </span>  Potvrdi',['class'=>'btn btn-sm btn-success','type'=>'submit']) !!}  
-                              {!!Form::button('<span class="glyphicon glyphicon-minus">  </span> Otkaži', ['class'=>'btn btn-şm btn-danger',' data-dismiss'=>'modal']) !!}
                               {!!Form::close()!!}
                           </div>
                         </td>                        
@@ -90,9 +89,11 @@
                                 }
                             });
                             });
-                            }).on('mouseleave', '.edit', function () {
-                                $(this).popover('destroy');
+                            });
+                      $(document).on('mouseleave', '.edit', function () {
+                                $('.popover').remove();
                                 $(this).find("#member{{$key}}").fadeOut('fast');
+
                         });
                         </script>
                       @endif
@@ -121,33 +122,36 @@
                                 </a></td>
                                 <td >{!!Form::text('val',null,['class'=>'form-control','placeholder'=>'Unesite'])!!}</td>  
                                 <td>
-                                  {!! Form::button('<span class="glyphicon glyphicon-ok"></span>',['class'=>'btn btn-sm btn-success','onclick'=>'Komunikacija.posalji("/korisnik/profil/popuni-profil",\'forma-'.$key.'\',\'poruka\',\'vrti\',\'zabrani\')']) !!}
+                                  {!! Form::button('<span class="sacuvaj glyphicon glyphicon-ok"></span>',['class'=>'btn btn-sm btn-success','onclick'=>'Komunikacija.posalji("/korisnik/profil/popuni-profil",\'forma-'.$key.'\',\'poruka\',\'vrti\',\'zabrani\')']) !!}
                                 </td>
                                 @elseif($key == 'twitter')   
                                 <td><a class="btn btn-social-icon btn-twitter"><i class="fa fa-twitter"></i></a></td>
                                 <td >{!!Form::text('val',null,['class'=>'form-control','placeholder'=>'Unesite'])!!}</td>
                                 <td>
-                                  {!! Form::button('<span class="glyphicon glyphicon-ok"></span>',['class'=>'btn btn-sm btn-success','onclick'=>'Komunikacija.posalji("/korisnik/profil/popuni-profil",\'forma-'.$key.'\',\'poruka\',\'vrti\',\'zabrani\')']) !!}
+                                  {!! Form::button('<span class="sacuvaj glyphicon glyphicon-ok"></span>',['class'=>'btn btn-sm btn-success','onclick'=>'Komunikacija.posalji("/korisnik/profil/popuni-profil",\'forma-'.$key.'\',\'poruka\',\'vrti\',\'zabrani\')']) !!}
                                 </td>
                               @elseif($key == 'google')   
                                 <td><a class="btn btn-social-icon btn-google"><i class="fa fa-google"></i></a></td>
                                 <td >{!!Form::text('val',null,['class'=>'form-control','placeholder'=>'Unesite'])!!}</td>
                                 <td >
-                                  {!! Form::button('<span class="glyphicon glyphicon-ok"></span>',['class'=>'btn btn-sm btn-success','onclick'=>'Komunikacija.posalji("/korisnik/profil/popuni-profil",\'forma-'.$key.'\',\'poruka\',\'vrti\',\'zabrani\')']) !!}
+                                  {!! Form::button('<span class="sacuvaj glyphicon glyphicon-ok"></span>',['class'=>'btn btn-sm btn-success','onclick'=>'Komunikacija.posalji("/korisnik/profil/popuni-profil",\'forma-'.$key.'\',\'poruka\',\'vrti\',\'zabrani\')']) !!}
                                 </td>
                                  @elseif($key == 'skype')   
                                 <td><a class="btn btn-social-icon btn-skype"><i class="fa fa-skype"></i></a></td>
                                 <td >{!!Form::text('val',null,['class'=>'form-control','placeholder'=>'Unesite'])!!}</td>
                                 <td >
-                                  {!! Form::button('<span class="glyphicon glyphicon-ok"></span>',['class'=>'btn btn-sm btn-success','onclick'=>'Komunikacija.posalji("/korisnik/profil/popuni-profil",\'forma-'.$key.'\',\'poruka\',\'vrti\',\'zabrani\')']) !!}
+                                  {!! Form::button('<span class="sacuvaj glyphicon glyphicon-ok"></span>',['class'=>'btn btn-sm btn-success','onclick'=>'Komunikacija.posalji("/korisnik/profil/popuni-profil",\'forma-'.$key.'\',\'poruka\',\'vrti\',\'zabrani\')']) !!}
                                 </td>
                               @else
                                 <td>{{$key}}</td>
                                 <td >{!!Form::text('val',null,['class'=>'form-control','placeholder'=>'Unesite'])!!}</td>  
                                 <td >
-                                  {!! Form::button('<span class="glyphicon glyphicon-ok"></span>',['class'=>'btn btn-sm btn-success','onclick'=>'Komunikacija.posalji("/korisnik/profil/popuni-profil",\'forma-'.$key.'\',\'poruka\',\'vrti\',\'zabrani\')']) !!}
+                                  {!! Form::button('<span class="sacuvaj glyphicon glyphicon-ok"></span>',['class'=>'btn btn-sm btn-success','onclick'=>'Komunikacija.posalji("/korisnik/profil/popuni-profil",\'forma-'.$key.'\',\'poruka\',\'vrti\',\'zabrani\')']) !!}
                                 </td>
-                              @endif                        
+                              @endif 
+                              <script>
+                                $('.sacuvaj').click(function(){$('#'+$(this).closest('tr').attr('id')).fadeOut('slow')});
+                              </script>                       
                           </tr>
                       
                       @endif
