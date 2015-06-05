@@ -206,10 +206,19 @@
                 </div>
                 <div class="col-sm-2">
                 </div>
-                <div class="col-sm-2">
-                </div>
-                <div class="col-sm-2">
-                </div>
+                <div style="border-left:2px solid #5AC4DC;height: 150px;"  class="col-sm-4">
+                            
+                            <h4>Prijavite se na našu mail-ing listu.</h4>
+                            {!!Form::open(['url'=>'#','class'=>'form-horizontal'])!!}
+                                <div class="input-prepend"><span class="add-on"><i class="icon-envelope"></i></span>
+                                    {!!Form::text('mailing',null,['class'=>'form-control','placeholder'=>'mail@email.com'])!!}
+                                </div>
+                                <br />
+                                {!!Form::button('<span class="glyphicon glyphicon-mail"></span> Prijavite se!', ['class'=>'btn btn-lg btn-primary','type'=>'submit'])!!}
+                          {!!Form::close()!!}
+                        </div>    
+
+
                 <div style="border-left:2px solid #5AC4DC;height: 150px;"  class="col-sm-2">
                     <a href="{!!url('/administracija')!!}" class="btn btn-lg btn-default"><i class="glyphicon glyphicon-cog"></i> Administracija</a>
                 </div>
