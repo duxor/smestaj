@@ -81,7 +81,7 @@
 					{!!Form::text('adresa',null,['class'=>'form-control gllpSearchField','placeholder'=>'Unesite adresu, mesto'])!!}
 					</div>
 					<div class="col-sm-4">
-					{!!Form::button('<span class="glyphicon glyphicon-zoom-in"></span> Pretraži', ['class'=>'btn btn-sm btn-success gllpSearchButton','value'=>'search','type'=>'submit'])!!}
+					{!!Form::button('<span class="glyphicon glyphicon-zoom-in"></span> Pretraži', ['class'=>'btn btn-sm btn-success gllpSearchButton','value'=>'search'])!!}
 					</div>
 				</div><br/>
 				<div class="gllpMap">Google Maps</div>

@@ -239,7 +239,7 @@ $(document).ready( function() {
 });
 
 $(document).bind("location_changed", function(event, object) {
-	$('input[name=x]').val($('#lat').val());
-	$('input[name=y]').val($('#lon').val());
+	$('input[name=y]').val($('#lat').val());
+	$('input[name=x]').val($('#lon').val());
 	$('input[name=z]').val($('#zoom').val());
 });

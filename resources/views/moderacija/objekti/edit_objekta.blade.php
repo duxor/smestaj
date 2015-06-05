@@ -4,10 +4,10 @@
 <div class="panel panel-primary clearfix">
 	<div  class="panel-heading">Izmena objekta</div>
 	    <div class="panel-body">
-	     {!!Form::open(['url'=>'/moderacija/izmeni-objekat','class'=>'form-horizontal'])!!}
-				    {!!Form::hidden('id',$objekti['id'])!!}
-			<div id="sort" class="row">
+			<div id="sort" class="row">			 
 				<div class="col-md-8">
+				 {!!Form::open(['url'=>'/moderacija/izmeni-objekat','class'=>'form-horizontal'])!!}
+				    {!!Form::hidden('id',$objekti['id'])!!}
 			      	@if(!isset($objekti))
 				        {{$objekti=null}}
 				        <h1 class="col-sm-10">Greška</h1>
@@ -64,8 +64,8 @@
 				        </div>
 				   			{!!Form::label('ladresa','Adresa',['class'=>'control-label col-sm-2'])!!}
 				        <div class="col-sm-3">
-				            {!!Form::text('adresa',$objekti['adresa'],['class'=>'form-control','placeholder'=>'Adresa','id'=>'adesa'])!!}
-				            <span id="sadesa" class="glyphicon form-control-feedback"></span>
+				            {!!Form::text('adresa',$objekti['adresa'],['class'=>'form-control','placeholder'=>'Adresa','id'=>'adresa'])!!}
+				            <span id="sadresa" class="glyphicon form-control-feedback"></span>
 				        </div>
 				    </div>
 				    <div class="form-group">
@@ -74,10 +74,18 @@
 							{!!Form::select('nalog',$nalog,$objekti['nalog_id'],['class'=>'form-control'])!!}
 						</div>
 					</div>
+				     @endif
+				   <div class="row">
+						<div class="form-group">
+					        <div class="col-sm-2"></div>
+					        <div class="col-sm-10">
+					            {!!Form::button('<span class="glyphicon glyphicon-floppy-disk"></span> Sačuvaj izmene', ['class'=>'btn btn-lg btn-primary','type'=>'submit'])!!}
+					        </div>
+					    </div>
+					</div>	
+					{!!Form::close()!!}		
+ 				</div> <!-- kraj md-8 -->
 
-			        
-				     @endif			
- 				</div>
  				<div class="gllpLatlonPicker col-md-4" id="mapPick">
 				<h4>Pomerite marker, ili kliknite na mapu.</h4>
 				<div class="row">
@@ -85,24 +93,15 @@
 					{!!Form::text('adresa',null,['class'=>'form-control gllpSearchField','placeholder'=>'Unesite adresu, mesto'])!!}
 					</div>
 					<div class="col-sm-4">
-					{!!Form::button('<span class="glyphicon glyphicon-zoom-in"></span> Pretraži', ['class'=>'btn btn-sm btn-success gllpSearchButton','value'=>'search','type'=>'submit'])!!}
+					{!!Form::button('<span class="glyphicon glyphicon-zoom-in"></span> Pretraži', ['class'=>'btn btn-sm btn-success gllpSearchButton','value'=>'search'])!!}
 					</div>
 				</div><br/>
 				<div class="gllpMap">Google Maps</div>
-				<input id="lat"  type="hidden" class="gllpLatitude" value="43.83452678223684"/>
-				<input id="lon" type="hidden" class="gllpLongitude" value="20.478515625"/>
-				<input id="zoom" type="hidden" class="gllpZoom" value="7"/>
+				<input id="lat"  type="hidden" class="gllpLatitude" value="{{$objekti['y']}}"/>
+				<input id="lon" type="hidden" class="gllpLongitude" value="{{$objekti['x']}}"/>
+				<input id="zoom" type="hidden" class="gllpZoom" value="{{$objekti['z']}}"/>
 			</div>
 			</div>
-		<div class="row">
-			<div class="form-group">
-		        <div class="col-sm-2"></div>
-		        <div class="col-sm-10">
-		            {!!Form::button('<span class="glyphicon glyphicon-floppy-disk"></span> Sačuvaj izmene', ['class'=>'btn btn-lg btn-primary','type'=>'submit'])!!}
-		        </div>
-		    </div>
-		    {!!Form::close()!!}
-		</div>
 
 	    </div>
 </div>
