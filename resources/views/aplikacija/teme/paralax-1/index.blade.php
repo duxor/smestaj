@@ -181,10 +181,36 @@
         {{--footer START::--}}
         <div class="content" id="done" style="height: 200px;">
             <div class="container">
-                <div class="col-sm-10">
+                <div style="border-right:2px solid #5AC4DC; height: 150px;" class="col-sm-2">
                     <a href="http://dusanperisic.com" class="btn btn-lg btn-primary"><i>dusanperisic.com</i></a>
                 </div>
+                <div style="border-right:2px solid #5AC4DC;height: 150px;" class="col-sm-2">
+                            @if($podaci['app']['facebook']!= null)
+                            <a href="{{$podaci['app']['facebook']}}" class="btn btn-social-icon btn-facebook">
+                                <i class="fa fa-facebook"></i>
+                            </a>@endif
+                            @if($podaci['app']['twitter']!=null)
+                            <a href="{{$podaci['app']['twitter']}}" class="btn btn-social-icon btn-twitter">
+                                <i class="fa fa-twitter"></i>
+                            </a>
+                            @endif
+                            @if($podaci['app']['google']!=null)
+                            <a href="{{$podaci['app']['google']}}" class="btn btn-social-icon btn-google">
+                                <i class="fa fa-google"></i>
+                            </a>@endif
+                            @if($podaci['app']['skype']!=null)
+                            <a href="{{$podaci['app']['skype']}}" class="btn btn-social-icon btn-skype">
+                                <i class="fa fa-skype"></i>
+                            </a>@endif
+
+                </div>
                 <div class="col-sm-2">
+                </div>
+                <div class="col-sm-2">
+                </div>
+                <div class="col-sm-2">
+                </div>
+                <div style="border-left:2px solid #5AC4DC;height: 150px;"  class="col-sm-2">
                     <a href="{!!url('/administracija')!!}" class="btn btn-lg btn-default"><i class="glyphicon glyphicon-cog"></i> Administracija</a>
                 </div>
             </div>

@@ -25,6 +25,8 @@
     {!! HTML::style('teme/osnovna-paralax/css/parallax.css') !!}
     {!! HTML::style('css/datepicker.css') !!}
     {!! HTML::style('css/bootstrap-switch.css') !!}
+    {!!HTML::style('css/bootstrap-social.css')!!}
+    {!!HTML::style('css/font-awesome.css')!!}
 
     {!! HTML::script('js/jquery-3.0.js') !!}
     {!! HTML::script('js/datepicker.js') !!}

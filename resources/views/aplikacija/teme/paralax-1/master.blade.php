@@ -28,6 +28,8 @@
     {!!HTML::style('teme/paralax-1/css/templejt.css')!!}
     {!! HTML::style('css/slider.css') !!}
     {!! HTML::style('css/bootstrap-switch.css') !!}
+    {!!HTML::style('css/bootstrap-social.css')!!}
+    {!!HTML::style('css/font-awesome.css')!!}
 
     {!!HTML::script('js/jquery-3.0.js')!!}
     {!!HTML::script('js/datepicker.js')!!}
