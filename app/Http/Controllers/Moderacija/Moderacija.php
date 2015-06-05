@@ -77,7 +77,7 @@ class Moderacija extends Controller {
 		return Security::autentifikacija('moderacija.aplikacija.index', compact('podaci'),4);
 	}
 	public function getPodesavanja($slug=null){
-		$podaci['aplikacije']=$slug?Nalog::where('aktivan',1)->where('korisnici_id',Session::get('id'))->where('slug',$slug)->get(['id','slug','naziv','saradnja','tema_id'])->toArray():Nalog::where('aktivan',1)->where('korisnici_id',Session::get('id'))->get(['id','slug','naziv','saradnja','tema_id'])->toArray();
+		$podaci['aplikacije']=$slug?Nalog::where('aktivan',1)->where('korisnici_id',Session::get('id'))->where('slug',$slug)->get(['id','slug','naziv','saradnja','tema_id','facebook','google','twitter','skype'])->toArray():Nalog::where('aktivan',1)->where('korisnici_id',Session::get('id'))->get(['id','slug','naziv','saradnja','tema_id','facebook','google','twitter','skype'])->toArray();
 		$podaci['teme']=Tema::where('id','<>',1)->where('aktivan',1)->lists('naziv','id');
 		foreach($podaci['aplikacije'] as $k=>$app){
 			$podaci['aplikacije'][$k]['teme']=Tema::join('templejt','templejt.tema_id','=','tema.id')
@@ -91,6 +91,10 @@ class Moderacija extends Controller {
 			$app->naziv=Input::get('naziv');
 			$app->tema_id=Input::get('tema');
 			$app->saradnja=Input::get('saradnja');
+			$app->facebook=Input::get('facebook');
+			$app->twitter=Input::get('twitter');
+			$app->google=Input::get('google');
+			$app->skype=Input::get('skype');
 			$app->save();
 			if(!Sadrzaji::join('templejt','templejt.id','=','sadrzaji.templejt_id')->where('nalog_id',$app->id)->where('tema_id',$app->tema_id)->exists()){
 				$templejti=Templejt::where('tema_id',$app->tema_id)->get(['id','slug'])->toArray();
