@@ -111,16 +111,43 @@
                       <tbody>
                     @foreach($korisnik as $key=>$val)
                       @if (in_array($val,array('null','',)))
-                      <dv >
-                            
                           <tr id="forma-{{$key}}" class="edit">
                           {!!Form::hidden('kljuc',$key)!!}
-                            {!!Form::hidden('_token',csrf_token())!!}
-                            <td>{{$key}}</td>
-                            <td >{!!Form::text('val',null,['class'=>'form-control','placeholder'=>'Unesite'])!!}</td>  
-                            <td >
-                              {!! Form::button('<span class="glyphicon glyphicon-ok"></span>',['class'=>'btn btn-sm btn-success','onclick'=>'Komunikacija.posalji("/korisnik/profil/popuni-profil",\'forma-'.$key.'\',\'poruka\',\'vrti\',\'zabrani\')']) !!}
-                            </td>                        
+                          {!!Form::hidden('_token',csrf_token())!!}
+                            @if($key == 'facebook')   
+                                
+                                <td><a class="btn btn-social-icon btn-facebook">
+                                    <i class="fa fa-facebook"></i>
+                                </a></td>
+                                <td >{!!Form::text('val',null,['class'=>'form-control','placeholder'=>'Unesite'])!!}</td>  
+                                <td>
+                                  {!! Form::button('<span class="glyphicon glyphicon-ok"></span>',['class'=>'btn btn-sm btn-success','onclick'=>'Komunikacija.posalji("/korisnik/profil/popuni-profil",\'forma-'.$key.'\',\'poruka\',\'vrti\',\'zabrani\')']) !!}
+                                </td>
+                                @elseif($key == 'twitter')   
+                                <td><a class="btn btn-social-icon btn-twitter"><i class="fa fa-twitter"></i></a></td>
+                                <td >{!!Form::text('val',null,['class'=>'form-control','placeholder'=>'Unesite'])!!}</td>
+                                <td>
+                                  {!! Form::button('<span class="glyphicon glyphicon-ok"></span>',['class'=>'btn btn-sm btn-success','onclick'=>'Komunikacija.posalji("/korisnik/profil/popuni-profil",\'forma-'.$key.'\',\'poruka\',\'vrti\',\'zabrani\')']) !!}
+                                </td>
+                              @elseif($key == 'google')   
+                                <td><a class="btn btn-social-icon btn-google"><i class="fa fa-google"></i></a></td>
+                                <td >{!!Form::text('val',null,['class'=>'form-control','placeholder'=>'Unesite'])!!}</td>
+                                <td >
+                                  {!! Form::button('<span class="glyphicon glyphicon-ok"></span>',['class'=>'btn btn-sm btn-success','onclick'=>'Komunikacija.posalji("/korisnik/profil/popuni-profil",\'forma-'.$key.'\',\'poruka\',\'vrti\',\'zabrani\')']) !!}
+                                </td>
+                                 @elseif($key == 'skype')   
+                                <td><a class="btn btn-social-icon btn-skype"><i class="fa fa-skype"></i></a></td>
+                                <td >{!!Form::text('val',null,['class'=>'form-control','placeholder'=>'Unesite'])!!}</td>
+                                <td >
+                                  {!! Form::button('<span class="glyphicon glyphicon-ok"></span>',['class'=>'btn btn-sm btn-success','onclick'=>'Komunikacija.posalji("/korisnik/profil/popuni-profil",\'forma-'.$key.'\',\'poruka\',\'vrti\',\'zabrani\')']) !!}
+                                </td>
+                              @else
+                                <td>{{$key}}</td>
+                                <td >{!!Form::text('val',null,['class'=>'form-control','placeholder'=>'Unesite'])!!}</td>  
+                                <td >
+                                  {!! Form::button('<span class="glyphicon glyphicon-ok"></span>',['class'=>'btn btn-sm btn-success','onclick'=>'Komunikacija.posalji("/korisnik/profil/popuni-profil",\'forma-'.$key.'\',\'poruka\',\'vrti\',\'zabrani\')']) !!}
+                                </td>
+                              @endif                        
                           </tr>
                       
                       @endif
