@@ -138,6 +138,18 @@ class KreiranjeBaze extends Migration{
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->nullable();
         });
+        Schema::create('blog', function(Blueprint $table)
+        {
+            $table->bigIncrements('id');
+            $table->string('naslov',45);
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->nullable();
+            $table->unsignedBigInteger('nalog_id');
+            $table->foreign('nalog_id')->references('id')->on('nalog');
+            $table->unsignedBigInteger('korisnici_id');
+            $table->foreign('korisnici_id')->references('id')->on('korisnici');
+            $table->tinyInteger('aktivan')->default(1);
+        });
         Schema::create('objekat', function(Blueprint $table)
         {
             $table->bigIncrements('id');
@@ -299,6 +311,7 @@ class KreiranjeBaze extends Migration{
         Schema::drop('sadrzaji');
         Schema::drop('default_sadrzaji');
         Schema::drop('newsletter');
+        Schema::drop('blog');
         Schema::drop('nalog');
         Schema::drop('templejt');
         Schema::drop('tema');
