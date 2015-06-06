@@ -3,6 +3,7 @@
 Route::controller('/{pravaSlug}/mailbox','MailboxC');
 Route::controller('/{pravaSlug}/profil','Profil');
 Route::controller('/{slugPrava}/galerije','Galerija');
+Route::controller('/{slugPrava}/blog','Blog');
 Route::get('{pravaSlug}/u-pripremi',function(){return view('u-pripremi.index');});
 
 Route::controller('/administracija/korisnik','Administracija\Korisnik');

@@ -141,7 +141,8 @@ class KreiranjeBaze extends Migration{
         Schema::create('blog', function(Blueprint $table)
         {
             $table->bigIncrements('id');
-            $table->string('naslov',45);
+            $table->string('naslov',100);
+            $table->text('tekst');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->nullable();
             $table->unsignedBigInteger('nalog_id');

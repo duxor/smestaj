@@ -66,6 +66,9 @@
                         </ul>
                     </li>
                     <li class="dropdown">
+                        <a href="/moderacija/blog" class="dropdown-toggle" id="blog" data-toggle="tooltip" data-placement="bottom" title="Blog"><i class="glyphicon glyphicon-comment"></i></a>
+                    </li>
+                    <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="osnovno" data-toggle="tooltip" data-placement="bottom" title="Osnovno"><i class="glyphicon glyphicon-cog"></i>@if(\App\OsnovneMetode::brojKomentara()>0)<i class="badge">{{\App\OsnovneMetode::brojKomentara()}}</i>@endif</a>
                         <ul class="dropdown-menu">
                             <li class="dropdown-header">Osnovno</li>
