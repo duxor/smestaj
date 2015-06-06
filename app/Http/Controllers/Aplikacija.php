@@ -10,6 +10,7 @@ use App\Sadrzaji;
 use App\Smestaj;
 use App\Templejt;
 use App\Grad;
+use App\Newsletter;
 use App\Security;
 use App\Komentari;
 use Illuminate\Support\Facades\Session;
@@ -201,4 +202,37 @@ class Aplikacija extends Controller {
 		$mail->save();
 		return json_encode(['msg'=>'Poruka uspešno poslata. Hvala.','check'=>1]);
 	}
+	public function postNews(){
+		$podaci=json_decode(Input::get('podaci'));
+		$validator=Validator::make([
+			'email'=>$podaci->email,		
+		],[
+			'email'=>'required|email'
+		],[
+			//email
+			'email.email'=>'Pogrešno unesen email.',
+			'email.required'=>'Obavezan unos email-a.',
+		]);
+		if($validator->fails()){
+			$msg='<p>Dogodila se greška: <br><ol>';
+			foreach($validator->errors()->toArray() as $greske)
+				foreach($greske as $greska)
+					$msg.='<li>'.$greska.'</li>';
+			$msg.='</ol>';
+			return json_encode(['msg'=>$msg,'check'=>0]);
+		}
+			
+			$email=Newsletter::where('email','=',$podaci->email)->get(['email'])->toArray();
+			if($email){return json_encode(['msg'=>'Email postoji u bazi!','check'=>0]);}
+			
+			$news=new Newsletter();
+		 	$news->korisnici_id=Session::get('id');
+		 	$news->email=$podaci->email;
+		 	$news->token=$podaci->_token;
+		 	$news->nalog_id=$podaci->nalog_id;
+		 	$news->save();
+		return json_encode(['msg'=>'Uspešno ste prijavljeni!','check'=>1]);
+
+		}
+                    
 }

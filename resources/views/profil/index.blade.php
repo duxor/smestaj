@@ -29,14 +29,13 @@
                   @foreach($korisnik as $key=>$val)
                     @if (in_array($key,$popunjene_kolone))
                       @if($key == 'facebook')  
-                            <td><a id="social{{$key}}" data-contentwrapper=".mycontent{{$key}}"  rel="popover" class=" btn btn-social-icon btn-facebook">
+                            <td><a  id="social{{$key}}" data-contentwrapper=".mycontent{{$key}}"  rel="popover" class=" btn btn-social-icon btn-facebook">
                                 <i class="fa fa-facebook"></i>
                             </a></td> 
                           @elseif($key == 'twitter')   
                             <td><a id="social{{$key}}" data-contentwrapper=".mycontent{{$key}}"  rel="popover"  class="btn btn-social-icon btn-twitter">
                                 <i class="fa fa-twitter"></i>
                             </a></td>
-                          
                           @elseif($key == 'google')   
                             <td><a id="social{{$key}}" data-contentwrapper=".mycontent{{$key}}"  rel="popover"  class="btn btn-social-icon btn-google">
                                 <i class="fa fa-google"></i>
@@ -51,7 +50,8 @@
                             {!!Form::hidden('kljuc',$key)!!}   
                             {!!Form::hidden('_token',csrf_token())!!}    
                             {!! Form::text('podatak',$val, ['class'=>'form-control'])!!}<br>
-                            {!! Form::button('<span class="glyphicon glyphicon-ok-circle">  </span>  Potvrdi',['class'=>'btn btn-sm btn-success','type'=>'submit']) !!}  
+                            {!! Form::button('<span class="glyphicon glyphicon-ok-circle">  </span>  Potvrdi',['class'=>'btn btn-sm btn-success','type'=>'submit']) !!}
+                            <a href="{{$val}}" tooltip="{{$val}}"><i class="fa fa-facebook"></i></a>  
                             {!!Form::close()!!}
                       </div>
                       <script>
@@ -70,14 +70,9 @@
                       });});
                       $(document).on('mouseleave', '.popover', function () {
                                 $('.popover').remove();
-
-
                         });
-                      
-                     
                       </script>
-                    @endif
-                    
+                    @endif  
                   @endforeach
                   </div>
                 </div>
@@ -85,10 +80,8 @@
                 <div class=" col-md-8 col-lg-8 "> 
                   <table id="table_hover1" style="border-left:5px solid #5AC4DC" class="table table-user-information">
                     <tbody>
-
                     @foreach($korisnik as $key=>$val)
-                     <tr class="edit">
-                        
+                     <tr class="edit">    
                           @if (in_array($key,$popunjene_kolone) and $key !== 'facebook' and $key !== 'google' and $key !== 'twitter' and $key !== 'skype')
                             <td>{{ucfirst($key)}}</td>
                             <td ><span class="span_bg" >{{$val}}</span></td>
@@ -102,13 +95,8 @@
                                 {!!Form::close()!!}
                             </div>
                           </td>
-
                           @endif
-                        
-                          
-                        
-                      </tr>                        
-                      
+                      </tr>                                       
                       <script>
                       $(document).on('mouseenter', '.edit', function (){  
                             $(this).find("#member{{$key}}").fadeIn('fast').on('mouseenter', function(){
@@ -125,21 +113,21 @@
                       $(document).on('mouseleave', '.edit', function () {
                                 $('.popover').remove();
                                 $(this).find("#member{{$key}}").fadeOut('fast');
-
                         });
-                        </script>
-
-                      
+                        </script>  
                     @endforeach
                     </tbody>
                   </table>     
 
                  <!--<a href="/{{\App\OsnovneMetode::osnovniNav()}}/profil/edit-nalog/" class="btn btn-lg btn-primary"><i class="glyphicon glyphicon-pencil"></i> Uredi profil</a>-->
-                 <button style="margin-bottom:10px;" class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                @if($procenat_popunjenosti!=100)
+                <button style="margin-bottom:10px;" class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                   Popuni profil
                 </button>
+                @endif
                   <div class="collapse" id="collapseExample">
-                  <div id="vrti" style="display:none;"><center><i class='icon-spin4 animate-spin' style="font-size: 350%"></i></center></div>
+                    <i class='icon-spin4 animate-spin' style="color:rgba(0,0,0,0)"></i>
+                    <div id="vrti" style="display:none;"><center><i class='icon-spin4 animate-spin' style="font-size: 150%"></i></center></div>
                  <div id="poruka" style="display:none"></div>
                     <table id="table_hover" style="border-left:5px solid #5AC4DC" class="table table-user-information">
                       <tbody>
@@ -148,36 +136,33 @@
                           <tr id="forma-{{$key}}" class="edit">
                           {!!Form::hidden('kljuc',$key)!!}
                           {!!Form::hidden('_token',csrf_token())!!}
-                            @if($key == 'facebook')   
-                                
-                                <td><a class="btn btn-social-icon btn-facebook">
-                                    <i class="fa fa-facebook"></i>
-                                </a></td>
-                                <td >{!!Form::text('val',null,['class'=>'form-control','placeholder'=>'Unesite'])!!}</td>  
+                            @if($key == 'facebook')           
+                                <td><a class="btn btn-social-icon btn-facebook"><i class="fa fa-facebook"></i></a></td>  
+                                <td >{!!Form::text('val',null,['class'=>'form-control','placeholder'=>'Unesite'])!!}</td>
                                 <td>
                                   {!! Form::button('<span class="sacuvaj glyphicon glyphicon-ok"></span>',['class'=>'btn btn-sm btn-success','onclick'=>'Komunikacija.posalji("/korisnik/profil/popuni-profil",\'forma-'.$key.'\',\'poruka\',\'vrti\',\'zabrani\')']) !!}
                                 </td>
-                                @elseif($key == 'twitter')   
+                            @elseif($key == 'twitter')   
                                 <td><a class="btn btn-social-icon btn-twitter"><i class="fa fa-twitter"></i></a></td>
                                 <td >{!!Form::text('val',null,['class'=>'form-control','placeholder'=>'Unesite'])!!}</td>
                                 <td>
                                   {!! Form::button('<span class="sacuvaj glyphicon glyphicon-ok"></span>',['class'=>'btn btn-sm btn-success','onclick'=>'Komunikacija.posalji("/korisnik/profil/popuni-profil",\'forma-'.$key.'\',\'poruka\',\'vrti\',\'zabrani\')']) !!}
                                 </td>
-                              @elseif($key == 'google')   
+                            @elseif($key == 'google')   
                                 <td><a class="btn btn-social-icon btn-google"><i class="fa fa-google"></i></a></td>
                                 <td >{!!Form::text('val',null,['class'=>'form-control','placeholder'=>'Unesite'])!!}</td>
                                 <td >
                                   {!! Form::button('<span class="sacuvaj glyphicon glyphicon-ok"></span>',['class'=>'btn btn-sm btn-success','onclick'=>'Komunikacija.posalji("/korisnik/profil/popuni-profil",\'forma-'.$key.'\',\'poruka\',\'vrti\',\'zabrani\')']) !!}
                                 </td>
-                                 @elseif($key == 'skype')   
+                            @elseif($key == 'skype')   
                                 <td><a class="btn btn-social-icon btn-skype"><i class="fa fa-skype"></i></a></td>
                                 <td >{!!Form::text('val',null,['class'=>'form-control','placeholder'=>'Unesite'])!!}</td>
                                 <td >
                                   {!! Form::button('<span class="sacuvaj glyphicon glyphicon-ok"></span>',['class'=>'btn btn-sm btn-success','onclick'=>'Komunikacija.posalji("/korisnik/profil/popuni-profil",\'forma-'.$key.'\',\'poruka\',\'vrti\',\'zabrani\')']) !!}
                                 </td>
-                              @else
+                            @else
                                 <td>{{ucfirst($key)}}</td>
-                                <td >{!!Form::text('val',null,['class'=>'form-control','placeholder'=>'Unesite'])!!}</td>  
+                                <td >{!!Form::text('val',null,['class'=>'form-control','placeholder'=>'Unesite'])!!}</td>
                                 <td >
                                   {!! Form::button('<span class="sacuvaj glyphicon glyphicon-ok"></span>',['class'=>'btn btn-sm btn-success','onclick'=>'Komunikacija.posalji("/korisnik/profil/popuni-profil",\'forma-'.$key.'\',\'poruka\',\'vrti\',\'zabrani\')']) !!}
                                 </td>

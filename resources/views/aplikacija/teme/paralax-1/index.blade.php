@@ -208,14 +208,26 @@
                 </div>
                 <div style="height: 150px;"  class="col-sm-4">             
                     <h4>Prijavite se na našu mail-ing listu.</h4>
-                    {!!Form::open(['url'=>'#','class'=>'form-horizontal'])!!}
-                        <div class="input-group">
+                    <i class='icon-spin4 animate-spin' style="color:rgba(0,0,0,0)"></i>
+                    <div id="vrti" style="display:none;"><center><i class='icon-spin4 animate-spin' style="font-size: 150%"></i></center></div>
+                 <div id="poruka" style=" height:20px;display:none"></div>
+                 <div id="forma-news">
+                    {!!Form::hidden('_token',csrf_token())!!}
+                    {!!Form::hidden('nalog_id',$podaci['app']['id'])!!}
+                        <div id="zabrani" class="input-group">
                           <span class="input-group-addon" id="sizing-addon2"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></span>
-                          {!!Form::text('mailing',null,['class'=>'form-control','placeholder'=>'mail@email.com'])!!}
+                          {!!Form::text('email',null,['class'=>'form-control','placeholder'=>'mail@email.com'])!!}
                         </div>
                         <br />
-                        {!!Form::button('<span class="glyphicon glyphicon-mail"></span> Prijavite se!', ['class'=>'btn btn-lg btn-primary','type'=>'submit'])!!}
-                    {!!Form::close()!!}
+                        {!!Form::button('<span class="glyphicon glyphicon-mail"></span> Prijavite se!', ['id'=>'sakri','class'=>'btn btn-lg btn-primary','onclick'=>'Komunikacija.posalji("/aplikacija/news","forma-news","poruka","vrti","zabrani")' ])!!}
+                        <script>
+                            $('#sakri').click(function(){
+                                $(this).hide(function(){
+                                    setTimeout(function() { $('#sakri').show() }, 7000)});
+                                });
+                         
+                        </script>
+                    </div>
                 </div>    
 
 
