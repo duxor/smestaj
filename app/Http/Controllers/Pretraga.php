@@ -20,6 +20,7 @@ class Pretraga extends Controller {
 		return Templejt::join('sadrzaji','sadrzaji.templejt_id','=','templejt.id')->where('nalog_id',$appID)->where('tema_id',Nalog::find($appID,['tema_id'])->tema_id)->orderBy('redoslijed')->get(['slug','naziv','vrsta_sadrzaja_id','icon'])->toArray();
 	}
 	public function postSmestaji(){
+		$podaci=$this->defaultPodaci(1);//templejt sa menijem bez podataka
 		$podaci['rezultat']=Nalog::where('naziv','Like','%'.Input::get('naziv').'%')->where('aktivan','=',1)->get(['naziv','slug','opis'])->toArray();
 		$podaci['pretragaApp']=Input::get('naziv');
 		return view('aplikacija.teme-osnove.osnovna.pretraga',compact('podaci'));
@@ -32,7 +33,7 @@ class Pretraga extends Controller {
 			$nalozi=Objekat::join('nalog','nalog.id','=','objekat.nalog_id')
 				->join('smestaj','smestaj.objekat_id','=','objekat.id')
 				->join('kapacitet','kapacitet.id','=','smestaj.kapacitet_id')
-				->where('nalog.naziv','Like','%'.Input::get('like').'%')
+				->where('nalog.naziv','Like','%'.(Input::get('like')=='null'?'':Input::get('like')).'%')
 				->where('nalog.aktivan',1)->where('objekat.aktivan',1)->where('smestaj.aktivan',1)
 				->get(['objekat.id','objekat.naziv','nalog.slug as slugApp','smestaj.slug as slugSmestaj','smestaj.id as smestajID','x','y','adresa'])->toArray();
 		else
@@ -43,6 +44,7 @@ class Pretraga extends Controller {
 				->where('objekat.aktivan',1)->where('smestaj.aktivan',1)
 				->get(['objekat.id','objekat.naziv','nalog.slug as slugApp','smestaj.slug as slugSmestaj','smestaj.id as smestajID','x','y','adresa'])->toArray();
 		$nalozi=OsnovneMetode::dostupnostZaRezervaciju($nalozi,Input::get('datumOd'),Input::get('datumDo'),'smestajID');
+
 		$niz = 'onLoadMarkers({"type": "FeatureCollection","features": [';
 		$i=0;
 		foreach($nalozi as $nalog){

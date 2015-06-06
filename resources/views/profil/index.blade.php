@@ -180,8 +180,7 @@
           progressBarColor: "#5AC4DC",//colour of circular progress bar
           progressBarWidth: 4,//progress bar width
           progressPercent: "{!!$procenat_popunjenosti!!}%",//progress percentage out of 100
-          progressValue:0,//diplay this value instead of percentage
-          showText: true,//show progress text or not
+          showText: true//show progress text or not
           });
         </script>
               <div class="row">

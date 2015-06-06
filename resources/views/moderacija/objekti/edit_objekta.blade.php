@@ -63,7 +63,7 @@
 				            {!!Form::select('grad',$grad, $objekti['grad_id'],['class'=>'form-control'])!!}
 				        </div>
 				   			{!!Form::label('ladresa','Adresa',['class'=>'control-label col-sm-2'])!!}
-				        <div class="col-sm-3">
+				        <div class="col-sm-5">
 				            {!!Form::text('adresa',$objekti['adresa'],['class'=>'form-control','placeholder'=>'Adresa','id'=>'adresa'])!!}
 				            <span id="sadresa" class="glyphicon form-control-feedback"></span>
 				        </div>
