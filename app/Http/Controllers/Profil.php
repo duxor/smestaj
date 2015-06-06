@@ -22,9 +22,10 @@ class Profil extends Controller {
 		$counter = 0;
 		$procenat_popunjenosti=$this->proverapopunjenostiprofila();
 		$popunjene_kolone=$this->popunjenekolone();
+		$popunjene_kolone_social=$this->popunjenekolonesocial();
 		//dd($korisnik);
 
-		return view('profil.index', compact('korisnik','procenat_popunjenosti','popunjene_kolone'));
+		return view('profil.index', compact('korisnik','procenat_popunjenosti','popunjene_kolone','popunjene_kolone_social'));
     }
     private function popunjenekolone(){
 			$korisnik=Korisnici::where('id',Session::get('id'))->get(['id','ime','prezime','email','username','adresa','grad','telefon','fotografija','facebook','google','twitter','skype'])->first()->toArray();
@@ -36,6 +37,17 @@ class Profil extends Controller {
 				}
 			}
 			return $popunjene_kolone;
+    }
+    private function popunjenekolonesocial(){
+			$korisnik=Korisnici::where('id',Session::get('id'))->get(['facebook','google','twitter','skype'])->first()->toArray();
+			foreach($korisnik as $key=>$value)
+			{
+			  if($value != null || $value!='' and $key !== 'id')
+				{
+					$popunjene_kolone_social[]=$key;
+				}
+			}
+			return $popunjene_kolone_social;
     }
     private function proverapopunjenostiprofila(){
 			$korisnik=Korisnici::where('id',Session::get('id'))->get(['id','ime','prezime','email','username','adresa','grad','telefon','fotografija','facebook','google','twitter','skype'])->first()->toArray();

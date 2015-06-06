@@ -23,41 +23,26 @@
           <div style="opacity: 0.9; border:none; " class="panel panel-info">
             <div class="panel-body">
 
-              <div class="row editing">
-                <div class="col-md-4 col-lg-4 " align="center"> <img alt="User Pic" style="width:140px;" src="/galerije/{{Session::get('username')}}/osnovne/profilna.jpg" class="img-thumbnail"> 
-                  <div class="row">
+              <div class="row ">
+                <div id="editing" class="col-md-5" align="center"> <img alt="User Pic" style="width:140px;" src="/galerije/{{Session::get('username')}}/osnovne/profilna.jpg" class="img-thumbnail"> 
+                  <div  class="row">
                   @foreach($korisnik as $key=>$val)
-                    @if (in_array($key,$popunjene_kolone))
-                      @if($key == 'facebook')  
-                            <td><a  id="social{{$key}}" data-contentwrapper=".mycontent{{$key}}"  rel="popover" class=" btn btn-social-icon btn-facebook">
-                                <i class="fa fa-facebook"></i>
-                            </a></td> 
-                          @elseif($key == 'twitter')   
-                            <td><a id="social{{$key}}" data-contentwrapper=".mycontent{{$key}}"  rel="popover"  class="btn btn-social-icon btn-twitter">
-                                <i class="fa fa-twitter"></i>
-                            </a></td>
-                          @elseif($key == 'google')   
-                            <td><a id="social{{$key}}" data-contentwrapper=".mycontent{{$key}}"  rel="popover"  class="btn btn-social-icon btn-google">
-                                <i class="fa fa-google"></i>
-                            </a></td>
-                          @elseif($key == 'skype')   
-                            <td><a id="social{{$key}}" data-contentwrapper=".mycontent{{$key}}"  rel="popover"  class="btn btn-social-icon btn-skype">
-                                <i class="fa fa-skype"></i>
-                            </a></td>
-                      @endif
+                    @if (in_array($key,$popunjene_kolone_social))
+                      <td><a  href="//{{$val}}" data-toggle="tooltip" title="{{$val}}"class="btn btn-social-icon btn-{{$key}}"><i class="fa fa-{{$key}}"></i></a></td> 
+                      <button id="social{{$key}}" style="display: none;" class="btn btn-success btn-xs "  data-contentwrapper=".mycontent{{$key}}"  rel="popover"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button></td>
                       <div style="display:none;" class="mycontent{{$key}}">      
                             {!!Form::open(['url'=>'/korisnik/profil/edit-profil/','class'=>'form-horizontal'])!!}
                             {!!Form::hidden('kljuc',$key)!!}   
                             {!!Form::hidden('_token',csrf_token())!!}    
                             {!! Form::text('podatak',$val, ['class'=>'form-control'])!!}<br>
-                            {!! Form::button('<span class="glyphicon glyphicon-ok-circle">  </span>  Potvrdi',['class'=>'btn btn-sm btn-success','type'=>'submit']) !!}
-                            <a href="{{$val}}" tooltip="{{$val}}"><i class="fa fa-facebook"></i></a>  
+                            {!! Form::button('<span class="glyphicon glyphicon-ok-circle">  </span>  Potvrdi',['class'=>'btn btn-sm btn-success','type'=>'submit']) !!}  
                             {!!Form::close()!!}
-                      </div>
-                      <script>
+                      </div>  
+                    @endif  
+                    <script>
                       $(document).ready(function(){
-                          $('.editing').mouseenter(function(){
-                            $(this).find("#social{{$key}}").fadeIn('fast').on('mouseenter', function(){
+                          $('#editing').mouseenter(function(){
+                            $(this).find("#social{{$key}}").fadeIn('slow').on('mouseenter', function(){
                             $(this).popover({
                                 html:true,
                                 placement:'bottom',
@@ -67,17 +52,21 @@
                                 }
                             });
                           });
-                      });});
+                        });
+                      });
+                      $(document).ready(function(){
+                          $('#editing').mouseleave(function(){
+                            $(this).find("#social{{$key}}").fadeOut('slow');
+                          });
+                        });
                       $(document).on('mouseleave', '.popover', function () {
                                 $('.popover').remove();
                         });
                       </script>
-                    @endif  
                   @endforeach
                   </div>
                 </div>
-
-                <div class=" col-md-8 col-lg-8 "> 
+                <div class=" col-md-7"> 
                   <table id="table_hover1" style="border-left:5px solid #5AC4DC" class="table table-user-information">
                     <tbody>
                     @foreach($korisnik as $key=>$val)
