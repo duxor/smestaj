@@ -181,10 +181,10 @@
         {{--footer START::--}}
         <div class="content" id="done" style="height: 200px;">
             <div class="container">
-                <div style="border-right:2px solid #5AC4DC; height: 150px;" class="col-sm-2">
+                <div style="height: 150px;" class="col-sm-2">
                     <a href="http://dusanperisic.com" class="btn btn-lg btn-primary"><i>dusanperisic.com</i></a>
                 </div>
-                <div style="border-right:2px solid #5AC4DC;height: 150px;" class="col-sm-2">
+                <div style="height: 150px;" class="col-sm-2">
                             @if($podaci['app']['facebook']!= null)
                             <a href="{{$podaci['app']['facebook']}}" class="btn btn-social-icon btn-facebook">
                                 <i class="fa fa-facebook"></i>
@@ -206,7 +206,7 @@
                 </div>
                 <div class="col-sm-2">
                 </div>
-                <div style="border-left:2px solid #5AC4DC;height: 150px;"  class="col-sm-4">             
+                <div style="height: 150px;"  class="col-sm-4">             
                     <h4>Prijavite se na našu mail-ing listu.</h4>
                     {!!Form::open(['url'=>'#','class'=>'form-horizontal'])!!}
                         <div class="input-group">
@@ -219,7 +219,7 @@
                 </div>    
 
 
-                <div style="border-left:2px solid #5AC4DC;height: 150px;"  class="col-sm-2">
+                <div style="height: 150px;"  class="col-sm-2">
                     <a href="{!!url('/administracija')!!}" class="btn btn-lg btn-default"><i class="glyphicon glyphicon-cog"></i> Administracija</a>
                 </div>
             </div>

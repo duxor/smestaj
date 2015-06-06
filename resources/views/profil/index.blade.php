@@ -22,18 +22,67 @@
 </div>
 <div class="container" style=" position:absolute;top:35%; margin-top:0px; padding-top:0px;">
       <div  class="row">
-        <div  class="col-sm-7 col-md-offset-1 toppad">
+        <div  class="col-sm-9 col-md-offset-1 toppad">
           <div style="opacity: 0.9; border:none; " class="panel panel-info">
             <div class="panel-body">
 
-              <div class="row">
+              <div class="row editing">
                 <div class="col-md-4 col-lg-4 " align="center"> <img alt="User Pic" style="width:140px;" src="/galerije/{{Session::get('username')}}/osnovne/profilna.jpg" class="img-thumbnail"> 
-                 {{-- <div class="row">
-                    <div class="col-md-3">@if(in_array('facebook',$popunjene_kolone)) <a href="#"> <i class="glyphicon glyphicon-map-marker"></i></a>  @endif</div>
-                    <div class="col-md-3">@if(in_array('google',$popunjene_kolone)) <a href="#"><i class="glyphicon glyphicon-map-marker"></i> </a>  @endif</div>
-                    <div class="col-md-3">@if(in_array('skype',$popunjene_kolone)) <a href="#"><i class="glyphicon glyphicon-map-marker"></i></a>  @endif</div>
-                    <div class="col-md-3">@if(in_array('twitter',$popunjene_kolone)) <a href="#"><i class="glyphicon glyphicon-map-marker"></i></a>  @endif</div>
-                  </div>--}}
+                  <div class="row">
+                  @foreach($korisnik as $key=>$val)
+                    @if (in_array($key,$popunjene_kolone))
+                      @if($key == 'facebook')  
+                            <td><a id="social{{$key}}" data-contentwrapper=".mycontent{{$key}}"  rel="popover" class=" btn btn-social-icon btn-facebook">
+                                <i class="fa fa-facebook"></i>
+                            </a></td> 
+                          @elseif($key == 'twitter')   
+                            <td><a id="social{{$key}}" data-contentwrapper=".mycontent{{$key}}"  rel="popover"  class="btn btn-social-icon btn-twitter">
+                                <i class="fa fa-twitter"></i>
+                            </a></td>
+                          
+                          @elseif($key == 'google')   
+                            <td><a id="social{{$key}}" data-contentwrapper=".mycontent{{$key}}"  rel="popover"  class="btn btn-social-icon btn-google">
+                                <i class="fa fa-google"></i>
+                            </a></td>
+                          @elseif($key == 'skype')   
+                            <td><a id="social{{$key}}" data-contentwrapper=".mycontent{{$key}}"  rel="popover"  class="btn btn-social-icon btn-skype">
+                                <i class="fa fa-skype"></i>
+                            </a></td>
+                      @endif
+                      <div style="display:none;" class="mycontent{{$key}}">      
+                            {!!Form::open(['url'=>'/korisnik/profil/edit-profil/','class'=>'form-horizontal'])!!}
+                            {!!Form::hidden('kljuc',$key)!!}   
+                            {!!Form::hidden('_token',csrf_token())!!}    
+                            {!! Form::text('podatak',$val, ['class'=>'form-control'])!!}<br>
+                            {!! Form::button('<span class="glyphicon glyphicon-ok-circle">  </span>  Potvrdi',['class'=>'btn btn-sm btn-success','type'=>'submit']) !!}  
+                            {!!Form::close()!!}
+                      </div>
+                      <script>
+                      $(document).ready(function(){
+                          $('.editing').mouseenter(function(){
+                            $(this).find("#social{{$key}}").fadeIn('fast').on('mouseenter', function(){
+                            $(this).popover({
+                                html:true,
+                                placement:'bottom',
+                                content:function()
+                                {
+                                    return $($('#social{{$key}}').data('contentwrapper')).html();
+                                }
+                            });
+                          });
+                      });});
+                      $(document).on('mouseleave', '.popover', function () {
+                                $('.popover').remove();
+
+
+                        });
+                      
+                     
+                      </script>
+                    @endif
+                    
+                  @endforeach
+                  </div>
                 </div>
 
                 <div class=" col-md-8 col-lg-8 "> 
@@ -41,42 +90,28 @@
                     <tbody>
 
                     @foreach($korisnik as $key=>$val)
-                      @if (in_array($key,$popunjene_kolone)) 
-                      <tr class="edit">
-                        <td>
-                          @if($key == 'facebook')   
-                            <a class="btn btn-social-icon btn-facebook">
-                                <i class="fa fa-facebook"></i>
-                            </a>
-                            @elseif($key == 'twitter')   
-                            <a class="btn btn-social-icon btn-twitter">
-                                <i class="fa fa-twitter"></i>
-                            </a>
-                          
-                          @elseif($key == 'google')   
-                            <a class="btn btn-social-icon btn-google">
-                                <i class="fa fa-google"></i>
-                            </a>
-                             @elseif($key == 'skype')   
-                            <a class="btn btn-social-icon btn-skype">
-                                <i class="fa fa-skype"></i>
-                            </a>
-                          
-                          @else {{$key}}
+                     <tr class="edit">
+                        
+                          @if (in_array($key,$popunjene_kolone) and $key !== 'facebook' and $key !== 'google' and $key !== 'twitter' and $key !== 'skype')
+                            <td>{{ucfirst($key)}}</td>
+                            <td ><span class="span_bg" >{{$val}}</span></td>
+                            <td ><button id="member{{$key}}" style="display: none;" class="btn btn-success btn-xs "  data-contentwrapper=".mycontent{{$key}}"  rel="popover"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
+                            <div style="display:none;" class="mycontent{{$key}}">      
+                                {!!Form::open(['url'=>'/korisnik/profil/edit-profil/','class'=>'form-horizontal'])!!}
+                                {!!Form::hidden('kljuc',$key)!!}   
+                                {!!Form::hidden('_token',csrf_token())!!}    
+                                {!! Form::text('podatak',$val, ['class'=>'form-control'])!!}<br>
+                                {!! Form::button('<span class="glyphicon glyphicon-ok-circle">  </span>  Potvrdi',['class'=>'btn btn-sm btn-success','type'=>'submit']) !!}  
+                                {!!Form::close()!!}
+                            </div>
+                          </td>
+
                           @endif
-                        </td>
-                        <td ><span class="span_bg" >{{$val}}</span></td>  
-                        <td ><button id="member{{$key}}" style="display: none;" class="btn btn-success btn-xs "  data-contentwrapper=".mycontent{{$key}}"  rel="popover"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
-                          <div style="display:none;" class="mycontent{{$key}}">      
-                              {!!Form::open(['url'=>'/korisnik/profil/edit-profil/','class'=>'form-horizontal'])!!}
-                              {!!Form::hidden('kljuc',$key)!!}   
-                              {!!Form::hidden('_token',csrf_token())!!}    
-                              {!! Form::text('podatak',$val, ['class'=>'form-control'])!!}<br>
-                              {!! Form::button('<span class="glyphicon glyphicon-ok-circle">  </span>  Potvrdi',['class'=>'btn btn-sm btn-success','type'=>'submit']) !!}  
-                              {!!Form::close()!!}
-                          </div>
-                        </td>                        
-                      </tr>
+                        
+                          
+                        
+                      </tr>                        
+                      
                       <script>
                       $(document).on('mouseenter', '.edit', function (){  
                             $(this).find("#member{{$key}}").fadeIn('fast').on('mouseenter', function(){
@@ -96,7 +131,8 @@
 
                         });
                         </script>
-                      @endif
+
+                      
                     @endforeach
                     </tbody>
                   </table>     
@@ -143,7 +179,7 @@
                                   {!! Form::button('<span class="sacuvaj glyphicon glyphicon-ok"></span>',['class'=>'btn btn-sm btn-success','onclick'=>'Komunikacija.posalji("/korisnik/profil/popuni-profil",\'forma-'.$key.'\',\'poruka\',\'vrti\',\'zabrani\')']) !!}
                                 </td>
                               @else
-                                <td>{{$key}}</td>
+                                <td>{{ucfirst($key)}}</td>
                                 <td >{!!Form::text('val',null,['class'=>'form-control','placeholder'=>'Unesite'])!!}</td>  
                                 <td >
                                   {!! Form::button('<span class="sacuvaj glyphicon glyphicon-ok"></span>',['class'=>'btn btn-sm btn-success','onclick'=>'Komunikacija.posalji("/korisnik/profil/popuni-profil",\'forma-'.$key.'\',\'poruka\',\'vrti\',\'zabrani\')']) !!}
@@ -167,7 +203,7 @@
             </div>            
           </div>
         </div>
-        <div style="border:none;" class="col-md-3">
+        <div style="border:none;" class="col-md-2">
         {!!HTML::script('js/CircularLoader.js')!!}
         <div style="opacity: 0.9;" id="divProgress"></div>
         <script>
@@ -183,15 +219,6 @@
           showText: true//show progress text or not
           });
         </script>
-              <div class="row">
-                <div class="progress">
-                  <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="2" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em; width: {{$procenat_popunjenosti}}%;">
-                  Popunjenost profila:   {{$procenat_popunjenosti}}%
-                  </div>
-
-                </div>
-
-        </div>
       </div>
     </div>
 </div>
