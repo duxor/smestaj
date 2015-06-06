@@ -5,9 +5,7 @@
      <div class="row">
        <div id="bg_btn" style="visibility: hidden; margin-bottom:50px; margin-top:7%;" class="col-md-2 col-md-offset-5">
        {!!Form::open(['id'=>'forma','url'=>'','class'=>'form-horizontal','enctype' => 'multipart/form-data'])!!}
-
        {!!Form::button('<span class="glyphicon glyphicon-picture"></span> Izmeni pozadinu', ['class'=>'btn btn-lg btn-success','type'=>'submit'])!!}
-       
        {!!Form::close()!!}
          <script>
          $(document).on('mouseenter','#container_id',function(){
@@ -15,7 +13,6 @@
             }).on('mouseleave','#container_id',function(){
               $(this).find('#bg_btn').css('visibility','hiden').fadeOut('slow');
             });
-         
          </script>
        </div>
      </div>
