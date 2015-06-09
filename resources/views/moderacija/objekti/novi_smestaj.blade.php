@@ -55,13 +55,20 @@
 								{!!Form::select('vrstasmestaja',$vrstasmestaja,null, ['class'=>'form-control'])!!}
 							</div>
 						</div>
+						<div id="dsmestaj" class="form-group has-feedback">
+							{!!Form::label('lsmestaj','Naziv smeštaja',['class'=>'control-label col-sm-7'])!!}
+							<div class="col-sm-5">
+								{!!Form::text('smestaj',null,['id'=>'smestaj','class'=>'form-control','placeholder'=>'Unesite naziv smeštaja...'])!!}
+								<span id="ssmestaj" class="glyphicon form-control-feedback"></span>
+							</div>
+						</div>
 						<div id="dslug" class="form-group has-feedback">
-					        {!!Form::label('lslug','Slug',['class'=>'control-label col-sm-7'])!!}
-					        <div class="col-sm-5">
-					            {!!Form::text('slug',null,['id'=>'slug','class'=>'form-control','placeholder'=>'Unesite slug...'])!!}
-					            <span id="sslug" class="glyphicon form-control-feedback"></span>
-					        </div>
-					    </div>
+							{!!Form::label('lslug','Slug',['class'=>'control-label col-sm-7'])!!}
+							<div class="col-sm-5">
+								{!!Form::text('slug',null,['id'=>'slug','class'=>'form-control','placeholder'=>'Unesite slug...'])!!}
+								<span id="sslug" class="glyphicon form-control-feedback"></span>
+							</div>
+						</div>
 						<div class="form-group">
 					        {!!Form::label('cena','Cena',['class'=>'control-label col-sm-7'])!!}
 					        <div class="col-sm-5">

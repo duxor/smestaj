@@ -24,13 +24,16 @@
     {!!HTML::style('css/pregled_smestaja.css')!!}
     {!!HTML::style('css/gmaps-picker.css')!!}
     {!!HTML::style('css/bootstrap-social.css')!!}
+    {!! HTML::style('css/bootstrap-switch.css') !!}
     {!!HTML::style('css/font-awesome.css')!!}
+
     {!!HTML::script('js/jquery-3.0.js')!!}
     {!!HTML::script('http://maps.googleapis.com/maps/api/js?sensor=false')!!}
     {!!HTML::script('js/funkcije.js')!!}
     {!!HTML::script('js/pregled_smestaja.js')!!}
     {!!HTML::script('tinymce/tinymce.min.js')!!}
     {!!HTML::script('js/komentari.js')!!}
+    {!!HTML::script('js/bootstrap-switch.js')!!}
     
     {!!HTML::script('js/gmaps-picker.js')!!}
 </head>

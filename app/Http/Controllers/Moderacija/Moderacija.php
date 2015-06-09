@@ -301,21 +301,20 @@ class Moderacija extends Controller {
 			$target_dir="galerije/".$podaci['username']."/aplikacije/".$podaci['slug']."/smestaji/".Input::get('slug')."/";
 			$target_file = $target_dir . basename($_FILES["naslovna_foto"]["name"]);
 			move_uploaded_file($_FILES["naslovna_foto"]["tmp_name"], $target_file);
-			
-			$naziv_objekta=Objekat::where('id','=',Input::get('nazivobjekta'))->get(['naziv'])->first()->toArray();
-            $novi = Smestaj::firstOrNew(['id'=>Input::get('id')]);
+
+            $novi=Smestaj::firstOrNew(['id'=>Input::get('id')]);
             $novi->objekat_id = Input::get('nazivobjekta'); 
             $novi->aktivan = '1';
             $novi->kapacitet_id = Input::get('kapacitet');
             $novi->vrsta_smestaja_id = Input::get('vrstasmestaja');
-            $novi->naziv= $naziv_objekta['naziv'];
+            $novi->naziv=Input::get('smestaj');
             $novi->cena_osoba = Input::get('cena');
             $novi->slug = Input::get('slug');
             $novi->naslovna_foto="galerije/".$podaci['username']."/aplikacije/".$podaci['slug']."/smestaji/".Input::get('slug')."";
             $novi->save();
             $id=$novi->id;
-            $dod_oprema=Input::get('oprema');
-            foreach ($dod_oprema as $opr) {
+			if(Input::has('oprema'))
+            foreach (Input::get('oprema') as $opr) {
             	$dod=new Dodatno();
             	$dod->smestaj_id=$id;
             	$dod->dodatna_oprema_id=$opr;
