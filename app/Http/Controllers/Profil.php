@@ -81,12 +81,16 @@ class Profil extends Controller {
 		return view('profil.edit',compact('korisnik','procenat_popunjenosti','pravaSlug'));
 	}
 	public function postEditProfil(){
-		$podatak=Input::get('podatak');//nova vrednost
-		$data=Input::get('kljuc');//kolona
-		//dd($data);
+		
+		$podatak=Input::get('podatak');
+		$data=Input::get('kljuc');
+
 		$korisnik= Korisnici::firstOrNew(['id'=>Session::get('id')],[$data]);  
 		$korisnik->$data=Input::get('podatak');
 		$korisnik->save();
+		if($data =='username'){
+		Session::put('username', $podatak);
+		}
 		return Redirect::back();
 	}
 

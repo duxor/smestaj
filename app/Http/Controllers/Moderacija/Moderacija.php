@@ -303,8 +303,6 @@ class Moderacija extends Controller {
 			$target_file = $target_dir . basename($_FILES["naslovna_foto"]["name"]);
 			move_uploaded_file($_FILES["naslovna_foto"]["tmp_name"], $target_file);
 			
-			
-            
             $novi=Smestaj::firstOrNew(['id'=>Input::get('id')]);
             $novi->objekat_id = Input::get('nazivobjekta'); 
             $novi->aktivan = '1';
@@ -382,13 +380,6 @@ class Moderacija extends Controller {
 			return Redirect::back()->with('message','Uspešno ste odgovorili!');
 		}else return Security::rediectToLogin();
 	}
-	public function postBgUpload(){
-		if(!Security::autentifikacijaTest(4,'min')) return json_encode(['msg'=>'Dogodila se greška. Proverite podatke i pokušajte ponovo.','check'=>0]);
-		$podaci=json_decode(Input::get('podaci'));
-		$objekat=Objekat::join('nalog as n','objekat.nalog_id','=','n.id')->where('n.korisnici_id',Session::get('id'))->where('objekat.id',$podaci->id_objekta)->get(['objekat.id','objekat.aktivan'])->first();
-		$objekat->aktivan=$objekat->aktivan?0:1;
-		$objekat->save();
-		return json_encode(['msg'=>'Uspešno ste postavili status objekta na '.($objekat->aktivan?'aktivan':'neaktivan'),'check'=>1]);
-	}
+	
 
 }
