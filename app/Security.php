@@ -125,7 +125,7 @@ class Security {
     private function inputTest($in){
         return strlen($in)>$this->minLenPass;
     }
-    public static function login($username, $password, $return_to_url=null){
+    public static function login($username, $password, $return_to_url=null,$mobile=false){
         $sec = new Security();
 
         if($sec->inputTest($username) and $sec->inputTest($password)){
@@ -145,6 +145,7 @@ class Security {
                 Log::insert(['korisnici_id'=>$korisnik->id]);
             }else Korisnici::where('id', $sec->id)->update(['token' => null]);
         }
+        if($mobile) return $test ? true : false;
         if($return_to_url&&strcmp(substr($return_to_url,0,5),'/log/')!=0) return redirect($return_to_url);
         return Security::rediectToLogin();
     }
