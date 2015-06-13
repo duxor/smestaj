@@ -24,6 +24,11 @@
     {!!HTML::style('css/animation.css')!!}
     {!! HTML::script('js/funkcije.js') !!}
     {!! HTML::script('tinymce/tinymce.min.js') !!}
+    {!!HTML::style('css/bootstrap-social.css')!!}
+    {!! HTML::style('css/bootstrap-switch.css') !!}
+    {!!HTML::style('css/font-awesome.css')!!}
+
+
 
 </head>
 <body>

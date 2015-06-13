@@ -79,7 +79,7 @@
 					<div class="form-group">
 				        <div class="col-sm-5"></div>
 				        <div class="col-sm-7">
-				            {!!Form::button('<span class="glyphicon glyphicon-floppy-disk"></span> Dodaj smeštaj', ['class'=>'btn btn-lg btn-primary','type'=>'submit'])!!}
+				            {!!Form::button('<span class="glyphicon glyphicon-floppy-disk"></span> Dodaj smeštaj', ['class'=>'btn btn-lg btn-primary', 'type'=>'submit'])!!}
 				        </div>
 				    </div>
 					<input id="fileSlika" name="naslovna_foto" type="file" style="display: none">
@@ -88,15 +88,17 @@
 			<div class="col-sm-4">
 				<div class="well" style="max-height: 300px;overflow: auto;">
 					<h4>Izaberite dodatnu opremu:</h4>
-					@foreach($dodatna_oprema as $dodatna)
+					@foreach($dodatna_oprema as  $dodatna)
 					<div class="col-sm-12">
-						<input type="checkbox"  name="oprema_filter" value="0" class="my-checkbox" data-size="normal" data-on-text="Da" data-off-text="Ne" data-label-text="{{$dodatna['naziv']}}">
+						<input type="checkbox"  name="oprema_filter" value="0" class="my-checkbox" data-size="normal" data-on-text="Da" data-off-text="Ne" data-key="{{$dodatna['id']}}" data-label-text="{{$dodatna['naziv']}}">
 		            </div>
 		            @endforeach
-		            <script>$(".my-checkbox").bootstrapSwitch();
+		            <script>
+		            $(".my-checkbox").bootstrapSwitch();
 		            $('input[name="oprema_filter"]').on('switchChange.bootstrapSwitch', function(event, state) {
 					     $(this).val(state?1:0);
-					});</script>
+					});
+					</script>
 	        	</div>
 	            
 			</div>{!!Form::close()!!}

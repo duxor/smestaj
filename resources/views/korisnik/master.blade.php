@@ -27,10 +27,13 @@
     {!!HTML::style('css/datepicker.css')!!}
     {!!HTML::script('js/datepicker.js')!!}
      {!!HTML::script('js/CircularLoader.js')!!}
+    {!!HTML::style('css/bootstrap-social.css')!!}
+    {!! HTML::style('css/bootstrap-switch.css') !!}
+    {!!HTML::style('css/font-awesome.css')!!}
 
-
+    {!!HTML::script('js/bootstrap-switch.js')!!}
 </head>
-<body>
+<body style=" width:100%;  height:100%; border-bottom:2px solid #b5b1b1; background: url(/galerije/korisnik/teme/paralax-1/pozadine-1/contact_bg.jpg) no-repeat center center fixed;">
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">

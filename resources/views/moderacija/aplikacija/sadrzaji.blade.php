@@ -7,7 +7,7 @@
     <div class="col-sm-6"></div>
     <script>
         $(document).ready($('select').change(function(){
-            $('#app').attr("action", '/moderator/sadrzaji/'+$(this).val());
+            $('#app').attr("action", '/moderacija/sadrzaji/'+$(this).val());
             $('#app').submit();
         }));
     </script>
@@ -16,7 +16,7 @@
         <br clear="all">
         @foreach($podaci['sadrzaji'] as $podatak)
             <hr>
-            {!!Form::open(['url'=>'/moderator/sadrzaji-update/'.$podatak['id'],'class'=>'form-horizontal'])!!}
+            {!!Form::open(['url'=>'/moderacija/sadrzaji-update/'.$podatak['id'],'class'=>'form-horizontal'])!!}
                 <div class="form-group">
                     <div class="col-sm-12">
                         {!!Form::text('naziv',$podatak['sadrzaj_naziv'],['class'=>'form-control'])!!}
@@ -50,7 +50,7 @@
             @endforeach
             <script>
                 function pozadinasubmit(id){
-                    $.post("/moderator/sadrzaji-update/"+id+"/1", {_token:'{{csrf_token()}}',sadrzaj:$('#sadrzaji-'+id).val()},function(rezultat) {
+                    $.post("/moderacija/sadrzaji-update/"+id+"/1", {_token:'{{csrf_token()}}',sadrzaj:$('#sadrzaji-'+id).val()},function(rezultat) {
                         $('#div-'+id).html(rezultat);$('#div-'+id).fadeToggle("slow");
                         window.setTimeout(function(){$('#div-'+id).fadeToggle("slow")}, 3000);
                     });

@@ -48,13 +48,13 @@
 
 						</tbody>
 					</table>
-					<button onclick="myFunction()">PDf</button>
+					{{--<button onclick="myFunction()">PDf</button>
 				
 						<script>
 							function myFunction() {
 							    $('#dev-table').tableExport({htmlContent:'false',type:'pdf',escape:'false'});
 							}
-						</script>
+						</script>--}}
 
 				</div>
 			</div>

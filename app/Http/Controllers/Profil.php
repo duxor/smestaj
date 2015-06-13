@@ -24,8 +24,17 @@ class Profil extends Controller {
 		$popunjene_kolone=$this->popunjenekolone();
 		$popunjene_kolone_social=$this->popunjenekolonesocial();
 		//dd($korisnik);
+		$target_dir="galerije/".Session::get('username')."/";
+		if (is_dir($target_dir)){
+		  if ($dh = opendir($target_dir)){
+		    while (($file = readdir($dh)) !== false){
+		      $profil_bg=$file;
+		    }
+		    closedir($dh);
+		  }
+		}
 
-		return view('profil.index', compact('korisnik','procenat_popunjenosti','popunjene_kolone','popunjene_kolone_social'));
+		return view('profil.index', compact('profil_bg','korisnik','procenat_popunjenosti','popunjene_kolone','popunjene_kolone_social'));
     }
     private function popunjenekolone(){
 			$korisnik=Korisnici::where('id',Session::get('id'))->get(['id','ime','prezime','email','username','adresa','grad','telefon','fotografija','facebook','google','twitter','skype'])->first()->toArray();
@@ -40,6 +49,7 @@ class Profil extends Controller {
     }
     private function popunjenekolonesocial(){
 			$korisnik=Korisnici::where('id',Session::get('id'))->get(['facebook','google','twitter','skype'])->first()->toArray();
+			$popunjene_kolone_social=[];
 			foreach($korisnik as $key=>$value)
 			{
 			  if($value != null || $value!='' and $key !== 'id')
@@ -157,9 +167,35 @@ class Profil extends Controller {
 		$podaci=json_decode(Input::get('podaci'));
 		Korisnici::where('id',Session::get('id'))->update([$podaci->kljuc=>$podaci->val]);
 		return json_encode(['msg'=>'Uspešno ste ažurirali podatak','check'=>1]);
+	}
+	public function postBgUpload(){	
+		if(!Security::autentifikacijaTest(2,'min')){
+					echo json_encode(['error'=>'Niste prijavljeni na platformu.']);
+					return;
+				}
+				if (!$_FILES['image']){
+					echo json_encode(['error'=>'Nije pronađena fotografija.']);
+					return;
+				}
+				if (!Input::get('username')) {
+					echo json_encode(['error'=>'Username nije pronađen.']);
+					return;
+				}
+				$folder = 'galerije/'.$_POST['username'].'/profilna_bg.jpg';//.pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+				$success = null;
+				if(file_exists($folder)) unlink($folder);
+				if(move_uploaded_file($_FILES['image']['tmp_name'], $folder)) $success = true;
+				else $success = false;
+				if ($success === true) $output = '[]';
+				elseif ($success === false) {
+					$output = ['error'=>'Greška prilikom upload-a. Kontaktirajte tehničku podršku platforme.'];
+					unlink($folder);
+				} else $output = ['error'=>'Fajlovi nisu procesuirani.'];
+				echo json_encode($output);
+				return;
 
-		 
-		
-		
+
+
+		return Redirect::back();
 	}
 }

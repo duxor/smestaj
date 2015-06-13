@@ -16,10 +16,10 @@
 			    @foreach($objekti as $obj)
 			    		<div class=" well well-sm">
 					      	<div id="sort" class="row">
-								<div style="padding-top:0px;" class="col-md-4">
+								<div style="padding-top:0px;" class="col-md-3">
 		                    		<img  style="height: 150px;" src="/teme/osnovna-paralax/slike/15.jpg" alt="" class="img-rounded img-responsive" />
 					    		</div>										
-								<div  class="col-md-4">
+								<div  class="col-md-3">
 									<h3  style="margin-top:0px; margin-bottom:5px;" >{{$obj['naziv']}}</h3>
 									<i class="glyphicon glyphicon-map-marker"></i>  {{$obj['grad']}}
 									<br/>
@@ -30,27 +30,29 @@
 									<i class="glyphicon glyphicon-user"></i> {{$obj['nalog']}}
 								</div>
 								
-								<div  class="col-md-4">
+								<div  class="col-md-5">
 									@if($obj['opis'])
 										<i class="icon-th-large-outline"></i> Opis: {{$obj['opis']}}
 										<br/><br/>
 									@endif
-										<div id="forma-{{$obj['id']}}" style="position: absolute;top: 10px;right:10px">
-											{!!Form::hidden('id_objekta',$obj['id'])!!}
-											{!!Form::hidden('_token',csrf_token())!!}
-											<div class="status-objekta btn btn-xs btn-primary" data-placement="top" data-toggle="tooltip" @if($obj['aktivan']==0) data-aktivan="false" title="Postavi objekat u stanje aktivan" @else data-aktivan="true" title="Postavi objekat u stanje neaktivan" @endif href="#" onclick='Komunikacija.posalji("/moderacija/objekat-status","forma-{{$obj['id']}}","poruka","vrti","zabrani")'>
-												<span @if($obj['aktivan']==0) class="glyphicon glyphicon-remove" @else class="glyphicon glyphicon-ok" @endif></span>
-											</div>
-											<script>
-												$('.status-objekta').css('cursor','pointer');
-												$('.status-objekta').click(function(){
-													$(this).attr('title','Postavi objekat u stanje '+($(this).data('aktivan')?'aktivan':'neaktivan'));
-													$(this).children('span').toggleClass('glyphicon glyphicon-remove').toggleClass('glyphicon glyphicon-ok');
-													$(this).data('aktivan',$(this).data('aktivan')?'false':'true');
-												});
-											</script>
-											<a href="{!!url('/moderacija/izmeni-objekat/'.$obj['id']) !!}" style="margin-left: 10px" class="btn btn-xs btn-primary" ><span class="glyphicon glyphicon-pencil"> </span></a>
+								</div>
+								<div  class="col-md-1">
+									<div id="forma-{{$obj['id']}}" style="position: absolute;top: 10px;right:10px">
+										{!!Form::hidden('id_objekta',$obj['id'])!!}
+										{!!Form::hidden('_token',csrf_token())!!}
+										<div class="status-objekta btn btn-xs btn-primary" data-placement="top" data-toggle="tooltip" @if($obj['aktivan']==0) data-aktivan="false" title="Postavi objekat u stanje aktivan" @else data-aktivan="true" title="Postavi objekat u stanje neaktivan" @endif href="#" onclick='Komunikacija.posalji("/moderacija/objekat-status","forma-{{$obj['id']}}","poruka","vrti","zabrani")'>
+											<span @if($obj['aktivan']==0) class="glyphicon glyphicon-remove" @else class="glyphicon glyphicon-ok" @endif></span>
 										</div>
+										<script>
+											$('.status-objekta').css('cursor','pointer');
+											$('.status-objekta').click(function(){
+												$(this).attr('title','Postavi objekat u stanje '+($(this).data('aktivan')?'aktivan':'neaktivan'));
+												$(this).children('span').toggleClass('glyphicon glyphicon-remove').toggleClass('glyphicon glyphicon-ok');
+												$(this).data('aktivan',$(this).data('aktivan')?'false':'true');
+											});
+										</script>
+										<a href="{!!url('/moderacija/izmeni-objekat/'.$obj['id']) !!}" style="margin-left: 10px" class="btn btn-xs btn-primary" ><span class="glyphicon glyphicon-pencil"> </span></a>
+									</div>
 								</div>
 							</div>
 						</div>

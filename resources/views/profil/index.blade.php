@@ -1,31 +1,33 @@
 @extends(\App\OsnovneMetode::osnovniNav().".master")
 
 @section('body')
-<div id="container_id"  class="container" style=" position:absolute;top:15px; margin-top:0px; padding-top:0px; width:100%;  height:70%; border-bottom:2px solid #b5b1b1; background: url(/galerije/korisnik/teme/paralax-1/pozadine-1/bg_user_2.jpg) no-repeat center center fixed;">
+<div id="container_id"  class="container" style=" position:absolute;top:15px; margin-top:0px; padding-top:0px; width:100%;  height:70%; border-bottom:2px solid #b5b1b1; background: url(/galerije/{{Session::get('username')}}/profilna_bg.jpg) no-repeat center center fixed;">
      <div class="row">
-       <div id="bg_btn" style="visibility: hidden; margin-bottom:50px; margin-top:7%;" class="col-md-2 col-md-offset-5">
-       {!!Form::open(['id'=>'forma','url'=>'','class'=>'form-horizontal','enctype' => 'multipart/form-data'])!!}
-       {!!Form::button('<span class="glyphicon glyphicon-picture"></span> Izmeni pozadinu', ['class'=>'btn btn-lg btn-success','type'=>'submit'])!!}
-       {!!Form::close()!!}
+       <div id="bg_btn" style="visibility: hidden; margin-bottom:50px; margin-top:7%;" class="col-md-2 col-md-offset-5"> 
+       
+       {{--{!!Form::open(['id'=>'forma','url'=>'','class'=>'form-horizontal','enctype' => 'multipart/form-data'])!!}--}}
+       {!!Form::button('<span  class="glyphicon glyphicon-picture"></span> Izmeni pozadinu', ['data-target'=>'#dodajFoto', 'data-toggle'=>'modal','class'=>'btn btn-lg btn-success'])!!}
+       </div>
+      {{-- {!!Form::close()!!}--}}
          <script>
-         $(document).on('mouseenter','#container_id',function(){
-             $(this).find('#bg_btn').css('visibility','visible').fadeIn('slow');
-            }).on('mouseleave','#container_id',function(){
-              $(this).find('#bg_btn').css('visibility','hiden').fadeOut('slow');
-            });
+           $(document).on('mouseenter','#container_id',function(){
+               $(this).find('#bg_btn').css('visibility','visible').fadeIn('slow');
+              }).on('mouseleave','#container_id',function(){
+                $(this).find('#bg_btn').css('visibility','hiden').fadeOut('slow');
+              });
          </script>
        </div>
-     </div>
+     
 </div>
 <div class="container" style=" position:absolute;top:35%; margin-top:0px; padding-top:0px;">
       <div  class="row">
         <div  class="col-sm-9 col-md-offset-1 toppad">
           <div style="opacity: 0.9; border:none; " class="panel panel-info">
             <div class="panel-body">
-
+              </script>
               <div class="row ">
                 <div id="editing" class="col-md-5" align="center"> <img alt="User Pic" style="width:140px;" src="/galerije/{{Session::get('username')}}/osnovne/profilna.jpg" class="img-thumbnail"> 
-                  <div  class="row">
+                  <div  class="row">{{--social ispod slike--}}
                   @foreach($korisnik as $key=>$val)
                     @if (in_array($key,$popunjene_kolone_social))
                       <td><a  href="//{{$val}}" data-toggle="tooltip" title="{{$val}}"class="btn btn-social-icon btn-{{$key}}"><i class="fa fa-{{$key}}"></i></a></td> 
@@ -35,7 +37,7 @@
                             {!!Form::hidden('kljuc',$key)!!}   
                             {!!Form::hidden('_token',csrf_token())!!}    
                             {!! Form::text('podatak',$val, ['class'=>'form-control'])!!}<br>
-                            {!! Form::button('<span class="glyphicon glyphicon-ok-circle">  </span>  Potvrdi',['class'=>'btn btn-sm btn-success','type'=>'submit']) !!}  
+                            {!! Form::button('<span class="glyphicon glyphicon-ok-circle">  </span>  Potvrdi',['class'=>'btn btn-sm btn-success','type'=>'submit','id'=>'potvrdi']) !!}  
                             {!!Form::close()!!}
                       </div>  
                     @endif  
@@ -73,7 +75,7 @@
                      <tr class="edit">    
                           @if (in_array($key,$popunjene_kolone) and $key !== 'facebook' and $key !== 'google' and $key !== 'twitter' and $key !== 'skype')
                             <td>{{ucfirst($key)}}</td>
-                            <td ><span class="span_bg" >{{$val}}</span></td>
+                            <td ><span class="span_bg" id="val_{{$key}}">{{$val}}</span></td>
                             <td ><button id="member{{$key}}" style="display: none;" class="btn btn-success btn-xs "  data-contentwrapper=".mycontent{{$key}}"  rel="popover"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
                             <div style="display:none;" class="mycontent{{$key}}">      
                                 {!!Form::open(['url'=>'/korisnik/profil/edit-profil/','class'=>'form-horizontal'])!!}
@@ -120,7 +122,7 @@
                  <div id="poruka" style="display:none"></div>
                     <table id="table_hover" style="border-left:5px solid #5AC4DC" class="table table-user-information">
                       <tbody>
-                    @foreach($korisnik as $key=>$val)
+                    @foreach($korisnik as $key=>$val){{--popuni profil--}}
                       @if (in_array($val,array('null','',)))
                           <tr id="forma-{{$key}}" class="edit">
                           {!!Form::hidden('kljuc',$key)!!}
@@ -190,6 +192,33 @@
           showText: true//show progress text or not
           });
         </script>
+          <div class="modal fade" id="dodajFoto">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button class="close" data-dismiss="modal">&times;</button>
+                  <h2>Dodaj novu fotografiju</h2>
+                </div>
+                <div class="modal-body">
+                  <input id="input-700" name="image" type="file" multiple=false class="file-loading">
+                </div>
+                <div class="modal-footer">
+                  <a href="/{{\App\OsnovneMetode::osnovniNav()}}/profil" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-ok"></span> Završeno dodavanje</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          {!! HTML::style('/dragdrop/css/fileinput.css') !!}
+          {!! HTML::script('/dragdrop/js/fileinput.min.js') !!}
+          <script>
+            $("#input-700").fileinput({
+              uploadExtraData: {username: '{{Session('username')}}', _token:'{{csrf_token()}}'},
+              uploadUrl: '/{{\App\OsnovneMetode::osnovniNav()}}/profil/bg-upload',
+              uploadAsync: true,
+              maxFileCount: 10,
+              overwriteInitial: true
+            });
+          </script>
       </div>
     </div>
 </div>
