@@ -6,7 +6,7 @@
        <div id="bg_btn" style="visibility: hidden; margin-bottom:50px; margin-top:7%;" class="col-md-2 col-md-offset-5"> 
        
        {{--{!!Form::open(['id'=>'forma','url'=>'','class'=>'form-horizontal','enctype' => 'multipart/form-data'])!!}--}}
-       {!!Form::button('<span  class="glyphicon glyphicon-picture"></span> Izmeni pozadinu', ['data-target'=>'#dodajFoto', 'data-toggle'=>'modal','class'=>'btn btn-lg btn-success'])!!}
+       {!!Form::button('<span  class="glyphicon glyphicon-picture"></span> Izmeni pozadinu', ['id'=>'bg','data-target'=>'#dodajFoto', 'data-toggle'=>'modal','class'=>'btn btn-lg btn-success'])!!}
        </div>
       {{-- {!!Form::close()!!}--}}
          <script>
@@ -26,7 +26,7 @@
             <div class="panel-body">
               </script>
               <div class="row ">
-                <div id="editing" class="col-md-5" align="center"> <img alt="User Pic" style="width:140px;" src="/galerije/{{Session::get('username')}}/osnovne/profilna.jpg" class="img-thumbnail"> 
+                <div id="editing" class="col-md-5" align="center"><a id="slika" href="#" data-target="#dodajFoto1" data-toggle="modal"> <img alt="User Pic" style="width:140px;" src="/galerije/{{Session::get('username')}}/osnovne/profilna.jpg" class="img-thumbnail"></a> 
                   <div  class="row">{{--social ispod slike--}}
                   @foreach($korisnik as $key=>$val)
                     @if (in_array($key,$popunjene_kolone_social))
@@ -208,16 +208,45 @@
               </div>
             </div>
           </div>
+          <div class="modal fade" id="dodajFoto1">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button class="close" data-dismiss="modal">&times;</button>
+                  <h2>Dodaj novu fotografiju1</h2>
+                </div>
+                <div class="modal-body">
+                  <input id="input-701" name="image" type="file" multiple=false class="file-loading">
+                </div>
+                <div class="modal-footer">
+                  <a href="/{{\App\OsnovneMetode::osnovniNav()}}/profil" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-ok"></span> Završeno dodavanje</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
           {!! HTML::style('/dragdrop/css/fileinput.css') !!}
           {!! HTML::script('/dragdrop/js/fileinput.min.js') !!}
           <script>
             $("#input-700").fileinput({
-              uploadExtraData: {username: '{{Session('username')}}', _token:'{{csrf_token()}}'},
-              uploadUrl: '/{{\App\OsnovneMetode::osnovniNav()}}/profil/bg-upload',
-              uploadAsync: true,
-              maxFileCount: 10,
-              overwriteInitial: true
-            });
+                          uploadExtraData: {username: '{{Session('username')}}', _token:'{{csrf_token()}}'},
+                          uploadUrl: '/{{\App\OsnovneMetode::osnovniNav()}}/profil/bg-upload',
+                          uploadAsync: true,
+                          maxFileCount: 10,
+                          overwriteInitial: true
+                        });
+
+
+            $("#input-701").fileinput({
+                          uploadExtraData: {username: '{{Session('username')}}', _token:'{{csrf_token()}}'},
+                          uploadUrl: '/{{\App\OsnovneMetode::osnovniNav()}}/profil/img-upload',
+                          uploadAsync: true,
+                          maxFileCount: 10,
+                          overwriteInitial: true
+                        });
+
+            
+            
           </script>
       </div>
     </div>

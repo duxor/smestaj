@@ -185,7 +185,8 @@ class Profil extends Controller {
 					echo json_encode(['error'=>'Username nije pronađen.']);
 					return;
 				}
-				$folder = 'galerije/'.$_POST['username'].'/profilna_bg.jpg';//.pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+
+				$folder = 'galerije/'.$_POST['username'].'/profilna_bg.jpg';
 				$success = null;
 				if(file_exists($folder)) unlink($folder);
 				if(move_uploaded_file($_FILES['image']['tmp_name'], $folder)) $success = true;
@@ -197,9 +198,34 @@ class Profil extends Controller {
 				} else $output = ['error'=>'Fajlovi nisu procesuirani.'];
 				echo json_encode($output);
 				return;
+		return Redirect::back();
+	}
+	public function postImgUpload(){	
+		if(!Security::autentifikacijaTest(2,'min')){
+					echo json_encode(['error'=>'Niste prijavljeni na platformu.']);
+					return;
+				}
+				if (!$_FILES['image']){
+					echo json_encode(['error'=>'Nije pronađena fotografija.']);
+					return;
+				}
+				if (!Input::get('username')) {
+					echo json_encode(['error'=>'Username nije pronađen.']);
+					return;
+				}
 
-
-
+				$folder = 'galerije/'.$_POST['username'].'/osnovne/profilna.jpg';
+				$success = null;
+				if(file_exists($folder)) unlink($folder);
+				if(move_uploaded_file($_FILES['image']['tmp_name'], $folder)) $success = true;
+				else $success = false;
+				if ($success === true) $output = '[]';
+				elseif ($success === false) {
+					$output = ['error'=>'Greška prilikom upload-a. Kontaktirajte tehničku podršku platforme.'];
+					unlink($folder);
+				} else $output = ['error'=>'Fajlovi nisu procesuirani.'];
+				echo json_encode($output);
+				return;
 		return Redirect::back();
 	}
 }
