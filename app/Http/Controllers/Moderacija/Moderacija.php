@@ -276,7 +276,6 @@ class Moderacija extends Controller {
 	}
 	public function postNoviSmestaj(){//dd(Input::all());
 		if(Security::autentifikacijaTest(4,'min')){
-
 			$validator=Validator::make([
             'slug'=>Input::get('slug'),
             'cena'=>Input::get('cena')
@@ -303,6 +302,8 @@ class Moderacija extends Controller {
 			$target_file = $target_dir . basename($_FILES["naslovna_foto"]["name"]);
 			move_uploaded_file($_FILES["naslovna_foto"]["tmp_name"], $target_file);
 			
+			
+
             $novi=Smestaj::firstOrNew(['id'=>Input::get('id')]);
             $novi->objekat_id = Input::get('nazivobjekta'); 
             $novi->aktivan = '1';
@@ -315,13 +316,16 @@ class Moderacija extends Controller {
             $novi->save();
             $id=$novi->id;
     
-			if(Input::has('dodatna_oprema_id'))
-            foreach ( Input::get('dodatna_oprema_id') as $opr) {
-            	$dod=new Dodatno();
-            	$dod->smestaj_id=$id;
-            	$dod->dodatna_oprema_id=$opr;
-            	$dod->save();
-            }
+			if(Input::has('oprema_filter'))
+			{	
+	            foreach ( Input::get('oprema_filter') as $key=>$val)
+	            {
+	            	$dod=new Dodatno();
+	            	$dod->smestaj_id=$id;
+	            	$dod->dodatna_oprema_id=$key;
+	            	$dod->save();
+	            }
+        	}
             return Redirect::back()->with('message','Uspešno ste dodali novi smeštaj!');
         }else return Security::rediectToLogin();
 		

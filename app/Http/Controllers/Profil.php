@@ -23,7 +23,6 @@ class Profil extends Controller {
 		$procenat_popunjenosti=$this->proverapopunjenostiprofila();
 		$popunjene_kolone=$this->popunjenekolone();
 		$popunjene_kolone_social=$this->popunjenekolonesocial();
-		//dd($korisnik);
 		$target_dir="galerije/".Session::get('username')."/";
 		if (is_dir($target_dir)){
 		  if ($dh = opendir($target_dir)){

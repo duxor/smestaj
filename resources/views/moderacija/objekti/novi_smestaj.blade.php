@@ -23,7 +23,8 @@
     @endif
 <div class="panel panel-primary clearfix">
 	<div  class="panel-heading">Dodavanje novog smeštaja</div>
-	    <div class="panel-body">
+	    <div class="panel-body"> 
+	    {!!Form::open(['id'=>'forma','url'=>'/moderacija/novi-smestaj','class'=>'form-horizontal','enctype' => 'multipart/form-data'])!!}
 	      	<div id="sort" class="col-sm-5">
 			      	@if(!isset($objekti))
 				        {{$objekti=null}}
@@ -35,7 +36,7 @@
 					        {{ Session::get('message')}}
 					    </div>
 					@endif
-				    {!!Form::open(['id'=>'forma','url'=>'/moderacija/novi-smestaj','class'=>'form-horizontal','enctype' => 'multipart/form-data'])!!}
+				   
 					   
 					    <div class="form-group">
 							{!! Form::label('nazivobjekta','Dodavanje smeštaja u objekat:',['class'=>'control-label col-sm-7']) !!}
@@ -90,15 +91,16 @@
 					<h4>Izaberite dodatnu opremu:</h4>
 					@foreach($dodatna_oprema as  $dodatna)
 					<div class="col-sm-12">
-						<input type="checkbox"  name="oprema_filter" value="0" class="my-checkbox" data-size="normal" data-on-text="Da" data-off-text="Ne" data-key="{{$dodatna['id']}}" data-label-text="{{$dodatna['naziv']}}">
+						<input type="checkbox"  name="oprema_filter[{{$dodatna['id']}}]" value="0" class="my-checkbox{{$dodatna['id']}}" data-size="normal" data-on-text="Da" data-off-text="Ne" data-key="{{$dodatna['id']}}" data-label-text="{{$dodatna['naziv']}}"/>
 		            </div>
-		            @endforeach
 		            <script>
-		            $(".my-checkbox").bootstrapSwitch();
-		            $('input[name="oprema_filter"]').on('switchChange.bootstrapSwitch', function(event, state) {
+		            $(".my-checkbox{{$dodatna['id']}}").bootstrapSwitch();
+		            $('.my-checkbox{{$dodatna['id']}}').on('switchChange.bootstrapSwitch', function(event, state) {
 					     $(this).val(state?1:0);
 					});
 					</script>
+		            @endforeach
+		            
 	        	</div>
 	            
 			</div>{!!Form::close()!!}
