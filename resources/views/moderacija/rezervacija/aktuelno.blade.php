@@ -81,13 +81,13 @@
 					</table>
  
 				
-				<button onclick="myFunction()">PDf</button>
+				{{--<button onclick="myFunction()">PDf</button>
 				
 				<script>
 					function myFunction() {
 					    $('#tableID').tableExport({type:'pdf',escape:'false'});
 					}
-				</script>
+				</script>--}}
 </div>
 			</div>
 		</div>
