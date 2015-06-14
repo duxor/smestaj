@@ -23,6 +23,8 @@
 					<div class="panel-body" id="sdf">
 						<input type="text" class="form-control" id="dev-table-filter" data-action="filter" data-filters="#dev-table" placeholder="Unesite naziv, vrstu smestaja, kapacitet ili broj osoba!" />
 					</div>
+						<div id="vrti" style="display:none;"><center><i class='icon-spin4 animate-spin' style="font-size: 200%"></i></center></div>
+						<div id="poruka" style="display:none"></div>
 					<table class="table table-hover" id="dev-table">
 						<thead>
 							<tr>
@@ -31,7 +33,7 @@
 								<th> Vrsta smeštaja</th>
 								<th>Naziv kapaciteta</th>
 								<th>Broj osoba</th>
-								<th></th>
+								<th></th><th></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -42,7 +44,25 @@
 								<td>{{$obj['naziv_smestaja']}}</td>
 								<td>{{$obj['naziv_kapaciteta']}}</td>
 								<td>{{$obj['broj_osoba']}}</td>
-								<td><p data-placement="top" data-toggle="tooltip" title="Ažuriraj"><a href="{!!url('/moderacija/izmeni-smestaj/'.$obj['id']) !!}" class="btn btn-xs btn-primary" ><span class="glyphicon glyphicon-pencil"></span></a></p></td>
+								<td>
+									<div id="forma-{{$obj['id']}}" >
+										{!!Form::hidden('id_objekta',$obj['id'])!!}
+										{!!Form::hidden('_token',csrf_token())!!}
+										<div class="status-smestaja btn btn-xs btn-primary" data-placement="top" data-toggle="tooltip" @if($obj['aktivan']==0) data-aktivan="false" title="Postavi smeštaj u stanje aktivan" @else data-aktivan="true" title="Postavi smeštaj u stanje neaktivan" @endif href="#" onclick='Komunikacija.posalji("/moderacija/smestaj-status","forma-{{$obj['id']}}","poruka","vrti","zabrani")'>
+										<span @if($obj['aktivan']==0) class="glyphicon glyphicon-remove" @else class="glyphicon glyphicon-ok" @endif></span>
+										</div>
+									</div>
+									<script>
+										$('.status-smestaja').css('cursor','pointer');
+										$('.status-smestaja').click(function(){
+											$(this).attr('title','Postavi smeštaj u stanje '+($(this).data('aktivan')?'aktivan':'neaktivan'));
+											$(this).children('span').toggleClass('glyphicon glyphicon-remove').toggleClass('glyphicon glyphicon-ok');
+											$(this).data('aktivan',$(this).data('aktivan')?'false':'true');
+										});
+									</script>
+								</td><td>
+									<p data-placement="top" data-toggle="tooltip" title="Ažuriraj"><a href="{!!url('/moderacija/izmeni-smestaj/'.$obj['id']) !!}" class="btn btn-xs btn-primary" ><span class="glyphicon glyphicon-pencil"></span></a></p>
+								</td>
 							</tr>
 							@endforeach
 
@@ -60,7 +80,7 @@
 			</div>
 		</div>
 	</div>
-@else <h1 class="col-sm-12">Nema objekata u bazi podataka!</h1>
+@else <h1 class="col-sm-12">Nije dodata ni jedna smeštajna jedinica!</h1>
 @endif
 
 

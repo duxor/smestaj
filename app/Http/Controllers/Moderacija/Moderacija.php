@@ -245,7 +245,7 @@ class Moderacija extends Controller {
 						->join('nalog','nalog.id','=','objekat.nalog_id')
 						->join('vrsta_smestaja','vrsta_smestaja.id','=','smestaj.vrsta_smestaja_id')
 						->join('kapacitet','kapacitet.id','=','smestaj.kapacitet_id')
-							->get(['smestaj.id','smestaj.naziv','nalog.slug as app','smestaj.slug','objekat.naziv as naziv_objekta','vrsta_smestaja.naziv as naziv_smestaja','kapacitet.naziv as naziv_kapaciteta','kapacitet.broj_osoba as broj_osoba'])->toArray();
+							->get(['smestaj.id','smestaj.naziv','nalog.slug as app','smestaj.slug','smestaj.aktivan','objekat.naziv as naziv_objekta','vrsta_smestaja.naziv as naziv_smestaja','kapacitet.naziv as naziv_kapaciteta','kapacitet.broj_osoba as broj_osoba'])->toArray();
 		return Security::autentifikacija('moderacija.objekti.pregled_smestaja',compact('objekti','nalog'),4);
 	}
 	public function getIzmeniSmestaj($id){
@@ -296,7 +296,6 @@ class Moderacija extends Controller {
 			->join('objekat','objekat.nalog_id','=','nalog.id')
 			->get(['korisnici.username','nalog.slug','objekat.naziv'])->first()->toArray();
 
-			//dd($podaci);
 			OsnovneMetode::kreirjFolder("galerije/".$podaci['username']."/aplikacije/".$podaci['slug']."/smestaji/".Input::get('slug')."");
 
 			$target_dir="galerije/".$podaci['username']."/aplikacije/".$podaci['slug']."/smestaji/".Input::get('slug')."/";
@@ -369,6 +368,14 @@ class Moderacija extends Controller {
 		$objekat->aktivan=$objekat->aktivan?0:1;
 		$objekat->save();
 		return json_encode(['msg'=>'Uspešno ste postavili status objekta na '.($objekat->aktivan?'aktivan':'neaktivan'),'check'=>1]);
+	}
+	public function postSmestajStatus(){
+		if(!Security::autentifikacijaTest(4,'min')) return json_encode(['msg'=>'Dogodila se greška. Proverite podatke i pokušajte ponovo.','check'=>0]);
+		$podaci=json_decode(Input::get('podaci'));
+		$objekat=Smestaj::where('smestaj.id',$podaci->id_objekta)->get(['smestaj.id','smestaj.aktivan'])->first();
+		$objekat->aktivan=$objekat->aktivan?0:1;
+		$objekat->save();
+		return json_encode(['msg'=>'Uspešno ste postavili status smeštaja na '.($objekat->aktivan?'aktivan':'neaktivan'),'check'=>1]);
 	}
 	public function postOdgovor(){
 		if(Security::autentifikacijaTest(4,'min')){
