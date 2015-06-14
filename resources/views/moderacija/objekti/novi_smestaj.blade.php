@@ -111,13 +111,22 @@
 					$(function (){
 						$('#slika').tooltip();
 						$("input:file").change(function (){
-							$("#slika").attr('src','');
-							$("#slika").attr('alt','Izabrali ste fotografiju: '+$(this).val());
+							readURL(this);
 						});
 					})
 					$('#slika').click(function(){
 						$('#fileSlika').click();
 					});
+					function readURL(input) {
+					    if (input.files && input.files[0]) {
+					        var reader = new FileReader();
+					        reader.onload = function (e) {
+					            $('#slika').attr('src', e.target.result);
+					        }
+					        reader.readAsDataURL(input.files[0]);
+					    }
+					}
+
 				</script>
 			</div>
 	    </div>
