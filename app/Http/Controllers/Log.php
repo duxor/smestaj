@@ -18,4 +18,7 @@ class Log extends Controller {
 	public function postRegistracija(){
 		return Security::registracija(Input::get('reg_username'),Input::get('reg_email'),Input::get('reg_password'),Input::get('reg_password_potvrda'),Input::get('reg_prezime'),Input::get('reg_ime'),Input::get('return_to_url'));
 	}
+	public function getTest(){
+		return 'Token:239';
+	}
 }

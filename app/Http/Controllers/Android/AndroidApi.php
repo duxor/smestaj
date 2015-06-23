@@ -8,4 +8,7 @@ class AndroidApi extends Controller {
 		$_POST['_token']=csrf_token();
 		return Redirect::to(Input::get('url'))->withInput(Input::All());
 	}
+    public function getTest(){
+        return view('test',['podaci'=>[]]);
+    }
 }
