@@ -199,42 +199,103 @@
             </div>
             @endif
             <p id="rezultati"></p>
-            @foreach($podaci['rezultat'] as $smestaj)
-                <div class="smestaj smestaj-{{isset($smestaj['id'])?$smestaj['id']:'app'}}">
-                    <hr>
-                    <div class="col-sm-4">
-                        <a @if(!isset($podaci['pretragaApp'])) href="/{{$smestaj['slugApp']}}/{{$smestaj['slugSmestaj']}}" @else href="/{{$smestaj['slug']}}" @endif >
-                            <img style="height: 150px;" alt="fotografija smeštajnog kapaciteta" @if(isset($podaci['pretragaApp'])) src="/{{\App\OsnovneMetode::randomFotoZaNalog($smestaj['slug'])}}" @elseif($smestaj['naslovna_foto'])src="/{{$smestaj['naslovna_foto']}}" @else src="/{{\App\OsnovneMetode::randomFoto('galerije/'.$smestaj['username'].'/aplikacije/'.$smestaj['slugApp'].'/smestaji/'.$smestaj['slugSmestaj'])}}" @endif>
-                        </a>
-                        <p>
-                            <a @if(!isset($podaci['pretragaApp'])) href="/{{$smestaj['slugApp']}}/{{$smestaj['slugSmestaj']}}" @@else href="/{{$smestaj['slug']}}" @endif  class="btn btn-lg btn-default"><i class="glyphicon glyphicon-zoom-in"></i> Pregled</a>
-                            @if(!isset($podaci['pretragaApp']))
-                                @if(\App\Security::autentifikacijaTest(2,'min'))
-                                    <button class="btn btn-lg btn-info m" data-toggle="modal" data-target="#rezervacija" data-cena="{{$smestaj['cena_osoba']}}" data-id="{{$smestaj['id']}}" data-app="{{$smestaj['nazivApp']}}" data-naziv="{{$smestaj['naziv']}}" data-vrobjekta="{{$smestaj['vrsta_smestaja']}}" data-maxosoba="{{$smestaj['broj_osoba']}}" data-adresa="{{$smestaj['adresa']}}" data-img="/teme/osnovna-paralax/slike/15.jpg"><span class="glyphicon glyphicon-check"></span> Rezervacija</button>
-                                    <button class="btn btn-lg btn-default _tooltip zelja" @if($smestaj['zelja']) data-zelja="{{$smestaj['zelja']}}" style="color:red" title="Izbaci iz liste zelja" @else data-zelja="false" title="Dodaj u listu želja" @endif data-zid="{{$smestaj['id']}}" data-toggle="tooltip" data-placement="bottom"><i class="glyphicon glyphicon-heart"></i></button>
-                                @else
-                                    <a href="/log/login" class="btn btn-lg btn-info"><span class="glyphicon glyphicon-check"></span> Rezervacija</a>
-                                    <a href="/log/login" class="btn btn-lg btn-default _tooltip"  title="Dodaj u listu želja" data-toggle="tooltip" data-placement="bottom"><i class="glyphicon glyphicon-heart"></i></a>
-                                @endif
-                            @endif
-                        </p>
+            <div  class="container ">
+                <div class="row">
+                    <div class="span12">
+                        <p class="lead">Izaberite prikaz:</p>
+                        <div id="tab" class="btn-group" data-toggle="buttons-radio">
+                            <a href="#listing" class="btn btn-large btn-info active" data-toggle="tab"><span class="glyphicon glyphicon-th-list"> </span> Lista</a>
+                            <a href="#slike" class="btn btn-large btn-info" data-toggle="tab"><span class="glyphicon glyphicon-th"> </span> Slike</a>
+                        </div>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="listing">
+                                <br>
+                                @foreach($podaci['rezultat'] as $smestaj)
+                                    <div class="smestaj smestaj-{{isset($smestaj['id'])?$smestaj['id']:'app'}}">
+                                        <hr>
+                                        <div class="col-sm-4">
+                                            <a @if(!isset($podaci['pretragaApp'])) href="/{{$smestaj['slugApp']}}/{{$smestaj['slugSmestaj']}}" @else href="/{{$smestaj['slug']}}" @endif >
+                                                <img style="height: 150px;" alt="fotografija smeštajnog kapaciteta" @if(isset($podaci['pretragaApp'])) src="/{{\App\OsnovneMetode::randomFotoZaNalog($smestaj['slug'])}}" @elseif($smestaj['naslovna_foto'])src="/{{$smestaj['naslovna_foto']}}" @else src="/{{\App\OsnovneMetode::randomFoto('galerije/'.$smestaj['username'].'/aplikacije/'.$smestaj['slugApp'].'/smestaji/'.$smestaj['slugSmestaj'])}}" @endif>
+                                            </a>
+                                            <p>
+                                                <a @if(!isset($podaci['pretragaApp'])) href="/{{$smestaj['slugApp']}}/{{$smestaj['slugSmestaj']}}" @@else href="/{{$smestaj['slug']}}" @endif  class="btn btn-lg btn-default"><i class="glyphicon glyphicon-zoom-in"></i> Pregled</a>
+                                                @if(!isset($podaci['pretragaApp']))
+                                                    @if(\App\Security::autentifikacijaTest(2,'min'))
+                                                        <button class="btn btn-lg btn-info m" data-toggle="modal" data-target="#rezervacija" data-cena="{{$smestaj['cena_osoba']}}" data-id="{{$smestaj['id']}}" data-app="{{$smestaj['nazivApp']}}" data-naziv="{{$smestaj['naziv']}}" data-vrobjekta="{{$smestaj['vrsta_smestaja']}}" data-maxosoba="{{$smestaj['broj_osoba']}}" data-adresa="{{$smestaj['adresa']}}" data-img="/teme/osnovna-paralax/slike/15.jpg"><span class="glyphicon glyphicon-check"></span> Rezervacija</button>
+                                                        <button class="btn btn-lg btn-default _tooltip zelja" @if($smestaj['zelja']) data-zelja="{{$smestaj['zelja']}}" style="color:red" title="Izbaci iz liste zelja" @else data-zelja="false" title="Dodaj u listu želja" @endif data-zid="{{$smestaj['id']}}" data-toggle="tooltip" data-placement="bottom"><i class="glyphicon glyphicon-heart"></i></button>
+                                                    @else
+                                                        <a href="/log/login" class="btn btn-lg btn-info"><span class="glyphicon glyphicon-check"></span> Rezervacija</a>
+                                                        <a href="/log/login" class="btn btn-lg btn-default _tooltip"  title="Dodaj u listu želja" data-toggle="tooltip" data-placement="bottom"><i class="glyphicon glyphicon-heart"></i></a>
+                                                    @endif
+                                                @endif
+                                            </p>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <h3 class="smestajNaslov">{{!isset($podaci['pretragaApp'])?$smestaj['nazivApp']:$smestaj['naziv']}}</h3>
+                                            <table class="moja-tabela">
+                                                @if(!isset($podaci['pretragaApp']))
+                                                    <tr><td class="nDn">Naziv objekta:</td><td>{{$smestaj['naziv']}}</td></tr>
+                                                    <tr><td class="nDn">Vrsta objekta:</td><td>{{$smestaj['vrsta_smestaja']}}</td></tr>
+                                                    <tr><td class="nDn">Broj mesta:</td><td>{{$smestaj['broj_osoba']}}</td></tr>
+                                                    <tr><td class="nDn">Adresa:</td><td>{{$smestaj['adresa']}}</td></tr>
+                                                    <tr><td class="nDn">Cena (po osobi):</td><td>{{$smestaj['cena_osoba']}} din</td></tr>
+                                                @else
+                                                    <tr><td class="nDn">Opis:</td><td>{{$smestaj['opis']?$smestaj['opis']:'Opis nije dodat za ovaj brend.'}}</td></tr>
+                                                @endif
+                                            </table>
+                                        </div>
+                                    </div><br clear="all">
+                                @endforeach
+                            </div>
+                            <div class="tab-pane" id="slike">
+                                <br>
+                                @foreach($podaci['rezultat'] as $smestaj)
+                                    <div class="smestaj smestaj-{{isset($smestaj['id'])?$smestaj['id']:'app'}}">
+                                        <div class="col-sm-4">
+                                            <div style="margin: 25px;">
+                                                <div style="position: relative;">
+                                                    <a  @if(!isset($podaci['pretragaApp'])) href="/{{$smestaj['slugApp']}}/{{$smestaj['slugSmestaj']}}" @else href="/{{$smestaj['slug']}}" @endif >
+                                                        <img style="height: 150px;" alt="fotografija smeštajnog kapaciteta" @if(isset($podaci['pretragaApp'])) src="/{{\App\OsnovneMetode::randomFotoZaNalog($smestaj['slug'])}}" @elseif($smestaj['naslovna_foto'])src="/{{$smestaj['naslovna_foto']}}" @else src="/{{\App\OsnovneMetode::randomFoto('galerije/'.$smestaj['username'].'/aplikacije/'.$smestaj['slugApp'].'/smestaji/'.$smestaj['slugSmestaj'])}}" @endif>
+                                                    </a>
+                                                    <button style="position: absolute; bottom: 0%; left: 0%
+                                                    " class="btn btn-lg btn-default _tooltip zelja" @if($smestaj['zelja']) data-zelja="{{$smestaj['zelja']}}" style="color:red" title="Izbaci iz liste zelja" @else data-zelja="false" title="Dodaj u listu želja" @endif data-zid="{{$smestaj['id']}}" data-toggle="tooltip" data-placement="bottom"><i class="glyphicon glyphicon-heart"></i></button>
+                                                </div>
+                                            <p>
+                                                <div class="row">
+                                                    <a @if(!isset($podaci['pretragaApp'])) href="/{{$smestaj['slugApp']}}/{{$smestaj['slugSmestaj']}}" @@else href="/{{$smestaj['slug']}}" @endif  class="btn btn-lg btn-default"><i class="glyphicon glyphicon-zoom-in"></i> Pregled</a>
+                                                    @if(!isset($podaci['pretragaApp']))
+                                                        @if(\App\Security::autentifikacijaTest(2,'min'))
+
+                                                                <button class="btn btn-lg btn-info m" data-toggle="modal" data-target="#rezervacija" data-cena="{{$smestaj['cena_osoba']}}" data-id="{{$smestaj['id']}}" data-app="{{$smestaj['nazivApp']}}" data-naziv="{{$smestaj['naziv']}}" data-vrobjekta="{{$smestaj['vrsta_smestaja']}}" data-maxosoba="{{$smestaj['broj_osoba']}}" data-adresa="{{$smestaj['adresa']}}" data-img="/teme/osnovna-paralax/slike/15.jpg"><span class="glyphicon glyphicon-check"></span> Rezervacija</button>
+
+                                                </div>
+                                                @else
+                                                        <a href="/log/login" class="btn btn-lg btn-info"><span class="glyphicon glyphicon-check"></span> Rezervacija</a>
+                                                        <a href="/log/login" class="btn btn-lg btn-default _tooltip"  title="Dodaj u listu želja" data-toggle="tooltip" data-placement="bottom"><i class="glyphicon glyphicon-heart"></i></a>
+                                                    @endif
+                                                @endif
+                                            </p>
+                                            <h3 class="smestajNaslov">{{!isset($podaci['pretragaApp'])?$smestaj['nazivApp']:$smestaj['naziv']}}</h3>
+                                            <table class="moja-tabela">
+                                                @if(!isset($podaci['pretragaApp']))
+                                                    <tr><td class="nDn">Naziv objekta:</td><td>{{$smestaj['naziv']}}</td></tr>
+                                                    <tr><td class="nDn">Vrsta objekta:</td><td>{{$smestaj['vrsta_smestaja']}}</td></tr>
+                                                    <tr><td class="nDn">Broj mesta:</td><td>{{$smestaj['broj_osoba']}}</td></tr>
+                                                    <tr><td class="nDn">Adresa:</td><td>{{$smestaj['adresa']}}</td></tr>
+                                                    <tr><td class="nDn">Cena (po osobi):</td><td>{{$smestaj['cena_osoba']}} din</td></tr>
+                                                @else
+                                                    <tr><td class="nDn">Opis:</td><td>{{$smestaj['opis']?$smestaj['opis']:'Opis nije dodat za ovaj brend.'}}</td></tr>
+                                                @endif
+                                            </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-sm-8">
-                        <h3 class="smestajNaslov">{{!isset($podaci['pretragaApp'])?$smestaj['nazivApp']:$smestaj['naziv']}}</h3>
-                        <table class="moja-tabela">
-                            @if(!isset($podaci['pretragaApp']))
-                                <tr><td class="nDn">Naziv objekta:</td><td>{{$smestaj['naziv']}}</td></tr>
-                                <tr><td class="nDn">Vrsta objekta:</td><td>{{$smestaj['vrsta_smestaja']}}</td></tr>
-                                <tr><td class="nDn">Broj mesta:</td><td>{{$smestaj['broj_osoba']}}</td></tr>
-                                <tr><td class="nDn">Adresa:</td><td>{{$smestaj['adresa']}}</td></tr>
-                                <tr><td class="nDn">Cena (po osobi):</td><td>{{$smestaj['cena_osoba']}} din</td></tr>
-                            @else
-                                <tr><td class="nDn">Opis:</td><td>{{$smestaj['opis']?$smestaj['opis']:'Opis nije dodat za ovaj brend.'}}</td></tr>
-                            @endif
-                        </table>
-                    </div>
-                </div><br clear="all">
-            @endforeach
+                </div>
+            </div>
             <div class="modal fade" id="rezervacija" tabindex="-1" role="dialog" >
                 <div class="modal-dialog">
                     <div class="modal-content">

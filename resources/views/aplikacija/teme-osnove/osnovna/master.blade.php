@@ -27,6 +27,7 @@
     {!! HTML::style('css/bootstrap-switch.css') !!}
     {!!HTML::style('css/bootstrap-social.css')!!}
     {!!HTML::style('css/font-awesome.css')!!}
+    {!!HTML::style('css/tab_panel.css')!!}
 
     {!! HTML::script('js/jquery-3.0.js') !!}
     {!! HTML::script('js/datepicker.js') !!}
