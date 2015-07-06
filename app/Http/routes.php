@@ -1,6 +1,7 @@
 <?php
 
 Route::controller('/android','Android\AndroidApi');
+Route::controller('/mailer','Mailer\Mailer');
 
 Route::controller('/{pravaSlug}/mailbox','MailboxC');
 Route::controller('/{pravaSlug}/profil','Profil');
