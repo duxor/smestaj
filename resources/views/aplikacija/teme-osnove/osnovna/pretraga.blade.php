@@ -261,7 +261,7 @@
                                                         @if(\App\Security::autentifikacijaTest(2,'min'))
                                                             <button style="position: absolute; bottom: 0%; left: 0%;  opacity: 0.7;" class="btn btn-lg btn-default _tooltip zelja" @if($smestaj['zelja']) data-zelja="{{$smestaj['zelja']}}" style="color:red" title="Izbaci iz liste zelja" @else data-zelja="false" title="Dodaj u listu želja" @endif data-zid="{{$smestaj['id']}}" data-toggle="tooltip" data-placement="bottom"><i class="glyphicon glyphicon-heart"></i></button>
                                                         @else
-                                                            <a style="position: absolute; bottom: 0%; left: 0%;  opacity: 0.7;" href="/log/login" class="btn btn-lg btn-default _tooltip"  title="Dodaj u listu želja" data-toggle="tooltip" data-placement="bottom"><i class="glyphicon glyphicon-heart"></i></a>
+                                                            <a style="position: absolute; z=1000; bottom: 0%; left: 0%;  opacity: 0.7;" href="/log/login" class="btn btn-lg btn-default _tooltip"  title="Dodaj u listu želja" data-toggle="tooltip" data-placement="bottom"><i class="glyphicon glyphicon-heart"></i></a>
 
                                                         @endif
                                                     @endif
