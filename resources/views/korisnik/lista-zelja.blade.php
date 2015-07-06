@@ -6,7 +6,7 @@
 			<div class="col-md-12">
 				<div class="panel panel-primary">
 					<div class="panel-heading">
-						<h3 class="panel-title">Llista želja</h3>
+						<h3 class="panel-title">Lista želja</h3>
 					</div>
 					
 					<table class="table table-hover" id="dev-table">
@@ -27,8 +27,9 @@
 								<td>{{$lista['naziv_kapaciteta']}}</td>
 								<td>{{$lista['broj_osoba']}}</td>
 								<td>
-									{!!Form::open(['url'=>'/aplikacija/lista-zelja-dodaj','class'=>'form-horizontal'])!!}
-				    					{!!Form::hidden('zelja',$lista['id'])!!}
+									{!!Form::open(['url'=>'/aplikacija/lista-zelja-ukloni','class'=>'form-horizontal'])!!}
+				    					{!!Form::hidden('aktivan',$lista['aktivan'])!!}
+                                        {!!Form::hidden('id_lista_zelja',$lista['id_lista_zelja'])!!}
 										<p data-placement="top" data-toggle="tooltip" title="Ukloni iz liste"><button  class="btn btn-xs btn-primary" type="submit" ><span class="glyphicon glyphicon-remove"></span></button></p>
 									{!!Form::close()!!}
 								</td>

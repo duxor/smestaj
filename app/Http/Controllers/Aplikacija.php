@@ -77,6 +77,10 @@ class Aplikacija extends Controller {
 			return $lista->id;
 		}else return ListaZelja::where('korisnici_id',Session::get('id'))->where('id',Input::get('zelja'))->update(['aktivan'=>0]);
 	}
+    public function postListaZeljaUkloni(){
+        ListaZelja::where('korisnici_id',Session::get('id'))->where('id',Input::get('id_lista_zelja'))->update(['aktivan'=>0]);
+        return Redirect::back();
+    }
 	public function postPosaljiKomentar(){
 		$podaci=json_decode(Input::get('podaci'));
 		$test=1;
@@ -98,7 +102,7 @@ class Aplikacija extends Controller {
 						->join('objekat','objekat.id','=','smestaj.objekat_id')
 						->join('vrsta_smestaja','vrsta_smestaja.id','=','smestaj.vrsta_smestaja_id')
 						->join('kapacitet','kapacitet.id','=','smestaj.kapacitet_id')
-						->get(['smestaj.id','smestaj.naziv','objekat.naziv as naziv_objekta',
+						->get(['smestaj.id','lista_zelja.aktivan','lista_zelja.id as id_lista_zelja','smestaj.naziv','objekat.naziv as naziv_objekta',
 							'vrsta_smestaja.naziv as naziv_smestaja','kapacitet.naziv as naziv_kapaciteta','kapacitet.broj_osoba as broj_osoba'])->toArray();
 		return view('korisnik.lista-zelja',compact('lista_zelja'));
 	}
