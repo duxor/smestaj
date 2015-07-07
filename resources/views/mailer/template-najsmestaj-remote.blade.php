@@ -34,6 +34,9 @@
         .padd{
             padding: 50px;
         }
+        .center{
+            margin: 0 auto;
+        }
         .left{
             float: left;
         }
@@ -44,16 +47,16 @@
 </head>
 <body>
     <div class="header">
-        <img src="{{$message->embed($heder)}}">
+        <img src="{{$heder}}">
     </div>
 
     <div class="container">
-        <img src="{{$message->embed($naslovna)}}">
+        <img src="{{$naslovna}}">
         <h1><b>duXor</b> je Faca! kako god okreneš.</h1>
         <hr>
         <p>Ovo je mejl za testiranje. Ukoliko ste ga dobili slučajno i smatrate da nije namijenjen vama, molimo da ga izbrišete.</p>
         <div class="box left">
-            <img src="{{$message->embed('http://cdn3.worldcarfans.co/2012/9/19/medium/12744536541374220907.jpg')}}" style="width: 100%">
+            <img src="http://cdn3.worldcarfans.co/2012/9/19/medium/12744536541374220907.jpg" style="width: 100%">
             Aston in Monte Carlo
         </div>
         <div class="left box padd left3">Zapamti!!: duXor je Faca! i voziće Aston Martina po Monte Karlu!</div>
@@ -61,7 +64,7 @@
     </div>
 
     <div class="footer">
-        <img src="{{$message->embed($footer)}}">
+        <img src="{{$footer}}">
     </div>
 </body>
 </html>
