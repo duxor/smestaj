@@ -2,16 +2,11 @@
 
 class ExampleTest extends TestCase {
 
-	/**
-	 * A basic functional test example.
-	 *
-	 * @return void
-	 */
-	public function testBasicExample()
+	public function testRoute()
 	{
-		$response = $this->call('GET', '/');
-
-		$this->assertEquals(200, $response->getStatusCode());
+		$asdf=$this->action('get','Administracija\Administracija');
 	}
+
+
 
 }

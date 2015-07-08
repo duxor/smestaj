@@ -125,6 +125,16 @@
                                         {!!Form::label('lgrad','Broj osoba',['class'=>'control-label'])!!}
                                         {!!Form::select('broj_osoba',[1=>1,2=>2,3=>3,4=>4,5=>5,6=>6,7=>7,8=>8,9=>9,10=>10,11=>11,12=>12],2,['class'=>'form-control'])!!}
                                     </div>
+                                    <div class="form-group">
+                                        <div class="col-md-6">
+                                            {!!Form::label('cenaod','Cena od:',['class'=>'control-label'])!!}
+                                            {!!Form::select('min',array_combine(range(500,10000,200),range(500,10000,200)),2,['class'=>'form-control'])!!}
+                                        </div>
+                                        <div class=" col-md-6">
+                                            {!!Form::label('cenaod','Cena do:',['class'=>'control-label'])!!}
+                                            {!!Form::select('max',array_combine(range(500,10000,200),range(500,10000,200)),2,['class'=>'form-control'])!!}
+                                        </div>
+                                    </div>
                                     <div class="form-group" style="text-align: right">
                                         {!!Form::button('<i class="glyphicon glyphicon-search"></i> Pretraga',['class'=>'btn btn-lg btn-primary','type'=>'submit'])!!}
                                     </div>

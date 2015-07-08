@@ -56,10 +56,14 @@ class Pretraga extends Controller {
 		return $niz;
 	}
 	public function anyIndex($slugApp=null){
+
 		if($slugApp&&Input::get('aplikacija')=='') return Redirect::to('/'.$slugApp);//nalog.id
 		$tacan_broj=Input::get('tacan_broj')?'':'>';
 		$podaci=$this->defaultPodaci($slugApp?Input::get('aplikacija'):1);//templejt sa menijem bez podataka
 		$podaci['broj_osoba']=Input::get('broj_osoba')?Input::get('broj_osoba'):1;
+        $min=Input::get('min')?Input::get('min'):1;
+        $max=Input::get('max')?Input::get('max'):10000;
+        //dd($max);
 		$podaci['rezultat']=Objekat::
 		join('smestaj','smestaj.objekat_id','=','objekat.id')
 			->leftjoin('nalog','nalog.id','=','objekat.nalog_id')
@@ -72,6 +76,7 @@ class Pretraga extends Controller {
 			->groupby('id')
 			->where('grad_id',Input::get('grad_id'))->where('kapacitet.broj_osoba',$tacan_broj.'=',$podaci['broj_osoba'])
 			->where('objekat.aktivan',1)->where('smestaj.aktivan',1)
+            ->whereBetween('smestaj.cena_osoba',[$min,$max])
 			->orderBy('smestaj.naziv')
 			->select('nalog.naziv as nazivApp','nalog.slug as slugApp','vrsta_smestaja.naziv as vrsta_smestaja','smestaj.id',
 				'smestaj.slug as slugSmestaj','smestaj.naziv','objekat.adresa','kapacitet.broj_osoba','lista_zelja.id as zelja','naslovna_foto','cena_osoba','k.username')->get()->toArray();
@@ -87,6 +92,7 @@ class Pretraga extends Controller {
 		$podaci['datumDo']=Input::get('datumDo');
 		$tema=$slugApp?'.'.Tema::find(Nalog::find(Input::get('aplikacija'),['tema_id'])->tema_id, ['slug'])->slug:'-osnove.osnovna';
 		$podaci['dodatna_oprema']=DodatnaOprema::get(['id','naziv']);
-		return view('aplikacija.teme'.$tema.'.pretraga',compact('podaci'));
+
+		return view('aplikacija.teme'.$tema.'.pretraga',compact('podaci','max','min'));
 	}
 }

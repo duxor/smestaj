@@ -1,6 +1,6 @@
 @extends('aplikacija.teme-osnove.osnovna.master')
 @section('head')
-    <script type="text/javascript">
+    <script type="text/javascript" xmlns="http://www.w3.org/1999/html">
         var map, markers, spotlight, locationsByType = {};
         function initMap() {
             var template = 'http://{S}tile.openstreetmap.org/{Z}/{X}/{Y}.png';
@@ -115,13 +115,34 @@
                     {!! Form::text('datumDo',isset($podaci['datumDo'])?$podaci['datumDo']:null,['class'=>'input-sm form-control','placeholder'=>'do...']) !!}
                 </div>
             </div>
-            <script>
+        </div>
+        <br/><br/>
+        <div class="form-group">
+                <div class="col-md-4">
+                    {!! Form::label('cenaod','Cena od:',['class'=>'control-label']) !!}
+                    {!!Form::select('min', array_combine(range(500,10000,200),range(500,10000,200)),$min, ['class'=>'form-control'])!!}
+                </div>
+
+
+                <div class="col-md-4">
+                    {!! Form::label('cenaod','Cena do:',['class'=>'control-label']) !!}
+                    {!!Form::select('max', array_combine(range(500,10000,200),range(500,10000,200)),$max, ['class'=>'form-control'])!!}
+                </div>
+
+        </div><br/><br/>
+        <div class="col-md-4">
+            {!!Form::button('<i class="glyphicon glyphicon-search"></i> Pronađi',['class'=>'btn btn-primary pronadji_btn','type'=>'submit'])!!}
+        </div>
+
+
+
+        <script>
                 $('#datarange .input-daterange').datepicker({orientation: "top auto",weekStart: 1,startDate: "current",todayBtn: "linked",toggleActive: true,format: "yyyy-mm-dd"});
                 @if(!isset($podaci['datumOd'])) var d = new Date(); $('input[name=datumOd]').datepicker('setDate',d); @endif
                 @if(!isset($podaci['datumDo'])) var d = new Date(); d.setDate(d.getDate()+1); $('input[name=datumDo]').datepicker('setDate', d); @endif
             </script>
-            {!!Form::button('<i class="glyphicon glyphicon-search"></i> Pronađi',['class'=>'btn btn-primary pronadji_btn','type'=>'submit'])!!}
-        </div>
+    <br/>
+
         {!!Form::close()!!}
     @endif
     @if(isset($podaci['rezultat']))
@@ -135,68 +156,75 @@
                 <button class="btn btn-xs btn-danger" onclick="zoomMap('-')" style="z-index:20;position: absolute;margin:50px 0 0 10px"><i class="glyphicon glyphicon-minus"></i></button>
             </div><script>function zoomMap(kako){map.zoomBy(kako=='+'?1:-1)}</script>
             @if(!isset($podaci['pretragaApp']))
-            {!!Form::button('<i class="glyphicon glyphicon-chevron-down"></i> Filter',['class'=>'btn btn-info','id'=>'btn_filter'])!!}
-            <div class="filter">
-                <hr>
-                @foreach($podaci['dodatna_oprema'] as $k=>$oprema)
-                    <input name="oprema_filter" type="checkbox" value="0" class="oprema_filter" data-opremaid="{{$oprema['id']}}" data-size="normal" data-on-text="Da" data-off-text="Ne" data-label-text="{{$oprema['naziv']}}">
-                @endforeach
-                <script>
-                    $(".oprema_filter").bootstrapSwitch();
-                    $('.filter').hide();
-                    $('#btn_filter').css('margin-top','20px');
-                    $('#btn_filter').click(function(){
-                        $(this).children('i').toggleClass('glyphicon-chevron-down');
-                        $(this).children('i').toggleClass('glyphicon-chevron-up');
-                        if($('div.filter').is(':visible'))$('div.filter').slideUp();
-                        if($('div.filter').is(':hidden'))$('div.filter').slideDown();
-                    });
-                    $('input[name="oprema_filter"]').on('switchChange.bootstrapSwitch', function(event, state) {
-                        $(this).val(state?1:0);console.log(1);
-                        filter.akcijaFiltriraj($(this).data('opremaid'),state?'dodaj':'ukloni');
-                    });
-                    var filter={
-                        oprema:JSON.parse('{!!$podaci['filter']!!}'),
-                        filter:[],
-                        dodajFilter:function(oprema){this.filter.push(oprema)},
-                        ukloniFilter:function(oprema){
-                            for(var i=0;i<this.filter.length;i++)
-                                if(this.filter[i]==oprema){
-                                    this.filter.splice(i,1);
-                                    return;
+                {!!Form::button('<i class="glyphicon glyphicon-chevron-down"></i> Filter',['class'=>'btn btn-info','id'=>'btn_filter'])!!}
+                <div class="container">
+                    <div class="filter">
+                        <hr>
+                        <div class="col-md-5">
+                            @foreach($podaci['dodatna_oprema'] as $k=>$oprema)
+                                <input name="oprema_filter" type="checkbox" value="0" class="oprema_filter" data-opremaid="{{$oprema['id']}}" data-size="normal" data-on-text="Da" data-off-text="Ne" data-label-text="{{$oprema['naziv']}}">
+                            @endforeach
+                        </div>
+                        <script>
+                            $(".oprema_filter").bootstrapSwitch();
+                            $('.filter').hide();
+                            $('#btn_filter').css('margin-top','20px');
+                            $('#btn_filter').click(function(){
+                                $(this).children('i').toggleClass('glyphicon-chevron-down');
+                                $(this).children('i').toggleClass('glyphicon-chevron-up');
+                                if($('div.filter').is(':visible'))$('div.filter').slideUp();
+                                if($('div.filter').is(':hidden'))$('div.filter').slideDown();
+                            });
+                            $('input[name="oprema_filter"]').on('switchChange.bootstrapSwitch', function(event, state) {
+                                $(this).val(state?1:0);console.log(1);
+                                filter.akcijaFiltriraj($(this).data('opremaid'),state?'dodaj':'ukloni');
+                            });
+                            var filter={
+                                oprema:JSON.parse('{!!$podaci['filter']!!}'),
+                            filter:[],
+                                    dodajFilter:function(oprema){this.filter.push(oprema)},
+                            ukloniFilter:function(oprema){
+                                for(var i=0;i<this.filter.length;i++)
+                                    if(this.filter[i]==oprema){
+                                        this.filter.splice(i,1);
+                                        return;
+                                    }
+                            },
+                            prikaziSakrijSve:function(akcija){
+                                if(akcija=='sakrij') $('.smestaj').fadeOut()
+                                else $('.smestaj').fadeIn()
+                            },
+                            prikaziSakrij:function(index,akcija){
+                                if(akcija=='sakrij') $('.smestaj-'+index).fadeOut();
+                                else $('.smestaj-'+index).fadeIn();
+                            },
+                            filtriraj:function(){
+                                if(this.filter.length>0) this.prikaziSakrijSve('sakrij');
+                                else { this.prikaziSakrijSve('prikazi'); return; }
+                                var p,p1;
+                                for(var s in this.oprema){
+                                    p=1;
+                                    for(var f=0;f<this.filter.length;f++){
+                                        p1=0;
+                                        for(var o=0;o<this.oprema[s].length;o++)
+                                            if(this.filter[f]==this.oprema[s][o]){ p1=1; break; }
+                                        if(!p1){ p=0; break; }
+                                    }
+                                    if(p) this.prikaziSakrij(s,'prikazi');
                                 }
-                        },
-                        prikaziSakrijSve:function(akcija){
-                            if(akcija=='sakrij') $('.smestaj').fadeOut()
-                            else $('.smestaj').fadeIn()
-                        },
-                        prikaziSakrij:function(index,akcija){
-                            if(akcija=='sakrij') $('.smestaj-'+index).fadeOut();
-                            else $('.smestaj-'+index).fadeIn();
-                        },
-                        filtriraj:function(){
-                            if(this.filter.length>0) this.prikaziSakrijSve('sakrij');
-                            else { this.prikaziSakrijSve('prikazi'); return; }
-                            var p,p1;
-                            for(var s in this.oprema){
-                                p=1;
-                                for(var f=0;f<this.filter.length;f++){
-                                    p1=0;
-                                    for(var o=0;o<this.oprema[s].length;o++)
-                                        if(this.filter[f]==this.oprema[s][o]){ p1=1; break; }
-                                    if(!p1){ p=0; break; }
-                                }
-                                if(p) this.prikaziSakrij(s,'prikazi');
+                            },
+                            akcijaFiltriraj:function(oprema,akcija){
+                                if(akcija=='dodaj') this.dodajFilter(oprema);
+                                else this.ukloniFilter(oprema);
+                                this.filtriraj();
                             }
-                        },
-                        akcijaFiltriraj:function(oprema,akcija){
-                            if(akcija=='dodaj') this.dodajFilter(oprema);
-                            else this.ukloniFilter(oprema);
-                            this.filtriraj();
-                        }
-                    };
-                </script>
-            </div>
+                            }
+
+                        </script>
+
+
+                    </div>
+                </div>
             @endif
             <p id="rezultati"></p>
             <div  class="container ">
@@ -211,7 +239,7 @@
                             <div class="tab-pane active" id="listing">
                                 <br>
                                 @foreach($podaci['rezultat'] as $smestaj)
-                                    <div class="smestaj smestaj-{{isset($smestaj['id'])?$smestaj['id']:'app'}}">
+                                    <div data-cene="{{$smestaj['cena_osoba']}}"  class="smestaj smestaj-{{isset($smestaj['id'])?$smestaj['id']:'app'}}">
                                         <hr>
                                         <div class="col-sm-4">
                                             <a @if(!isset($podaci['pretragaApp'])) href="/{{$smestaj['slugApp']}}/{{$smestaj['slugSmestaj']}}" @else href="/{{$smestaj['slug']}}" @endif >
@@ -250,13 +278,14 @@
                             <div class="tab-pane" id="slike">
                                 <br>
                                 @foreach($podaci['rezultat'] as $smestaj)
-                                    <div class="smestaj smestaj-{{isset($smestaj['id'])?$smestaj['id']:'app'}}">
+                                    <div data-cene="{{$smestaj['cena_osoba']}}"  class="smestaj smestaj-{{isset($smestaj['id'])?$smestaj['id']:'app'}}">
                                         <div class="col-sm-4">
-                                            <div style="margin: 25px;">
+                                            <div style="height: 450px; margin: 25px; -moz-box-shadow: 0 0 10px 1px #888; -webkit-box-shadow: 0 0 10px 1px#888; box-shadow: 0 0 10px 1px #888;">
                                                 <div style="position: relative;">
                                                     <a @if(!isset($podaci['pretragaApp'])) href="/{{$smestaj['slugApp']}}/{{$smestaj['slugSmestaj']}}" @else href="/{{$smestaj['slug']}}" @endif >
-                                                        <img style="height: 150px;" alt="fotografija smeštajnog kapaciteta" @if(isset($podaci['pretragaApp'])) src="/{{\App\OsnovneMetode::randomFotoZaNalog($smestaj['slug'])}}" @elseif($smestaj['naslovna_foto'])src="/{{$smestaj['naslovna_foto']}}" @else src="/{{\App\OsnovneMetode::randomFoto('galerije/'.$smestaj['username'].'/aplikacije/'.$smestaj['slugApp'].'/smestaji/'.$smestaj['slugSmestaj'])}}" @endif>
+                                                        <img class="img-responsive" style="max-height: 200px;" alt="fotografija smeštajnog kapaciteta" @if(isset($podaci['pretragaApp'])) src="/{{\App\OsnovneMetode::randomFotoZaNalog($smestaj['slug'])}}" @elseif($smestaj['naslovna_foto'])src="/{{$smestaj['naslovna_foto']}}" @else src="/{{\App\OsnovneMetode::randomFoto('galerije/'.$smestaj['username'].'/aplikacije/'.$smestaj['slugApp'].'/smestaji/'.$smestaj['slugSmestaj'])}}" @endif>
                                                     </a>
+                                                    <span style="color:#C2B7A3; position: absolute; top: 0%; left: 0%; opacity: 0.7" class="glyphicon glyphicon-picture">7</span>
                                                     @if(!isset($podaci['pretragaApp']))
                                                         @if(\App\Security::autentifikacijaTest(2,'min'))
                                                             <button style="position: absolute; bottom: 0%; left: 0%;  opacity: 0.7;" class="btn btn-lg btn-default _tooltip zelja" @if($smestaj['zelja']) data-zelja="{{$smestaj['zelja']}}" style="color:red" title="Izbaci iz liste zelja" @else data-zelja="false" title="Dodaj u listu želja" @endif data-zid="{{$smestaj['id']}}" data-toggle="tooltip" data-placement="bottom"><i class="glyphicon glyphicon-heart"></i></button>
@@ -265,34 +294,40 @@
 
                                                         @endif
                                                     @endif
-
                                                 </div>
-                                                    <p>
-                                                    <div class="row">
-                                                        <a @if(!isset($podaci['pretragaApp'])) href="/{{$smestaj['slugApp']}}/{{$smestaj['slugSmestaj']}}" @@else href="/{{$smestaj['slug']}}" @endif  class="btn btn-lg btn-default"><i class="glyphicon glyphicon-zoom-in"></i> Pregled</a>
+                                                <p>
+                                                    <div class="col-sm-5">
+                                                    <a @if(!isset($podaci['pretragaApp'])) href="/{{$smestaj['slugApp']}}/{{$smestaj['slugSmestaj']}}" @@else href="/{{$smestaj['slug']}}" @endif  class="btn btn-lg btn-default"><i class="glyphicon glyphicon-zoom-in"></i> Pregled</a>
+                                                    </div>
+                                                    <div class="col-sm-7">
                                                         @if(!isset($podaci['pretragaApp']))
                                                             @if(\App\Security::autentifikacijaTest(2,'min'))
                                                                 <button class="btn btn-lg btn-info m" data-toggle="modal" data-target="#rezervacija" data-cena="{{$smestaj['cena_osoba']}}" data-id="{{$smestaj['id']}}" data-app="{{$smestaj['nazivApp']}}" data-naziv="{{$smestaj['naziv']}}" data-vrobjekta="{{$smestaj['vrsta_smestaja']}}" data-maxosoba="{{$smestaj['broj_osoba']}}" data-adresa="{{$smestaj['adresa']}}" data-img="/teme/osnovna-paralax/slike/15.jpg"><span class="glyphicon glyphicon-check"></span> Rezervacija</button>
-                                                            @else
+                                                                @else
                                                                 <a href="/log/login" class="btn btn-lg btn-info"><span class="glyphicon glyphicon-check"></span> Rezervacija</a>
                                                             @endif
                                                         @endif
                                                     </div>
-                                                    </p>
+                                                </p>
 
-                                                <h3 class="smestajNaslov">{{!isset($podaci['pretragaApp'])?$smestaj['nazivApp']:$smestaj['naziv']}}</h3>
+                                                <h3 style=" padding-left: 5px; font-size: large;" class="smestajNaslov">{{!isset($podaci['pretragaApp'])?$smestaj['nazivApp']:$smestaj['naziv']}}</h3>
                                                 <table class="moja-tabela">
                                                     @if(!isset($podaci['pretragaApp']))
-                                                        <tr><td class="nDn">Naziv objekta:</td><td>{{$smestaj['naziv']}}</td></tr>
-                                                        <tr><td class="nDn">Vrsta objekta:</td><td>{{$smestaj['vrsta_smestaja']}}</td></tr>
-                                                        <tr><td class="nDn">Broj mesta:</td><td>{{$smestaj['broj_osoba']}}</td></tr>
-                                                        <tr><td class="nDn">Adresa:</td><td>{{$smestaj['adresa']}}</td></tr>
-                                                        <tr><td class="nDn">Cena (po osobi):</td><td>{{$smestaj['cena_osoba']}} din</td></tr>
+                                                        <div style="margin-bottom: 5px; padding-left: 5px;" class="row"><div class="col-md-6">Naziv objekta:</div><div class="col-md-6 ">{{$smestaj['naziv']}}</div></div>
+                                                        {{-- <tr><td class="nDn"></td><td></td></tr>--}}
+                                                        <div style="margin-bottom: 5px; padding-left: 5px;" class="row"><div class="col-md-6">Vrsta objekta:</div><div class="col-md-6">{{$smestaj['vrsta_smestaja']}}</div></div>
+
+                                                        <div style="margin-bottom: 5px; padding-left: 5px;" class="row"><div class="col-md-6">Broj mesta:</div><div class="col-md-6">{{$smestaj['broj_osoba']}}</div></div>
+
+                                                        <div style="margin-bottom: 5px; padding-left: 5px;" class="row"><div class="col-md-6">Adresa:</div><div class="col-md-6">{{$smestaj['adresa']}}</div></div>
+
+                                                        <div style="margin-bottom: 5px; padding-left: 5px;" class="row"><div class="col-md-6">Cena (po osobi):</div><div class="col-md-6">{{$smestaj['cena_osoba']}}</div></div>
                                                     @else
                                                         <tr><td class="nDn">Opis:</td><td>{{$smestaj['opis']?$smestaj['opis']:'Opis nije dodat za ovaj brend.'}}</td></tr>
                                                     @endif
                                                 </table>
-                                                    </div>
+                                                </br>
+                                            </div>
                                         </div>
                                     </div>
                                 @endforeach
@@ -420,6 +455,7 @@
     @else
         <br clear="all"><p>Nema rezultata za date parametre. Proverite parametre i pokušajte ponovo.</p>
     @endif
+    <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>
 @endsection
 
    
