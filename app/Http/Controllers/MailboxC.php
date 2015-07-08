@@ -95,4 +95,8 @@ class MailboxC extends Controller {
 		if(Security::autentifikacijaTest(4,'min')) return $this->mailbox($pravaSlug,'newsletter');
 		return $this->mailbox($pravaSlug,'inbox');
 	}
+//POSLATE
+	public function getMejl($pravaSlug){
+		return redirect("/{$pravaSlug}/mailbox")->withAkcija('mail');
+	}
 }

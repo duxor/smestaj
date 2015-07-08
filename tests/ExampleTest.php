@@ -7,11 +7,11 @@ class ExampleTest extends TestCase {
 	 *
 	 * @return void
 	 */
-	public function testBasicExample()
+	public function testBasicExample2()
 	{
 		$response = $this->call('GET', '/');
+		$this->assertResponseOk();
 
-		$this->assertEquals(200, $response->getStatusCode());
 	}
 
 }

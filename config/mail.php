@@ -15,7 +15,7 @@ return [
 	|
 	*/
 
-	'driver' => 'smtp',//env('MAIL_DRIVER', 'smtp'),
+	'driver' => 'smtp',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -28,7 +28,7 @@ return [
 	|
 	*/
 
-	'host' => 'smtp.gmail.com',//env('MAIL_HOST', 'smtp.gmail.com'),
+	'host' => env('MAIL_HOST'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -41,7 +41,7 @@ return [
 	|
 	*/
 
-	'port' => 587,//env('MAIL_PORT', 587),
+	'port' => env('MAIL_PORT'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -54,7 +54,7 @@ return [
 	|
 	*/
 
-	'from' => ['address' => 'kontakt@dusanperisic.com', 'name' => 'duXor Faca!'],
+	'from' => ['address' => 'test@test.najsmestaj.com', 'name' => 'najSmeštaj Tester'],
 
 	/*
 	|--------------------------------------------------------------------------
@@ -80,7 +80,7 @@ return [
 	|
 	*/
 
-	'username' => env('MAIL_USERNAME'),//'laravel.tester.duxor@gmail.com',
+	'username' => env('MAIL_USERNAME'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -93,7 +93,7 @@ return [
 	|
 	*/
 
-	'password' => env('MAIL_PASSWORD'),//'testlaravel',
+	'password' => env('MAIL_PASSWORD'),
 
 	/*
 	|--------------------------------------------------------------------------

@@ -32,7 +32,7 @@
             }
         });
     </script>
-    <div class="col-sm-7">
+    <div class="col-sm-9">
         <div class="panel with-nav-tabs panel-default">
             <div class="panel-heading">
                 <ul class="nav nav-tabs" id="myTab">
