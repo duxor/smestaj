@@ -26,7 +26,15 @@
             <div class="panel-body">
               </script>
               <div class="row ">
-                <div id="editing" class="col-md-5" align="center"><a id="slika" href="#" data-target="#dodajFoto1" data-toggle="modal"> <img alt="User Pic" style="width:140px;" src="/galerije/{{Session::get('username')}}/osnovne/profilna.jpg" class="img-thumbnail"></a> 
+                <div style="position:relative;" id="editing" class="col-md-5" align="center"><a id="slika" href="#" data-target="#dodajFoto1" data-toggle="modal"> <img alt="User Pic" style="width:140px;" src="/galerije/{{Session::get('username')}}/osnovne/profilna.jpg" class="img-thumbnail"> <div id="b" style="position:absolute; background: black;  margin-left:20px; width:auto; top:0px; left:0px; opacity:0.5; height:30px; display:none;" ><div style=" padding:0 3px 0 3px;color:white; font-size:16px;"><span class="glyphicon glyphicon-camera"> </span> Promeni sliku</div></div></a> 
+                {{--div promeni sliku--}}
+               
+
+                <script> $('#editing').mouseenter(function(){$(this).find("#b").fadeIn('fast');
+                $('#editing').mouseleave(function(){
+                            $(this).find("#b").fadeOut('fast');
+                          });});</script>
+
                   <div  class="row">{{--social ispod slike--}}
                   @foreach($korisnik as $key=>$val)
                     @if (in_array($key,$popunjene_kolone_social))

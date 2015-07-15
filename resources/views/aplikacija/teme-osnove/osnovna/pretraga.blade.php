@@ -280,7 +280,7 @@
                                 @foreach($podaci['rezultat'] as $smestaj)
                                     <div data-cene="{{$smestaj['cena_osoba']}}"  class="smestaj smestaj-{{isset($smestaj['id'])?$smestaj['id']:'app'}}">
                                         <div class="col-sm-4">
-                                            <div style="height: 450px; margin: 25px; -moz-box-shadow: 0 0 10px 1px #888; -webkit-box-shadow: 0 0 10px 1px#888; box-shadow: 0 0 10px 1px #888;">
+                                            <div id="box{{$smestaj['id']}}" style="border:1px solid gray; height: 450px; background-color:#f1f3f4; margin: 25px;">
                                                 <div style="position: relative;">
                                                     <a @if(!isset($podaci['pretragaApp'])) href="/{{$smestaj['slugApp']}}/{{$smestaj['slugSmestaj']}}" @else href="/{{$smestaj['slug']}}" @endif >
                                                         <img class="img-responsive" style="max-height: 200px;" alt="fotografija smeštajnog kapaciteta" @if(isset($podaci['pretragaApp'])) src="/{{\App\OsnovneMetode::randomFotoZaNalog($smestaj['slug'])}}" @elseif($smestaj['naslovna_foto'])src="/{{$smestaj['naslovna_foto']}}" @else src="/{{\App\OsnovneMetode::randomFoto('galerije/'.$smestaj['username'].'/aplikacije/'.$smestaj['slugApp'].'/smestaji/'.$smestaj['slugSmestaj'])}}" @endif>
@@ -330,6 +330,12 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <script>
+                                            $("#box{{$smestaj['id']}}").mouseenter(function(){$(this).css('box-shadow','0 0 15px 4px #888');
+                                            $("#box{{$smestaj['id']}}").mouseleave(function(){
+                                                        $(this).css('box-shadow','none');
+                                                      });});
+                                        </script>
                                 @endforeach
                             </div>
                         </div>

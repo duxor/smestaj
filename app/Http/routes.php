@@ -1,4 +1,5 @@
 <?php
+Route::controller('/blog','Bloger');
 
 Route::controller('/android','Android\AndroidApi');
 Route::controller('/mailer','Mailer\Mailer');
@@ -32,5 +33,6 @@ Route::get('/{slug?}','Aplikacija@getIndex');
 Route::any('/{slugApp}/pretraga','Pretraga@anyIndex');
 Route::get('/{slugApp}/{slugSmestaj}','Aplikacija@getSmestaj');
 Route::post('/{slugApp}/{slugSmestaj}/smestaj-komentari','Aplikacija@postSmestajKomentari');
+
 
 //Route::controller('/','Glavni');

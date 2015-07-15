@@ -92,7 +92,6 @@ class Pretraga extends Controller {
 		$podaci['datumDo']=Input::get('datumDo');
 		$tema=$slugApp?'.'.Tema::find(Nalog::find(Input::get('aplikacija'),['tema_id'])->tema_id, ['slug'])->slug:'-osnove.osnovna';
 		$podaci['dodatna_oprema']=DodatnaOprema::get(['id','naziv']);
-
 		return view('aplikacija.teme'.$tema.'.pretraga',compact('podaci','max','min'));
 	}
 }

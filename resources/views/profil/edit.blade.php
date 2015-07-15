@@ -25,11 +25,15 @@
              {!! Form::hidden('id', $korisnik['id']) !!}
               <div class="row">
                 <div class="col-md-4" align="center"> 
-                  <div class="row">
+                  <div  class="row">
                     <a href="#" data-toggle="modal" data-target="#dodajFoto">
                       <img id="foto" data-toggle="tooltip" data-placement="bottom" title="Izmeni fotografiju" style="width:200px;height: 200px" src="/galerije/{{Session::get('username')}}/osnovne/profilna.jpg" class="img-circle img-responsive">
-                      <script>$(document).ready(function(){$('#foto').tooltip()})</script>
+                      <script>$(document).ready(function(){
+
+                        $('#foto').tooltip()})
+                      </script>
                     </a>
+                    
                   </div>
                 </div>
             
