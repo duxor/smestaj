@@ -2,33 +2,30 @@
 <head>
     <title>NajSmeštaj</title>
     <style>
+        body{margin:0}
         p,b,i{font-size: 18px}
-        .fuxTop{
-            position: fixed;
-            left: 0;
-            top: 0;
-        }
         .header{
             overflow-x: hidden;
             height: 120px;
-            margin-bottom:20px;
+            margin-bottom:10px;
         }
-        .header .urban{
-            height: 120px;
-            width: 1920px;
+        .header img{height: 100%;width: 1920px;}
+        .footer{
+            margin: 50px 0 0 0;
+            padding: 10px 50px;
+            background-color: #222;
+            color: #cbcbcb;
+            width: 100%;
+            height:160px;
         }
+        .footer img{ height: 100%}
+
         .container{
             width:80%;
             margin:0 auto;
-            padding: 10px;
+            padding: 0 10px;
         }
-        .foter{
-            margin: 50px 0 0 0;
-            padding: 10px 50px;
-            background-color: #080808;
-            color: #cbcbcb;
-            width: 100%;
-        }
+        .container img{width:100%;margin-bottom: 20px}
         .box{
             background-color: #222;
             color: #fff;
@@ -50,10 +47,11 @@
 </head>
 <body>
     <div class="header">
-        <img src="http://localhost:8001/teme/osnovna-paralax/slike/logo/mail-header.jpg" class="fuxTop urban">
+        <img src="{{$heder}}">
     </div>
 
     <div class="container">
+        <img src="{{$naslovna}}">
         <h1><b>duXor</b> je Faca! kako god okreneš.</h1>
         <hr>
         <p>Ovo je mejl za testiranje. Ukoliko ste ga dobili slučajno i smatrate da nije namijenjen vama, molimo da ga izbrišete.</p>
@@ -65,8 +63,8 @@
         <br clear="all">
     </div>
 
-    <div class="foter">
-        <b><i>najsmeštaj.com</i></b>
+    <div class="footer">
+        <img src="{{$footer}}">
     </div>
 </body>
 </html>

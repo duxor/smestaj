@@ -6,6 +6,7 @@
             @if(\App\Security::autentifikacijaTest(4,'min')) <li id="newsletter" role="presentation"><a href="#"onclick="getNewsletter()">Newsletter</a></li> @endif
             <li id="inbox" role="presentation"><a href="#"onclick="getInbox()">Inbox</a></li>
             <li id="poslate" role="presentation"><a href="#"onclick="getPoslate()">Poslate</a></li>
+            @if(\App\Security::autentifikacijaTest(4,'min')) <li id="mail" role="presentation"><a href="#" onclick="kreirajMejl()">Mail</a></li> @endif
         </ul>
     </div>
     <div id="work-area" class="col-sm-9">
@@ -20,7 +21,10 @@
                 case'nova':kreirajNovu();break;
                 case'inbox':getInbox();break;
                 case'poslate':getPoslate();break;
-                @if(\App\Security::autentifikacijaTest(4,'min')) case'newsletter':getNewsletter();break; @endif
+                @if(\App\Security::autentifikacijaTest(4,'min'))
+                    case'newsletter':getNewsletter();break;
+                    case'mail':kreirajMejl();break;
+                @endif
             }
         });
         @if(\App\Security::autentifikacijaTest(4,'min'))
@@ -30,10 +34,10 @@
                 $('#wait').show();
                 $('#show').html(
                 '<div id="zaSlanje" class="form-horizontal">'+
-                    '{!!Form::hidden('_token',csrf_token())!!}'+
+                    '{!!Form::hidden("_token",csrf_token())!!}'+
                     '<p>Broj prijavljenih korisnika: {{$podaci['newsKorisniciNum']}}</p><br>'+
                     '<div class="form-group">'+
-                        '{!!Form::select('app',$podaci['app'],null,['class'=>'form-control'])!!}'+
+                        '{!!Form::select("app",$podaci["app"],null,["class"=>"form-control"])!!}'+
                     '</div>'+
                     '<div class="form-group">'+
                         '<input name="naslov" class="form-control" placeholder="Naslov poruke">'+
@@ -45,6 +49,33 @@
                         '<button class="btn btn-lg btn-primary" onclick="Komunikacija.posalji(\'/{{\App\OsnovneMetode::osnovniNav()}}/mailbox/posalji-newsletter\',\'zaSlanje\',\'poruka\',\'wait\',\'show\')"><i class="glyphicon glyphicon-envelope"></i> Pošalji</div>'+
                     '</div>'+
                 '</div>');
+                $('#wait').hide();
+                $('#show').fadeIn();
+            }
+            function kreirajMejl(){
+                setActive('mail');
+                $('#show').hide();
+                $('#wait').show();
+                $('#show').html(
+                    '<div id="zaSlanje" class="form-horizontal">'+
+                        '{!!Form::hidden("_token",csrf_token())!!}'+
+                        '<div class="form-group">'+
+                            '{!!Form::select("email-template",[0=>"Osnovni templejt"],null,["class"=>"form-control","readonly"=>"true"])!!}'+
+                        '</div>'+
+                        '<div class="form-group">'+
+                            '<input name="za" class="form-control" placeholder="Email primaoca">'+
+                            '<span id="preporuke" class="list-group"></span>'+
+                        '</div>'+
+                        '<div class="form-group">'+
+                            '<input name="naslov" class="form-control" placeholder="Naslov">'+
+                        '</div>'+
+                        '<div class="form-group">'+
+                            '<textarea name="poruka" class="form-control" placeholder="Poruka" rows="7"></textarea>'+
+                        '</div>'+
+                        '<div class="form-group">'+
+                            '<button class="btn btn-lg btn-primary" onclick="Komunikacija.posalji(\'/mailer/posalji-email\',\'zaSlanje\',\'poruka\',\'wait\',\'show\')"><i class="glyphicon glyphicon-envelope"></i> Pošalji</div>'+
+                        '</div>'+
+                    '</div>');
                 $('#wait').hide();
                 $('#show').fadeIn();
             }
@@ -132,7 +163,7 @@
             $('#wait').show();
             $('#show').html(
             '<div id="zaSlanje" class="form-horizontal">'+
-                '{!!Form::hidden('_token',csrf_token())!!}'+
+                '{!!Form::hidden("_token",csrf_token())!!}'+
                 '<div class="form-group">'+
                     '<input name="za" class="form-control" onkeyup="pronadjiUsername(this.value)" placeholder="Username primaoca" value="'+uname+'">'+
                     '<span id="preporuke" class="list-group"></span>'+

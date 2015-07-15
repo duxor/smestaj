@@ -57,6 +57,7 @@
                             <li><a href="/administracija/mailbox/kreiraj"><i class="glyphicon glyphicon-edit"></i> Kreiraj poruku</a></li>
                             <li><a href="/administracija/mailbox"><i class="glyphicon glyphicon-log-in"></i> Inbox @if(\App\OsnovneMetode::brojNeprocitanihPoruka()>0)<i class="badge">{{\App\OsnovneMetode::brojNeprocitanihPoruka()}}</i>@endif </a></li>
                             <li><a href="/administracija/mailbox/poslate"><i class="glyphicon glyphicon-share"></i> Poslate</a></li>
+                            <li><a href="/administracija/mailbox/mejl"><i class="glyphicon glyphicon-share"></i> Pošalji mejl</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
