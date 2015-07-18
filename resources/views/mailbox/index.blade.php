@@ -188,7 +188,7 @@
                 _token:'{{csrf_token()}}',
                 tekst:tekst
             },function(data){
-                var podaci=JSON.parse(data);
+                var podaci=JSON.parse(data);console.log(podaci);
                 if(podaci.length){
                     var useri='';
                     for(var i=0;i<podaci.length;i++)

@@ -34,7 +34,7 @@
         </div>
     </div>
     <div id="dpridruzi" class="form-group has-feedback">
-        {!! Form::label('lkorisnici_id', 'Pridruži korisnika',['class'=>'control-label col-sm-3']) !!}
+        {!! Form::label('lkorisnici_id', 'Pridruži korisniku',['class'=>'control-label col-sm-3']) !!}
         <div class="col-sm-9">
             {!!Form::select('korisnici_id',$korisnici,$nalog['korisnici_id'],['class'=>'form-control'])!!}
         </div>

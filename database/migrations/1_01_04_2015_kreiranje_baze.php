@@ -150,6 +150,7 @@ class KreiranjeBaze extends Migration{
             $table->unsignedBigInteger('korisnici_id');
             $table->foreign('korisnici_id')->references('id')->on('korisnici');
             $table->tinyInteger('aktivan')->default(1);
+            $table->string('slika',250)->nullable();
         });
         Schema::create('objekat', function(Blueprint $table)
         {
