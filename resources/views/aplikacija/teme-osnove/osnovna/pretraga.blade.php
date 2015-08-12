@@ -161,9 +161,9 @@
                 <div class="container">
                     <div class="filter">
                         <hr>
-                        <div class="col-md-5">
+                        <div class="col-md-12">
                             @foreach($podaci['dodatna_oprema'] as $k=>$oprema)
-                                <input name="oprema_filter" type="checkbox" value="0" class="oprema_filter" data-opremaid="{{$oprema['id']}}" data-size="normal" data-on-text="Da" data-off-text="Ne" data-label-text="{{$oprema['naziv']}}">
+                                <input name="oprema_filter" type="checkbox" data-handle-width="18" data-label-width="{{strlen($oprema['naziv'])*9}}" value="0" class="oprema_filter" data-opremaid="{{$oprema['id']}}" data-size="normal" data-on-text="Da" data-off-text="Ne" data-label-text="{{$oprema['naziv']}}">
                             @endforeach
                         </div>
                         <script>
@@ -181,7 +181,7 @@
                                 filter.akcijaFiltriraj($(this).data('opremaid'),state?'dodaj':'ukloni');
                             });
                             var filter={
-                                oprema:JSON.parse('{!!$podaci['filter']!!}'),
+                                oprema:JSON.parse('{!!$podaci["filter"]!!}'),
                             filter:[],
                                     dodajFilter:function(oprema){this.filter.push(oprema)},
                             ukloniFilter:function(oprema){
