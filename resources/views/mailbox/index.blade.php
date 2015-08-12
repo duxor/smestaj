@@ -2,10 +2,10 @@
 @section('content')
     <div class="col-sm-3">
         <ul class="nav nav-pills nav-stacked">
-            <li id="nova" role="presentation"><a href="#"onclick="kreirajNovu()">Kreiraj poruku</a></li>
-            @if(\App\Security::autentifikacijaTest(4,'min')) <li id="newsletter" role="presentation"><a href="#"onclick="getNewsletter()">Newsletter</a></li> @endif
-            <li id="inbox" role="presentation"><a href="#"onclick="getInbox()">Inbox</a></li>
-            <li id="poslate" role="presentation"><a href="#"onclick="getPoslate()">Poslate</a></li>
+            <li id="nova" role="presentation"><a href="#" onclick="kreirajNovu()">Kreiraj poruku</a></li>
+            @if(\App\Security::autentifikacijaTest(4,'min')) <li id="newsletter" role="presentation"><a href="#" onclick="getNewsletter()">Newsletter</a></li> @endif
+            <li id="inbox" role="presentation"><a href="#" onclick="getInbox()">Inbox</a></li>
+            <li id="poslate" role="presentation"><a href="#" onclick="getPoslate()">Poslate</a></li>
             @if(\App\Security::autentifikacijaTest(4,'min')) <li id="mail" role="presentation"><a href="#" onclick="kreirajMejl()">Mail</a></li> @endif
         </ul>
     </div>
@@ -188,7 +188,7 @@
                 _token:'{{csrf_token()}}',
                 tekst:tekst
             },function(data){
-                var podaci=JSON.parse(data);console.log(podaci);
+                var podaci=JSON.parse(data);
                 if(podaci.length){
                     var useri='';
                     for(var i=0;i<podaci.length;i++)
