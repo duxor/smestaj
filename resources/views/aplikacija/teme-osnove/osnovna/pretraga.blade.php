@@ -42,9 +42,10 @@
                 marker.setAttribute("title", [type]);
                 marker.setAttribute("class", "report");
                 marker.setAttribute("href", feature.link);
-                var img = marker.appendChild(document.createElement("a"));
-                img.setAttribute("class","glyphicon glyphicon-screenshot");
-                img.setAttribute("style","color:red");
+                var img = marker.appendChild(document.createElement("img"));
+               // img.setAttribute("class","glyphicon glyphicon-bed");
+                img.setAttribute("src","/galerije/marker1.png");
+                img.setAttribute("style","width:30px;");
                 markers.addMarker(marker, feature);
                 locations.push(marker.location);
                 if (type in locationsByType)locationsByType[type].push(marker.location);else locationsByType[type] = [marker.location];
