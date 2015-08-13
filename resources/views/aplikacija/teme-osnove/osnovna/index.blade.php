@@ -174,7 +174,10 @@
         {{--Smestaj START::--}}
         <div class="content-full container" id="{{$podaci[1]['slug']}}">
                 <h1>{!!$podaci[1]['naziv']!!}</h1>
-                {!!$podaci[1]['sadrzaj']!!}
+                <div class="col-sm-5" style="text-align: justify">{!!$podaci[1]['sadrzaj']!!}</div>
+                <div class="col-sm-7">
+                    <#!!! smestaj 1 !!#><#!!! smestaj 2 !!#><br><#!!! smestaj 3 !!#><#!!! smestaj 4 !!#><br><#!!! smestaj 5 !!#><#!!! smestaj 6 !!#>
+                </div>
         </div>
         <div class="gap gap-100"></div>
         {{--Smestaj END::--}}
@@ -183,17 +186,20 @@
         <div class="content content-full" id="{{$podaci[2]['slug']}}">
             <div class="container">
                 <h1>{!!$podaci[2]['naziv']!!}</h1>
-                {!!$podaci[2]['sadrzaj']!!}
+                <div class="col-sm-5" style="text-align: justify">{!!$podaci[2]['sadrzaj']!!}</div>
+                <div class="col-sm-7">
+                    <#!!! gif uputstvo za rezervaciju !!#>
+                </div>
             </div>
         </div>
         <div class="gap gap-50"></div>
         {{--Rezervacije END::--}}
 
         {{--Kontakt START::--}}
-        <div class="content" id="{{$podaci[3]['slug']}}">
+        <div class="content" id="{{$podaci[4]['slug']}}">
             <div class="container">
-                <h1>{!!$podaci[3]['naziv']!!}</h1>
-                <div class="col-sm-7">{!!$podaci[3]['sadrzaj']!!}</div><i class='icon-spin6 animate-spin' style="color: rgba(0,0,0,0)"></i>
+                <h1>{!!$podaci[4]['naziv']!!}</h1>
+                <div class="col-sm-7">{!!$podaci[4]['sadrzaj']!!}</div><i class='icon-spin6 animate-spin' style="color: rgba(0,0,0,0)"></i>
                 <div id="wait" style="display:none"><center><i class='icon-spin6 animate-spin' style="font-size: 350%"></i></center></div>
                 <div id="kontaktForma" class="col-sm-5 form-horizontal">
                     <div id="_poruka" style="display: none"></div>

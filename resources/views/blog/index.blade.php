@@ -1,4 +1,4 @@
-@extends(\App\OsnovneMetode::osnovniNav().".master")
+@extends("aplikacija.teme-osnove.osnovna.master")
 @section('content')
     <div class="col-sm-3">
         <ul class="nav nav-pills nav-stacked">

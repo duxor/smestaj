@@ -70,21 +70,21 @@ class KonfiguracioniPodaci extends Seeder{
             ]
         ]);
         Templejt::insert([
-            ['slug'=>'pocetna',     'vrsta_sadrzaja_id'=>3, 'tema_id'=>1,   'redoslijed'=>1],//1
+            ['slug'=>'pocetna',     'vrsta_sadrzaja_id'=>2, 'tema_id'=>1,   'redoslijed'=>1],//1
             ['slug'=>'smestaj',     'vrsta_sadrzaja_id'=>1, 'tema_id'=>1,   'redoslijed'=>3],//2
             ['slug'=>'rezervacije', 'vrsta_sadrzaja_id'=>1, 'tema_id'=>1,   'redoslijed'=>5],//3
-            ['slug'=>'kontakt',     'vrsta_sadrzaja_id'=>1, 'tema_id'=>1,   'redoslijed'=>7],//4
-            ['slug'=>'pozadina-1',  'vrsta_sadrzaja_id'=>6, 'tema_id'=>1,   'redoslijed'=>20],//5
-            ['slug'=>'pozadina-2',  'vrsta_sadrzaja_id'=>6, 'tema_id'=>1,   'redoslijed'=>22],//6
-            ['slug'=>'pozadina-3',  'vrsta_sadrzaja_id'=>6, 'tema_id'=>1,   'redoslijed'=>24],//7
-            ['slug'=>'pozadina-4',  'vrsta_sadrzaja_id'=>6, 'tema_id'=>1,   'redoslijed'=>26],//8
-            ['slug'=>'osnovne',     'vrsta_sadrzaja_id'=>7, 'tema_id'=>1,   'redoslijed'=>40],//9
-            ['slug'=>'slajder-1',   'vrsta_sadrzaja_id'=>7, 'tema_id'=>1,   'redoslijed'=>42],//10
-            ['slug'=>'pozadine-1',  'vrsta_sadrzaja_id'=>7, 'tema_id'=>1,   'redoslijed'=>44],//11
-            ['slug'=>'prosirenje-1','vrsta_sadrzaja_id'=>7, 'tema_id'=>1,   'redoslijed'=>90],//12
-            ['slug'=>'prosirenje-2','vrsta_sadrzaja_id'=>7, 'tema_id'=>1,   'redoslijed'=>90],//13
-            ['slug'=>'prosirenje-3','vrsta_sadrzaja_id'=>7, 'tema_id'=>1,   'redoslijed'=>90],//14
-            ['slug'=>'prosirenje-4','vrsta_sadrzaja_id'=>7, 'tema_id'=>1,   'redoslijed'=>90],//15
+            ['slug'=>'blog',        'vrsta_sadrzaja_id'=>3, 'tema_id'=>1,   'redoslijed'=>7],//4
+            ['slug'=>'kontakt',     'vrsta_sadrzaja_id'=>1, 'tema_id'=>1,   'redoslijed'=>9],//5
+            ['slug'=>'pozadina-1',  'vrsta_sadrzaja_id'=>6, 'tema_id'=>1,   'redoslijed'=>20],//6
+            ['slug'=>'pozadina-2',  'vrsta_sadrzaja_id'=>6, 'tema_id'=>1,   'redoslijed'=>22],//7
+            ['slug'=>'pozadina-3',  'vrsta_sadrzaja_id'=>6, 'tema_id'=>1,   'redoslijed'=>24],//8
+            ['slug'=>'pozadina-4',  'vrsta_sadrzaja_id'=>6, 'tema_id'=>1,   'redoslijed'=>26],//9
+            ['slug'=>'osnovne',     'vrsta_sadrzaja_id'=>7, 'tema_id'=>1,   'redoslijed'=>40],//10
+            ['slug'=>'slajder-1',   'vrsta_sadrzaja_id'=>7, 'tema_id'=>1,   'redoslijed'=>42],//11
+            ['slug'=>'pozadine-1',  'vrsta_sadrzaja_id'=>7, 'tema_id'=>1,   'redoslijed'=>44],//12
+            ['slug'=>'prosirenje-1','vrsta_sadrzaja_id'=>7, 'tema_id'=>1,   'redoslijed'=>90],//13
+            ['slug'=>'prosirenje-2','vrsta_sadrzaja_id'=>7, 'tema_id'=>1,   'redoslijed'=>90],//14
+            ['slug'=>'prosirenje-3','vrsta_sadrzaja_id'=>7, 'tema_id'=>1,   'redoslijed'=>90],//15
 
             ['slug'=>'pocetna',     'vrsta_sadrzaja_id'=>3, 'tema_id'=>2,   'redoslijed'=>1],//16
             ['slug'=>'o-nama',      'vrsta_sadrzaja_id'=>1, 'tema_id'=>2,   'redoslijed'=>3],//17
@@ -121,51 +121,58 @@ class KonfiguracioniPodaci extends Seeder{
             ],
             [
                 'naziv'=>'Smeštaj',
-                'sadrzaj'=>'<p>Tekst je u pripremi.</p>',
+                'sadrzaj'=>'<h2>Da li je moguće u nekoliko koraka obezbediti idealan sme&scaron;taj po Va&scaron;oj meri i pre nego &scaron;to krenete na putovanje?</h2><p>Da, uz nas va&scaron;e zamisli postaju stvarnost, omogućićemo Vam lagodnu pretragu, u&scaron;tedićemo Va&scaron;e dragoceno vreme, predstavićemo Vam sve mogućnosti, omogućićemo Vam da imate izbor i pružiti sve potrebne informacije koje će Vam pomoći da donesete pravu odluku pri izboru. U samo nekoliko osnovnih koraka, od sada ste u mogućnosti da pronađete sme&scaron;taj koji najbolje odgovara Va&scaron;im potrebama i da mirno krenete na put. Maksimalno iskoristite pogodnosti koje smo spremili za Vas.</p>',
                 'icon'=>'glyphicon glyphicon-home',
                 'templejt_id'=>2,
                 'nalog_id'=>1
             ],
             [
                 'naziv'=>'Rezervacije',
-                'sadrzaj'=>'<p>Tekst je u pripremi (Rezervišite online i ostvarite bonus i popuste za naredni period).</p>',
+                'sadrzaj'=>'<h2>Za&scaron;to online rezervacija?</h2><p>Zato &scaron;to ste u najkraćem mogućem roku u mogućnosti da izvr&scaron;ite pregled slobodnih termina, planiratre, obavljate i objedinjavate svoje rezervacije na jednom mestu, dajete i vr&scaron;ite pregled preporuka va&scaron;im prijateljima, ocenjujete sme&scaron;tajne kapacitete &scaron;to će da olak&scaron;a dono&scaron;enje odluke pri izboru sme&scaron;taja, upoređujete kretanje cena sme&scaron;taja i jo&scaron; mnogo toga.&nbsp;</p>',
                 'icon'=>'glyphicon glyphicon-calendar',
                 'templejt_id'=>3,
+                'nalog_id'=>1
+            ],
+            [
+                'naziv'=>'Blog',
+                'sadrzaj'=>'/blog',
+                'icon'=>'glyphicon glyphicon-comment',
+                'templejt_id'=>4,
                 'nalog_id'=>1
             ],
             [
                 'naziv'=>'Kontakt',
                 'sadrzaj'=>'<p>Naša tehnička podrška je aktivna 24/7 radeći na realizaciji aktuelnih zahteva korisnika, obezbeđujući i unapređujući punu funkcionalnost platforme. U tom kontekstu budite slobodni da nas kontaktirate i ostavite svoj utisak, sugestiju ili kritiku, a mi ćemo se truditi da realizujemo i prilagodimo platformu Vašim potrebama.</p>',
                 'icon'=>'glyphicon glyphicon-earphone',
-                'templejt_id'=>4,
+                'templejt_id'=>5,
                 'nalog_id'=>1
             ],
             [
                 'naziv'=>'Pozadina 1',
                 'sadrzaj'=>'teme/osnovna-paralax/slike/15.jpg',
                 'icon'=>null,
-                'templejt_id'=>5,
+                'templejt_id'=>6,
                 'nalog_id'=>1
             ],
             [
                 'naziv'=>'Pozadina 2',
                 'sadrzaj'=>'teme/osnovna-paralax/slike/19.jpg',
                 'icon'=>null,
-                'templejt_id'=>6,
+                'templejt_id'=>7,
                 'nalog_id'=>1
             ],
             [
                 'naziv'=>'Pozadina 3',
                 'sadrzaj'=>'teme/osnovna-paralax/slike/28.jpg',
                 'icon'=>null,
-                'templejt_id'=>7,
+                'templejt_id'=>8,
                 'nalog_id'=>1
             ],
             [
                 'naziv'=>'Pozadina 4',
                 'sadrzaj'=>'teme/osnovna-paralax/slike/34.jpg',
                 'icon'=>null,
-                'templejt_id'=>8,
+                'templejt_id'=>9,
                 'nalog_id'=>1
             ]
         ]);
