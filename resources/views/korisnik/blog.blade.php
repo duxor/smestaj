@@ -1,4 +1,4 @@
-@extends('korisnik.blog_master')
+@extends('aplikacija.teme-osnove.osnovna.master')
 @section('content')
 
     <!-- Page Content -->
@@ -10,7 +10,7 @@
                     Blog
                     <small>NajSmeštaj-blog</small>
                 </h1>
-            @foreach($podaci as $pod)
+            @foreach($blog_podaci as $pod)
                 <!-- Blog Post -->
                 <h2>
                     <a href="/blog/blog-post/{{$pod['id']}}">{{$pod['naslov']}}</a>
@@ -26,7 +26,7 @@
                 <a class="btn btn-primary" href="/blog/blog-post/{{$pod['id']}}">Više <span class="glyphicon glyphicon-chevron-right"></span></a>
                 <hr>
             @endforeach
-                {!!$podaci->render()!!}
+                {!!$blog_podaci->render()!!}
             </div>
             <div class="col-md-4">
                 <div class="well">

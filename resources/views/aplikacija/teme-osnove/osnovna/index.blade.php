@@ -55,14 +55,14 @@
     {{--Kontakt START::--}}
     <div
             class="parallax-image-wrapper parallax-image-wrapper-100"
-            data-anchor-target="#{{$podaci[3]['slug']}} + .gap"
+            data-anchor-target="#{{$podaci[4]['slug']}} + .gap"
             data-bottom-top="transform:translate3d(0px, 300%, 0px)"
             data-top-bottom="transform:translate3d(0px, 0%, 0px)">
 
         <div
                 class="parallax-image parallax-image-50"
                 style="background-image:url('{{$podaci['pozadine'][3]['sadrzaj']}}')"
-                data-anchor-target="#{{$podaci[3]['slug']}} + .gap"
+                data-anchor-target="#{{$podaci[4]['slug']}} + .gap"
                 data-bottom-top="transform: translate3d(0px, -60%, 0px);"
                 data-top-bottom="transform: translate3d(0px, 60%, 0px);"
                 ></div>

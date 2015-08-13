@@ -75,7 +75,16 @@
                 @foreach($podaci as $meni)
                     @if(isset($meni['vrsta_sadrzaja_id']))
                         @if($meni['vrsta_sadrzaja_id']<4)
-                            <li><a @if(isset($podaci['pocetna']) and $meni['vrsta_sadrzaja_id']!=3) href="/#{{$meni['slug']}}" class="scroll-link" data-id="{{$meni['slug']}}" @else href="/{{$meni['slug']}}" @endif><i class="{{$meni['icon']}}"></i> @if(in_array($meni['vrsta_sadrzaja_id'],[1,3])){!! $meni['naziv'] !!}@endif</a></li>
+                            <li><a
+                                @if($meni['vrsta_sadrzaja_id']!=3)
+                                    href="/#{{$meni['slug']}}"
+                                    @if(isset($podaci['pocetna']))
+                                        class="scroll-link" data-id="{{$meni['slug']}}"
+                                    @endif
+                                @else
+                                    href="/{{$meni['slug']}}"
+                                @endif
+                                            ><i class="{{$meni['icon']}}"></i> @if(in_array($meni['vrsta_sadrzaja_id'],[1,3])){!! $meni['naziv'] !!}@endif</a></li>
                         @endif
                     @endif
                 @endforeach
