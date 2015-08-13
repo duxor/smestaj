@@ -106,37 +106,25 @@
     @else
         {!!Form::open(['url'=>'/pretraga','class'=>'form-inline col-sm-11'])!!}
         <div class="form-group">
-            <label>Broj mesta (Tačan broj {!!Form::checkbox('tacan_broj',1,$podaci['tacan_broj'])!!})</label>
+            <label>Broj mesta (Tačan broj {!!Form::checkbox('tacan_broj',1,$podaci['tacan_broj'])!!})</label><br clear="all">
             {!!Form::select('broj_osoba',[1=>1,2=>2,3=>3,4=>4,5=>5,6=>6,7=>7,8=>8,9=>9,10=>10,11=>11,12=>12],$podaci['broj_osoba'],['class'=>'form-control'])!!}
             {!!Form::select('grad_id',$podaci['gradovi'],$podaci['grad_id'],['class'=>'form-control'])!!}
             <div class="form-group" id="datarange">
                 <div class="input-daterange input-group col-sm-12" id="datepicker">
-                    {!! Form::text('datumOd',isset($podaci['datumOd'])?$podaci['datumOd']:null,['class'=>'input-sm form-control','placeholder'=>'od...']) !!}
-                    <span class="input-group-addon">do</span>
-                    {!! Form::text('datumDo',isset($podaci['datumDo'])?$podaci['datumDo']:null,['class'=>'input-sm form-control','placeholder'=>'do...']) !!}
+                    {!! Form::text('datumOd',isset($podaci['datumOd'])?$podaci['datumOd']:null,['class'=>'form-control','placeholder'=>'od...']) !!}
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                    {!! Form::text('datumDo',isset($podaci['datumDo'])?$podaci['datumDo']:null,['class'=>'form-control','placeholder'=>'do...']) !!}
                 </div>
             </div>
-        </div>
-        <br/><br/>
-        <div class="form-group">
-                <div class="col-md-4">
-                    {!! Form::label('cenaod','Cena od:',['class'=>'control-label']) !!}
-                    {!!Form::select('min', array_combine(range(500,10000,200),range(500,10000,200)),$min, ['class'=>'form-control'])!!}
+            <div class="form-group" id="datarange">
+                <div class="input-daterange input-group col-sm-12" id="datepicker">
+                    {!!Form::select('min', range(500,10000,200),$min, ['class'=>'form-control'])!!}
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-eur"></i> (din)</span>
+                    {!!Form::select('max', range(500,10000,200),$max, ['class'=>'form-control'])!!}
                 </div>
-
-
-                <div class="col-md-4">
-                    {!! Form::label('cenaod','Cena do:',['class'=>'control-label']) !!}
-                    {!!Form::select('max', array_combine(range(500,10000,200),range(500,10000,200)),$max, ['class'=>'form-control'])!!}
-                </div>
-
-        </div><br/><br/>
-        <div class="col-md-4">
+            </div>
             {!!Form::button('<i class="glyphicon glyphicon-search"></i> Pronađi',['class'=>'btn btn-primary pronadji_btn','type'=>'submit'])!!}
         </div>
-
-
-
         <script>
                 $('#datarange .input-daterange').datepicker({orientation: "top auto",weekStart: 1,startDate: "current",todayBtn: "linked",toggleActive: true,format: "yyyy-mm-dd"});
                 @if(!isset($podaci['datumOd'])) var d = new Date(); $('input[name=datumOd]').datepicker('setDate',d); @endif
@@ -163,7 +151,7 @@
                         <hr>
                         <div class="col-md-12">
                             @foreach($podaci['dodatna_oprema'] as $k=>$oprema)
-                                <input name="oprema_filter" type="checkbox" data-handle-width="18" data-label-width="{{strlen($oprema['naziv'])*9}}" value="0" class="oprema_filter" data-opremaid="{{$oprema['id']}}" data-size="normal" data-on-text="Da" data-off-text="Ne" data-label-text="{{$oprema['naziv']}}">
+                                <input name="oprema_filter" type="checkbox" data-label-width="{{strlen($oprema['naziv'])*9}}" value="0" class="oprema_filter" data-opremaid="{{$oprema['id']}}" data-size="normal" data-on-text="Da" data-off-text="Ne" data-label-text="{{$oprema['naziv']}}">
                             @endforeach
                         </div>
                         <script>

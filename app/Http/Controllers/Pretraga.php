@@ -61,8 +61,8 @@ class Pretraga extends Controller {
 		$tacan_broj=Input::get('tacan_broj')?'':'>';
 		$podaci=$this->defaultPodaci($slugApp?Input::get('aplikacija'):1);//templejt sa menijem bez podataka
 		$podaci['broj_osoba']=Input::get('broj_osoba')?Input::get('broj_osoba'):1;
-        $min=Input::get('min')?Input::get('min'):1;
-        $max=Input::get('max')?Input::get('max'):10000;
+        $min=Input::get('min')?Input::get('min'):0; $rmin=range(500,10000,200)[$min];
+        $max=Input::get('max')?Input::get('max'):0; $rmax=range(500,10000,200)[$max];
         //dd($max);
 		$podaci['rezultat']=Objekat::
 		join('smestaj','smestaj.objekat_id','=','objekat.id')
@@ -76,7 +76,7 @@ class Pretraga extends Controller {
 			->groupby('id')
 			->where('grad_id',Input::get('grad_id'))->where('kapacitet.broj_osoba',$tacan_broj.'=',$podaci['broj_osoba'])
 			->where('objekat.aktivan',1)->where('smestaj.aktivan',1)
-            ->whereBetween('smestaj.cena_osoba',[$min,$max])
+            ->whereBetween('smestaj.cena_osoba',[$rmin,$rmax])
 			->orderBy('smestaj.naziv')
 			->select('nalog.naziv as nazivApp','nalog.slug as slugApp','vrsta_smestaja.naziv as vrsta_smestaja','smestaj.id',
 				'smestaj.slug as slugSmestaj','smestaj.naziv','objekat.adresa','kapacitet.broj_osoba','lista_zelja.id as zelja','naslovna_foto','cena_osoba','k.username')->get()->toArray();

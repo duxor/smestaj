@@ -128,11 +128,11 @@
                                     <div class="form-group">
                                         <div class="col-md-6">
                                             {!!Form::label('cenaod','Cena od:',['class'=>'control-label'])!!}
-                                            {!!Form::select('min',array_combine(range(500,10000,200),range(500,10000,200)),2,['class'=>'form-control'])!!}
+                                            {!!Form::select('min',range(500,10000,200),0,['class'=>'form-control'])!!}
                                         </div>
                                         <div class=" col-md-6">
                                             {!!Form::label('cenaod','Cena do:',['class'=>'control-label'])!!}
-                                            {!!Form::select('max',array_combine(range(500,10000,200),range(500,10000,200)),2,['class'=>'form-control'])!!}
+                                            {!!Form::select('max',range(500,10000,200),sizeof(range(500,10000,200))-1,['class'=>'form-control'])!!}
                                         </div>
                                     </div>
                                     <div class="form-group" style="text-align: right">
